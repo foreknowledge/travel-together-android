@@ -1,7 +1,11 @@
 <resources>
-    <string name="app_name">Travel Together</string>
+    <string name="app_name">가치 여행</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="main_activity_name">여행방 목록</string>
+    <string name="notice_activity_name">공지사항</string>
+    <string name="create_notice_activity_name">공지사항 작성</string>
+
     <string name="msg_token_fmt">token: %1$s</string>
 </resources>
