@@ -1,5 +1,6 @@
 package com.mungziapp.traveltogether;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -40,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        // FCM 서비스 실행
+        Intent intent = new Intent(this, MyFirebaseMessagingService.class);
+        startService(intent);
     }
 
 }

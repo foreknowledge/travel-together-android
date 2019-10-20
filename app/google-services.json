@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "317691045230",
+    "firebase_url": "https://travel-together-f8c1d.firebaseio.com",
+    "project_id": "travel-together-f8c1d",
+    "storage_bucket": "travel-together-f8c1d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:317691045230:android:ccc20684c2a71294db8d7f",
+        "android_client_info": {
+          "package_name": "com.mungziapp.traveltogether"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "317691045230-0if38c2i8bsjg4lfn0t5rij0e785pjpd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAS3fBVoibksV19CVjnPDB2hOENRSM0drI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "317691045230-0if38c2i8bsjg4lfn0t5rij0e785pjpd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
