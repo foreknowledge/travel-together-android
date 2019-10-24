@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.mungziapp.traveltogether.R;
 
@@ -17,6 +15,8 @@ import java.util.Calendar;
 public class AddTravelRoomActivity extends AppCompatActivity {
     private Button btnStartDate;
     private Button btnEndDate;
+    private Button btnPickCoverImg;
+    private Button btnRePickCoverImg;
     private int flag;
 
     final private int SET_START_DATE = 1;
@@ -45,7 +45,8 @@ public class AddTravelRoomActivity extends AppCompatActivity {
         //EditText editRoomTitle = findViewById(R.id.edit_room_title);
         btnStartDate = findViewById(R.id.btn_pick_start_date);
         btnEndDate = findViewById(R.id.btn_pick_end_date);
-        //Button btnCoverImg = findViewById(R.id.btn_pick_cover_img);
+        btnPickCoverImg = findViewById(R.id.btn_pick_cover_img);
+        btnRePickCoverImg = findViewById(R.id.btn_re_pick_cover_img);
 
         int year = Calendar.getInstance().get(Calendar.YEAR);
         int month = Calendar.getInstance().get(Calendar.MONTH);
@@ -79,6 +80,24 @@ public class AddTravelRoomActivity extends AppCompatActivity {
             public void onClick(View view) {
                 flag = SET_END_DATE;
                 datePickerDialog.show();
+            }
+        });
+
+        btnPickCoverImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnPickCoverImg.setVisibility(View.INVISIBLE);
+                btnRePickCoverImg.setVisibility(View.VISIBLE);
+                // 갤러리 이미지 선택해서 가져오기
+
+            }
+        });
+
+        btnRePickCoverImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 갤러리 이미지 선택해서 가져오기
+
             }
         });
 

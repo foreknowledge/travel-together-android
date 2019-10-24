@@ -31,7 +31,7 @@
             android:layout_marginEnd="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="@color/colorPrimary"
             android:text="@string/btn_text_save"
             android:background="@android:color/transparent"/>
@@ -45,7 +45,7 @@
             android:layout_marginEnd="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="@color/colorPrimary"
             android:text="@string/btn_text_cancel"
             android:background="@android:color/transparent"/>
@@ -147,23 +147,48 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="100dp"
-            android:layout_marginEnd="100dp"
+            android:layout_weight="1"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
+            android:paddingTop="8dp"
+            android:layout_gravity="start"
             android:text="@string/btn_text_cover_img"
             android:textColor="@android:color/black"
             android:textSize="17sp" />
 
-        <Button
-            android:id="@+id/btn_pick_cover_img"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="50dp"
-            android:background="@drawable/ic_add_circle_outline_black_24dp" />
+        <FrameLayout
+            android:id="@+id/frame_cover_img"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_pick_cover_img"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:visibility="visible"
+                android:background="@drawable/ic_add_circle_outline_black_24dp" />
+
+            <Button
+                android:id="@+id/btn_re_pick_cover_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"
+                android:background="@color/colorDivLine"/>
+
+        </FrameLayout>
+
+
+        <!--<Button-->
+            <!--android:id="@+id/btn_pick_cover_img"-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_weight="0"-->
+            <!--android:layout_margin="50dp"-->
+            <!--android:background="@drawable/ic_add_circle_outline_black_24dp" />-->
 
     </LinearLayout>
 

@@ -3,44 +3,30 @@ package com.mungziapp.traveltogether.Activity;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.mungziapp.traveltogether.Adapter.PagerAdapter;
 import com.mungziapp.traveltogether.Fragment.CalendarFragment;
 import com.mungziapp.traveltogether.Fragment.MainFragment;
 import com.mungziapp.traveltogether.Fragment.SettingsFragment;
+import com.mungziapp.traveltogether.Fragment.DetailFragment;
+import com.mungziapp.traveltogether.Interface.ActivityCallback;
 import com.mungziapp.traveltogether.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
 
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
-    FragmentManager fm;
-    MainFragment mainFragment;
-    CalendarFragment calendarFragment;
-    SettingsFragment settingsFragment;
+public class MainActivity extends AppCompatActivity
+        implements ActivityCallback {
+    private FragmentManager fm;
+    private Fragment currentFragment;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+    private MainFragment mainFragment;
+    private CalendarFragment calendarFragment;
+    private SettingsFragment settingsFragment;
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    fm.beginTransaction().replace(R.id.frame_container, mainFragment).commit();
-                    return true;
-                case R.id.navigation_calendar:
-                    fm.beginTransaction().replace(R.id.frame_container, calendarFragment).commit();
-                    return true;
-                case R.id.navigation_settings:
-                    fm.beginTransaction().replace(R.id.frame_container, settingsFragment).commit();
-                    return true;
-            }
-            return false;
-        }
-    };
+    private DetailFragment currentDetailFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +40,54 @@ public class MainActivity extends AppCompatActivity {
         calendarFragment = new CalendarFragment();
         settingsFragment = new SettingsFragment();
 
-        fm.beginTransaction().add(R.id.frame_container, mainFragment).commit();
+        currentFragment = mainFragment;
+        fm.beginTransaction().add(R.id.frame_container, currentFragment).commit();
     }
 
-    private void setViewPager() {
-        FragmentManager fm = getSupportFragmentManager();
-        PagerAdapter pagerAdapter = new PagerAdapter(fm);
-
-        ViewPager viewPager = findViewById(R.id.view_pager);
-        viewPager.setOffscreenPageLimit(3);
-        viewPager.setCurrentItem(0);
-        viewPager.setAdapter(pagerAdapter);
+    @Override
+    public void addDetailFragment(DetailFragment detailFragment) {
+        currentDetailFragment = detailFragment;
+        fm.beginTransaction().add(R.id.frame_container, currentDetailFragment).commit();
     }
 
+    @Override
+    public void removeDetailFragment() {
+        fm.beginTransaction().remove(currentDetailFragment).commit();
+        currentDetailFragment = null;
+    }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    if (!(currentFragment instanceof MainFragment)) {
+                        fm.beginTransaction().remove(currentFragment).commit();
+                        currentFragment = mainFragment;
+                    }
+                    return true;
+
+                case R.id.navigation_calendar:
+                    if (!(currentFragment instanceof CalendarFragment)){
+                        if (currentFragment instanceof SettingsFragment)
+                            fm.beginTransaction().remove(currentFragment).commit();
+                        currentFragment = calendarFragment;
+                        fm.beginTransaction().add(R.id.frame_container, currentFragment).commit();
+                    }
+                    return true;
+
+                case R.id.navigation_settings:
+                    if (!(currentFragment instanceof SettingsFragment)){
+                        if (currentFragment instanceof CalendarFragment)
+                            fm.beginTransaction().remove(currentFragment).commit();
+                        currentFragment = settingsFragment;
+                        fm.beginTransaction().add(R.id.frame_container, currentFragment).commit();
+                    }
+                    return true;
+            }
+            return false;
+        }
+    };
 }
