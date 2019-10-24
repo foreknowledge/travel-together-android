@@ -1,9 +1,11 @@
 package com.mungziapp.traveltogether.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,11 +13,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.mungziapp.traveltogether.Activity.AddTravelRoomActivity;
 import com.mungziapp.traveltogether.Adapter.TravelRoomAdapter;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.RoomItem;
 
 public class MainFragment extends Fragment {
+    private View rootView;
+
     private TravelRoomsFragment oncommingTravels;
     private TravelRoomsFragment lastTravels;
 
@@ -27,8 +32,16 @@ public class MainFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.main_fragment, container, false);
+        rootView = inflater.inflate(R.layout.main_fragment, container, false);
 
+        createTravelRoomsFragments();
+        setTabBar();
+        addTravelRoom();
+
+        return rootView;
+    }
+
+    private void createTravelRoomsFragments() {
         TravelRoomAdapter oncommingAdapter = new TravelRoomAdapter(getContext());
         oncommingAdapter.addItem(new RoomItem("친구들과 배낭 여행", "2019. 10. 12 ~ 2019. 10. 16", 12, R.drawable.travel_room_sample_01));
         oncommingAdapter.addItem(new RoomItem("혼자 가는 미국 횡단 일주", "2019. 06. 09 ~ 2019. 06. 29", 1, R.drawable.travel_room_sample_02));
@@ -50,7 +63,9 @@ public class MainFragment extends Fragment {
         lastTravelAdapter.addItem(new RoomItem("가자 파리로~!", "2018. 08. 15 ~ 2019. 08. 16", 2, R.drawable.travel_room_sample_02));
 
         lastTravels = new TravelRoomsFragment(lastTravelAdapter);
+    }
 
+    private void setTabBar() {
         TabLayout tabs = rootView.findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText("다가오는 여행"));
         tabs.addTab(tabs.newTab().setText("지난 여행"));
@@ -81,7 +96,16 @@ public class MainFragment extends Fragment {
             @Override
             public void onTabReselected(TabLayout.Tab tab) { }
         });
+    }
 
-        return rootView;
+    private void addTravelRoom() {
+        Button button = rootView.findViewById(R.id.btn_add_travel_room);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), AddTravelRoomActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
