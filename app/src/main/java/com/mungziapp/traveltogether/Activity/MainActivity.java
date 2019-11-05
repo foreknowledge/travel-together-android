@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity
                     }
                     return true;
 
-                case R.id.navigation_calendar:
+                case R.id.navigation_album:
                     if (!(currentFragment instanceof CalendarFragment)){
                         if (currentFragment instanceof SettingsFragment)
                             fm.beginTransaction().remove(currentFragment).commit();

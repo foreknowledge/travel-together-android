@@ -19,7 +19,7 @@
             android:textColor="@color/colorTitle"
             android:textStyle="bold"
             android:textSize="24sp"
-            android:text="@string/title_calendar_kor"/>
+            android:text="@string/title_album_kor"/>
 
     </androidx.appcompat.widget.Toolbar>
 
