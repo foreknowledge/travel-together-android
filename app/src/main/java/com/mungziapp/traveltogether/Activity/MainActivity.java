@@ -3,7 +3,7 @@ package com.mungziapp.traveltogether.Activity;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.mungziapp.traveltogether.Fragment.CalendarFragment;
+import com.mungziapp.traveltogether.Fragment.AlbumFragment;
 import com.mungziapp.traveltogether.Fragment.MainFragment;
 import com.mungziapp.traveltogether.Fragment.SettingsFragment;
 import com.mungziapp.traveltogether.Fragment.DetailFragment;
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity
     private Fragment currentFragment;
 
     private MainFragment mainFragment;
-    private CalendarFragment calendarFragment;
+    private AlbumFragment albumFragment;
     private SettingsFragment settingsFragment;
 
     private DetailFragment currentDetailFragment;
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
 
         fm = getSupportFragmentManager();
         mainFragment = new MainFragment(fm);
-        calendarFragment = new CalendarFragment();
+        albumFragment = new AlbumFragment();
         settingsFragment = new SettingsFragment();
 
         currentFragment = mainFragment;
@@ -70,17 +70,17 @@ public class MainActivity extends AppCompatActivity
                     return true;
 
                 case R.id.navigation_album:
-                    if (!(currentFragment instanceof CalendarFragment)){
+                    if (!(currentFragment instanceof AlbumFragment)){
                         if (currentFragment instanceof SettingsFragment)
                             fm.beginTransaction().remove(currentFragment).commit();
-                        currentFragment = calendarFragment;
+                        currentFragment = albumFragment;
                         fm.beginTransaction().add(R.id.frame_container, currentFragment).commit();
                     }
                     return true;
 
                 case R.id.navigation_settings:
                     if (!(currentFragment instanceof SettingsFragment)){
-                        if (currentFragment instanceof CalendarFragment)
+                        if (currentFragment instanceof AlbumFragment)
                             fm.beginTransaction().remove(currentFragment).commit();
                         currentFragment = settingsFragment;
                         fm.beginTransaction().add(R.id.frame_container, currentFragment).commit();

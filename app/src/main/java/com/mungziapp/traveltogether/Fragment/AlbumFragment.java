@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.mungziapp.traveltogether.R;
 
-public class CalendarFragment extends Fragment {
+public class AlbumFragment extends Fragment {
 
     @Nullable
     @Override

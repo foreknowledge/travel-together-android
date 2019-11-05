@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -55,7 +56,7 @@ public class TravelRoomAdapter extends RecyclerView.Adapter<TravelRoomAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        LinearLayout roomLayout;
+        FrameLayout roomLayout;
         TextView roomTitle;
         TextView roomDuration;
         TextView roomMembers;

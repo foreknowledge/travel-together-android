@@ -84,12 +84,12 @@ public class MainFragment extends Fragment {
         lastTravelAdapter = new TravelRoomAdapter(getContext());
         lastTravelAdapter.addItem(new RoomItem("가치 같이 여행", "2019. 10. 12 ~ 2019. 10. 16", 7, R.drawable.travel_room_sample_05));
         lastTravelAdapter.addItem(new RoomItem("일주일 제주 여행", "2019. 06. 09 ~ 2019. 06. 29", 2, R.drawable.travel_room_sample_06));
-        lastTravelAdapter.addItem(new RoomItem("내일로 전국 일주~~", "2019. 02. 11 ~ 2019. 02. 15", 3, R.drawable.travel_room_sample_01));
-        lastTravelAdapter.addItem(new RoomItem("가자 파리로~!", "2018. 08. 15 ~ 2019. 08. 16", 2, R.drawable.travel_room_sample_02));
+        lastTravelAdapter.addItem(new RoomItem("내일로 전국 일주~~", "2019. 02. 11 ~ 2019. 02. 15", 3, R.drawable.travel_room_sample_07));
+        lastTravelAdapter.addItem(new RoomItem("가자 파리로~!", "2018. 08. 15 ~ 2019. 08. 16", 2, R.drawable.travel_room_sample_01));
         lastTravelAdapter.addItem(new RoomItem("가치 같이 여행", "2019. 10. 12 ~ 2019. 10. 16", 7, R.drawable.travel_room_sample_05));
         lastTravelAdapter.addItem(new RoomItem("일주일 제주 여행", "2019. 06. 09 ~ 2019. 06. 29", 2, R.drawable.travel_room_sample_06));
-        lastTravelAdapter.addItem(new RoomItem("내일로 전국 일주~~", "2019. 02. 11 ~ 2019. 02. 15", 3, R.drawable.travel_room_sample_01));
-        lastTravelAdapter.addItem(new RoomItem("가자 파리로~!", "2018. 08. 15 ~ 2019. 08. 16", 2, R.drawable.travel_room_sample_02));
+        lastTravelAdapter.addItem(new RoomItem("내일로 전국 일주~~", "2019. 02. 11 ~ 2019. 02. 15", 3, R.drawable.travel_room_sample_07));
+        lastTravelAdapter.addItem(new RoomItem("가자 파리로~!", "2018. 08. 15 ~ 2019. 08. 16", 2, R.drawable.travel_room_sample_01));
 
         lastTravelAdapter.setOnClickListener(new OnItemClickListener() {
             @Override
