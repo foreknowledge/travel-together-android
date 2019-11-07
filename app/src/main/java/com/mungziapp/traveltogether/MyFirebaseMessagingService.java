@@ -1,7 +1,6 @@
 package com.mungziapp.traveltogether;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
