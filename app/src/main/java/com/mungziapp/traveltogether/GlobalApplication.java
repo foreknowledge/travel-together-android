@@ -41,6 +41,7 @@ import com.mungziapp.traveltogether.Adapter.KakaoSDKAdapter;
 public class GlobalApplication extends Application {
     private static volatile GlobalApplication instance = null;
     private ImageLoader imageLoader;
+    private static RequestQueue requestQueue;
 
     /**
      * singleton 애플리케이션 객체를 얻는다.
@@ -63,7 +64,8 @@ public class GlobalApplication extends Application {
 
         KakaoSDK.init(new KakaoSDKAdapter());
 
-        final RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue = Volley.newRequestQueue(this);
+        RequestManager.setmRequestQueue(requestQueue);
 
         ImageLoader.ImageCache imageCache = new ImageLoader.ImageCache() {
             final LruCache<String, Bitmap> imageCache = new LruCache<>(30);

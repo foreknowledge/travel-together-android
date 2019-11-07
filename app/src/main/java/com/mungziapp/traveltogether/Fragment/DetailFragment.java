@@ -32,8 +32,8 @@ public class DetailFragment extends Fragment {
 
         // Detail Fragment 초기화
 
-        Button goTravelRooms = rootView.findViewById(R.id.go_travel_rooms);
-        Button btnMore = rootView.findViewById(R.id.btn_travel_room_more);
+        Button goTravelRooms = rootView.findViewById(R.id.go_before);
+        Button btnMore = rootView.findViewById(R.id.btn_tr_more);
 
         goTravelRooms.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.kakao.auth.ApiResponseCallback;
 import com.kakao.auth.AuthService;
 import com.kakao.auth.ISessionCallback;
@@ -18,6 +22,9 @@ import com.kakao.util.OptionalBoolean;
 import com.kakao.util.exception.KakaoException;
 import com.mungziapp.traveltogether.Activity.LoginActivity;
 import com.mungziapp.traveltogether.Activity.MainActivity;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SessionCallback implements ISessionCallback {
     private final String TAG = "SessionCallback :: ";
@@ -107,13 +114,27 @@ public class SessionCallback implements ISessionCallback {
             @Override
             public void onSuccess(AccessTokenInfoResponse accessTokenInfoResponse) {
                 AccessToken accessToken = AccessToken.Factory.getInstance();
-                String token = accessToken.getAccessToken();
+                final String token = accessToken.getAccessToken();
                 Log.d(TAG, "Access token is " + token);
 
                 long userId = accessTokenInfoResponse.getUserId();
                 Log.d(TAG, "this access token is for userId=" + userId);
 
                 // 서버로 access token & user id 전송
+                String url = "http://192.168.0.56/tt/api/v1/users/" + userId;
+                RequestManager requestManager = RequestManager.getInstance();
+                requestManager.onSendPostRequest(url, new SetResponseListener() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, "응답 = " + response);
+                    }
+
+                    @Override
+                    public void setParams(Map<String, String> params) {
+                        params.put("accessToken", token);
+                        params.put("resourceServer", "kakao");
+                    }
+                });
             }
         });
     }
