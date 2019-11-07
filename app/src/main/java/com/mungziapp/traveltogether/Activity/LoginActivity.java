@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Session session = Session.getCurrentSession();
-                session.addCallback(new SessionCallback());
+                session.addCallback(new SessionCallback(getApplicationContext()));
                 session.open(AuthType.KAKAO_TALK, LoginActivity.this);
             }
         });

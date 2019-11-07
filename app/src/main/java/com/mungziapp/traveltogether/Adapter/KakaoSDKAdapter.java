@@ -30,7 +30,7 @@ public class KakaoSDKAdapter extends KakaoAdapter {
             // 로그인 시 토큰을 저장할 때의 암호화 여부를 지정
             @Override
             public boolean isSecureMode() {
-                return true;
+                return false;
             }
 
             // 로그인 웹뷰에서 pause와 resume시에 타이머를 설정하여, CPU의 소모를 절약 할 지의 여부를 지정
