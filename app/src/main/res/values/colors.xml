@@ -7,10 +7,13 @@
     <color name="colorBackDark">#BCE0FD</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="colorTitle">#000000</color>
+    <color name="colorTitle">#3E3E3E</color>
     <color name="colorDisableTitle">#BCE0FD</color>
     <color name="colorRoomTitle">#0C516F</color>
     <color name="colorTitleHint">#AAAAAA</color>
+
+    <color name="kakao_back">#F7E516</color>
+    <color name="kakao_front">#3C1E1E</color>
 
     <color name="colorDivLine">#F2F2F2</color>
 </resources>

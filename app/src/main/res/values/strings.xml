@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">Travel Together</string>
     <string name="app_name_kor">가치 여행</string>
+
+    <string name="app_description">같이 쓰는 여행 계획으로\n더욱 가치 있는 여행을 즐기자!</string>
+
+    <string name="login_kor">로그인</string>
+    <string name="kakao_login_kor">카카오로 로그인</string>
+    <string name="email_kor">이메일</string>
+    <string name="password_kor">비밀번호</string>
+    <string name="forgot_password">비밀번호를 잊어버렸나요?</string>
+    <string name="go_sign_up">회원가입 하러가가</string>
+
     <string name="title_home">Home</string>
     <string name="title_album">Album</string>
     <string name="title_settings">Settings</string>
