@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.0"
     defaultConfig {
         applicationId "com.mungziapp.traveltogether"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -28,4 +28,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // 카카오 로그인 sdk를 사용하기 위해 필요. (2019.11.6 기준 최신 버전 1.25.0)
+    //implementation 'com.kakao.sdk:usermgmt:1.25.0'
+    api group: 'com.kakao.sdk', name: 'usermgmt', version: '1.25.0'
 }
