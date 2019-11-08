@@ -13,7 +13,7 @@
         <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorBack"
+            android:background="@android:color/white"
             android:padding="10dp"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
@@ -51,8 +51,8 @@
             app:tabGravity="fill"
             app:tabIndicatorColor="@color/colorPrimary"
             app:tabTextColor="@color/colorPrimary"
-            app:tabSelectedTextColor="@android:color/white"
-            android:background="@color/colorBack"/>
+            app:tabSelectedTextColor="@color/colorPrimary"
+            android:background="@android:color/white"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -10,14 +10,13 @@ import com.mungziapp.traveltogether.Fragment.DetailFragment;
 import com.mungziapp.traveltogether.Interface.ActivityCallback;
 import com.mungziapp.traveltogether.R;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements ActivityCallback {
     private FragmentManager fm;
     private Fragment currentFragment;
@@ -54,6 +53,11 @@ public class MainActivity extends AppCompatActivity
     public void removeDetailFragment() {
         fm.beginTransaction().remove(currentDetailFragment).commit();
         currentDetailFragment = null;
+    }
+
+    @Override
+    public void redirectLoginActivityAndFinish() {
+        redirectLoginActivity();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

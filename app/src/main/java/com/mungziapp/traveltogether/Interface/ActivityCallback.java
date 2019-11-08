@@ -5,4 +5,5 @@ import com.mungziapp.traveltogether.Fragment.DetailFragment;
 public interface ActivityCallback {
     void addDetailFragment(DetailFragment detailFragment);
     void removeDetailFragment();
+    void redirectLoginActivityAndFinish();
 }

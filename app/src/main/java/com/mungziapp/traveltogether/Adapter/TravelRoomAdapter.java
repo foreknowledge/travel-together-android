@@ -59,6 +59,7 @@ public class TravelRoomAdapter extends RecyclerView.Adapter<TravelRoomAdapter.Vi
         TextView roomTitle;
         TextView roomDuration;
         TextView roomMembers;
+        TextView roomFlag;
 
 
         ViewHolder(@NonNull final View itemView, final OnItemClickListener listener) {
@@ -68,6 +69,7 @@ public class TravelRoomAdapter extends RecyclerView.Adapter<TravelRoomAdapter.Vi
             roomTitle = itemView.findViewById(R.id.room_title);
             roomDuration = itemView.findViewById(R.id.room_duration);
             roomMembers = itemView.findViewById(R.id.room_members);
+            roomFlag = itemView.findViewById(R.id.room_flag);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -86,6 +88,7 @@ public class TravelRoomAdapter extends RecyclerView.Adapter<TravelRoomAdapter.Vi
             roomDuration.setText(item.getRoomDuration());
             String numOfRoomMember = Integer.toString(item.getRoomMembers());
             roomMembers.setText(numOfRoomMember);
+            roomFlag.setText(item.getRoomFlag());
         }
     }
 }

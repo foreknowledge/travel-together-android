@@ -7,11 +7,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.mungziapp.traveltogether.Interface.SetResponseListener;
 
 import java.util.HashMap;
 import java.util.Map;
 
-class RequestManager {
+public class RequestManager {
     private final String TAG = "RequestManager :: ";
     private static RequestManager instance = new RequestManager();
     private static RequestQueue mRequestQueue;
@@ -19,11 +20,11 @@ class RequestManager {
     private RequestManager() {}
     static void setmRequestQueue(RequestQueue requestQueue) { mRequestQueue = requestQueue; }
 
-    static RequestManager getInstance() {
+    public static RequestManager getInstance() {
         return instance;
     }
 
-    void onSendGetRequest(String url, final SetResponseListener listener) {
+    public void onSendGetRequest(String url, final SetResponseListener listener) {
         StringRequest request = new StringRequest(
             Request.Method.GET,
             url,
@@ -42,7 +43,7 @@ class RequestManager {
         );
     }
 
-    void onSendPostRequest(String url, final SetResponseListener listener) {
+    public void onSendPostRequest(String url, final SetResponseListener listener) {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,

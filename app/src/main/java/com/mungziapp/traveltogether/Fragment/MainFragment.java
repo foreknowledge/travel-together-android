@@ -62,12 +62,12 @@ public class MainFragment extends Fragment {
     private void setAdapters() {
         // oncommingAdapter 세팅
         oncommingAdapter = new TravelRoomAdapter(getContext());
-        oncommingAdapter.addItem(new RoomItem("친구들과 배낭 여행", "2019. 10. 12 ~ 2019. 10. 16", 12, R.drawable.travel_room_sample_01));
-        oncommingAdapter.addItem(new RoomItem("혼자 가는 미국 횡단 일주", "2019. 06. 09 ~ 2019. 06. 29", 1, R.drawable.travel_room_sample_02));
-        oncommingAdapter.addItem(new RoomItem("엄마랑 가는 휴양지 Tour", "2019. 02. 11 ~ 2019. 02. 15", 2, R.drawable.travel_room_sample_03));
-        oncommingAdapter.addItem(new RoomItem("여름에는 호캉스지!", "2018. 08. 15 ~ 2019. 08. 16", 3, R.drawable.travel_room_sample_04));
-        oncommingAdapter.addItem(new RoomItem("친구들과 배낭 여행", "2019. 10. 12 ~ 2019. 10. 16", 12, R.drawable.travel_room_sample_01));
-        oncommingAdapter.addItem(new RoomItem("혼자 가는 미국 횡단 일주", "2019. 06. 09 ~ 2019. 06. 29", 1, R.drawable.travel_room_sample_02));
+        oncommingAdapter.addItem(new RoomItem("엄마와 함께하는 4박 5일 홍콩여행", "19.10.12 ~ 19.10.16", "\uD83C\uDDED\uD83C\uDDF0", 2, R.drawable.travel_room_sample_01));
+        oncommingAdapter.addItem(new RoomItem("친구들과 처음가는 배낭 여행", "2019.06.09 ~ 19.06.29", "\uD83C\uDDF0\uD83C\uDDF7", 10, R.drawable.travel_room_sample_02));
+        oncommingAdapter.addItem(new RoomItem("마카오로 호캉스~~!!", "19.02.11 ~ 19.02.15", "\uD83C\uDDF2\uD83C\uDDF4", 3, R.drawable.travel_room_sample_03));
+        oncommingAdapter.addItem(new RoomItem("앗싸 퇴직여행 ✈️", "18.08.15 ~ 19.08.16", "\uD83C\uDDEC\uD83C\uDDFA", 3, R.drawable.travel_room_sample_04));
+        oncommingAdapter.addItem(new RoomItem("혼자가는 러시아 일주 \uD83C\uDFA1", "19.10.12 ~ 19.10.16", "\uD83C\uDDF7\uD83C\uDDFA", 1, R.drawable.travel_room_sample_01));
+        oncommingAdapter.addItem(new RoomItem("찐친들 - 미국 횡단 일주", "19.06.09 ~ 19.06.29", "\uD83C\uDDFA\uD83C\uDDF8", 6, R.drawable.travel_room_sample_02));
 
         oncommingAdapter.setOnClickListener(new OnItemClickListener() {
             @Override
@@ -75,21 +75,27 @@ public class MainFragment extends Fragment {
                 RoomItem roomItem = oncommingAdapter.getItem(position);
 
                 DetailFragment detailFragment = new DetailFragment();
+                Bundle arguments = new Bundle();
+                arguments.putString("roomTitle", roomItem.getRoomTitle());
+                arguments.putString("roomDuration", roomItem.getRoomDuration());
+                arguments.putString("roomFlag", roomItem.getRoomFlag());
+                arguments.putInt("roomImg", roomItem.getImgResId());
 
+                detailFragment.setArguments(arguments);
                 callback.addDetailFragment(detailFragment);
             }
         });
 
         // lastTravelAdapter 세팅
         lastTravelAdapter = new TravelRoomAdapter(getContext());
-        lastTravelAdapter.addItem(new RoomItem("가치 같이 여행", "2019. 10. 12 ~ 2019. 10. 16", 7, R.drawable.travel_room_sample_05));
-        lastTravelAdapter.addItem(new RoomItem("일주일 제주 여행", "2019. 06. 09 ~ 2019. 06. 29", 2, R.drawable.travel_room_sample_06));
-        lastTravelAdapter.addItem(new RoomItem("내일로 전국 일주~~", "2019. 02. 11 ~ 2019. 02. 15", 3, R.drawable.travel_room_sample_07));
-        lastTravelAdapter.addItem(new RoomItem("가자 파리로~!", "2018. 08. 15 ~ 2019. 08. 16", 2, R.drawable.travel_room_sample_01));
-        lastTravelAdapter.addItem(new RoomItem("가치 같이 여행", "2019. 10. 12 ~ 2019. 10. 16", 7, R.drawable.travel_room_sample_05));
-        lastTravelAdapter.addItem(new RoomItem("일주일 제주 여행", "2019. 06. 09 ~ 2019. 06. 29", 2, R.drawable.travel_room_sample_06));
-        lastTravelAdapter.addItem(new RoomItem("내일로 전국 일주~~", "2019. 02. 11 ~ 2019. 02. 15", 3, R.drawable.travel_room_sample_07));
-        lastTravelAdapter.addItem(new RoomItem("가자 파리로~!", "2018. 08. 15 ~ 2019. 08. 16", 2, R.drawable.travel_room_sample_01));
+        lastTravelAdapter.addItem(new RoomItem("가치 같이 여행", "19.10.12 ~ 19.10.16", "\uD83C\uDDFB\uD83C\uDDF3", 7, R.drawable.travel_room_sample_05));
+        lastTravelAdapter.addItem(new RoomItem("일주일 제주 여행", "18.06.09 ~ 19.06.29", "\uD83C\uDDF0\uD83C\uDDF7", 2, R.drawable.travel_room_sample_06));
+        lastTravelAdapter.addItem(new RoomItem("내일로 전국 일주~~", "18.02.11 ~ 18.02.15", "\uD83C\uDDF0\uD83C\uDDF7", 3, R.drawable.travel_room_sample_07));
+        lastTravelAdapter.addItem(new RoomItem("가자 파리로~!", "18.08.15 ~ 19.08.16", "\uD83C\uDDEB\uD83C\uDDF7", 2, R.drawable.travel_room_sample_01));
+        lastTravelAdapter.addItem(new RoomItem("가치 같이 여행", "19.10.12 ~ 19.10.16", "\uD83C\uDDFB\uD83C\uDDF3", 7, R.drawable.travel_room_sample_05));
+        lastTravelAdapter.addItem(new RoomItem("일주일 제주 여행", "19.06.09 ~ 19.06.29", "\uD83C\uDDF0\uD83C\uDDF7", 2, R.drawable.travel_room_sample_06));
+        lastTravelAdapter.addItem(new RoomItem("내일로 전국 일주~~", "19.02.11 ~ 19.02.15", "\uD83C\uDDF0\uD83C\uDDF7", 3, R.drawable.travel_room_sample_07));
+        lastTravelAdapter.addItem(new RoomItem("가자 파리로~!", "16.08.19 ~ 16.09.02", "\uD83C\uDDEB\uD83C\uDDF7", 2, R.drawable.travel_room_sample_01));
 
         lastTravelAdapter.setOnClickListener(new OnItemClickListener() {
             @Override

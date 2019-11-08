@@ -4,7 +4,7 @@
     <color name="colorSecondary">#6EB9C3</color>
 
     <color name="colorBack">#F2F2F2</color>
-    <color name="colorBackDark">#BCE0FD</color>
+    <color name="colorBackDark">#C6C6C6</color>
     <color name="colorAccent">#D81B60</color>
 
     <color name="colorTitle">#3E3E3E</color>
@@ -14,6 +14,4 @@
 
     <color name="kakao_back">#F7E516</color>
     <color name="kakao_front">#3C1E1E</color>
-
-    <color name="colorDivLine">#F2F2F2</color>
 </resources>

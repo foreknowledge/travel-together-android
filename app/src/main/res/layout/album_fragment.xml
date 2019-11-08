@@ -1,27 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorBack"
+        android:gravity="center"
         android:padding="10dp"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/colorTitle"
-            android:textStyle="bold"
-            android:textSize="24sp"
-            android:text="@string/title_album_kor"/>
-
-    </androidx.appcompat.widget.Toolbar>
+        android:textColor="@color/colorTitle"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:text="@string/title_album_kor"
+        android:background="@android:color/white"/>
 
     <TextView
         android:layout_width="match_parent"

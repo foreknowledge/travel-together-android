@@ -9,7 +9,7 @@
     <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorBack"
+        android:background="@android:color/white"
         android:padding="10dp"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
@@ -55,7 +55,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/colorDivLine"/>
+        android:background="@color/colorBack"/>
 
     <EditText
         android:id="@+id/edit_room_title"
@@ -74,7 +74,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:background="@color/colorDivLine"/>
+        android:background="@color/colorBack"/>
 
     <!--여행 시작일 레이아웃-->
     <LinearLayout
@@ -106,7 +106,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorDivLine"/>
+        android:background="@color/colorBack"/>
 
     <!--여행 종료일 레이아웃-->
     <LinearLayout
@@ -138,7 +138,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorDivLine"/>
+        android:background="@color/colorBack"/>
 
     <!--커버 이미지 레이아웃-->
     <LinearLayout
@@ -177,7 +177,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="invisible"
-                android:background="@color/colorDivLine"/>
+                android:background="@color/colorBack"/>
 
         </FrameLayout>
 

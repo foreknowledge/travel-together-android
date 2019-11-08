@@ -1,4 +1,4 @@
-package com.mungziapp.traveltogether;
+package com.mungziapp.traveltogether.Interface;
 
 import java.util.Map;
 
