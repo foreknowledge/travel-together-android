@@ -61,6 +61,7 @@ public class SettingsFragment extends Fragment {
         UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
             @Override
             public void onCompleteLogout() {
+                Log.d(TAG, "onCompleteLogout");
                 callback.redirectLoginActivityAndFinish();
             }
         });
@@ -82,16 +83,19 @@ public class SettingsFragment extends Fragment {
 
                                     @Override
                                     public void onSessionClosed(ErrorResult errorResult) {
+                                        Log.d(TAG, "onSessionClosed");
                                         callback.redirectLoginActivityAndFinish();
                                     }
 
                                     @Override
                                     public void onNotSignedUp() {
+                                        Log.d(TAG, "onNotSignedUp");
                                         callback.redirectLoginActivityAndFinish();
                                     }
 
                                     @Override
                                     public void onSuccess(Long userId) {
+                                        Log.d(TAG, "onSuccess");
                                         callback.redirectLoginActivityAndFinish();
                                     }
                                 });
