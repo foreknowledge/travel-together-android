@@ -22,7 +22,7 @@
             android:text="@string/app_desc_start"
             android:textColor="@color/colorText"
             android:textScaleX="0.95"
-            android:textSize="40sp" />
+            android:textSize="35sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
             android:text="@string/app_desc_middle1"
             android:textColor="@color/colorSecondary"
             android:textScaleX="0.95"
-            android:textSize="30sp" />
+            android:textSize="28sp" />
 
     </LinearLayout>
 
@@ -53,43 +53,44 @@
             android:text="@string/app_desc_middle2"
             android:textColor="@color/colorSecondary"
             android:textScaleX="0.95"
-            android:textSize="30sp" />
+            android:textSize="28sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="8dp"
             android:layout_gravity="center"
             android:fontFamily="@font/dxlogo"
             android:text="@string/app_desc_middle3"
             android:textColor="@color/colorText"
             android:textScaleX="0.95"
-            android:textSize="40sp" />
+            android:textSize="35sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="8dp"
             android:fontFamily="@font/dxlogo"
             android:text="@string/app_desc_end"
             android:textColor="@color/colorSecondary"
             android:textScaleX="0.95"
-            android:textSize="30sp" />
+            android:textSize="28sp" />
 
     </LinearLayout>
 
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="60dp"
+        android:layout_margin="50dp"
         android:layout_gravity="center">
 
         <ImageView
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_gravity="center"
-            android:src="@drawable/app_logo" />
+            android:src="@drawable/app_logo"
+            android:contentDescription="@string/app_logo"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -129,7 +130,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:src="@drawable/splash_calendar" />
+            android:src="@drawable/splash_calendar"
+            android:contentDescription="@string/splash_calendar"/>
 
         <TextView
             android:layout_width="wrap_content"

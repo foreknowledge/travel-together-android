@@ -12,7 +12,7 @@
     <string name="app_developers">Developed by Teamot</string>
 
     <string name="login_kor">로그인</string>
-    <string name="kakao_login_kor">카카오로 로그인</string>
+    <string name="kakao_login_kor">카카오 계정으로 로그인</string>
     <string name="email_kor">이메일</string>
     <string name="password_kor">비밀번호</string>
     <string name="forgot_password">비밀번호를 잊어버렸나요?</string>
@@ -37,6 +37,8 @@
     <string name="title_travel_room">여행방</string>
 
     <string name="desc_icon_person">person icon</string>
+    <string name="app_logo">app logo</string>
+    <string name="splash_calendar">calendar</string>
 
     <string name="hint_title">제목</string>
     <string name="hint_start_date">시작일을 선택 해 주세요.</string>
