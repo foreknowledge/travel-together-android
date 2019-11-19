@@ -2,15 +2,15 @@ package com.mungziapp.traveltogether;
 
 public class RoomItem {
     private String roomTitle;
-    private String roomDuration;
-    private String roomFlag;
+    private String roomStartDate;
+    private String roomEndDate;
     private int roomMembers;
     private int imgResId;
 
-    public RoomItem(String roomTitle, String roomDuration, String roomFlag, int roomMembers, int imgResId) {
+    public RoomItem(String roomTitle, String roomStartDate, String roomEndDate, int roomMembers, int imgResId) {
         this.roomTitle = roomTitle;
-        this.roomDuration = roomDuration;
-        this.roomFlag = roomFlag;
+        this.roomStartDate = roomStartDate;
+        this.roomEndDate = roomEndDate;
         this.roomMembers = roomMembers;
         this.imgResId = imgResId;
     }
@@ -19,10 +19,10 @@ public class RoomItem {
     public String getRoomTitle() {
         return roomTitle;
     }
-    public String getRoomDuration() {
-        return roomDuration;
+    public String getRoomStartDate() {
+        return roomStartDate;
     }
-    public String getRoomFlag() { return roomFlag; }
+    public String getRoomEndDate() { return roomEndDate; }
     public int getRoomMembers() {
         return roomMembers;
     }

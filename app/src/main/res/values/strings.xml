@@ -16,7 +16,7 @@
     <string name="email_kor">이메일</string>
     <string name="password_kor">비밀번호</string>
     <string name="forgot_password">비밀번호를 잊어버렸나요?</string>
-    <string name="go_sign_up">회원가입 하러가가</string>
+    <string name="go_sign_up">회원가입 하러가기</string>
 
     <string name="title_home">Home</string>
     <string name="title_album">Album</string>
@@ -24,6 +24,8 @@
 
     <string name="btn_text_save">Save</string>
     <string name="btn_text_cancel">Cancel</string>
+    <string name="btn_text_destination">여행지</string>
+    <string name="btn_text_member">여행 멤버</string>
     <string name="btn_text_start_date">여행 시작일</string>
     <string name="btn_text_end_date">여행 종료일</string>
     <string name="btn_text_cover_img">커버 이미지</string>

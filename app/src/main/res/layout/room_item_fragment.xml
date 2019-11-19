@@ -8,7 +8,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#69000000"/>
+        android:background="#79000000"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -30,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:fontFamily="@font/dxkyungpil"
             android:textColor="@color/colorBackDark"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -40,19 +41,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
+        android:layout_marginBottom="80dp"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/room_flag"
+            android:id="@+id/room_d_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="5dp"
+            android:fontFamily="@font/dxkyungpil"
             android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <View
-            android:layout_width="40dp"
+            android:layout_width="55dp"
             android:layout_height="1dp"
             android:layout_gravity="center"
             android:background="#EE702E" />
@@ -62,19 +65,80 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/dxkyungpil"
             android:textColor="@android:color/white"
-            android:textSize="23sp"
-            android:textStyle="bold" />
+            android:textSize="23sp" />
 
         <TextView
             android:id="@+id/room_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="4dp"
+            android:layout_margin="13dp"
+            android:fontFamily="@font/dxkyungpil"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="30dp"
+        android:gravity="bottom">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:fontFamily="@font/dxkyungpil"
+                android:text="@string/btn_text_destination"
+                android:textSize="16sp"
+                android:background="@color/colorTransparentDark"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:fontFamily="@font/dxkyungpil"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:text="홍콩"
+                android:textSize="16sp"
+                android:background="@color/colorTransparent"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dxkyungpil"
+                android:text="@string/btn_text_member"
+                android:textSize="16sp"
+                android:background="@color/colorTransparentDark"/>
+
+            <Button
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dxkyungpil"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:text="김예지  김엄마"
+                android:textSize="16sp"
+                android:background="@color/colorTransparent"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -82,7 +146,6 @@
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:layout_gravity="bottom"
-        android:background="@color/colorBack"
-        />
+        android:background="@color/colorBack" />
 
 </FrameLayout>

@@ -11,10 +11,8 @@
     <color name="colorGray">#5F5C5C</color>
     <color name="colorGrayLight">#95989A</color>
 
-    <color name="colorTitle">#3E3E3E</color>
-    <color name="colorDisableTitle">#BCE0FD</color>
-    <color name="colorRoomTitle">#0C516F</color>
-    <color name="colorTitleHint">#AAAAAA</color>
+    <color name="colorTransparent">#AAC6C6C6</color>
+    <color name="colorTransparentDark">#CCC6C6C6</color>
 
     <color name="kakao_front">#3C1E1E</color>
 </resources>

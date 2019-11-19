@@ -9,7 +9,7 @@
         android:layout_height="?attr/actionBarSize"
         android:gravity="center"
         android:padding="10dp"
-        android:textColor="@color/colorTitle"
+        android:textColor="@android:color/black"
         android:textStyle="bold"
         android:textSize="24sp"
         android:text="@string/title_settings_kor"

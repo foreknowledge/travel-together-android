@@ -59,7 +59,7 @@ public class TravelRoomAdapter extends RecyclerView.Adapter<TravelRoomAdapter.Vi
         TextView roomTitle;
         TextView roomDuration;
         TextView roomMembers;
-        TextView roomFlag;
+        TextView roomDday;
 
         ViewHolder(@NonNull final View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -68,7 +68,7 @@ public class TravelRoomAdapter extends RecyclerView.Adapter<TravelRoomAdapter.Vi
             roomTitle = itemView.findViewById(R.id.room_title);
             roomDuration = itemView.findViewById(R.id.room_duration);
             roomMembers = itemView.findViewById(R.id.room_members);
-            roomFlag = itemView.findViewById(R.id.room_flag);
+            roomDday = itemView.findViewById(R.id.room_d_day);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -84,10 +84,13 @@ public class TravelRoomAdapter extends RecyclerView.Adapter<TravelRoomAdapter.Vi
         void setItem(RoomItem item) {
             roomLayout.setBackgroundResource(item.getImgResId());
             roomTitle.setText(item.getRoomTitle());
-            roomDuration.setText(item.getRoomDuration());
+
+            String strDuration = item.getRoomStartDate() + " ~ " + item.getRoomEndDate() + " (N일간)";
+            roomDuration.setText(strDuration);
             String numOfRoomMember = Integer.toString(item.getRoomMembers());
             roomMembers.setText(numOfRoomMember);
-            roomFlag.setText(item.getRoomFlag());
+            String strDday = "D - N";
+            roomDday.setText(strDday);
         }
     }
 }
