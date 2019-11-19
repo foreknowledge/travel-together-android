@@ -90,7 +90,7 @@
             android:layout_height="250dp"
             android:layout_gravity="center"
             android:src="@drawable/app_logo"
-            android:contentDescription="@string/app_logo"/>
+            android:contentDescription="@string/desc_app_logo"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -131,7 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:src="@drawable/splash_calendar"
-            android:contentDescription="@string/splash_calendar"/>
+            android:contentDescription="@string/desc_splash_calendar"/>
 
         <TextView
             android:layout_width="wrap_content"

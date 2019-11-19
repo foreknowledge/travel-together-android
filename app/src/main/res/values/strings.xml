@@ -30,15 +30,15 @@
     <string name="btn_logout">로그 아웃</string>
     <string name="btn_remove_account">회원 탈퇴</string>
 
-    <string name="title_travel_room_list">여행방 목록</string>
     <string name="title_album_kor">앨범</string>
     <string name="title_settings_kor">설정</string>
     <string name="title_create_travel_room">여행방 생성</string>
     <string name="title_travel_room">여행방</string>
 
     <string name="desc_icon_person">person icon</string>
-    <string name="app_logo">app logo</string>
-    <string name="splash_calendar">calendar</string>
+    <string name="desc_app_logo">app logo</string>
+    <string name="desc_splash_calendar">calendar</string>
+    <string name="desc_calligraphy">travel together</string>
 
     <string name="hint_title">제목</string>
     <string name="hint_start_date">시작일을 선택 해 주세요.</string>

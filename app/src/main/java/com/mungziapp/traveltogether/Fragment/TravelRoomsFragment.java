@@ -18,7 +18,7 @@ public class TravelRoomsFragment extends Fragment {
     private TravelRoomAdapter travelRoomAdapter;
 
     public TravelRoomsFragment() {}
-    TravelRoomsFragment(TravelRoomAdapter travelRoomAdapter) {
+    public TravelRoomsFragment(TravelRoomAdapter travelRoomAdapter) {
         this.travelRoomAdapter = travelRoomAdapter;
     }
 
