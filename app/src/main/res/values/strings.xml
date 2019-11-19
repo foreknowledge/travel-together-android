@@ -2,7 +2,14 @@
     <string name="app_name">Travel Together</string>
     <string name="app_name_kor">가치 여행</string>
 
-    <string name="app_description">같이 쓰는 여행 계획으로\n더욱 가치 있는 여행을 즐기자!</string>
+    <string name="app_name_start">가치</string>
+    <string name="app_name_end">여행</string>
+    <string name="app_desc_start">같이 쓰는 </string>
+    <string name="app_desc_middle1">여행 계획으로 </string>
+    <string name="app_desc_middle2">더욱 </string>
+    <string name="app_desc_middle3">가치 있는 </string>
+    <string name="app_desc_end">여행을!</string>
+    <string name="app_developers">Developed by Teamot</string>
 
     <string name="login_kor">로그인</string>
     <string name="kakao_login_kor">카카오로 로그인</string>

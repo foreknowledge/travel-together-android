@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/room_layout"
     android:layout_width="match_parent"
-    android:layout_height="320dp"
+    android:layout_height="400dp"
     android:background="@drawable/travel_room_sample_01">
 
     <View
@@ -54,7 +54,7 @@
 
         <View
             android:layout_width="40dp"
-            android:layout_height="3dp"
+            android:layout_height="1dp"
             android:layout_gravity="center"
             android:background="#EE702E" />
 
@@ -78,5 +78,12 @@
             android:textSize="18sp" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_gravity="bottom"
+        android:background="@color/colorBack"
+        />
 
 </FrameLayout>

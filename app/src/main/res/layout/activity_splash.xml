@@ -4,36 +4,144 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_vertical"
     android:background="@color/colorPrimary"
     tools:context=".Activity.SplashActivity">
 
-    <ImageView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="20dp"
         android:layout_gravity="center"
-        android:src="@drawable/splash_img"
-        />
+        android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/app_name_kor"
-        android:textColor="@android:color/black"
-        android:textSize="50sp"
-        android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/dxlogo"
+            android:text="@string/app_desc_start"
+            android:textColor="@color/colorText"
+            android:textScaleX="0.95"
+            android:textSize="40sp" />
 
-    <TextView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/dxlogo"
+            android:text="@string/app_desc_middle1"
+            android:textColor="@color/colorSecondary"
+            android:textScaleX="0.95"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:text="@string/app_description"
-        android:textColor="@android:color/black"
-        android:textSize="23sp"
-        android:textStyle="normal" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/dxlogo"
+            android:text="@string/app_desc_middle2"
+            android:textColor="@color/colorSecondary"
+            android:textScaleX="0.95"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/dxlogo"
+            android:text="@string/app_desc_middle3"
+            android:textColor="@color/colorText"
+            android:textScaleX="0.95"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/dxlogo"
+            android:text="@string/app_desc_end"
+            android:textColor="@color/colorSecondary"
+            android:textScaleX="0.95"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="60dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:src="@drawable/app_logo" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:fontFamily="@font/dxlogo"
+                android:text="@string/app_name_start"
+                android:textColor="@android:color/white"
+                android:textSize="70sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/dxlogo"
+                android:text="@string/app_name_end"
+                android:textColor="@android:color/white"
+                android:textSize="70sp" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:src="@drawable/splash_calendar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="0dp"
+            android:paddingEnd="25dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/dxkyungpil"
+            android:text="@string/app_developers"
+            android:textColor="@color/colorText"
+            android:textSize="20sp" />
+
+    </FrameLayout>
 
 </LinearLayout>

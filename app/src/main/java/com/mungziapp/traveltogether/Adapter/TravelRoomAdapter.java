@@ -61,7 +61,6 @@ public class TravelRoomAdapter extends RecyclerView.Adapter<TravelRoomAdapter.Vi
         TextView roomMembers;
         TextView roomFlag;
 
-
         ViewHolder(@NonNull final View itemView, final OnItemClickListener listener) {
             super(itemView);
 
