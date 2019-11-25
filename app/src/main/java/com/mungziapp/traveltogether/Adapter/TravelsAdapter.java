@@ -12,19 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mungziapp.traveltogether.Interface.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.RoomItem;
+import com.mungziapp.traveltogether.TravelItem;
 
 import java.util.ArrayList;
 
-public class TravelRoomAdapter extends RecyclerView.Adapter<TravelRoomAdapter.ViewHolder>
+public class TravelsAdapter extends RecyclerView.Adapter<TravelsAdapter.ViewHolder>
                                 implements OnItemClickListener{
     private Context context;
-    private ArrayList<RoomItem> items = new ArrayList<>();
+    private ArrayList<TravelItem> items = new ArrayList<>();
     private OnItemClickListener listener;
 
-    public TravelRoomAdapter(Context context) { this.context = context; }
-    public void addItem(RoomItem item) { items.add(item); }
-    public RoomItem getItem(int position) { return items.get(position); }
+    public TravelsAdapter(Context context) { this.context = context; }
+    public void addItem(TravelItem item) { items.add(item); }
+    public TravelItem getItem(int position) { return items.get(position); }
 
     public void setOnClickListener(OnItemClickListener listener) { this.listener = listener; }
 
@@ -39,7 +39,7 @@ public class TravelRoomAdapter extends RecyclerView.Adapter<TravelRoomAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = inflater.inflate(R.layout.room_item_fragment, parent, false);
+        View itemView = inflater.inflate(R.layout.travel_item_fragment, parent, false);
 
         return new ViewHolder(itemView, this);
     }
@@ -55,20 +55,20 @@ public class TravelRoomAdapter extends RecyclerView.Adapter<TravelRoomAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        FrameLayout roomLayout;
-        TextView roomTitle;
-        TextView roomDuration;
-        TextView roomMembers;
-        TextView roomDday;
+        FrameLayout travelLayout;
+        TextView travelTitle;
+        TextView travelDuration;
+        TextView travelMembers;
+        TextView travelDday;
 
         ViewHolder(@NonNull final View itemView, final OnItemClickListener listener) {
             super(itemView);
 
-            roomLayout = itemView.findViewById(R.id.room_layout);
-            roomTitle = itemView.findViewById(R.id.room_title);
-            roomDuration = itemView.findViewById(R.id.room_duration);
-            roomMembers = itemView.findViewById(R.id.room_members);
-            roomDday = itemView.findViewById(R.id.room_d_day);
+            travelLayout = itemView.findViewById(R.id.travel_layout);
+            travelTitle = itemView.findViewById(R.id.travel_title);
+            travelDuration = itemView.findViewById(R.id.travel_duration);
+            travelMembers = itemView.findViewById(R.id.travel_members);
+            travelDday = itemView.findViewById(R.id.travel_d_day);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -81,16 +81,17 @@ public class TravelRoomAdapter extends RecyclerView.Adapter<TravelRoomAdapter.Vi
 
         }
 
-        void setItem(RoomItem item) {
-            roomLayout.setBackgroundResource(item.getImgResId());
-            roomTitle.setText(item.getRoomTitle());
+        void setItem(TravelItem item) {
+            travelLayout.setBackgroundResource(item.getImgResId());
+            travelTitle.setText(item.gettravelTitle());
 
-            String strDuration = item.getRoomStartDate() + " ~ " + item.getRoomEndDate() + " (N일간)";
-            roomDuration.setText(strDuration);
-            String numOfRoomMember = Integer.toString(item.getRoomMembers());
-            roomMembers.setText(numOfRoomMember);
-            String strDday = "D - N";
-            roomDday.setText(strDday);
+            String strDuration = item.gettravelStartDate() + " ~ " + item.gettravelEndDate() + " (N일간)";
+            travelDuration.setText(strDuration);
+
+            String numOfTravelMember = Integer.toString(item.gettravelMembers());
+            travelMembers.setText(numOfTravelMember);
+
+            travelDday.setText("D - N");
         }
     }
 }

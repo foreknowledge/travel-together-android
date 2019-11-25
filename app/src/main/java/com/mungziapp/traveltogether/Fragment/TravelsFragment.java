@@ -11,27 +11,27 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mungziapp.traveltogether.Adapter.TravelRoomAdapter;
+import com.mungziapp.traveltogether.Adapter.TravelsAdapter;
 import com.mungziapp.traveltogether.R;
 
-public class TravelRoomsFragment extends Fragment {
-    private TravelRoomAdapter travelRoomAdapter;
+public class TravelsFragment extends Fragment {
+    private TravelsAdapter travelsAdapter;
 
-    public TravelRoomsFragment() {}
-    public TravelRoomsFragment(TravelRoomAdapter travelRoomAdapter) {
-        this.travelRoomAdapter = travelRoomAdapter;
+    public TravelsFragment() {}
+    public TravelsFragment(TravelsAdapter travelsAdapter) {
+        this.travelsAdapter = travelsAdapter;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.travel_rooms_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.travels_fragment, container, false);
 
         RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        recyclerView.setAdapter(travelRoomAdapter);
+        recyclerView.setAdapter(travelsAdapter);
 
         return rootView;
     }

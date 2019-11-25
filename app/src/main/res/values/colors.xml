@@ -11,6 +11,8 @@
     <color name="colorGray">#5F5C5C</color>
     <color name="colorGrayLight">#95989A</color>
 
+    <color name="colorDetailBack">#F2F2F2</color>
+
     <color name="colorTransparent">#AAC6C6C6</color>
     <color name="colorTransparentDark">#CCC6C6C6</color>
 

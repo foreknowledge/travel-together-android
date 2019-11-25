@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/travel_layout"
+        android:layout_width="match_parent"
+        android:layout_height="330dp"
+        android:background="@drawable/travel_room_sample_01">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#69000000"/>
+
+        <Button
+            android:id="@+id/btn_go_before"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="15dp"
+            android:background="@drawable/ic_arrow_back_white_24dp"/>
+
+        <Button
+            android:id="@+id/btn_more"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="15dp"
+            android:layout_gravity="end"
+            android:background="@drawable/ic_more_vert_white_24dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingBottom="80dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/travel_d_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:fontFamily="@font/dxkyungpil"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:background="#EE702E" />
+
+            <TextView
+                android:id="@+id/travel_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/dxkyungpil"
+                android:textColor="@android:color/white"
+                android:textSize="23sp" />
+
+            <TextView
+                android:id="@+id/travel_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="13dp"
+                android:fontFamily="@font/dxkyungpil"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="30dp"
+            android:gravity="bottom">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp" >
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:fontFamily="@font/dxkyungpil"
+                    android:text="@string/btn_text_destination"
+                    android:textSize="16sp"
+                    android:background="@color/colorTransparentDark"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:fontFamily="@font/dxkyungpil"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="0dp"
+                    android:textSize="16sp"
+                    android:background="@color/colorTransparent"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" >
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dxkyungpil"
+                    android:text="@string/btn_text_member"
+                    android:textSize="16sp"
+                    android:background="@color/colorTransparentDark"/>
+
+                <Button
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dxkyungpil"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="0dp"
+                    android:textSize="16sp"
+                    android:background="@color/colorTransparent"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:background="@color/colorDetailBack"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_notice"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/dxkyungpil"
+            android:text="@string/btn_text_notice"
+            android:textSize="20sp"
+            android:background="@android:color/white"/>
+
+        <Button
+            android:id="@+id/btn_supplies"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/dxkyungpil"
+            android:text="@string/btn_text_supplies"
+            android:textSize="20sp"
+            android:background="@android:color/white"/>
+
+        <Button
+            android:id="@+id/btn_schedule"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/dxkyungpil"
+            android:text="@string/btn_text_schedule"
+            android:textSize="20sp"
+            android:background="@android:color/white"/>
+
+        <Button
+            android:id="@+id/btn_account_book"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/dxkyungpil"
+            android:text="@string/btn_text_account_book"
+            android:textSize="20sp"
+            android:background="@android:color/white"/>
+
+        <Button
+            android:id="@+id/btn_diary"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/dxkyungpil"
+            android:text="@string/btn_text_diary"
+            android:textSize="20sp"
+            android:background="@android:color/white"/>
+
+    </LinearLayout>
+
+</LinearLayout>
