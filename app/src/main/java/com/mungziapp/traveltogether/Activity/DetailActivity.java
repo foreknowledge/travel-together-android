@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.mungziapp.traveltogether.R;
+import com.mungziapp.traveltogether.ServiceType;
 
 public class DetailActivity extends AppCompatActivity {
     private String travelTitle;
@@ -32,27 +33,10 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         setRoomInfo();
-
-        Button btnGoBefore = findViewById(R.id.btn_go_before);
-        Button btnMore = findViewById(R.id.btn_more);
-
-        btnGoBefore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
-        btnMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
+        setButtons();
     }
 
-    public void setRoomInfo() {
+    private void setRoomInfo() {
         TextView travelTitle = findViewById(R.id.travel_title);
         travelTitle.setText(this.travelTitle);
 
@@ -65,5 +49,74 @@ public class DetailActivity extends AppCompatActivity {
 
         FrameLayout travelLayout = findViewById(R.id.travel_layout);
         travelLayout.setBackgroundResource(this.travelImg);
+    }
+
+    private void setButtons() {
+        Button btnGoBefore = findViewById(R.id.btn_go_before);
+        btnGoBefore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        Button btnMore = findViewById(R.id.btn_more);
+        btnMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        Button btnNotice = findViewById(R.id.btn_notice);
+        btnNotice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                startTravelActivity(ServiceType.NOTICE);
+                startTravelActivity(1);
+            }
+        });
+
+        Button btnSupplies = findViewById(R.id.btn_supplies);
+        btnSupplies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                startTravelActivity(ServiceType.SUPPLIES);
+                startTravelActivity(2);
+            }
+        });
+
+        Button btnSchedule = findViewById(R.id.btn_schedule);
+        btnSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                startTravelActivity(ServiceType.SCHEDULE);
+                startTravelActivity(3);
+            }
+        });
+
+        Button btnAccountBook = findViewById(R.id.btn_account_book);
+        btnAccountBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                startTravelActivity(ServiceType.ACCOUNT_BOOK);
+                startTravelActivity(4);
+            }
+        });
+
+        Button btnDiary = findViewById(R.id.btn_diary);
+        btnDiary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                startTravelActivity(ServiceType.DIARY);
+                startTravelActivity(5);
+            }
+        });
+    }
+
+    private void startTravelActivity(int type) {
+        Intent intent = new Intent(getApplicationContext(), TravelActivity.class);
+        intent.putExtra("caller", type);
+        startActivity(intent);
     }
 }

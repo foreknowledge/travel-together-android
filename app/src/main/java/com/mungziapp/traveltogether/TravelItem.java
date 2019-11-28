@@ -16,14 +16,14 @@ public class TravelItem {
     }
 
 
-    public String gettravelTitle() {
+    public String getTravelTitle() {
         return travelTitle;
     }
-    public String gettravelStartDate() {
+    public String getTravelStartDate() {
         return travelStartDate;
     }
-    public String gettravelEndDate() { return travelEndDate; }
-    public int gettravelMembers() {
+    public String getTravelEndDate() { return travelEndDate; }
+    public int getTravelMembers() {
         return travelMembers;
     }
     public int getImgResId() {

@@ -83,12 +83,12 @@ public class TravelsAdapter extends RecyclerView.Adapter<TravelsAdapter.ViewHold
 
         void setItem(TravelItem item) {
             travelLayout.setBackgroundResource(item.getImgResId());
-            travelTitle.setText(item.gettravelTitle());
+            travelTitle.setText(item.getTravelTitle());
 
-            String strDuration = item.gettravelStartDate() + " ~ " + item.gettravelEndDate() + " (N일간)";
+            String strDuration = item.getTravelStartDate() + " ~ " + item.getTravelEndDate() + " (N일간)";
             travelDuration.setText(strDuration);
 
-            String numOfTravelMember = Integer.toString(item.gettravelMembers());
+            String numOfTravelMember = Integer.toString(item.getTravelMembers());
             travelMembers.setText(numOfTravelMember);
 
             travelDday.setText("D - N");

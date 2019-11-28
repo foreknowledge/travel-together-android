@@ -54,9 +54,9 @@ public class MainActivity extends BaseActivity {
                 TravelItem item = oncommingAdapter.getItem(position);
 
                 Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
-                intent.putExtra("travelTitle", item.gettravelTitle());
-                intent.putExtra("travelStartDate", item.gettravelStartDate());
-                intent.putExtra("travelEndDate", item.gettravelEndDate());
+                intent.putExtra("travelTitle", item.getTravelTitle());
+                intent.putExtra("travelStartDate", item.getTravelStartDate());
+                intent.putExtra("travelEndDate", item.getTravelEndDate());
                 intent.putExtra("travelImg", item.getImgResId());
 
                 startActivity(intent);
