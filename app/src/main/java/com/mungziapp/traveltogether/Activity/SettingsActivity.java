@@ -1,44 +1,35 @@
-package com.mungziapp.traveltogether.Fragment;
+package com.mungziapp.traveltogether.Activity;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
-import com.mungziapp.traveltogether.Interface.ActivityCallback;
 import com.mungziapp.traveltogether.R;
 
-public class SettingsFragment extends Fragment {
-    private ActivityCallback callback;
-    private final String TAG = "SettingsFragment :: ";
+public class SettingsActivity extends BaseActivity {
+    private final String TAG = "Settings :: ";
 
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_settings);
 
-        if (context instanceof ActivityCallback)
-            callback = (ActivityCallback) context;
-    }
+        Button btnGoBefore = findViewById(R.id.btn_go_before);
+        btnGoBefore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.settings_fragment, container, false);
-
-        Button btnLogout = rootView.findViewById(R.id.btn_logout);
+        Button btnLogout = findViewById(R.id.btn_logout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,15 +37,13 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        Button btnRemoveAccount = rootView.findViewById(R.id.btn_remove_account);
+        Button btnRemoveAccount = findViewById(R.id.btn_remove_account);
         btnRemoveAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onClickUnlink();
             }
         });
-
-        return rootView;
     }
 
     private void onClickLogout() {
@@ -62,14 +51,14 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onCompleteLogout() {
                 Log.d(TAG, "onCompleteLogout");
-                callback.redirectLoginActivityAndFinish();
+                redirectLoginActivity();
             }
         });
     }
 
     private void onClickUnlink() {
         final String appendMessage = getString(R.string.com_kakao_confirm_unlink);
-        new AlertDialog.Builder(getContext())
+        new AlertDialog.Builder(getApplicationContext())
                 .setMessage(appendMessage)
                 .setPositiveButton(getString(R.string.com_kakao_ok_button),
                         new DialogInterface.OnClickListener() {
@@ -84,19 +73,19 @@ public class SettingsFragment extends Fragment {
                                     @Override
                                     public void onSessionClosed(ErrorResult errorResult) {
                                         Log.d(TAG, "onSessionClosed");
-                                        callback.redirectLoginActivityAndFinish();
+                                        redirectLoginActivity();
                                     }
 
                                     @Override
                                     public void onNotSignedUp() {
                                         Log.d(TAG, "onNotSignedUp");
-                                        callback.redirectLoginActivityAndFinish();
+                                        redirectLoginActivity();
                                     }
 
                                     @Override
                                     public void onSuccess(Long userId) {
                                         Log.d(TAG, "onSuccess");
-                                        callback.redirectLoginActivityAndFinish();
+                                        redirectLoginActivity();
                                     }
                                 });
                                 dialog.dismiss();

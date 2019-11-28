@@ -35,6 +35,7 @@ public class MainActivity extends BaseActivity {
 
         setTabBar();
         setAddTravelRoomButton();
+        setSettingsButton();
     }
 
     private void setAdapters() {
@@ -114,11 +115,22 @@ public class MainActivity extends BaseActivity {
     }
 
     private void setAddTravelRoomButton() {
-        Button button = findViewById(R.id.btn_add_travel_room);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button btnAddTravelRoom = findViewById(R.id.btn_add_travel_room);
+        btnAddTravelRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), AddTravelRoomActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void setSettingsButton() {
+        Button btnGoSettings = findViewById(R.id.btn_go_settings);
+        btnGoSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
                 startActivity(intent);
             }
         });
