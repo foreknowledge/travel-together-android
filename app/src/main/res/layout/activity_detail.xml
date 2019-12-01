@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -7,35 +8,41 @@
     <FrameLayout
         android:id="@+id/travel_layout"
         android:layout_width="match_parent"
-        android:layout_height="330dp"
-        android:background="@drawable/travel_room_sample_01">
+        android:layout_height="0dp"
+        android:background="@drawable/travel_room_sample_01"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintHeight_percent="0.45"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#69000000"/>
+            android:background="#69000000" />
 
         <Button
             android:id="@+id/btn_go_before"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="15dp"
-            android:background="@drawable/ic_arrow_back_white_24dp"/>
+            android:background="@drawable/ic_arrow_back_white_24dp" />
 
         <Button
             android:id="@+id/btn_more"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_margin="15dp"
             android:layout_gravity="end"
-            android:background="@drawable/ic_more_vert_white_24dp"/>
+            android:layout_margin="15dp"
+            android:background="@drawable/ic_more_vert_white_24dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:paddingBottom="80dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="80dp">
 
             <TextView
                 android:id="@+id/travel_d_day"
@@ -78,60 +85,60 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_margin="30dp"
-            android:gravity="bottom">
+            android:gravity="bottom"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp" >
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
                 <Button
+                    style="?android:buttonBarStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
+                    android:background="@color/colorTransparentDark"
                     android:fontFamily="@font/dxkyungpil"
                     android:text="@string/btn_text_destination"
-                    android:textSize="16sp"
-                    android:background="@color/colorTransparentDark"
-                    style="?android:buttonBarStyle" />
+                    android:textSize="16sp" />
 
                 <Button
+                    style="?android:buttonBarStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
+                    android:background="@color/colorTransparent"
                     android:fontFamily="@font/dxkyungpil"
                     android:paddingStart="0dp"
                     android:paddingEnd="0dp"
-                    android:textSize="16sp"
-                    android:background="@color/colorTransparent"
-                    style="?android:buttonBarStyle" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" >
+                android:layout_marginTop="10dp">
 
                 <Button
+                    style="?android:buttonBarStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@color/colorTransparentDark"
                     android:fontFamily="@font/dxkyungpil"
                     android:text="@string/btn_text_member"
-                    android:textSize="16sp"
-                    android:background="@color/colorTransparentDark"
-                    style="?android:buttonBarStyle" />
+                    android:textSize="16sp" />
 
                 <Button
+                    style="?android:buttonBarStyle"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
+                    android:background="@color/colorTransparent"
                     android:fontFamily="@font/dxkyungpil"
                     android:paddingStart="0dp"
                     android:paddingEnd="0dp"
-                    android:textSize="16sp"
-                    android:background="@color/colorTransparent"
-                    style="?android:buttonBarStyle" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -140,67 +147,169 @@
     </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="5dp"
+        android:layout_height="0dp"
         android:background="@color/colorDetailBack"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="5dp"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintHeight_percent="0.55"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/travel_layout">
 
-        <Button
+        <LinearLayout
             android:id="@+id/btn_notice"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_margin="5dp"
-            android:fontFamily="@font/dxkyungpil"
-            android:text="@string/text_notice"
-            android:textSize="20sp"
-            android:background="@android:color/white"/>
+            android:layout_weight="1"
+            android:background="@drawable/btn_cornered"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <Button
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:contentDescription="@string/text_notice"
+                android:src="@drawable/ic_notice_selected" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dxkyungpil"
+                android:text="@string/text_notice"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/btn_supplies"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_margin="5dp"
-            android:fontFamily="@font/dxkyungpil"
-            android:text="@string/text_supplies"
-            android:textSize="20sp"
-            android:background="@android:color/white"/>
+            android:layout_weight="1"
+            android:background="@drawable/btn_cornered"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <Button
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:contentDescription="@string/text_supplies"
+                android:src="@drawable/ic_supplies_selected" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dxkyungpil"
+                android:text="@string/text_supplies"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/btn_schedule"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_margin="5dp"
-            android:fontFamily="@font/dxkyungpil"
-            android:text="@string/text_schedule"
-            android:textSize="20sp"
-            android:background="@android:color/white"/>
+            android:layout_weight="1"
+            android:background="@drawable/btn_cornered"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_account_book"
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:contentDescription="@string/text_schedule"
+                android:src="@drawable/ic_schedule_selected" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dxkyungpil"
+                android:text="@string/text_schedule"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_account"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_margin="5dp"
-            android:fontFamily="@font/dxkyungpil"
-            android:text="@string/text_account_book"
-            android:textSize="20sp"
-            android:background="@android:color/white"/>
+            android:layout_weight="1"
+            android:background="@drawable/btn_cornered"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <Button
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:contentDescription="@string/text_account_book"
+                android:src="@drawable/ic_account_selected" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dxkyungpil"
+                android:text="@string/text_account_book"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/btn_diary"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_margin="5dp"
-            android:fontFamily="@font/dxkyungpil"
-            android:text="@string/text_diary"
-            android:textSize="20sp"
-            android:background="@android:color/white"/>
+            android:layout_weight="1"
+            android:background="@drawable/btn_cornered"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:contentDescription="@string/text_diary"
+                android:src="@drawable/ic_diary_selected" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dxkyungpil"
+                android:text="@string/text_diary"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

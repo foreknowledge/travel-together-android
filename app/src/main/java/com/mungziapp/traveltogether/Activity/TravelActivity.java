@@ -22,7 +22,14 @@ import com.mungziapp.traveltogether.R;
 
 public class TravelActivity extends AppCompatActivity implements ActivityCallback {
     private final String[] titles = {"공지사항", "준비물", "일정", "가계부", "일기"};
-    ViewPager innerViewPager;
+    private final int[] icons = {R.drawable.ic_notice, R.drawable.ic_supplies, R.drawable.ic_schedule, R.drawable.ic_account, R.drawable.ic_diary};
+    private final int[] icons_selected = {R.drawable.ic_notice_selected, R.drawable.ic_supplies_selected, R.drawable.ic_schedule_selected,
+            R.drawable.ic_account_selected, R.drawable.ic_diary_selected};
+
+    private ViewPager innerViewPager;
+    private InnerPagerAdapter innerPagerAdapter;
+    private TextView fragmentTitle;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +43,15 @@ public class TravelActivity extends AppCompatActivity implements ActivityCallbac
 
     @Override
     public void setFragmentTitle(String title) {
-        TextView fragmentTitle = findViewById(R.id.fragment_title);
+        if (fragmentTitle == null) fragmentTitle = findViewById(R.id.fragment_title);
         fragmentTitle.setText(title);
     }
 
     private void setPagerAdapter(int type) {
         FragmentManager fm = getSupportFragmentManager();
 
-        InnerPagerAdapter innerPagerAdapter = new InnerPagerAdapter(fm);
+        // innerPagerAdapter 설정
+        innerPagerAdapter = new InnerPagerAdapter(fm);
         innerPagerAdapter.addItem(new NoticeFragment());
         innerPagerAdapter.addItem(new SuppliesFragment());
         innerPagerAdapter.addItem(new ScheduleFragment());
@@ -52,18 +60,47 @@ public class TravelActivity extends AppCompatActivity implements ActivityCallbac
 
         innerPagerAdapter.notifyDataSetChanged();
 
+        // innerViewPager 설정
         innerViewPager = findViewById(R.id.travel_view_pager);
         innerViewPager.setOffscreenPageLimit(innerPagerAdapter.getCount());
         innerViewPager.setAdapter(innerPagerAdapter);
         innerViewPager.setCurrentItem(type);
+
+        innerViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
+
+            @Override
+            public void onPageSelected(int position) {
+                setFragmentTitle(titles[position]);
+
+                for (int i = 0; i < innerPagerAdapter.getCount(); ++i) {
+                    TabLayout.Tab tab = tabLayout.getTabAt(i);
+
+                    if (tab != null) {
+                        if (i == position) tab.setIcon(icons_selected[i]);
+                        else tab.setIcon(icons[i]);
+                    }
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) { }
+        });
+
         setFragmentTitle(titles[type]);
 
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        // tabLayout 설정
+        tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(innerViewPager);
 
         for (int i = 0; i < innerPagerAdapter.getCount(); ++i) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
-            if (tab != null) tab.setText(titles[i]);
+
+            if (tab != null) {
+                if (i == type) tab.setIcon(icons_selected[i]);
+                else tab.setIcon(icons[i]);
+            }
         }
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

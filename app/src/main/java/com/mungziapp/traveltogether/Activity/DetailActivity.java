@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mungziapp.traveltogether.R;
@@ -68,8 +69,8 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        Button btnNotice = findViewById(R.id.btn_notice);
-        btnNotice.setOnClickListener(new View.OnClickListener() {
+        LinearLayout notice = findViewById(R.id.btn_notice);
+        notice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                startTravelActivity(ServiceType.NOTICE);
@@ -77,8 +78,8 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        Button btnSupplies = findViewById(R.id.btn_supplies);
-        btnSupplies.setOnClickListener(new View.OnClickListener() {
+        LinearLayout supplies = findViewById(R.id.btn_supplies);
+        supplies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                startTravelActivity(ServiceType.SUPPLIES);
@@ -86,8 +87,8 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        Button btnSchedule = findViewById(R.id.btn_schedule);
-        btnSchedule.setOnClickListener(new View.OnClickListener() {
+        LinearLayout schedule = findViewById(R.id.btn_schedule);
+        schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                startTravelActivity(ServiceType.SCHEDULE);
@@ -95,8 +96,8 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        Button btnAccountBook = findViewById(R.id.btn_account_book);
-        btnAccountBook.setOnClickListener(new View.OnClickListener() {
+        LinearLayout account = findViewById(R.id.btn_account);
+        account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                startTravelActivity(ServiceType.ACCOUNT_BOOK);
@@ -104,8 +105,8 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        Button btnDiary = findViewById(R.id.btn_diary);
-        btnDiary.setOnClickListener(new View.OnClickListener() {
+        LinearLayout diary = findViewById(R.id.btn_diary);
+        diary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                startTravelActivity(ServiceType.DIARY);
