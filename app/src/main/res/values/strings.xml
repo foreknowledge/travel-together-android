@@ -20,9 +20,9 @@
 
     <string name="text_notice">공지사항</string>
     <string name="text_supplies">준비물</string>
-    <string name="text_schedule">여행 일정</string>
+    <string name="text_schedule">일정</string>
     <string name="text_account_book">가계부</string>
-    <string name="text_diary">여행 일기</string>
+    <string name="text_diary">일기</string>
 
     <string name="btn_text_save">Save</string>
     <string name="btn_text_cancel">Cancel</string>

@@ -6,6 +6,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.mungziapp.traveltogether.Adapter.InnerPagerAdapter;
@@ -14,9 +17,11 @@ import com.mungziapp.traveltogether.Fragment.DiaryFragment;
 import com.mungziapp.traveltogether.Fragment.NoticeFragment;
 import com.mungziapp.traveltogether.Fragment.ScheduleFragment;
 import com.mungziapp.traveltogether.Fragment.SuppliesFragment;
+import com.mungziapp.traveltogether.Interface.ActivityCallback;
 import com.mungziapp.traveltogether.R;
 
-public class TravelActivity extends AppCompatActivity {
+public class TravelActivity extends AppCompatActivity implements ActivityCallback {
+    private final String[] titles = {"공지사항", "준비물", "일정", "가계부", "일기"};
     ViewPager innerViewPager;
 
     @Override
@@ -25,8 +30,17 @@ public class TravelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_travel);
 
         Intent intent = getIntent();
-        int type = intent.getIntExtra("caller", 0);
+        setPagerAdapter(intent.getIntExtra("caller", 0));
+        setButtons();
+    }
 
+    @Override
+    public void setFragmentTitle(String title) {
+        TextView fragmentTitle = findViewById(R.id.fragment_title);
+        fragmentTitle.setText(title);
+    }
+
+    private void setPagerAdapter(int type) {
         FragmentManager fm = getSupportFragmentManager();
 
         InnerPagerAdapter innerPagerAdapter = new InnerPagerAdapter(fm);
@@ -42,15 +56,15 @@ public class TravelActivity extends AppCompatActivity {
         innerViewPager.setOffscreenPageLimit(innerPagerAdapter.getCount());
         innerViewPager.setAdapter(innerPagerAdapter);
         innerViewPager.setCurrentItem(type);
+        setFragmentTitle(titles[type]);
 
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(innerViewPager);
 
-        tabLayout.getTabAt(0).setText("공지사항");
-        tabLayout.getTabAt(1).setText("준비물");
-        tabLayout.getTabAt(2).setText("일정");
-        tabLayout.getTabAt(3).setText("가계부");
-        tabLayout.getTabAt(4).setText("일기");
+        for (int i = 0; i < innerPagerAdapter.getCount(); ++i) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            if (tab != null) tab.setText(titles[i]);
+        }
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -64,6 +78,15 @@ public class TravelActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) { }
         });
+    }
 
+    private void setButtons() {
+        Button btnGoBefore = findViewById(R.id.btn_go_before);
+        btnGoBefore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }
