@@ -15,7 +15,7 @@ public class ScheduleFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.schedule_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_schedule, container, false);
 
         return rootView;
     }

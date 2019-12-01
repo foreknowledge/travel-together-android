@@ -16,13 +16,13 @@ import com.mungziapp.traveltogether.TravelItem;
 
 import java.util.ArrayList;
 
-public class TravelsAdapter extends RecyclerView.Adapter<TravelsAdapter.ViewHolder>
+public class OuterTravelsAdapter extends RecyclerView.Adapter<OuterTravelsAdapter.ViewHolder>
                                 implements OnItemClickListener{
     private Context context;
     private ArrayList<TravelItem> items = new ArrayList<>();
     private OnItemClickListener listener;
 
-    public TravelsAdapter(Context context) { this.context = context; }
+    public OuterTravelsAdapter(Context context) { this.context = context; }
     public void addItem(TravelItem item) { items.add(item); }
     public TravelItem getItem(int position) { return items.get(position); }
 
@@ -39,7 +39,7 @@ public class TravelsAdapter extends RecyclerView.Adapter<TravelsAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = inflater.inflate(R.layout.travel_item_fragment, parent, false);
+        View itemView = inflater.inflate(R.layout.fragment_travel_item, parent, false);
 
         return new ViewHolder(itemView, this);
     }

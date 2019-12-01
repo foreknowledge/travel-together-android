@@ -73,7 +73,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                startTravelActivity(ServiceType.NOTICE);
-                startTravelActivity(1);
+                startTravelActivity(0);
             }
         });
 
@@ -82,7 +82,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                startTravelActivity(ServiceType.SUPPLIES);
-                startTravelActivity(2);
+                startTravelActivity(1);
             }
         });
 
@@ -91,7 +91,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                startTravelActivity(ServiceType.SCHEDULE);
-                startTravelActivity(3);
+                startTravelActivity(2);
             }
         });
 
@@ -100,7 +100,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                startTravelActivity(ServiceType.ACCOUNT_BOOK);
-                startTravelActivity(4);
+                startTravelActivity(3);
             }
         });
 
@@ -109,7 +109,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                startTravelActivity(ServiceType.DIARY);
-                startTravelActivity(5);
+                startTravelActivity(4);
             }
         });
     }

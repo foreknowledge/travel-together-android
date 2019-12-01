@@ -9,17 +9,17 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.mungziapp.traveltogether.Adapter.TravelsAdapter;
-import com.mungziapp.traveltogether.Adapter.TravelsPagerAdapter;
+import com.mungziapp.traveltogether.Adapter.OuterTravelsAdapter;
+import com.mungziapp.traveltogether.Adapter.OuterPagerAdapter;
 import com.mungziapp.traveltogether.Fragment.TravelsFragment;
 import com.mungziapp.traveltogether.Interface.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.TravelItem;
 
 public class MainActivity extends BaseActivity {
-    private TravelsAdapter oncommingAdapter;
-    private TravelsAdapter lastTravelAdapter;
-    private ViewPager travelViewPager;
+    private OuterTravelsAdapter oncommingAdapter;
+    private OuterTravelsAdapter lastTravelAdapter;
+    private ViewPager outerViewPager;
 
     private FragmentManager fm;
 
@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity {
 
     private void setAdapters() {
         // oncommingAdapter 세팅
-        oncommingAdapter = new TravelsAdapter(getApplicationContext());
+        oncommingAdapter = new OuterTravelsAdapter(getApplicationContext());
         oncommingAdapter.addItem(new TravelItem("엄마와 함께하는 4박 5일 홍콩여행", "19.10.12","19.10.16", 2, R.drawable.travel_room_sample_01));
         oncommingAdapter.addItem(new TravelItem("친구들과 처음가는 배낭 여행", "2019.06.09", "19.06.29", 10, R.drawable.travel_room_sample_02));
         oncommingAdapter.addItem(new TravelItem("마카오로 호캉스~~!!", "19.02.11", "19.02.15", 3, R.drawable.travel_room_sample_03));
@@ -48,7 +48,7 @@ public class MainActivity extends BaseActivity {
 
         oncommingAdapter.setOnClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(TravelsAdapter.ViewHolder viewHolder, View view, int position) {
+            public void onItemClick(OuterTravelsAdapter.ViewHolder viewHolder, View view, int position) {
                 TravelItem item = oncommingAdapter.getItem(position);
 
                 Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
@@ -62,7 +62,7 @@ public class MainActivity extends BaseActivity {
         });
 
         // lastTravelAdapter 세팅
-        lastTravelAdapter = new TravelsAdapter(getApplicationContext());
+        lastTravelAdapter = new OuterTravelsAdapter(getApplicationContext());
         lastTravelAdapter.addItem(new TravelItem("가치 같이 여행", "19.10.12", "19.10.16", 7, R.drawable.travel_room_sample_05));
         lastTravelAdapter.addItem(new TravelItem("일주일 제주 여행", "18.06.09", "19.06.29", 2, R.drawable.travel_room_sample_06));
         lastTravelAdapter.addItem(new TravelItem("내일로 전국 일주~~", "18.02.11", "18.02.15", 3, R.drawable.travel_room_sample_07));
@@ -74,7 +74,7 @@ public class MainActivity extends BaseActivity {
 
         lastTravelAdapter.setOnClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(TravelsAdapter.ViewHolder viewHolder, View view, int position) {
+            public void onItemClick(OuterTravelsAdapter.ViewHolder viewHolder, View view, int position) {
                 TravelItem item = lastTravelAdapter.getItem(position);
 
                 Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
@@ -90,26 +90,25 @@ public class MainActivity extends BaseActivity {
         TravelsFragment oncommingTravels = new TravelsFragment(oncommingAdapter);
         TravelsFragment lastTravels = new TravelsFragment(lastTravelAdapter);
 
-        TravelsPagerAdapter travelsPagerAdapter = new TravelsPagerAdapter(fm);
-        travelsPagerAdapter.addItem(oncommingTravels);
-        travelsPagerAdapter.addItem(lastTravels);
+        OuterPagerAdapter outerPagerAdapter = new OuterPagerAdapter(fm);
+        outerPagerAdapter.addItem(oncommingTravels);
+        outerPagerAdapter.addItem(lastTravels);
 
-        travelsPagerAdapter.notifyDataSetChanged();
+        outerPagerAdapter.notifyDataSetChanged();
 
-        travelViewPager = findViewById(R.id.travel_view_pager);
-        travelViewPager.setOffscreenPageLimit(travelsPagerAdapter.getCount());
-        travelViewPager.setCurrentItem(0);
-        travelViewPager.setAdapter(travelsPagerAdapter);
+        outerViewPager = findViewById(R.id.outer_view_pager);
+        outerViewPager.setOffscreenPageLimit(outerPagerAdapter.getCount());
+        outerViewPager.setAdapter(outerPagerAdapter);
     }
 
     private void setTabBar() {
         TabLayout tabLayout = findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(travelViewPager);
+        tabLayout.setupWithViewPager(outerViewPager);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                travelViewPager.setCurrentItem(tab.getPosition());
+                outerViewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
