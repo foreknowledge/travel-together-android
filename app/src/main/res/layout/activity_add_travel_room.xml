@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@android:color/white"
@@ -60,7 +60,7 @@
         android:background="@color/colorBack"/>
 
     <EditText
-        android:id="@+id/edit_room_title"
+        android:id="@+id/edit_travel_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="30dp"
@@ -182,15 +182,6 @@
                 android:background="@color/colorBack"/>
 
         </FrameLayout>
-
-
-        <!--<Button-->
-            <!--android:id="@+id/btn_pick_cover_img"-->
-            <!--android:layout_width="40dp"-->
-            <!--android:layout_height="40dp"-->
-            <!--android:layout_weight="0"-->
-            <!--android:layout_margin="50dp"-->
-            <!--android:background="@drawable/ic_add_circle_outline_black_24dp" />-->
 
     </LinearLayout>
 

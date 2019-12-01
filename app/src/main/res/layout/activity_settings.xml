@@ -13,7 +13,7 @@
             android:id="@+id/btn_go_before"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_margin="10dp"
+            android:layout_margin="15dp"
             android:layout_gravity="center_vertical"
             android:background="@drawable/ic_arrow_back_24dp"/>
 
@@ -22,10 +22,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:layout_margin="5dp"
             android:fontFamily="@font/dxkyungpil"
             android:textColor="@color/colorPrimary"
             android:text="@string/btn_text_edit"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:background="@android:color/transparent"/>
 
     </FrameLayout>
@@ -34,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@android:color/white">
+        android:background="@color/colorBack">
 
         <Button
             android:id="@+id/btn_logout"

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.ServiceType;
 
 public class TravelActivity extends AppCompatActivity {
 

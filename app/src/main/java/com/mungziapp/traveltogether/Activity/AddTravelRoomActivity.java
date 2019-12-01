@@ -42,7 +42,7 @@ public class AddTravelRoomActivity extends AppCompatActivity {
         Button btnSave = findViewById(R.id.btn_save);
         Button btnCancel = findViewById(R.id.btn_cancel);
 
-        //EditText editRoomTitle = findViewById(R.id.edit_room_title);
+        //EditText editRoomTitle = findViewById(R.id.edit_travel_title);
         btnStartDate = findViewById(R.id.btn_pick_start_date);
         btnEndDate = findViewById(R.id.btn_pick_end_date);
         btnPickCoverImg = findViewById(R.id.btn_pick_cover_img);

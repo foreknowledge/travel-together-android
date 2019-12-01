@@ -6,9 +6,11 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.mungziapp.traveltogether.Adapter.TravelsAdapter;
+import com.mungziapp.traveltogether.Adapter.TravelsPagerAdapter;
 import com.mungziapp.traveltogether.Fragment.TravelsFragment;
 import com.mungziapp.traveltogether.Interface.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
@@ -17,8 +19,7 @@ import com.mungziapp.traveltogether.TravelItem;
 public class MainActivity extends BaseActivity {
     private TravelsAdapter oncommingAdapter;
     private TravelsAdapter lastTravelAdapter;
-    private TravelsFragment oncommingTravels;
-    private TravelsFragment lastTravels;
+    private ViewPager travelViewPager;
 
     private FragmentManager fm;
 
@@ -28,11 +29,8 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         fm = getSupportFragmentManager();
-        // create TravelRoomsFragments
-        setAdapters();
-        oncommingTravels = new TravelsFragment(oncommingAdapter);
-        lastTravels = new TravelsFragment(lastTravelAdapter);
 
+        setAdapters();
         setTabBar();
         setAddTravelRoomButton();
         setSettingsButton();
@@ -77,33 +75,41 @@ public class MainActivity extends BaseActivity {
         lastTravelAdapter.setOnClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(TravelsAdapter.ViewHolder viewHolder, View view, int position) {
+                TravelItem item = lastTravelAdapter.getItem(position);
+
+                Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+                intent.putExtra("travelTitle", item.getTravelTitle());
+                intent.putExtra("travelStartDate", item.getTravelStartDate());
+                intent.putExtra("travelEndDate", item.getTravelEndDate());
+                intent.putExtra("travelImg", item.getImgResId());
+
+                startActivity(intent);
             }
         });
+
+        TravelsFragment oncommingTravels = new TravelsFragment(oncommingAdapter);
+        TravelsFragment lastTravels = new TravelsFragment(lastTravelAdapter);
+
+        TravelsPagerAdapter travelsPagerAdapter = new TravelsPagerAdapter(fm);
+        travelsPagerAdapter.addItem(oncommingTravels);
+        travelsPagerAdapter.addItem(lastTravels);
+
+        travelsPagerAdapter.notifyDataSetChanged();
+
+        travelViewPager = findViewById(R.id.travel_view_pager);
+        travelViewPager.setOffscreenPageLimit(travelsPagerAdapter.getCount());
+        travelViewPager.setCurrentItem(0);
+        travelViewPager.setAdapter(travelsPagerAdapter);
     }
 
     private void setTabBar() {
-        TabLayout tabs = findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("다가오는 여행"));
-        tabs.addTab(tabs.newTab().setText("지난 여행"));
-        fm.beginTransaction().add(R.id.travel_room_container, oncommingTravels).commit();
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(travelViewPager);
 
-        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                int position = tab.getPosition();
-
-                TravelsFragment selected = null;
-                switch (position) {
-                    case 0:
-                        selected = oncommingTravels;
-                        break;
-                    case 1:
-                        selected = lastTravels;
-                        break;
-                }
-
-                if (selected != null)
-                    fm.beginTransaction().replace(R.id.travel_room_container, selected).commit();
+                travelViewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
