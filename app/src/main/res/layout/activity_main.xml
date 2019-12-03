@@ -29,8 +29,14 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="8dp">
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/btn_search"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/ic_search_24dp" />
 
                     <ImageView
                         android:layout_width="140dp"
@@ -43,33 +49,32 @@
                         android:id="@+id/btn_add_travel_room"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_gravity="end"
+                        android:layout_gravity="end|center_vertical"
                         android:layout_marginStart="5dp"
-                        android:layout_marginLeft="5dp"
                         android:layout_marginEnd="40dp"
-                        android:layout_marginRight="5dp"
                         android:background="@drawable/ic_add_black_24dp" />
 
                     <Button
                         android:id="@+id/btn_go_settings"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_gravity="end"
+                        android:layout_gravity="end|center_vertical"
                         android:layout_marginStart="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
                         android:background="@drawable/ic_settings_black_24dp" />
 
                 </FrameLayout>
 
                 <LinearLayout
+                    android:id="@+id/search_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="5dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginStart="7dp"
                     android:layout_marginEnd="7dp"
-                    android:background="@drawable/dr_search_cornered">
+                    android:background="@drawable/dr_search_cornered"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="30dp"

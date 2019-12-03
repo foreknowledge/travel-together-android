@@ -11,6 +11,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentManager;
@@ -35,6 +36,7 @@ public class MainActivity extends BaseActivity {
     private FragmentManager fm;
 
     private EditText editSearch;
+    private LinearLayout searchBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +45,12 @@ public class MainActivity extends BaseActivity {
 
         fm = getSupportFragmentManager();
 
-        setActionBarSlide();
         setAdapters();
         setTabBar();
         setAddTravelRoomButton();
         setSettingsButton();
         setSearchButton();
-    }
-
-    private void setActionBarSlide() {
+        setSearchBar();
     }
 
     private void setAdapters() {
@@ -152,6 +151,19 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    private void setSearchButton() {
+        Button btnSearch = findViewById(R.id.btn_search);
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (searchBarLayout.getVisibility() == View.GONE)
+                    searchBarLayout.setVisibility(View.VISIBLE);
+                else
+                    searchBarLayout.setVisibility(View.GONE);
+            }
+        });
+    }
+
     private void setAddTravelRoomButton() {
         Button btnAddTravelRoom = findViewById(R.id.btn_add_travel_room);
         btnAddTravelRoom.setOnClickListener(new View.OnClickListener() {
@@ -174,7 +186,8 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    private void setSearchButton() {
+    private void setSearchBar() {
+        searchBarLayout = findViewById(R.id.search_layout);
         editSearch = findViewById(R.id.search_travel);
         final Button btnClear = findViewById(R.id.btn_clear);
 
