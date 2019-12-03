@@ -48,6 +48,7 @@
     <string name="hint_start_date">시작일을 선택 해 주세요.</string>
     <string name="hint_end_date">종료일을 선택 해 주세요.</string>
     <string name="hint_search_country">국가 검색</string>
+    <string name="hint_search_travel">제목 검색</string>
 
     <string name="kakao_app_key">411c1f05ffdee3dc3ae05dd3de07ab7b</string>
 </resources>
