@@ -23,13 +23,14 @@
     <string name="text_schedule">일정</string>
     <string name="text_account_book">가계부</string>
     <string name="text_diary">일기</string>
+    <string name="text_destination">여행지</string>
+    <string name="text_member">여행 멤버</string>
 
     <string name="btn_text_save">Save</string>
     <string name="btn_text_cancel">Cancel</string>
-    <string name="btn_text_destination">여행지</string>
-    <string name="btn_text_member">여행 멤버</string>
     <string name="btn_text_start_date">여행 시작일</string>
     <string name="btn_text_end_date">여행 종료일</string>
+    <string name="btn_text_country">여행지 추가</string>
     <string name="btn_text_cover_img">커버 이미지</string>
     <string name="btn_logout">로그 아웃</string>
     <string name="btn_remove_account">회원 탈퇴</string>
@@ -46,6 +47,7 @@
     <string name="hint_title">제목</string>
     <string name="hint_start_date">시작일을 선택 해 주세요.</string>
     <string name="hint_end_date">종료일을 선택 해 주세요.</string>
+    <string name="hint_search_country">국가 검색</string>
 
     <string name="kakao_app_key">411c1f05ffdee3dc3ae05dd3de07ab7b</string>
 </resources>

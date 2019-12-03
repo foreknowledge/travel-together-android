@@ -67,7 +67,8 @@
         android:paddingRight="30dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:background="@android:color/transparent"
+        android:background="@android:color/white"
+        android:fontFamily="@font/dxkyungpil"
         android:inputType="text"
         android:hint="@string/hint_title"
         android:importantForAutofill="no"
@@ -82,7 +83,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@android:color/white" >
 
         <TextView
             android:layout_width="0dp"
@@ -90,6 +92,7 @@
             android:layout_weight="1"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
+            android:fontFamily="@font/dxkyungpil"
             android:textSize="17sp"
             android:textColor="@android:color/black"
             android:text="@string/btn_text_start_date"/>
@@ -99,6 +102,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
+            android:fontFamily="@font/dxkyungpil"
             android:textColor="@color/colorGrayLight"
             android:text="@string/hint_start_date"
             android:background="@android:color/transparent"/>
@@ -107,14 +111,15 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:background="@color/colorBack"/>
 
     <!--여행 종료일 레이아웃-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@android:color/white" >
 
         <TextView
             android:layout_width="0dp"
@@ -122,6 +127,7 @@
             android:layout_weight="1"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
+            android:fontFamily="@font/dxkyungpil"
             android:textSize="17sp"
             android:textColor="@android:color/black"
             android:text="@string/btn_text_end_date"/>
@@ -131,6 +137,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
+            android:fontFamily="@font/dxkyungpil"
             android:textColor="@color/colorGrayLight"
             android:text="@string/hint_end_date"
             android:background="@android:color/transparent"/>
@@ -139,14 +146,68 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
+        android:background="@color/colorBack"/>
+
+    <!--여행지 추가 레이아웃-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:fontFamily="@font/dxkyungpil"
+            android:textSize="17sp"
+            android:textColor="@android:color/black"
+            android:text="@string/btn_text_country"/>
+
+        <androidx.appcompat.widget.SearchView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/dr_search_cornered"
+            android:inputType="text"
+            android:fontFamily="@font/dxkyungpil"
+            android:hint="@string/hint_search_country" />
+
+<!--        <EditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:layout_marginBottom="5dp"-->
+<!--            android:layout_marginLeft="30dp"-->
+<!--            android:layout_marginRight="30dp"-->
+<!--            android:drawableStart="@drawable/ic_search_black_24dp"-->
+<!--            android:paddingStart="10dp"-->
+<!--            android:paddingEnd="10dp"-->
+<!--            android:background="@drawable/dr_search_cornered"-->
+<!--            android:inputType="text"-->
+<!--            android:fontFamily="@font/dxkyungpil"-->
+<!--            android:hint="@string/hint_search_country" />-->
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
         android:background="@color/colorBack"/>
 
     <!--커버 이미지 레이아웃-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@android:color/white" >
 
         <TextView
             android:layout_width="0dp"
@@ -156,6 +217,7 @@
             android:paddingRight="30dp"
             android:paddingTop="8dp"
             android:layout_gravity="start"
+            android:fontFamily="@font/dxkyungpil"
             android:text="@string/btn_text_cover_img"
             android:textColor="@android:color/black"
             android:textSize="17sp" />

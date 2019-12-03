@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.ServiceType;
+import com.mungziapp.traveltogether.SearchType;
 
 public class DetailActivity extends AppCompatActivity {
     private String travelTitle;
@@ -73,8 +73,7 @@ public class DetailActivity extends AppCompatActivity {
         notice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startTravelActivity(ServiceType.NOTICE);
-                startTravelActivity(0);
+                startTravelActivity(SearchType.NOTICE);
             }
         });
 
@@ -82,8 +81,7 @@ public class DetailActivity extends AppCompatActivity {
         supplies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startTravelActivity(ServiceType.SUPPLIES);
-                startTravelActivity(1);
+                startTravelActivity(SearchType.SUPPLIES);
             }
         });
 
@@ -91,8 +89,7 @@ public class DetailActivity extends AppCompatActivity {
         schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startTravelActivity(ServiceType.SCHEDULE);
-                startTravelActivity(2);
+                startTravelActivity(SearchType.SCHEDULE);
             }
         });
 
@@ -100,8 +97,7 @@ public class DetailActivity extends AppCompatActivity {
         account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startTravelActivity(ServiceType.ACCOUNT_BOOK);
-                startTravelActivity(3);
+                startTravelActivity(SearchType.ACCOUNT);
             }
         });
 
@@ -109,8 +105,7 @@ public class DetailActivity extends AppCompatActivity {
         diary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startTravelActivity(ServiceType.DIARY);
-                startTravelActivity(4);
+                startTravelActivity(SearchType.DIARY);
             }
         });
     }

@@ -1,16 +1,21 @@
 package com.mungziapp.traveltogether;
 
+import java.util.ArrayList;
+
 public class TravelItem {
     private String travelTitle;
     private String travelStartDate;
     private String travelEndDate;
-    private int travelMembers;
+    private ArrayList<String> travelCountries;
+    private ArrayList<Integer> travelMembers;
     private int imgResId;
 
-    public TravelItem(String travelTitle, String travelStartDate, String travelEndDate, int travelMembers, int imgResId) {
+    public TravelItem(String travelTitle, String travelStartDate, String travelEndDate,
+                      ArrayList<String> travelCountries, ArrayList<Integer> travelMembers, int imgResId) {
         this.travelTitle = travelTitle;
         this.travelStartDate = travelStartDate;
         this.travelEndDate = travelEndDate;
+        this.travelCountries = travelCountries;
         this.travelMembers = travelMembers;
         this.imgResId = imgResId;
     }
@@ -23,7 +28,10 @@ public class TravelItem {
         return travelStartDate;
     }
     public String getTravelEndDate() { return travelEndDate; }
-    public int getTravelMembers() {
+    public ArrayList<String> getTravelCountries() {
+        return travelCountries;
+    }
+    public ArrayList<Integer> getTravelMembers() {
         return travelMembers;
     }
     public int getImgResId() {

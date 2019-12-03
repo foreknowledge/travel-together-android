@@ -55,8 +55,8 @@
                 android:textSize="16sp" />
 
             <View
-                android:layout_width="40dp"
-                android:layout_height="1dp"
+                android:layout_width="55dp"
+                android:layout_height="1.5dp"
                 android:layout_gravity="center"
                 android:background="#EE702E" />
 
@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:fontFamily="@font/dxkyungpil"
                 android:textColor="@android:color/white"
                 android:textSize="23sp" />
@@ -101,7 +101,7 @@
                     android:layout_height="30dp"
                     android:background="@color/colorTransparentDark"
                     android:fontFamily="@font/dxkyungpil"
-                    android:text="@string/btn_text_destination"
+                    android:text="@string/text_destination"
                     android:textSize="16sp" />
 
                 <Button
@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/colorTransparentDark"
                     android:fontFamily="@font/dxkyungpil"
-                    android:text="@string/btn_text_member"
+                    android:text="@string/text_member"
                     android:textSize="16sp" />
 
                 <Button
@@ -164,9 +164,9 @@
             android:id="@+id/btn_notice"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_weight="1"
-            android:background="@drawable/btn_cornered"
+            android:background="@drawable/dr_shadow_cornered"
             android:clickable="true"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -194,9 +194,9 @@
             android:id="@+id/btn_supplies"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_weight="1"
-            android:background="@drawable/btn_cornered"
+            android:background="@drawable/dr_shadow_cornered"
             android:clickable="true"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -224,9 +224,9 @@
             android:id="@+id/btn_schedule"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_weight="1"
-            android:background="@drawable/btn_cornered"
+            android:background="@drawable/dr_shadow_cornered"
             android:clickable="true"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -254,9 +254,9 @@
             android:id="@+id/btn_account"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_weight="1"
-            android:background="@drawable/btn_cornered"
+            android:background="@drawable/dr_shadow_cornered"
             android:clickable="true"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -284,9 +284,9 @@
             android:id="@+id/btn_diary"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_weight="1"
-            android:background="@drawable/btn_cornered"
+            android:background="@drawable/dr_shadow_cornered"
             android:clickable="true"
             android:gravity="center_vertical"
             android:orientation="horizontal">

@@ -11,15 +11,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mungziapp.traveltogether.Adapter.OuterTravelsAdapter;
+import com.mungziapp.traveltogether.Adapter.TravelsRecyclerAdapter;
 import com.mungziapp.traveltogether.R;
 
 public class TravelsFragment extends Fragment {
-    private OuterTravelsAdapter outerTravelsAdapter;
+    private TravelsRecyclerAdapter travelsRecyclerAdapter;
 
     public TravelsFragment() {}
-    public TravelsFragment(OuterTravelsAdapter outerTravelsAdapter) {
-        this.outerTravelsAdapter = outerTravelsAdapter;
+    public TravelsFragment(TravelsRecyclerAdapter travelsRecyclerAdapter) {
+        this.travelsRecyclerAdapter = travelsRecyclerAdapter;
     }
 
     @Nullable
@@ -31,7 +31,7 @@ public class TravelsFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        recyclerView.setAdapter(outerTravelsAdapter);
+        recyclerView.setAdapter(travelsRecyclerAdapter);
 
         return rootView;
     }
