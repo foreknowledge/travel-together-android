@@ -4,5 +4,6 @@
     android:id="@+id/country_textView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:fontFamily="@font/dxkyungpil"
     android:paddingStart="0dp"
     android:paddingEnd="10dp" />

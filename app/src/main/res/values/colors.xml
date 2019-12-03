@@ -13,8 +13,7 @@
 
     <color name="colorDetailBack">#F2F2F2</color>
 
-    <color name="colorTransparent">#AAC6C6C6</color>
-    <color name="colorTransparentDark">#CCC6C6C6</color>
+    <color name="colorTransparent">#AAF2F2F2</color>
     <color name="colorShadow">#10000000</color>
 
     <color name="kakao_front">#3C1E1E</color>

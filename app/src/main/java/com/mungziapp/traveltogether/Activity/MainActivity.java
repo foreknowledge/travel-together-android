@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity {
 
         ArrayList<String> countries = new ArrayList<>(Arrays.asList("한국", "미국", "대만", "베트남", "부에노스아이레스", "태국", "일본"));
         ArrayList<Integer> members = new ArrayList<>(Arrays.asList(R.drawable.user_img, R.drawable.user_img, R.drawable.user_img,
-                R.drawable.user_img, R.drawable.user_img, R.drawable.user_img));
+                R.drawable.user_img, R.drawable.user_img, R.drawable.user_img, R.drawable.user_img, R.drawable.user_img, R.drawable.user_img));
 
         ArrayList<String> countries2 = new ArrayList<>(Arrays.asList(""));
         ArrayList<Integer> members2 = new ArrayList<>(Arrays.asList(R.drawable.user_img));
