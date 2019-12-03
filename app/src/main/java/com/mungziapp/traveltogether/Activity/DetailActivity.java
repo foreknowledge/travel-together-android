@@ -1,6 +1,8 @@
 package com.mungziapp.traveltogether.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,13 +12,19 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.mungziapp.traveltogether.Adapter.CountryAdapter;
+import com.mungziapp.traveltogether.Adapter.MemberAdapter;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.SearchType;
+
+import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
     private String travelTitle;
     private String travelStartDate;
     private String travelEndDate;
+    private ArrayList<String> travelCountries;
+    private ArrayList<Integer> travelMembers;
     private int travelImg;
 
     @Override
@@ -30,6 +38,8 @@ public class DetailActivity extends AppCompatActivity {
             this.travelTitle = intent.getStringExtra("travelTitle");
             this.travelStartDate = intent.getStringExtra("travelStartDate");
             this.travelEndDate = intent.getStringExtra("travelEndDate");
+            this.travelCountries = intent.getStringArrayListExtra("travelCountries");
+            this.travelMembers = intent.getIntegerArrayListExtra("travelMembers");
             this.travelImg = intent.getIntExtra("travelImg", 0);
         }
 
@@ -38,16 +48,36 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void setRoomInfo() {
+        // 여행 제목 설정
         TextView travelTitle = findViewById(R.id.travel_title);
         travelTitle.setText(this.travelTitle);
 
+        // 여행 기간 설정
         TextView travelDuration = findViewById(R.id.travel_duration);
         String strDuration = this.travelStartDate + " ~ " + this.travelEndDate + " (N일간)";
         travelDuration.setText(strDuration);
 
+        // 여행 D-Day 설정
         TextView travelDDay = findViewById(R.id.travel_d_day);
         travelDDay.setText("D - N");
 
+        // 여행지 설정
+        RecyclerView countryRecyclerView = findViewById(R.id.country_recycler_view);
+        countryRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        CountryAdapter countryAdapter = new CountryAdapter(getApplicationContext());
+        for (String country: travelCountries) countryAdapter.addItem(country);
+        countryRecyclerView.setAdapter(countryAdapter);
+
+        // 여행 멤버 설정
+        RecyclerView memberRecyclerView = findViewById(R.id.member_recycler_view);
+        memberRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        MemberAdapter memberAdapter = new MemberAdapter(getApplicationContext());
+        for (Integer member: travelMembers) memberAdapter.addItem(member);
+        memberRecyclerView.setAdapter(memberAdapter);
+
+        // 여행 커버 이미지 설정
         FrameLayout travelLayout = findViewById(R.id.travel_layout);
         travelLayout.setBackgroundResource(this.travelImg);
     }

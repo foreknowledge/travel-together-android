@@ -17,8 +17,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
     private Context context;
     private ArrayList<String> items = new ArrayList<>();
 
-    CountryAdapter(Context context) { this.context = context; }
-    void addItem(String item) { items.add(item); }
+    public CountryAdapter(Context context) { this.context = context; }
+    public void addItem(String item) { items.add(item); }
 
     @Override   // 아이템의 개수 리턴
     public int getItemCount() {

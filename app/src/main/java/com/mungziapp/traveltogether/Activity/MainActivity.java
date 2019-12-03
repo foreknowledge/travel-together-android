@@ -69,6 +69,8 @@ public class MainActivity extends BaseActivity {
                 intent.putExtra("travelTitle", item.getTravelTitle());
                 intent.putExtra("travelStartDate", item.getTravelStartDate());
                 intent.putExtra("travelEndDate", item.getTravelEndDate());
+                intent.putExtra("travelCountries", item.getTravelCountries());
+                intent.putExtra("travelMembers", item.getTravelMembers());
                 intent.putExtra("travelImg", item.getImgResId());
 
                 startActivity(intent);
@@ -95,6 +97,8 @@ public class MainActivity extends BaseActivity {
                 intent.putExtra("travelTitle", item.getTravelTitle());
                 intent.putExtra("travelStartDate", item.getTravelStartDate());
                 intent.putExtra("travelEndDate", item.getTravelEndDate());
+                intent.putExtra("travelCountries", item.getTravelCountries());
+                intent.putExtra("travelMembers", item.getTravelMembers());
                 intent.putExtra("travelImg", item.getImgResId());
 
                 startActivity(intent);

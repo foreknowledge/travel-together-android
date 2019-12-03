@@ -11,7 +11,7 @@
         android:layout_height="0dp"
         android:background="@drawable/travel_room_sample_01"
         app:layout_constrainedHeight="true"
-        app:layout_constraintHeight_percent="0.45"
+        app:layout_constraintHeight_percent="0.5"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:orientation="vertical"
-            android:paddingBottom="80dp">
+            android:paddingBottom="100dp">
 
             <TextView
                 android:id="@+id/travel_d_day"
@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="50dp"
                 android:fontFamily="@font/dxkyungpil"
                 android:textColor="@android:color/white"
                 android:textSize="23sp" />
@@ -89,58 +89,73 @@
             android:gravity="bottom"
             android:orientation="vertical">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+                android:layout_marginTop="20dp" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/dxkyungpil"
+                    android:paddingStart="98dp"
+                    android:paddingEnd="20dp"
+                    android:background="@drawable/dr_trasn_cornered">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/country_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
 
                 <Button
-                    style="?android:buttonBarStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:background="@color/colorTransparentDark"
+                    android:layout_width="85dp"
+                    android:layout_height="35dp"
+                    android:gravity="center"
                     android:fontFamily="@font/dxkyungpil"
                     android:text="@string/text_destination"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black"
+                    android:background="@drawable/dr_trasn_cornered"/>
 
-                <Button
-                    style="?android:buttonBarStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:background="@color/colorTransparent"
-                    android:fontFamily="@font/dxkyungpil"
-                    android:paddingStart="0dp"
-                    android:paddingEnd="0dp"
-                    android:textSize="16sp" />
+            </FrameLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/dxkyungpil"
+                    android:paddingStart="95dp"
+                    android:paddingEnd="20dp"
+                    android:background="@drawable/dr_trasn_cornered">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/member_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
 
                 <Button
-                    style="?android:buttonBarStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorTransparentDark"
+                    android:layout_width="85dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
                     android:fontFamily="@font/dxkyungpil"
                     android:text="@string/text_member"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black"
+                    android:background="@drawable/dr_trasn_cornered"/>
 
-                <Button
-                    style="?android:buttonBarStyle"
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorTransparent"
-                    android:fontFamily="@font/dxkyungpil"
-                    android:paddingStart="0dp"
-                    android:paddingEnd="0dp"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -154,7 +169,7 @@
         android:orientation="vertical"
         android:padding="5dp"
         app:layout_constrainedHeight="true"
-        app:layout_constraintHeight_percent="0.55"
+        app:layout_constraintHeight_percent="0.5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

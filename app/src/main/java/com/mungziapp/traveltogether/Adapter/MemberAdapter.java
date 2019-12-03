@@ -17,8 +17,8 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.ViewHolder
     private Context context;
     private ArrayList<Integer> items = new ArrayList<>();
 
-    MemberAdapter(Context context) { this.context = context; }
-    void addItem(int item) { items.add(item); }
+    public MemberAdapter(Context context) { this.context = context; }
+    public void addItem(int item) { items.add(item); }
 
     @Override   // 아이템의 개수 리턴
     public int getItemCount() {

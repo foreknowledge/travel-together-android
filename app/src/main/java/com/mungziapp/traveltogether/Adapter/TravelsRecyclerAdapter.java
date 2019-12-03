@@ -62,7 +62,7 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
         private TextView numOfTravelMembers;
         private TextView travelDday;
         private RecyclerView countryRecyclerView;
-        private RecyclerView memberRecyclerVeiew;
+        private RecyclerView memberRecyclerView;
 
         private Context context;
 
@@ -80,8 +80,8 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
             this.countryRecyclerView = itemView.findViewById(R.id.country_recycler_view);
             countryRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
 
-            this.memberRecyclerVeiew = itemView.findViewById(R.id.member_recycler_view);
-            memberRecyclerVeiew.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+            this.memberRecyclerView = itemView.findViewById(R.id.member_recycler_view);
+            memberRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -118,7 +118,7 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
             ArrayList<Integer> members = item.getTravelMembers();
             MemberAdapter memberAdapter = new MemberAdapter(context);
             for (int member: members) memberAdapter.addItem(member);
-            memberRecyclerVeiew.setAdapter(memberAdapter);
+            memberRecyclerView.setAdapter(memberAdapter);
         }
     }
 }
