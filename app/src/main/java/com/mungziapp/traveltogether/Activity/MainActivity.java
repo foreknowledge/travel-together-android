@@ -1,18 +1,9 @@
 package com.mungziapp.traveltogether.Activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -35,9 +26,6 @@ public class MainActivity extends BaseActivity {
 
     private FragmentManager fm;
 
-    private EditText editSearch;
-    private LinearLayout searchBarLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +38,6 @@ public class MainActivity extends BaseActivity {
         setAddTravelRoomButton();
         setSettingsButton();
         setSearchButton();
-        setSearchBar();
     }
 
     private void setAdapters() {
@@ -156,13 +143,8 @@ public class MainActivity extends BaseActivity {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (searchBarLayout.getVisibility() == View.GONE)
-                    searchBarLayout.setVisibility(View.VISIBLE);
-                else {
-                    searchBarLayout.setVisibility(View.GONE);
-                    clearFocusAndHideKeyboard();
-                    editSearch.setText("");
-                }
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -187,52 +169,5 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    private void setSearchBar() {
-        searchBarLayout = findViewById(R.id.search_layout);
-        editSearch = findViewById(R.id.search_travel);
-        final Button btnClear = findViewById(R.id.btn_clear);
-
-        editSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                btnClear.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (editSearch.getText().toString().equals("")) btnClear.setVisibility(View.INVISIBLE);
-            }
-        });
-
-        editSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEARCH) {
-                    clearFocusAndHideKeyboard();
-                    //performSearch();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        btnClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editSearch.setText("");
-            }
-        });
-    }
-
-    private void clearFocusAndHideKeyboard() {
-        editSearch.clearFocus();
-        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (in != null)
-            in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
     }
 }
