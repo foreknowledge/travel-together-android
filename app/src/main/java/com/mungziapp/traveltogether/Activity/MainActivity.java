@@ -158,8 +158,11 @@ public class MainActivity extends BaseActivity {
             public void onClick(View view) {
                 if (searchBarLayout.getVisibility() == View.GONE)
                     searchBarLayout.setVisibility(View.VISIBLE);
-                else
+                else {
                     searchBarLayout.setVisibility(View.GONE);
+                    clearFocusAndHideKeyboard();
+                    editSearch.setText("");
+                }
             }
         });
     }
@@ -210,7 +213,8 @@ public class MainActivity extends BaseActivity {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
-                    performSearch();
+                    clearFocusAndHideKeyboard();
+                    //performSearch();
                     return true;
                 }
                 return false;
@@ -225,7 +229,7 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    private void performSearch() {
+    private void clearFocusAndHideKeyboard() {
         editSearch.clearFocus();
         InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if (in != null)
