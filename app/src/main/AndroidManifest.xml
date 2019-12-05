@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".GlobalApplication"
+        android:name=".app.GlobalApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_app_round"
         android:label="@string/app_name_kor"
@@ -13,12 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.SearchActivity"></activity>
-        <activity android:name=".Activity.TravelActivity" />
-        <activity android:name=".Activity.SettingsActivity" />
-        <activity android:name=".Activity.DetailActivity" />
-        <activity android:name=".Activity.LoginActivity" />
-        <activity android:name=".Activity.SplashActivity">
+        <activity android:name=".activity.SearchActivity"></activity>
+        <activity android:name=".activity.TravelActivity" />
+        <activity android:name=".activity.SettingsActivity" />
+        <activity android:name=".activity.DetailActivity" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,8 +30,8 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
-        <activity android:name=".Activity.AddTravelRoomActivity" />
-        <activity android:name=".Activity.MainActivity" />
+        <activity android:name=".activity.AddTravelRoomActivity" />
+        <activity android:name=".activity.MainActivity" />
     </application>
 
 </manifest>
