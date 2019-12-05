@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Activity.SearchActivity">
 
     <LinearLayout
@@ -13,17 +13,13 @@
         android:layout_margin="8dp"
         android:background="@drawable/dr_search_cornered"
         android:orientation="horizontal"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="10dp">
 
         <Button
             android:id="@+id/btn_go_before"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_weight="0"
-            android:layout_marginStart="5dp"
             android:background="@drawable/ic_arrow_back_24dp" />
 
         <EditText
@@ -40,7 +36,7 @@
             android:inputType="text"
             android:textColor="@android:color/black"
             android:textColorHint="@color/colorGrayLight"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:autofillHints="false"/>
 
         <Button
@@ -56,4 +52,9 @@
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

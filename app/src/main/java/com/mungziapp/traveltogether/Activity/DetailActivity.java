@@ -62,20 +62,24 @@ public class DetailActivity extends AppCompatActivity {
         travelDDay.setText("D - N");
 
         // 여행지 설정
-        RecyclerView countryRecyclerView = findViewById(R.id.country_recycler_view);
-        countryRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+        if (travelCountries != null) {
+            RecyclerView countryRecyclerView = findViewById(R.id.country_recycler_view);
+            countryRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        CountryAdapter countryAdapter = new CountryAdapter(getApplicationContext());
-        for (String country: travelCountries) countryAdapter.addItem(country);
-        countryRecyclerView.setAdapter(countryAdapter);
+            CountryAdapter countryAdapter = new CountryAdapter(getApplicationContext());
+            for (String country : travelCountries) countryAdapter.addItem(country);
+            countryRecyclerView.setAdapter(countryAdapter);
+        }
 
         // 여행 멤버 설정
-        RecyclerView memberRecyclerView = findViewById(R.id.member_recycler_view);
-        memberRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+        if (travelMembers != null) {
+            RecyclerView memberRecyclerView = findViewById(R.id.member_recycler_view);
+            memberRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        MemberAdapter memberAdapter = new MemberAdapter(getApplicationContext());
-        for (Integer member: travelMembers) memberAdapter.addItem(member);
-        memberRecyclerView.setAdapter(memberAdapter);
+            MemberAdapter memberAdapter = new MemberAdapter(getApplicationContext());
+            for (Integer member : travelMembers) memberAdapter.addItem(member);
+            memberRecyclerView.setAdapter(memberAdapter);
+        }
 
         // 여행 커버 이미지 설정
         FrameLayout travelLayout = findViewById(R.id.travel_layout);

@@ -111,7 +111,7 @@
 
                 </LinearLayout>
 
-                <Button
+                <TextView
                     android:layout_width="85dp"
                     android:layout_height="32dp"
                     android:gravity="center"
@@ -119,7 +119,8 @@
                     android:text="@string/text_destination"
                     android:textSize="16sp"
                     android:textColor="@android:color/black"
-                    android:background="@drawable/dr_trasn_cornered"/>
+                    android:background="@drawable/dr_trasn_cornered"
+                    android:clickable="true" />
 
             </FrameLayout>
 
@@ -145,7 +146,7 @@
 
                 </LinearLayout>
 
-                <Button
+                <TextView
                     android:layout_width="85dp"
                     android:layout_height="45dp"
                     android:gravity="center"
@@ -153,7 +154,8 @@
                     android:text="@string/text_member"
                     android:textSize="16sp"
                     android:textColor="@android:color/black"
-                    android:background="@drawable/dr_trasn_cornered"/>
+                    android:background="@drawable/dr_trasn_cornered"
+                    android:clickable="true" />
 
             </FrameLayout>
 

@@ -12,7 +12,6 @@ import com.google.android.material.tabs.TabLayout;
 import com.mungziapp.traveltogether.Adapter.TravelsRecyclerAdapter;
 import com.mungziapp.traveltogether.Adapter.OuterPagerAdapter;
 import com.mungziapp.traveltogether.Fragment.TravelsFragment;
-import com.mungziapp.traveltogether.Interface.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.TravelItem;
 
@@ -20,8 +19,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainActivity extends BaseActivity {
-    private TravelsRecyclerAdapter oncommingAdapter;
-    private TravelsRecyclerAdapter lastTravelAdapter;
     private ViewPager outerViewPager;
 
     private FragmentManager fm;
@@ -41,9 +38,6 @@ public class MainActivity extends BaseActivity {
     }
 
     private void setAdapters() {
-        // oncommingAdapter 세팅
-        oncommingAdapter = new TravelsRecyclerAdapter(getApplicationContext());
-
         ArrayList<String> countries = new ArrayList<>(Arrays.asList("한국", "미국", "대만", "베트남", "부에노스아이레스", "태국", "일본"));
         ArrayList<Integer> members = new ArrayList<>(Arrays.asList(R.drawable.user_img, R.drawable.user_img, R.drawable.user_img,
                 R.drawable.user_img, R.drawable.user_img, R.drawable.user_img, R.drawable.user_img, R.drawable.user_img, R.drawable.user_img));
@@ -54,6 +48,8 @@ public class MainActivity extends BaseActivity {
         ArrayList<String> countries3 = new ArrayList<>(Arrays.asList("러시아"));
         ArrayList<Integer> members3 = new ArrayList<>(Arrays.asList(R.drawable.user_img, R.drawable.user_img));
 
+        // oncommingAdapter 세팅
+        TravelsRecyclerAdapter oncommingAdapter = new TravelsRecyclerAdapter(getApplicationContext());
         oncommingAdapter.addItem(new TravelItem("엄마와 함께하는 4박 5일 홍콩여행", "19.10.12","19.10.16", countries, members, R.drawable.travel_room_sample_01));
         oncommingAdapter.addItem(new TravelItem("친구들과 처음가는 배낭 여행", "2019.06.09", "19.06.29", countries2, members2, R.drawable.travel_room_sample_02));
         oncommingAdapter.addItem(new TravelItem("마카오로 호캉스~~!!", "19.02.11", "19.02.15", countries3, members3, R.drawable.travel_room_sample_03));
@@ -61,25 +57,8 @@ public class MainActivity extends BaseActivity {
         oncommingAdapter.addItem(new TravelItem("혼자가는 러시아 일주 \uD83C\uDFA1", "19.10.12", "19.10.16", countries2, members2, R.drawable.travel_room_sample_01));
         oncommingAdapter.addItem(new TravelItem("찐친들 - 미국 횡단 일주", "19.06.09", "19.06.29", countries3, members3, R.drawable.travel_room_sample_02));
 
-        oncommingAdapter.setOnClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(TravelsRecyclerAdapter.ViewHolder viewHolder, View view, int position) {
-                TravelItem item = oncommingAdapter.getItem(position);
-
-                Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
-                intent.putExtra("travelTitle", item.getTravelTitle());
-                intent.putExtra("travelStartDate", item.getTravelStartDate());
-                intent.putExtra("travelEndDate", item.getTravelEndDate());
-                intent.putExtra("travelCountries", item.getTravelCountries());
-                intent.putExtra("travelMembers", item.getTravelMembers());
-                intent.putExtra("travelImg", item.getImgResId());
-
-                startActivity(intent);
-            }
-        });
-
         // lastTravelAdapter 세팅
-        lastTravelAdapter = new TravelsRecyclerAdapter(getApplicationContext());
+        TravelsRecyclerAdapter lastTravelAdapter = new TravelsRecyclerAdapter(getApplicationContext());
         lastTravelAdapter.addItem(new TravelItem("가치 같이 여행", "19.10.12", "19.10.16", countries2, members2, R.drawable.travel_room_sample_05));
         lastTravelAdapter.addItem(new TravelItem("일주일 제주 여행", "18.06.09", "19.06.29", countries3, members3, R.drawable.travel_room_sample_06));
         lastTravelAdapter.addItem(new TravelItem("내일로 전국 일주~~", "18.02.11", "18.02.15", countries, members, R.drawable.travel_room_sample_07));
@@ -88,23 +67,6 @@ public class MainActivity extends BaseActivity {
         lastTravelAdapter.addItem(new TravelItem("일주일 제주 여행", "19.06.09", "19.06.29", countries, members, R.drawable.travel_room_sample_06));
         lastTravelAdapter.addItem(new TravelItem("내일로 전국 일주~~", "19.02.11", "19.02.15", countries2, members2, R.drawable.travel_room_sample_07));
         lastTravelAdapter.addItem(new TravelItem("가자 파리로~!", "16.08.19", "16.09.02", countries3, members3, R.drawable.travel_room_sample_01));
-
-        lastTravelAdapter.setOnClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(TravelsRecyclerAdapter.ViewHolder viewHolder, View view, int position) {
-                TravelItem item = lastTravelAdapter.getItem(position);
-
-                Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
-                intent.putExtra("travelTitle", item.getTravelTitle());
-                intent.putExtra("travelStartDate", item.getTravelStartDate());
-                intent.putExtra("travelEndDate", item.getTravelEndDate());
-                intent.putExtra("travelCountries", item.getTravelCountries());
-                intent.putExtra("travelMembers", item.getTravelMembers());
-                intent.putExtra("travelImg", item.getImgResId());
-
-                startActivity(intent);
-            }
-        });
 
         TravelsFragment oncommingTravels = new TravelsFragment(oncommingAdapter);
         TravelsFragment lastTravels = new TravelsFragment(lastTravelAdapter);

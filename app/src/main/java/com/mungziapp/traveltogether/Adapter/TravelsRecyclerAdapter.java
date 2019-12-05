@@ -1,6 +1,7 @@
 package com.mungziapp.traveltogether.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,30 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mungziapp.traveltogether.Interface.OnItemClickListener;
+import com.mungziapp.traveltogether.Activity.DetailActivity;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.TravelItem;
 
 import java.util.ArrayList;
 
-public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecyclerAdapter.ViewHolder>
-                                implements OnItemClickListener{
+public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecyclerAdapter.ViewHolder> {
     private Context context;
     private ArrayList<TravelItem> items = new ArrayList<>();
-    private OnItemClickListener listener;
 
     public TravelsRecyclerAdapter(Context context) { this.context = context; }
     public void addItem(TravelItem item) { items.add(item); }
     public TravelItem getItem(int position) { return items.get(position); }
-
-    public void setOnClickListener(OnItemClickListener listener) { this.listener = listener; }
-
-    @Override
-    public void onItemClick(ViewHolder viewHolder, View view, int position) {
-        if (listener != null) {
-            listener.onItemClick(viewHolder, view, position);
-        }
-    }
 
     @NonNull
     @Override
@@ -42,7 +32,7 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = inflater.inflate(R.layout.fragment_travel_item, parent, false);
 
-        return new ViewHolder(itemView, context, this);
+        return new ViewHolder(itemView, items, context);
     }
 
     @Override
@@ -66,7 +56,7 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 
         private Context context;
 
-        ViewHolder(@NonNull final View itemView, Context context, final OnItemClickListener listener) {
+        ViewHolder(@NonNull final View itemView, final ArrayList<TravelItem> items, final Context context) {
             super(itemView);
 
             this.context = context;
@@ -86,9 +76,17 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (listener != null) {
-                        listener.onItemClick(ViewHolder.this, view, getAdapterPosition());
-                    }
+                    TravelItem item = items.get(getAdapterPosition());
+
+                    Intent intent = new Intent(context, DetailActivity.class);
+                    intent.putExtra("travelTitle", item.getTravelTitle());
+                    intent.putExtra("travelStartDate", item.getTravelStartDate());
+                    intent.putExtra("travelEndDate", item.getTravelEndDate());
+                    intent.putExtra("travelCountries", item.getTravelCountries());
+                    intent.putExtra("travelMembers", item.getTravelMembers());
+                    intent.putExtra("travelImg", item.getImgResId());
+
+                    context.startActivity(intent);
                 }
             });
 
