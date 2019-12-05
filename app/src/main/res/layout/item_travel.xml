@@ -10,32 +10,17 @@
         android:layout_height="match_parent"
         android:background="#79000000"/>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/travel_members"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:layout_gravity="start"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:layout_gravity="center_vertical"
-            android:contentDescription="@string/desc_icon_person"
-            android:src="@drawable/ic_person_black_24dp" />
-
-        <TextView
-            android:id="@+id/travel_members"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:fontFamily="@font/dxkyungpil"
-            android:textColor="@color/colorBackDark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+        android:drawableStart="@drawable/ic_person_black_24dp"
+        android:drawablePadding="5dp"
+        android:fontFamily="@font/dxkyungpil"
+        android:textColor="@color/colorBackDark"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -100,13 +85,13 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:fontFamily="@font/dxkyungpil"
-                android:paddingStart="98dp"
+                android:paddingStart="95dp"
                 android:paddingEnd="20dp"
                 android:background="@drawable/dr_trasn_cornered">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/country_recycler_view"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>

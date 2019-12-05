@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,12 +13,12 @@ import com.mungziapp.traveltogether.R;
 
 import java.util.ArrayList;
 
-public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHolder> {
+public class TravelMemberAdapter extends RecyclerView.Adapter<TravelMemberAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<String> items = new ArrayList<>();
+    private ArrayList<Integer> items = new ArrayList<>();
 
-    public CountryAdapter(Context context) { this.context = context; }
-    public void addItem(String item) { items.add(item); }
+    public TravelMemberAdapter(Context context) { this.context = context; }
+    public void addItem(int item) { items.add(item); }
 
     @Override   // 아이템의 개수 리턴
     public int getItemCount() {
@@ -29,7 +29,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
     @Override   // 뷰홀더가 만들어지는 시점에 호출되는 메서드
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = inflater.inflate(R.layout.item_country, parent, false);
+        View itemView = inflater.inflate(R.layout.item_member, parent, false);
 
         return new ViewHolder(itemView);
     }
@@ -40,17 +40,17 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView country;
+        ImageView imageView;
 
         // 각각의 item에 대한 뷰가 뷰홀더의 파라미터로 전달 됨.
         ViewHolder(@NonNull final View itemView) {
             super(itemView);
 
-            country = itemView.findViewById(R.id.country_textView);
+            imageView = itemView.findViewById(R.id.member_img);
         }
 
-        void setItem(String item) {
-            country.setText(item);
+        void setItem(int item) {
+            imageView.setImageResource(item);
         }
     }
 }

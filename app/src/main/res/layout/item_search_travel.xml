@@ -11,7 +11,7 @@
     android:gravity="center_vertical"
     android:background="@android:color/white">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/travel_thumbnail"
         android:layout_width="65dp"
         android:layout_height="65dp"

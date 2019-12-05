@@ -20,7 +20,6 @@ public class TravelItem {
         this.imgResId = imgResId;
     }
 
-
     public String getTravelTitle() {
         return travelTitle;
     }

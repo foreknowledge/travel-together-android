@@ -5,7 +5,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:fontFamily="@font/dxkyungpil"
-    android:layout_marginTop="9dp"
-    android:layout_marginBottom="9dp"
-    android:paddingStart="0dp"
-    android:paddingEnd="10dp" />
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    android:paddingStart="5dp"
+    android:paddingEnd="5dp"
+    android:textSize="20sp"
+    android:textColor="@android:color/black" />

@@ -12,8 +12,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.mungziapp.traveltogether.Adapter.CountryAdapter;
-import com.mungziapp.traveltogether.Adapter.MemberAdapter;
+import com.mungziapp.traveltogether.Adapter.TravelCountryAdapter;
+import com.mungziapp.traveltogether.Adapter.TravelMemberAdapter;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.SearchType;
 
@@ -66,9 +66,9 @@ public class DetailActivity extends AppCompatActivity {
             RecyclerView countryRecyclerView = findViewById(R.id.country_recycler_view);
             countryRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
 
-            CountryAdapter countryAdapter = new CountryAdapter(getApplicationContext());
-            for (String country : travelCountries) countryAdapter.addItem(country);
-            countryRecyclerView.setAdapter(countryAdapter);
+            TravelCountryAdapter travelCountryAdapter = new TravelCountryAdapter(getApplicationContext());
+            for (String country : travelCountries) travelCountryAdapter.addItem(country);
+            countryRecyclerView.setAdapter(travelCountryAdapter);
         }
 
         // 여행 멤버 설정
@@ -76,9 +76,9 @@ public class DetailActivity extends AppCompatActivity {
             RecyclerView memberRecyclerView = findViewById(R.id.member_recycler_view);
             memberRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
 
-            MemberAdapter memberAdapter = new MemberAdapter(getApplicationContext());
-            for (Integer member : travelMembers) memberAdapter.addItem(member);
-            memberRecyclerView.setAdapter(memberAdapter);
+            TravelMemberAdapter travelMemberAdapter = new TravelMemberAdapter(getApplicationContext());
+            for (Integer member : travelMembers) travelMemberAdapter.addItem(member);
+            memberRecyclerView.setAdapter(travelMemberAdapter);
         }
 
         // 여행 커버 이미지 설정

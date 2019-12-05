@@ -1,18 +1,17 @@
 package com.mungziapp.traveltogether;
 
-public class SearchItem {
+public class SearchTravelItem {
     private String travelTitle;
     private String travelStartDate;
     private String travelEndDate;
     private int imgResId;
 
-    public SearchItem(String travelTitle, String travelStartDate, String travelEndDate, int imgResId) {
+    public SearchTravelItem(String travelTitle, String travelStartDate, String travelEndDate, int imgResId) {
         this.travelTitle = travelTitle;
         this.travelStartDate = travelStartDate;
         this.travelEndDate = travelEndDate;
         this.imgResId = imgResId;
     }
-
 
     public String getTravelTitle() {
         return travelTitle;

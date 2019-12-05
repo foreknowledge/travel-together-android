@@ -17,11 +17,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mungziapp.traveltogether.Adapter.SearchRecyclerAdapter;
-import com.mungziapp.traveltogether.Adapter.TravelsRecyclerAdapter;
+import com.mungziapp.traveltogether.Adapter.SearchTravelAdapter;
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.SearchItem;
-import com.mungziapp.traveltogether.TravelItem;
+import com.mungziapp.traveltogether.SearchTravelItem;
 
 public class SearchActivity extends AppCompatActivity {
     private EditText editSearch;
@@ -104,22 +102,22 @@ public class SearchActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         searchRecycler.setLayoutManager(layoutManager);
 
-        SearchRecyclerAdapter searchAdapter = new SearchRecyclerAdapter(getApplicationContext());
-        searchAdapter.addItem(new SearchItem("엄마와 함께하는 4박 5일 홍콩여행", "19.10.12","19.10.16", R.drawable.travel_room_sample_01));
-        searchAdapter.addItem(new SearchItem("친구들과 처음가는 배낭 여행", "2019.06.09", "19.06.29", R.drawable.travel_room_sample_02));
-        searchAdapter.addItem(new SearchItem("마카오로 호캉스~~!!", "19.02.11", "19.02.15", R.drawable.travel_room_sample_03));
-        searchAdapter.addItem(new SearchItem("앗싸 퇴직여행 ✈️", "18.08.15", "19.08.16", R.drawable.travel_room_sample_04));
-        searchAdapter.addItem(new SearchItem("혼자가는 러시아 일주 \uD83C\uDFA1", "19.10.12", "19.10.16", R.drawable.travel_room_sample_01));
-        searchAdapter.addItem(new SearchItem("찐친들 - 미국 횡단 일주", "19.06.09", "19.06.29", R.drawable.travel_room_sample_02));
+        SearchTravelAdapter searchAdapter = new SearchTravelAdapter(getApplicationContext());
+        searchAdapter.addItem(new SearchTravelItem("엄마와 함께하는 4박 5일 홍콩여행", "19.10.12","19.10.16", R.drawable.travel_room_sample_01));
+        searchAdapter.addItem(new SearchTravelItem("친구들과 처음가는 배낭 여행", "2019.06.09", "19.06.29", R.drawable.travel_room_sample_02));
+        searchAdapter.addItem(new SearchTravelItem("마카오로 호캉스~~!!", "19.02.11", "19.02.15", R.drawable.travel_room_sample_03));
+        searchAdapter.addItem(new SearchTravelItem("앗싸 퇴직여행 ✈️", "18.08.15", "19.08.16", R.drawable.travel_room_sample_04));
+        searchAdapter.addItem(new SearchTravelItem("혼자가는 러시아 일주 \uD83C\uDFA1", "19.10.12", "19.10.16", R.drawable.travel_room_sample_01));
+        searchAdapter.addItem(new SearchTravelItem("찐친들 - 미국 횡단 일주", "19.06.09", "19.06.29", R.drawable.travel_room_sample_02));
 
-        searchAdapter.addItem(new SearchItem("가치 같이 여행", "19.10.12", "19.10.16", R.drawable.travel_room_sample_05));
-        searchAdapter.addItem(new SearchItem("일주일 제주 여행", "18.06.09", "19.06.29", R.drawable.travel_room_sample_06));
-        searchAdapter.addItem(new SearchItem("내일로 전국 일주~~", "18.02.11", "18.02.15", R.drawable.travel_room_sample_07));
-        searchAdapter.addItem(new SearchItem("가자 파리로~!", "18.08.15", "19.08.16", R.drawable.travel_room_sample_01));
-        searchAdapter.addItem(new SearchItem("가치 같이 여행", "19.10.12", "19.10.16", R.drawable.travel_room_sample_05));
-        searchAdapter.addItem(new SearchItem("일주일 제주 여행", "19.06.09", "19.06.29", R.drawable.travel_room_sample_06));
-        searchAdapter.addItem(new SearchItem("내일로 전국 일주~~", "19.02.11", "19.02.15", R.drawable.travel_room_sample_07));
-        searchAdapter.addItem(new SearchItem("가자 파리로~!", "16.08.19", "16.09.02", R.drawable.travel_room_sample_01));
+        searchAdapter.addItem(new SearchTravelItem("가치 같이 여행", "19.10.12", "19.10.16", R.drawable.travel_room_sample_05));
+        searchAdapter.addItem(new SearchTravelItem("일주일 제주 여행", "18.06.09", "19.06.29", R.drawable.travel_room_sample_06));
+        searchAdapter.addItem(new SearchTravelItem("내일로 전국 일주~~", "18.02.11", "18.02.15", R.drawable.travel_room_sample_07));
+        searchAdapter.addItem(new SearchTravelItem("가자 파리로~!", "18.08.15", "19.08.16", R.drawable.travel_room_sample_01));
+        searchAdapter.addItem(new SearchTravelItem("가치 같이 여행", "19.10.12", "19.10.16", R.drawable.travel_room_sample_05));
+        searchAdapter.addItem(new SearchTravelItem("일주일 제주 여행", "19.06.09", "19.06.29", R.drawable.travel_room_sample_06));
+        searchAdapter.addItem(new SearchTravelItem("내일로 전국 일주~~", "19.02.11", "19.02.15", R.drawable.travel_room_sample_07));
+        searchAdapter.addItem(new SearchTravelItem("가자 파리로~!", "16.08.19", "16.09.02", R.drawable.travel_room_sample_01));
 
         searchRecycler.setAdapter(searchAdapter);
     }

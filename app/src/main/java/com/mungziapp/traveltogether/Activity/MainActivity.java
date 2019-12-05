@@ -38,14 +38,18 @@ public class MainActivity extends BaseActivity {
     }
 
     private void setAdapters() {
-        ArrayList<String> countries = new ArrayList<>(Arrays.asList("한국", "미국", "대만", "베트남", "부에노스아이레스", "태국", "일본"));
+
+        ArrayList<String> countries = new ArrayList<>(Arrays.asList(
+                "\uD83C\uDDF0\uD83C\uDDF7", "\uD83C\uDDFA\uD83C\uDDF8", "\uD83C\uDDED\uD83C\uDDF0", "\uD83C\uDDEB\uD83C\uDDF7",
+                "\uD83C\uDDEC\uD83C\uDDFA", "\uD83C\uDDFB\uD83C\uDDF3", "\uD83C\uDDF2\uD83C\uDDF4", "\uD83C\uDDF3\uD83C\uDDF5",
+                "\uD83C\uDDEC\uD83C\uDDF9", "\uD83C\uDDEC\uD83C\uDDE9", "\uD83C\uDDEC\uD83C\uDDF7", "\uD83C\uDDEC\uD83C\uDDF1"));
         ArrayList<Integer> members = new ArrayList<>(Arrays.asList(R.drawable.user_img, R.drawable.user_img, R.drawable.user_img,
                 R.drawable.user_img, R.drawable.user_img, R.drawable.user_img, R.drawable.user_img, R.drawable.user_img, R.drawable.user_img));
 
         ArrayList<String> countries2 = new ArrayList<>(Arrays.asList(""));
         ArrayList<Integer> members2 = new ArrayList<>(Arrays.asList(R.drawable.user_img));
 
-        ArrayList<String> countries3 = new ArrayList<>(Arrays.asList("러시아"));
+        ArrayList<String> countries3 = new ArrayList<>(Arrays.asList("\uD83C\uDDF7\uD83C\uDDFA"));
         ArrayList<Integer> members3 = new ArrayList<>(Arrays.asList(R.drawable.user_img, R.drawable.user_img));
 
         // oncommingAdapter 세팅

@@ -2,7 +2,6 @@ package com.mungziapp.traveltogether.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,23 +13,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mungziapp.traveltogether.Activity.DetailActivity;
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.SearchItem;
+import com.mungziapp.traveltogether.SearchTravelItem;
 
 import java.util.ArrayList;
 
-public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAdapter.ViewHolder> {
+public class SearchTravelAdapter extends RecyclerView.Adapter<SearchTravelAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<SearchItem> items = new ArrayList<>();
+    private ArrayList<SearchTravelItem> items = new ArrayList<>();
 
-    public SearchRecyclerAdapter(Context context) { this.context = context; }
-    public void addItem(SearchItem item) { items.add(item); }
-    public SearchItem getItem(int position) { return items.get(position); }
+    public SearchTravelAdapter(Context context) { this.context = context; }
+    public void addItem(SearchTravelItem item) { items.add(item); }
+    public SearchTravelItem getItem(int position) { return items.get(position); }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = inflater.inflate(R.layout.fragment_search_item, parent, false);
+        View itemView = inflater.inflate(R.layout.item_search_travel, parent, false);
 
         return new ViewHolder(itemView, items, context);
     }
@@ -50,7 +49,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
         private TextView travelTitle;
         private TextView travelDuration;
 
-        ViewHolder(@NonNull final View itemView, final ArrayList<SearchItem> items, final Context context) {
+        ViewHolder(@NonNull final View itemView, final ArrayList<SearchTravelItem> items, final Context context) {
             super(itemView);
 
             this.travelThumbnail = itemView.findViewById(R.id.travel_thumbnail);
@@ -60,7 +59,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    SearchItem item = items.get(getAdapterPosition());
+                    SearchTravelItem item = items.get(getAdapterPosition());
 
                     Intent intent = new Intent(context, DetailActivity.class);
                     intent.putExtra("travelTitle", item.getTravelTitle());
@@ -73,7 +72,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
 
         }
 
-        void setItem(SearchItem item) {
+        void setItem(SearchTravelItem item) {
             this.travelThumbnail.setBackgroundResource(item.getImgResId());
             this.travelTitle.setText(item.getTravelTitle());
 

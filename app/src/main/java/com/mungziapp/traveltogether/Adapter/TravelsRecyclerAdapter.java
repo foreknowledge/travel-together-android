@@ -30,7 +30,7 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = inflater.inflate(R.layout.fragment_travel_item, parent, false);
+        View itemView = inflater.inflate(R.layout.item_travel, parent, false);
 
         return new ViewHolder(itemView, items, context);
     }
@@ -86,6 +86,8 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
                     intent.putExtra("travelMembers", item.getTravelMembers());
                     intent.putExtra("travelImg", item.getImgResId());
 
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                     context.startActivity(intent);
                 }
             });
@@ -109,14 +111,14 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 
         private void setRecyclerViews(TravelItem item) {
             ArrayList<String> countries = item.getTravelCountries();
-            CountryAdapter countryAdapter = new CountryAdapter(context);
-            for (String country: countries) countryAdapter.addItem(country);
-            countryRecyclerView.setAdapter(countryAdapter);
+            TravelCountryAdapter travelCountryAdapter = new TravelCountryAdapter(context);
+            for (String country: countries) travelCountryAdapter.addItem(country);
+            countryRecyclerView.setAdapter(travelCountryAdapter);
 
             ArrayList<Integer> members = item.getTravelMembers();
-            MemberAdapter memberAdapter = new MemberAdapter(context);
-            for (int member: members) memberAdapter.addItem(member);
-            memberRecyclerView.setAdapter(memberAdapter);
+            TravelMemberAdapter travelMemberAdapter = new TravelMemberAdapter(context);
+            for (int member: members) travelMemberAdapter.addItem(member);
+            memberRecyclerView.setAdapter(travelMemberAdapter);
         }
     }
 }
