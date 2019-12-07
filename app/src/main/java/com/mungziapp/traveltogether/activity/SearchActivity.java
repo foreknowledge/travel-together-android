@@ -106,7 +106,7 @@ public class SearchActivity extends AppCompatActivity {
         if (in != null)
             in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
 
-        searchAdapter.searchItem(editSearch.getText().toString());
+        //searchAdapter.searchItem(editSearch.getText().toString());
     }
 
     private void setRecyclerView() {

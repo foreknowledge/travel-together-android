@@ -26,7 +26,6 @@ public class SearchTravelAdapter extends RecyclerView.Adapter<SearchTravelAdapte
     private ArrayList<SearchTravelItem> filteredItems = new ArrayList<>();
 
     public SearchTravelAdapter(Context context) { this.context = context; }
-    public SearchTravelItem getItem(int position) { return items.get(position); }
 
     public void initItem() {
         Cursor cursor = DatabaseManager.database.rawQuery(TravelRoomTable.SELECT_QUERY, null);

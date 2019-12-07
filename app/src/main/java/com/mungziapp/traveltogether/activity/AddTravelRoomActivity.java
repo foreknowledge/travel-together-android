@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +38,8 @@ public class AddTravelRoomActivity extends AppCompatActivity {
     private final int SET_END_DATE = 2;
 
     private EditText editSearch;
-    private RecyclerView recyclerView;
+    private RecyclerView countrySearchRecycler;
+    private SearchCountryAdapter countryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +73,9 @@ public class AddTravelRoomActivity extends AppCompatActivity {
 
     private void setSearchBar() {
         editSearch = findViewById(R.id.search_country);
-        recyclerView = findViewById(R.id.country_search_recycler);
 
         final Button btnClear = findViewById(R.id.btn_clear);
+        final FrameLayout btnClearOut = findViewById(R.id.btn_clear_out);
 
         editSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -82,15 +84,17 @@ public class AddTravelRoomActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 btnClear.setVisibility(View.VISIBLE);
-                recyclerView.setVisibility(View.VISIBLE);
+                countrySearchRecycler.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
                 if (editSearch.getText().toString().equals("")) {
                     btnClear.setVisibility(View.INVISIBLE);
-                    recyclerView.setVisibility(View.INVISIBLE);
+                    countrySearchRecycler.setVisibility(View.GONE);
                 }
+
+                countryAdapter.searchItem(editable.toString());
             }
         });
 
@@ -112,6 +116,12 @@ public class AddTravelRoomActivity extends AppCompatActivity {
                 editSearch.setText("");
             }
         });
+        btnClearOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editSearch.setText("");
+            }
+        });
     }
 
     private void performSearch() {
@@ -125,20 +135,16 @@ public class AddTravelRoomActivity extends AppCompatActivity {
         if (in != null)
             in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
 
-        Toast.makeText(this, "검색어 = " + editSearch.getText(), Toast.LENGTH_SHORT).show();
+        //countryAdapter.searchItem(editSearch.getText().toString());
     }
 
     private void setCountryList() {
-        RecyclerView countrySearchRecycler = findViewById(R.id.country_search_recycler);
+        countrySearchRecycler = findViewById(R.id.country_search_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         countrySearchRecycler.setLayoutManager(layoutManager);
 
-        SearchCountryAdapter countryAdapter = new SearchCountryAdapter(getApplicationContext());
-
-        for (String countryName: TravelHelper.countryMap.keySet()) {
-            String countryFlag = TravelHelper.countryMap.get(countryName);
-            countryAdapter.addItem(new SearchCountryItem(countryFlag, countryName));
-        }
+        countryAdapter = new SearchCountryAdapter(getApplicationContext());
+        countryAdapter.initItem();
 
         countrySearchRecycler.setAdapter(countryAdapter);
     }
