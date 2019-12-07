@@ -14,6 +14,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class SearchActivity extends AppCompatActivity {
     private void setSearchBar() {
         editSearch = findViewById(R.id.search_travel);
         final Button btnClear = findViewById(R.id.btn_clear);
+        final FrameLayout btnClearOut = findViewById(R.id.btn_clear_out);
 
         editSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -79,6 +81,13 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editSearch.setText("");
+            }
+        });
+
+        btnClearOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 editSearch.setText("");
