@@ -52,6 +52,7 @@ public class MainActivity extends BaseActivity {
         for (int i=0; i<numOfRecords; ++i) {
             cursor.moveToNext();
 
+            int id = cursor.getInt(cursor.getColumnIndex("id"));
             String title = cursor.getString(cursor.getColumnIndex("name"));
             String startDate = cursor.getString(cursor.getColumnIndex("start_date"));
             String endDate = cursor.getString(cursor.getColumnIndex("end_date"));
@@ -68,9 +69,9 @@ public class MainActivity extends BaseActivity {
             for (int j = 0; j < numOfMembers; ++j) members.add(R.drawable.user_img);
 
             if (Integer.valueOf(endDate.substring(0,2)) < 19)
-                lastTravelAdapter.addItem(new TravelItem(title, startDate, endDate, countries, members, thumb));
+                lastTravelAdapter.addItem(new TravelItem(id, title, startDate, endDate, countries, members, thumb));
             else
-                oncommingAdapter.addItem(new TravelItem(title, startDate, endDate, countries, members, thumb));
+                oncommingAdapter.addItem(new TravelItem(id, title, startDate, endDate, countries, members, thumb));
         }
 
         cursor.close();
@@ -113,6 +114,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
             }
         });

@@ -3,6 +3,7 @@ package com.mungziapp.traveltogether.item;
 import java.util.ArrayList;
 
 public class TravelItem {
+    private int id;
     private String travelTitle;
     private String travelStartDate;
     private String travelEndDate;
@@ -10,8 +11,9 @@ public class TravelItem {
     private ArrayList<Integer> travelMembers;
     private int imgResId;
 
-    public TravelItem(String travelTitle, String travelStartDate, String travelEndDate,
+    public TravelItem(int id, String travelTitle, String travelStartDate, String travelEndDate,
                       ArrayList<String> travelCountries, ArrayList<Integer> travelMembers, int imgResId) {
+        this.id = id;
         this.travelTitle = travelTitle;
         this.travelStartDate = travelStartDate;
         this.travelEndDate = travelEndDate;
@@ -20,6 +22,7 @@ public class TravelItem {
         this.imgResId = imgResId;
     }
 
+    public int getId() { return id; }
     public String getTravelTitle() {
         return travelTitle;
     }

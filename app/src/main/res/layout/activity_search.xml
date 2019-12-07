@@ -37,7 +37,7 @@
             android:textColor="@android:color/black"
             android:textColorHint="@color/colorGrayLight"
             android:textSize="20sp"
-            android:autofillHints="false"/>
+            android:autofillHints="false" />
 
         <Button
             android:id="@+id/btn_clear"

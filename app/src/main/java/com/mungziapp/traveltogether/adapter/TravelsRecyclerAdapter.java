@@ -45,7 +45,7 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
         return items.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder{
         private FrameLayout travelLayout;
         private TextView travelTitle;
         private TextView travelDuration;
@@ -79,12 +79,7 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
                     TravelItem item = items.get(getAdapterPosition());
 
                     Intent intent = new Intent(context, DetailActivity.class);
-                    intent.putExtra("travelTitle", item.getTravelTitle());
-                    intent.putExtra("travelStartDate", item.getTravelStartDate());
-                    intent.putExtra("travelEndDate", item.getTravelEndDate());
-                    intent.putExtra("travelCountries", item.getTravelCountries());
-                    intent.putExtra("travelMembers", item.getTravelMembers());
-                    intent.putExtra("travelImg", item.getImgResId());
+                    intent.putExtra("id", item.getId());
 
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 

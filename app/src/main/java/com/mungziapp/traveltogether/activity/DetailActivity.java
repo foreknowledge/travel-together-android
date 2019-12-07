@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -16,15 +18,19 @@ import com.mungziapp.traveltogether.adapter.TravelCountryAdapter;
 import com.mungziapp.traveltogether.adapter.TravelMemberAdapter;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.SearchType;
+import com.mungziapp.traveltogether.app.DatabaseManager;
+import com.mungziapp.traveltogether.table.TravelRoomTable;
 
 import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
+    private final String TAG = "DetailActivity";
+
     private String travelTitle;
     private String travelStartDate;
     private String travelEndDate;
-    private ArrayList<String> travelCountries;
-    private ArrayList<Integer> travelMembers;
+    private ArrayList<String> travelCountries = new ArrayList<>();
+    private ArrayList<Integer> travelMembers = new ArrayList<>();
     private int travelImg;
 
     @Override
@@ -35,16 +41,37 @@ public class DetailActivity extends AppCompatActivity {
         // Detail Fragment 초기화
         Intent intent = getIntent();
         if (intent != null) {
-            this.travelTitle = intent.getStringExtra("travelTitle");
-            this.travelStartDate = intent.getStringExtra("travelStartDate");
-            this.travelEndDate = intent.getStringExtra("travelEndDate");
-            this.travelCountries = intent.getStringArrayListExtra("travelCountries");
-            this.travelMembers = intent.getIntegerArrayListExtra("travelMembers");
-            this.travelImg = intent.getIntExtra("travelImg", 0);
+            int id = intent.getIntExtra("id", 0);
+
+            setDataFromDB(id);
+            setRoomInfo();
+            setButtons();
+        }
+    }
+
+    private void setDataFromDB(int id) {
+        Cursor cursor = DatabaseManager.database.rawQuery(TravelRoomTable.SELECT_QUERY + " WHERE id = " + id, null);
+        int numOfRecords = cursor.getCount();
+        Log.d(TAG, "레코드 개수: " + numOfRecords);
+
+        for (int i=0; i<numOfRecords; ++i) {
+            cursor.moveToNext();
+
+            this.travelTitle = cursor.getString(cursor.getColumnIndex("name"));
+            this.travelStartDate = cursor.getString(cursor.getColumnIndex("start_date"));
+            this.travelEndDate = cursor.getString(cursor.getColumnIndex("end_date"));
+            String countryCodes = cursor.getString(cursor.getColumnIndex("country_codes"));
+            this.travelImg = cursor.getInt(cursor.getColumnIndex("thumb"));
+            int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
+
+            for (String s : countryCodes.split(","))
+                travelCountries.add(s);
+
+            for (int j = 0; j < numOfMembers; ++j)
+                this.travelMembers.add(R.drawable.user_img);
         }
 
-        setRoomInfo();
-        setButtons();
+        cursor.close();
     }
 
     private void setRoomInfo() {
@@ -62,24 +89,20 @@ public class DetailActivity extends AppCompatActivity {
         travelDDay.setText("D - N");
 
         // 여행지 설정
-        if (travelCountries != null) {
-            RecyclerView countryRecyclerView = findViewById(R.id.country_recycler_view);
-            countryRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+        RecyclerView countryRecyclerView = findViewById(R.id.country_recycler_view);
+        countryRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
 
-            TravelCountryAdapter travelCountryAdapter = new TravelCountryAdapter(getApplicationContext());
-            for (String country : travelCountries) travelCountryAdapter.addItem(country);
-            countryRecyclerView.setAdapter(travelCountryAdapter);
-        }
+        TravelCountryAdapter travelCountryAdapter = new TravelCountryAdapter(getApplicationContext());
+        for (String country : travelCountries) travelCountryAdapter.addItem(country);
+        countryRecyclerView.setAdapter(travelCountryAdapter);
 
         // 여행 멤버 설정
-        if (travelMembers != null) {
-            RecyclerView memberRecyclerView = findViewById(R.id.member_recycler_view);
-            memberRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+        RecyclerView memberRecyclerView = findViewById(R.id.member_recycler_view);
+        memberRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
 
-            TravelMemberAdapter travelMemberAdapter = new TravelMemberAdapter(getApplicationContext());
-            for (Integer member : travelMembers) travelMemberAdapter.addItem(member);
-            memberRecyclerView.setAdapter(travelMemberAdapter);
-        }
+        TravelMemberAdapter travelMemberAdapter = new TravelMemberAdapter(getApplicationContext());
+        for (Integer member : travelMembers) travelMemberAdapter.addItem(member);
+        memberRecyclerView.setAdapter(travelMemberAdapter);
 
         // 여행 커버 이미지 설정
         FrameLayout travelLayout = findViewById(R.id.travel_layout);
