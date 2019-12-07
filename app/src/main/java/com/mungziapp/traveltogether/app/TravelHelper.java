@@ -47,7 +47,7 @@ public class TravelHelper {
         String countries3 = "\uD83C\uDDF7\uD83C\uDDFA";
 
         int members = 9;
-        int members2 = 0;
+        int members2 = 1;
         int members3 = 2;
 
         List<TravelRoom> travelRooms = new ArrayList<>();

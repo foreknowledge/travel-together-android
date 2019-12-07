@@ -20,7 +20,6 @@ import com.mungziapp.traveltogether.item.TravelItem;
 import com.mungziapp.traveltogether.table.TravelRoomTable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MainActivity extends BaseActivity {
     private ViewPager outerViewPager;
