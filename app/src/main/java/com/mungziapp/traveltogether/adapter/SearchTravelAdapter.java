@@ -49,21 +49,20 @@ public class SearchTravelAdapter extends RecyclerView.Adapter<SearchTravelAdapte
     }
 
     public void searchItem(String word) {
+        filteredItems.clear();
+
         if (word.equals("")) {
-            filteredItems.clear();
             notifyDataSetChanged();
             return;
         }
 
-        ArrayList<SearchTravelItem> searchTravelItems = new ArrayList<>();
         for (int i=0; i<items.size(); ++i) {
             SearchTravelItem item = items.get(i);
-            if (item.getTravelTitle().contains(word)) {
-                searchTravelItems.add(item);
+            if (item.getTravelTitle().replace(" ", "").contains(word)) {
+                filteredItems.add(item);
             }
         }
 
-        filteredItems = searchTravelItems;
         notifyDataSetChanged();
     }
 

@@ -1,6 +1,7 @@
 package com.mungziapp.traveltogether.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,21 +33,20 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
     }
 
     public void searchItem(String word) {
+        filteredItems.clear();
+
         if (word.equals("")) {
-            filteredItems.clear();
             notifyDataSetChanged();
             return;
         }
 
-        ArrayList<SearchCountryItem> searchTravelItems = new ArrayList<>();
         for (int i=0; i<items.size(); ++i) {
             SearchCountryItem item = items.get(i);
-            if (item.getCountryName().contains(word)) {
-                searchTravelItems.add(item);
+            if (item.getCountryName().replace(" ", "").contains(word)) {
+                filteredItems.add(item);
             }
         }
 
-        filteredItems = searchTravelItems;
         notifyDataSetChanged();
     }
 
@@ -82,6 +82,7 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Log.d("Log", "items size = " + items.size() + ", position = " + getAdapterPosition());
                     SearchCountryItem item = items.get(getAdapterPosition());
 
                     Toast.makeText(context, "나라 = " + item.getCountryName(), Toast.LENGTH_SHORT).show();

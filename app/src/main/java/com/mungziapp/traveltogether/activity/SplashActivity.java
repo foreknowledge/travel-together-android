@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.mungziapp.traveltogether.CountryType;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.app.TravelHelper;
 
