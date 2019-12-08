@@ -47,6 +47,11 @@ public class SearchActivity extends AppCompatActivity {
 
     private void setSearchBar() {
         editSearch = findViewById(R.id.search_travel);
+
+        editSearch.setFocusableInTouchMode(true);
+        editSearch.setFocusable(true);
+        editSearch.requestFocus();
+
         final Button btnClear = findViewById(R.id.btn_clear);
         final FrameLayout btnClearOut = findViewById(R.id.btn_clear_out);
 
