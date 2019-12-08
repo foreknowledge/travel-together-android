@@ -58,7 +58,7 @@ public class SettingsActivity extends BaseActivity {
 
     private void onClickUnlink() {
         final String appendMessage = getString(R.string.com_kakao_confirm_unlink);
-        new AlertDialog.Builder(getApplicationContext())
+        new AlertDialog.Builder(SettingsActivity.this)
                 .setMessage(appendMessage)
                 .setPositiveButton(getString(R.string.com_kakao_ok_button),
                         new DialogInterface.OnClickListener() {
