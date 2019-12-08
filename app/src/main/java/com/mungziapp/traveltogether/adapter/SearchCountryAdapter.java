@@ -16,6 +16,7 @@ import com.mungziapp.traveltogether.app.TravelHelper;
 import com.mungziapp.traveltogether.item.SearchCountryItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdapter.ViewHolder> {
     private Context context;
@@ -26,7 +27,9 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
 
     public void initItem() {
         for (String countryName: TravelHelper.countryMap.keySet()) {
-            String countryFlag = TravelHelper.countryMap.get(countryName);
+            List<String> countryInfo = TravelHelper.countryMap.get(countryName);
+            String countryFlag = countryInfo.get(0);
+            //String countryCode = countryInfo.get(1);
             items.add(new SearchCountryItem(countryFlag, countryName));
         }
         notifyDataSetChanged();

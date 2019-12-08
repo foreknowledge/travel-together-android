@@ -1,0 +1,11 @@
+mutation first {
+  oauthLogin(oauthInfo:{
+    oauthId: "1208434716"
+    oauthToken: "XA-yZu1AVeNzU1a0vSNgJ8cQGN32VNqnn-dSngopdbIAAAFu5YckSg"
+    resourceServer: KAKAO
+  }) {
+    accessToken
+    exp
+    refreshToken
+  }
+}
