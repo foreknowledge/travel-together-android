@@ -16,5 +16,6 @@
     <color name="colorTransparent">#AAF2F2F2</color>
     <color name="colorShadow">#10000000</color>
 
-    <color name="kakao_front">#3C1E1E</color>
+    <color name="color_clip_back">#3DE87C43</color>
+    <color name="color_kakao_front">#3C1E1E</color>
 </resources>

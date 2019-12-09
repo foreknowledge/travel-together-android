@@ -116,8 +116,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private void setRecyclerView() {
         RecyclerView searchRecycler = findViewById(R.id.search_recycler);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        searchRecycler.setLayoutManager(layoutManager);
+        searchRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         searchAdapter = new SearchTravelAdapter(getApplicationContext());
         searchAdapter.initItem();

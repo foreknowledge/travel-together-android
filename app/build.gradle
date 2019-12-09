@@ -34,8 +34,10 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.1'
     implementation 'com.kakao.sdk:usermgmt:1.25.0'
     implementation 'com.android.volley:volley:1.1.0'
-    implementation "androidx.core:core-ktx:+"
+    implementation 'androidx.core:core-ktx:1.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation 'com.google.android.material:material:1.0.0'
 }
 repositories {
     mavenCentral()

@@ -28,8 +28,7 @@ public class TravelsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_travels, container, false);
 
         RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         recyclerView.setAdapter(travelsRecyclerAdapter);
 
