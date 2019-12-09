@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.apollographql.android'
 
 android {
     compileSdkVersion 29
@@ -35,10 +34,12 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.1'
     implementation 'com.kakao.sdk:usermgmt:1.25.0'
     implementation 'com.android.volley:volley:1.1.0'
-    implementation "androidx.core:core-ktx:+"
+    implementation 'androidx.core:core-ktx:1.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation "com.apollographql.apollo:apollo-runtime:1.2.2"
+
+    implementation 'com.google.android.material:material:1.0.0'
 }
 repositories {
     mavenCentral()

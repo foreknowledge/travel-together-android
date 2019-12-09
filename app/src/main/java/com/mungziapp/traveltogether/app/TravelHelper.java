@@ -136,7 +136,7 @@ public class TravelHelper {
         countries.add(Arrays.asList("코모로", "\uD83C\uDDF0\uD83C\uDDF2", ""));
         countries.add(Arrays.asList("세인트 키츠 네비스", "\uD83C\uDDF0\uD83C\uDDF3", ""));
         countries.add(Arrays.asList("북한", "\uD83C\uDDF0\uD83C\uDDF5", ""));
-        countries.add(Arrays.asList("한국", "\uD83C\uDDF0\uD83C\uDDF7", ""));
+        countries.add(Arrays.asList("대한민국", "\uD83C\uDDF0\uD83C\uDDF7", ""));
         countries.add(Arrays.asList("쿠웨이트", "\uD83C\uDDF0\uD83C\uDDFC", ""));
         countries.add(Arrays.asList("케이맨 제도", "\uD83C\uDDF0\uD83C\uDDFE", ""));
         countries.add(Arrays.asList("카자흐스탄", "\uD83C\uDDF0\uD83C\uDDFF", ""));

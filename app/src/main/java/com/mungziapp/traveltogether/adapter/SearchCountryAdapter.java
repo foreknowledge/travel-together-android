@@ -1,16 +1,15 @@
 package com.mungziapp.traveltogether.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mungziapp.traveltogether.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.app.TravelHelper;
 import com.mungziapp.traveltogether.item.SearchCountryItem;
@@ -18,12 +17,27 @@ import com.mungziapp.traveltogether.item.SearchCountryItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdapter.ViewHolder> {
+public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdapter.ViewHolder>
+        implements OnItemClickListener {
     private Context context;
     private ArrayList<SearchCountryItem> items = new ArrayList<>();
-    private ArrayList<SearchCountryItem> filteredItems = new ArrayList<>();
+    private ArrayList<SearchCountryItem> searchItems = new ArrayList<>();
+
+    private OnItemClickListener listener;
 
     public SearchCountryAdapter(Context context) { this.context = context; }
+
+    public SearchCountryItem getSearchItem(int position) { return searchItems.get(position); }
+
+    public void selectItem(SearchCountryItem item) {
+        item.setIsSelected(true);
+        notifyDataSetChanged();
+    }
+
+    public void deselectItem(SearchCountryItem item) {
+        item.setIsSelected(false);
+        notifyDataSetChanged();
+    }
 
     public void initItem() {
         for (String countryName: TravelHelper.countryMap.keySet()) {
@@ -36,7 +50,7 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
     }
 
     public void searchItem(String word) {
-        filteredItems.clear();
+        searchItems.clear();
 
         if (word.equals("")) {
             notifyDataSetChanged();
@@ -45,12 +59,20 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
 
         for (int i=0; i<items.size(); ++i) {
             SearchCountryItem item = items.get(i);
-            if (item.getCountryName().replace(" ", "").contains(word)) {
-                filteredItems.add(item);
+            if (!item.getIsSelected() && item.getCountryName().replace(" ", "").contains(word)) {
+                searchItems.add(item);
             }
         }
 
         notifyDataSetChanged();
+    }
+
+    public void setClickListener(OnItemClickListener listener) { this.listener = listener; }
+
+    @Override
+    public void onItemClick(ViewHolder viewHolder, View view, int position) {
+        if (listener != null)
+            listener.onItemClick(viewHolder, view, position);
     }
 
     @NonNull
@@ -59,24 +81,24 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = inflater.inflate(R.layout.item_search_country, parent, false);
 
-        return new ViewHolder(itemView, filteredItems, context);
+        return new ViewHolder(itemView, listener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setItem(filteredItems.get(position));
+        holder.setItem(searchItems.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return filteredItems.size();
+        return searchItems.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         private TextView countryFlag;
         private TextView countryName;
 
-        ViewHolder(@NonNull final View itemView, final ArrayList<SearchCountryItem> items, final Context context) {
+        ViewHolder(@NonNull final View itemView, final OnItemClickListener listener) {
             super(itemView);
 
             this.countryFlag = itemView.findViewById(R.id.country_flag);
@@ -85,10 +107,8 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.d("Log", "items size = " + items.size() + ", position = " + getAdapterPosition());
-                    SearchCountryItem item = items.get(getAdapterPosition());
-
-                    Toast.makeText(context, "나라 = " + item.getCountryName(), Toast.LENGTH_SHORT).show();
+                    if (listener != null)
+                        listener.onItemClick(ViewHolder.this, view, getAdapterPosition());
                 }
             });
 

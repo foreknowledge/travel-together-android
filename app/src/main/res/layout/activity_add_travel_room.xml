@@ -162,7 +162,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@android:color/white"
-                android:padding="10dp">
+                android:paddingTop="10dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -233,6 +235,13 @@
                     </FrameLayout>
 
                 </LinearLayout>
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chip_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:chipSpacing="5dp"/>
 
             </LinearLayout>
 

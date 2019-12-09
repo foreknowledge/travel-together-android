@@ -20,10 +20,13 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipDrawable;
+import com.google.android.material.chip.ChipGroup;
+import com.mungziapp.traveltogether.OnItemClickListener;
 import com.mungziapp.traveltogether.adapter.SearchCountryAdapter;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.item.SearchCountryItem;
-import com.mungziapp.traveltogether.app.TravelHelper;
 
 import java.util.Calendar;
 
@@ -38,6 +41,7 @@ public class AddTravelRoomActivity extends AppCompatActivity {
     private final int SET_END_DATE = 2;
 
     private EditText editSearch;
+    private ChipGroup chipGroup;
     private RecyclerView countrySearchRecycler;
     private SearchCountryAdapter countryAdapter;
 
@@ -73,6 +77,7 @@ public class AddTravelRoomActivity extends AppCompatActivity {
 
     private void setSearchBar() {
         editSearch = findViewById(R.id.search_country);
+        chipGroup = findViewById(R.id.chip_group);
 
         final Button btnClear = findViewById(R.id.btn_clear);
         final FrameLayout btnClearOut = findViewById(R.id.btn_clear_out);
@@ -101,7 +106,6 @@ public class AddTravelRoomActivity extends AppCompatActivity {
         editSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
                     performSearch();
                     return true;
@@ -134,8 +138,6 @@ public class AddTravelRoomActivity extends AppCompatActivity {
         InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if (in != null)
             in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
-
-        //countryAdapter.searchItem(editSearch.getText().toString());
     }
 
     private void setCountryList() {
@@ -145,6 +147,35 @@ public class AddTravelRoomActivity extends AppCompatActivity {
 
         countryAdapter = new SearchCountryAdapter(getApplicationContext());
         countryAdapter.initItem();
+        countryAdapter.setClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(SearchCountryAdapter.ViewHolder viewHolder, View view, int position) {
+                final SearchCountryItem item = countryAdapter.getSearchItem(position);
+
+                Chip chip = new Chip(AddTravelRoomActivity.this);
+                chip.setText(item.getCountryName());
+                chip.setCloseIconVisible(true);
+                chip.setTextAppearance(R.style.chip_text_style);
+                ChipDrawable chipDrawable = (ChipDrawable) chip.getChipDrawable();
+                chipDrawable.setChipBackgroundColorResource(R.color.color_clip_back);
+                chipDrawable.setCloseIconResource(R.drawable.ic_clear_black_24dp);
+                chip.setCheckable(false);
+                chip.setClickable(false);
+                chip.setOnCloseIconClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        chipGroup.removeView(view);
+                        countryAdapter.deselectItem(item);
+                        countryAdapter.searchItem(editSearch.getText().toString());
+                    }
+                });
+
+                chipGroup.addView(chip);
+
+                countryAdapter.selectItem(item);
+                countryAdapter.searchItem(editSearch.getText().toString());
+            }
+        });
 
         countrySearchRecycler.setAdapter(countryAdapter);
     }

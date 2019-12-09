@@ -86,7 +86,7 @@
             android:layout_margin="10dp"
             android:fontFamily="@font/dxkyungpil"
             android:text="@string/kakao_login_kor"
-            android:textColor="@color/kakao_front"
+            android:textColor="@color/color_kakao_front"
             android:paddingStart="30dp"
             android:paddingEnd="0dp"
             android:background="@drawable/login_for_kakao" />
