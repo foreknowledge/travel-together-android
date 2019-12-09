@@ -23,21 +23,17 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
     private ArrayList<SearchCountryItem> searchItems = new ArrayList<>();
 
     private OnItemClickListener listener;
-    private int clipCount = 0;
 
     public SearchCountryAdapter(Context context) { this.context = context; }
 
     public SearchCountryItem getSearchItem(int position) { return searchItems.get(position); }
-    public int getClipCount() { return clipCount; }
 
     public void selectItem(SearchCountryItem item) {
-        clipCount += 1;
         item.setIsSelected(true);
         notifyDataSetChanged();
     }
 
     public void deselectItem(SearchCountryItem item) {
-        clipCount -= 1;
         item.setIsSelected(false);
         notifyDataSetChanged();
     }

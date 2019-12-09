@@ -152,8 +152,6 @@ public class AddTravelRoomActivity extends AppCompatActivity {
             public void onItemClick(SearchCountryAdapter.ViewHolder viewHolder, View view, int position) {
                 final SearchCountryItem item = countryAdapter.getSearchItem(position);
 
-                if (chipGroup.getVisibility() == View.GONE) chipGroup.setVisibility(View.VISIBLE);
-
                 Chip chip = new Chip(AddTravelRoomActivity.this);
                 chip.setText(item.getCountryName());
                 chip.setCloseIconVisible(true);
@@ -169,10 +167,6 @@ public class AddTravelRoomActivity extends AppCompatActivity {
                         chipGroup.removeView(view);
                         countryAdapter.deselectItem(item);
                         countryAdapter.searchItem(editSearch.getText().toString());
-
-                        if (countryAdapter.getClipCount() == 0) {
-                            chipGroup.setVisibility(View.INVISIBLE);
-                        }
                     }
                 });
 
