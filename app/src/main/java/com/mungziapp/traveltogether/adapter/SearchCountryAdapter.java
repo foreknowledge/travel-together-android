@@ -30,15 +30,15 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
     public SearchCountryItem getSearchItem(int position) { return searchItems.get(position); }
     public int getClipCount() { return clipCount; }
 
-    public void addItem(SearchCountryItem item) {
+    public void selectItem(SearchCountryItem item) {
         clipCount += 1;
-        searchItems.add(item);
+        item.setIsSelected(true);
         notifyDataSetChanged();
     }
 
-    public void removeItem(SearchCountryItem item) {
+    public void deselectItem(SearchCountryItem item) {
         clipCount -= 1;
-        searchItems.remove(item);
+        item.setIsSelected(false);
         notifyDataSetChanged();
     }
 
@@ -60,7 +60,7 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
 
         for (int i=0; i<items.size(); ++i) {
             SearchCountryItem item = items.get(i);
-            if (item.getCountryName().replace(" ", "").contains(word)) {
+            if (!item.getIsSelected() && item.getCountryName().replace(" ", "").contains(word)) {
                 searchItems.add(item);
             }
         }

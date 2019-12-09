@@ -132,7 +132,7 @@ public class TravelHelper {
         countryMap.put("코모로", "\uD83C\uDDF0\uD83C\uDDF2");
         countryMap.put("세인트 키츠 네비스", "\uD83C\uDDF0\uD83C\uDDF3");
         countryMap.put("북한", "\uD83C\uDDF0\uD83C\uDDF5");
-        countryMap.put("한국", "\uD83C\uDDF0\uD83C\uDDF7");
+        countryMap.put("대한민국", "\uD83C\uDDF0\uD83C\uDDF7");
         countryMap.put("쿠웨이트", "\uD83C\uDDF0\uD83C\uDDFC");
         countryMap.put("케이맨 제도", "\uD83C\uDDF0\uD83C\uDDFE");
         countryMap.put("카자흐스탄", "\uD83C\uDDF0\uD83C\uDDFF");

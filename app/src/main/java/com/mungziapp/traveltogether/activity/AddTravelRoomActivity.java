@@ -167,7 +167,8 @@ public class AddTravelRoomActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         chipGroup.removeView(view);
-                        countryAdapter.addItem(item);
+                        countryAdapter.deselectItem(item);
+                        countryAdapter.searchItem(editSearch.getText().toString());
 
                         if (countryAdapter.getClipCount() == 0) {
                             chipGroup.setVisibility(View.INVISIBLE);
@@ -177,7 +178,8 @@ public class AddTravelRoomActivity extends AppCompatActivity {
 
                 chipGroup.addView(chip);
 
-                countryAdapter.removeItem(item);
+                countryAdapter.selectItem(item);
+                countryAdapter.searchItem(editSearch.getText().toString());
             }
         });
 
