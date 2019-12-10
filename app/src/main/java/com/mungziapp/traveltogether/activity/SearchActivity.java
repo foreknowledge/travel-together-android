@@ -52,8 +52,9 @@ public class SearchActivity extends AppCompatActivity {
         editSearch.setFocusable(true);
         editSearch.requestFocus();
 
-        final Button btnClear = findViewById(R.id.btn_clear);
+        Button btnClear = findViewById(R.id.btn_clear);
         final FrameLayout btnClearOut = findViewById(R.id.btn_clear_out);
+        Button btnSearch = findViewById(R.id.btn_search);
 
         editSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -61,13 +62,13 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                btnClear.setVisibility(View.VISIBLE);
+                btnClearOut.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
                 if (editSearch.getText().toString().equals(""))
-                    btnClear.setVisibility(View.INVISIBLE);
+                    btnClearOut.setVisibility(View.INVISIBLE);
 
                 searchAdapter.searchItem(editable.toString());
             }
@@ -76,7 +77,6 @@ public class SearchActivity extends AppCompatActivity {
         editSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
                     performSearch();
                     return true;
@@ -91,11 +91,17 @@ public class SearchActivity extends AppCompatActivity {
                 editSearch.setText("");
             }
         });
-
         btnClearOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 editSearch.setText("");
+            }
+        });
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                performSearch();
             }
         });
     }
@@ -110,8 +116,6 @@ public class SearchActivity extends AppCompatActivity {
         InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if (in != null)
             in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
-
-        //searchAdapter.searchItem(editSearch.getText().toString());
     }
 
     private void setRecyclerView() {
