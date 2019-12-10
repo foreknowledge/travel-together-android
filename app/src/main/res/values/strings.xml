@@ -33,6 +33,8 @@
     <string name="btn_text_country">여행지 추가</string>
     <string name="btn_text_cover_img">커버 이미지 변경</string>
     <string name="btn_text_photo">사진 추가</string>
+
+    <string name="btn_push_notification">푸시 알림 설정</string>
     <string name="btn_logout">로그 아웃</string>
     <string name="btn_remove_account">회원 탈퇴</string>
     <string name="btn_text_edit">Edit</string>

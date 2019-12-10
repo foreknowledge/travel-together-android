@@ -29,10 +29,11 @@
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:fontFamily="@font/dxkyungpil"
-            android:textSize="16sp"
             android:textColor="@color/colorPrimary"
             android:text="@string/btn_text_save"
-            android:background="@android:color/transparent"/>
+            android:textSize="18sp"
+            android:background="@android:color/transparent"
+            style="?attr/buttonBarStyle"/>
 
         <Button
             android:id="@+id/btn_cancel"
@@ -42,10 +43,11 @@
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:fontFamily="@font/dxkyungpil"
-            android:textSize="16sp"
             android:textColor="@color/colorPrimary"
             android:text="@string/btn_text_cancel"
-            android:background="@android:color/transparent"/>
+            android:textSize="18sp"
+            android:background="@android:color/transparent"
+            style="?attr/buttonBarStyle"/>
 
     </androidx.appcompat.widget.Toolbar>
 
