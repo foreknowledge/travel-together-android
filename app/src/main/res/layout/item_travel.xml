@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/travel_layout"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="400dp"
-    android:background="@drawable/travel_room_sample_01">
+    android:layout_height="260dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="3dp">
+
+    <View
+        android:id="@+id/travel_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/travel_room_sample_01" />
 
     <View
         android:layout_width="match_parent"
@@ -27,7 +37,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:layout_marginBottom="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="70dp"
         android:orientation="vertical">
 
         <TextView
@@ -51,10 +62,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
             android:fontFamily="@font/dxkyungpil"
             android:textColor="@android:color/white"
-            android:textSize="23sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/travel_duration"
@@ -64,7 +76,7 @@
             android:layout_margin="13dp"
             android:fontFamily="@font/dxkyungpil"
             android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -88,7 +100,7 @@
                 android:fontFamily="@font/dxkyungpil"
                 android:paddingStart="95dp"
                 android:paddingEnd="20dp"
-                android:background="@drawable/dr_trasn_cornered">
+                android:background="@drawable/dr_trasn_rounded">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/country_recycler_view"
@@ -105,50 +117,10 @@
                 android:text="@string/text_destination"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
-                android:background="@drawable/dr_trasn_cornered"/>
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:fontFamily="@font/dxkyungpil"
-                android:paddingStart="95dp"
-                android:paddingEnd="20dp"
-                android:background="@drawable/dr_trasn_cornered">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/member_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="85dp"
-                android:layout_height="45dp"
-                android:gravity="center"
-                android:fontFamily="@font/dxkyungpil"
-                android:text="@string/text_member"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
-                android:background="@drawable/dr_trasn_cornered"/>
+                android:background="@drawable/dr_trasn_rounded"/>
 
         </FrameLayout>
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_gravity="bottom"
-        android:background="@color/colorBack" />
-
-</FrameLayout>
+</androidx.cardview.widget.CardView>

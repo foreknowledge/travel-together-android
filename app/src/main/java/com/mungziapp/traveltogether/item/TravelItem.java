@@ -8,17 +8,17 @@ public class TravelItem {
     private String travelStartDate;
     private String travelEndDate;
     private ArrayList<String> travelCountries;
-    private ArrayList<Integer> travelMembers;
+    private int numOfTravelMembers;
     private int imgResId;
 
     public TravelItem(int id, String travelTitle, String travelStartDate, String travelEndDate,
-                      ArrayList<String> travelCountries, ArrayList<Integer> travelMembers, int imgResId) {
+                      ArrayList<String> travelCountries, int numOfTravelMembers, int imgResId) {
         this.id = id;
         this.travelTitle = travelTitle;
         this.travelStartDate = travelStartDate;
         this.travelEndDate = travelEndDate;
         this.travelCountries = travelCountries;
-        this.travelMembers = travelMembers;
+        this.numOfTravelMembers = numOfTravelMembers;
         this.imgResId = imgResId;
     }
 
@@ -33,9 +33,7 @@ public class TravelItem {
     public ArrayList<String> getTravelCountries() {
         return travelCountries;
     }
-    public ArrayList<Integer> getTravelMembers() {
-        return travelMembers;
-    }
+    public int getNumOfTravelMembers() { return numOfTravelMembers; }
     public int getImgResId() {
         return imgResId;
     }

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,13 +45,12 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
-        private FrameLayout travelLayout;
+        private View travelLayout;
         private TextView travelTitle;
         private TextView travelDuration;
         private TextView numOfTravelMembers;
         private TextView travelDday;
         private RecyclerView countryRecyclerView;
-        private RecyclerView memberRecyclerView;
 
         private Context context;
 
@@ -69,9 +67,6 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 
             this.countryRecyclerView = itemView.findViewById(R.id.country_recycler_view);
             countryRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-
-            this.memberRecyclerView = itemView.findViewById(R.id.member_recycler_view);
-            memberRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -96,24 +91,15 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
             String strDuration = item.getTravelStartDate() + " ~ " + item.getTravelEndDate() + " (N일간)";
             this.travelDuration.setText(strDuration);
 
-            String numOfTravelMembers = Integer.toString(item.getTravelMembers().size());
+            String numOfTravelMembers = Integer.toString(item.getNumOfTravelMembers());
             this.numOfTravelMembers.setText(numOfTravelMembers);
 
             travelDday.setText("D - N");
 
-            setRecyclerViews(item);
-        }
-
-        private void setRecyclerViews(TravelItem item) {
             ArrayList<String> countries = item.getTravelCountries();
             TravelCountryAdapter travelCountryAdapter = new TravelCountryAdapter(context);
             for (String country: countries) travelCountryAdapter.addItem(country);
             countryRecyclerView.setAdapter(travelCountryAdapter);
-
-            ArrayList<Integer> members = item.getTravelMembers();
-            TravelMemberAdapter travelMemberAdapter = new TravelMemberAdapter(context);
-            for (int member: members) travelMemberAdapter.addItem(member);
-            memberRecyclerView.setAdapter(travelMemberAdapter);
         }
     }
 }

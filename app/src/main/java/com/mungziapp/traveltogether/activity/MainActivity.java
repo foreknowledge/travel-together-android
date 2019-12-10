@@ -61,17 +61,13 @@ public class MainActivity extends BaseActivity {
             int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
 
             ArrayList<String> countries = new ArrayList<>();
-
             for (String s : countryCodes.split(","))
                 countries.add(s);
 
-            ArrayList<Integer> members = new ArrayList<>();
-            for (int j = 0; j < numOfMembers; ++j) members.add(R.drawable.user_img);
-
             if (Integer.valueOf(endDate.substring(0,2)) < 19)
-                lastTravelAdapter.addItem(new TravelItem(id, title, startDate, endDate, countries, members, thumb));
+                lastTravelAdapter.addItem(new TravelItem(id, title, startDate, endDate, countries, numOfMembers, thumb));
             else
-                oncommingAdapter.addItem(new TravelItem(id, title, startDate, endDate, countries, members, thumb));
+                oncommingAdapter.addItem(new TravelItem(id, title, startDate, endDate, countries, numOfMembers, thumb));
         }
 
         cursor.close();

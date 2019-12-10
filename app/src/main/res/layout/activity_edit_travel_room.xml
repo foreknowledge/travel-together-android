@@ -183,7 +183,7 @@
                     android:layout_marginEnd="15dp"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:background="@drawable/dr_search_cornered">
+                    android:background="@drawable/dr_search_rounded">
 
                     <ImageView
                         android:layout_width="30dp"
@@ -289,7 +289,5 @@
             android:visibility="gone" />
 
     </FrameLayout>
-
-
 
 </LinearLayout>
