@@ -33,8 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:background="@android:color/white"
             android:fontFamily="@font/dxkyungpil"
             android:hint="@string/hint_search_travel"
@@ -48,7 +48,7 @@
         <FrameLayout
             android:id="@+id/btn_clear_out"
             android:layout_width="35dp"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="0"
             android:clickable="true"
@@ -79,7 +79,7 @@
         android:id="@+id/search_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"/>
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"/>
 
 </LinearLayout>

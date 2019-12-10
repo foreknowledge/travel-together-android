@@ -86,7 +86,7 @@ public class SearchTravelAdapter extends RecyclerView.Adapter<SearchTravelAdapte
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
-        private ImageView travelThumbnail;
+        private View travelThumbnail;
         private TextView travelTitle;
         private TextView travelDuration;
 

@@ -25,7 +25,6 @@
     <string name="text_diary">일기</string>
     <string name="text_destination">여행지</string>
     <string name="text_member">여행 멤버</string>
-    <string name="text_thumbnail">여행 썸네일</string>
 
     <string name="btn_text_save">Save</string>
     <string name="btn_text_cancel">Cancel</string>
