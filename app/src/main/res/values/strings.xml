@@ -32,12 +32,14 @@
     <string name="btn_text_start_date">여행 시작일</string>
     <string name="btn_text_end_date">여행 종료일</string>
     <string name="btn_text_country">여행지 추가</string>
-    <string name="btn_text_cover_img">커버 이미지</string>
+    <string name="btn_text_cover_img">커버 이미지 변경</string>
+    <string name="btn_text_photo">사진 추가</string>
     <string name="btn_logout">로그 아웃</string>
     <string name="btn_remove_account">회원 탈퇴</string>
     <string name="btn_text_edit">Edit</string>
 
     <string name="title_create_travel_room">여행방 생성</string>
+    <string name="title_edit_travel_room">여행방 편집</string>
     <string name="title_travel_room">여행방</string>
 
     <string name="desc_icon_person">person icon</string>

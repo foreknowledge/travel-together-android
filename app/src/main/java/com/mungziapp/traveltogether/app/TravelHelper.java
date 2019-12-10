@@ -270,7 +270,7 @@ public class TravelHelper {
 
     public static void init(Context context) {
         DatabaseManager.openDatabase(context);
-        //DatabaseManager.dropTables();
+        DatabaseManager.dropTables();
         DatabaseManager.createTables();
         DatabaseManager.insertDummyData(makeTravelRoom());
     }

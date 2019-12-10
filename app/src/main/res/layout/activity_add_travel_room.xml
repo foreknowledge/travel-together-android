@@ -26,10 +26,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginRight="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             android:fontFamily="@font/dxkyungpil"
             android:textSize="16sp"
             android:textColor="@color/colorPrimary"
@@ -41,10 +39,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginRight="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             android:fontFamily="@font/dxkyungpil"
             android:textSize="16sp"
             android:textColor="@color/colorPrimary"
@@ -62,8 +58,8 @@
         android:id="@+id/edit_travel_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:background="@android:color/white"
@@ -82,14 +78,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="10dp"
         android:background="@android:color/white" >
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
+            android:layout_marginStart="20dp"
             android:fontFamily="@font/dxkyungpil"
             android:textSize="17sp"
             android:textColor="@android:color/black"
@@ -98,7 +95,7 @@
         <Button
             android:id="@+id/btn_pick_start_date"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="19dp"
             android:layout_weight="1"
             android:fontFamily="@font/dxkyungpil"
             android:textColor="@color/colorGrayLight"
@@ -117,14 +114,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="10dp"
         android:background="@android:color/white" >
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
+            android:layout_marginStart="20dp"
             android:fontFamily="@font/dxkyungpil"
             android:textSize="17sp"
             android:textColor="@android:color/black"
@@ -133,7 +131,7 @@
         <Button
             android:id="@+id/btn_pick_end_date"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="19dp"
             android:layout_weight="1"
             android:fontFamily="@font/dxkyungpil"
             android:textColor="@color/colorGrayLight"
@@ -147,167 +145,101 @@
         android:layout_height="2dp"
         android:background="@color/colorBack"/>
 
-    <FrameLayout
+    <!--여행지 추가 레이아웃-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:paddingTop="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/dxkyungpil"
+            android:textSize="17sp"
+            android:textColor="@android:color/black"
+            android:text="@string/btn_text_country"/>
 
-            <!--여행지 추가 레이아웃-->
-            <LinearLayout
-                android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/search_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/dr_search_cornered">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="0"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/ic_search_black_24dp"
+                android:contentDescription="@string/hint_search_travel" />
+
+            <EditText
+                android:id="@+id/search_country"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_weight="1"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:inputType="text"
+                android:fontFamily="@font/dxkyungpil"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/colorGrayLight"
+                android:hint="@string/hint_search_country"
                 android:background="@android:color/white"
-                android:paddingTop="10dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp">
+                android:imeOptions="actionSearch"
+                android:autofillHints="false" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:fontFamily="@font/dxkyungpil"
-                    android:textSize="17sp"
-                    android:textColor="@android:color/black"
-                    android:text="@string/btn_text_country"/>
+            <FrameLayout
+                android:id="@+id/btn_clear_out"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0"
+                android:clickable="true" >
 
-                <LinearLayout
-                    android:id="@+id/search_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/dr_search_cornered">
+                <Button
+                    android:id="@+id/btn_clear"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_clear_black_24dp"
+                    android:visibility="invisible" />
 
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="0"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="5dp"
-                        android:src="@drawable/ic_search_black_24dp"
-                        android:contentDescription="@string/hint_search_travel" />
-
-                    <EditText
-                        android:id="@+id/search_country"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:inputType="text"
-                        android:fontFamily="@font/dxkyungpil"
-                        android:textSize="16sp"
-                        android:textColor="@android:color/black"
-                        android:textColorHint="@color/colorGrayLight"
-                        android:hint="@string/hint_search_country"
-                        android:background="@android:color/white"
-                        android:imeOptions="actionSearch"
-                        android:autofillHints="false" />
-
-                    <FrameLayout
-                        android:id="@+id/btn_clear_out"
-                        android:layout_width="40dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="0"
-                        android:clickable="true" >
-
-                        <Button
-                            android:id="@+id/btn_clear"
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:layout_gravity="center"
-                            android:background="@drawable/ic_clear_black_24dp"
-                            android:visibility="invisible" />
-
-                    </FrameLayout>
-
-                </LinearLayout>
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chip_group"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    app:chipSpacing="5dp"/>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/colorBack"/>
-
-            <!--커버 이미지 레이아웃-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@android:color/white" >
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="30dp"
-                    android:paddingTop="8dp"
-                    android:layout_gravity="start"
-                    android:fontFamily="@font/dxkyungpil"
-                    android:text="@string/btn_text_cover_img"
-                    android:textColor="@android:color/black"
-                    android:textSize="17sp" />
-
-                <FrameLayout
-                    android:id="@+id/frame_cover_img"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="1">
-
-                    <Button
-                        android:id="@+id/btn_pick_cover_img"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/ic_add_circle_outline_black_24dp" />
-
-                    <Button
-                        android:id="@+id/btn_re_pick_cover_img"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:visibility="invisible"
-                        android:background="@color/colorBack"/>
-
-                </FrameLayout>
-
-            </LinearLayout>
+            </FrameLayout>
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/country_search_recycler"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="85dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginEnd="60dp"
-            android:background="@color/colorBackDark"
-            android:visibility="gone" />
+            android:layout_margin="10dp"
+            app:chipSpacing="5dp"/>
 
-    </FrameLayout>
+    </LinearLayout>
 
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/country_search_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:background="@color/colorBackDark"
+        android:visibility="gone" />
 
 </LinearLayout>

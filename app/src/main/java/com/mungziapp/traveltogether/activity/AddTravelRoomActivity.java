@@ -33,8 +33,6 @@ import java.util.Calendar;
 public class AddTravelRoomActivity extends AppCompatActivity {
     private Button btnStartDate;
     private Button btnEndDate;
-    private Button btnPickCoverImg;
-    private Button btnRePickCoverImg;
     private int flag;
 
     private final int SET_START_DATE = 1;
@@ -54,7 +52,6 @@ public class AddTravelRoomActivity extends AppCompatActivity {
         setDateButtons();
         setSearchBar();
         setCountryList();
-        setCoverImgButtons();
     }
 
     private void setSaveAndCancelButtons() {
@@ -178,26 +175,6 @@ public class AddTravelRoomActivity extends AppCompatActivity {
         });
 
         countrySearchRecycler.setAdapter(countryAdapter);
-    }
-
-    private void setCoverImgButtons() {
-        btnPickCoverImg = findViewById(R.id.btn_pick_cover_img);
-        btnPickCoverImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnPickCoverImg.setVisibility(View.INVISIBLE);
-                btnRePickCoverImg.setVisibility(View.VISIBLE);
-                // 갤러리 이미지 선택해서 가져오기
-            }
-        });
-
-        btnRePickCoverImg = findViewById(R.id.btn_re_pick_cover_img);
-        btnRePickCoverImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // 갤러리 이미지 선택해서 가져오기
-            }
-        });
     }
 
     private void setDateButtons() {
