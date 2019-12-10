@@ -26,13 +26,9 @@ import com.kakao.util.OptionalBoolean;
 import com.kakao.util.exception.KakaoException;
 import com.mungziapp.traveltogether.ApolloConnector;
 import com.mungziapp.traveltogether.FirstMutation;
-import com.mungziapp.traveltogether.SetResponseListener;
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.app.RequestManager;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Map;
 
 public class LoginActivity extends BaseActivity {
 
