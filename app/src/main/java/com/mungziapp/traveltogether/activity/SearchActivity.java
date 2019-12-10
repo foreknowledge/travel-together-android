@@ -24,12 +24,14 @@ import com.mungziapp.traveltogether.R;
 public class SearchActivity extends AppCompatActivity {
     private EditText editSearch;
     private SearchTravelAdapter searchAdapter;
+    private InputMethodManager in;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         setGoBeforeButton();
         setSearchBar();
         setRecyclerView();
@@ -113,7 +115,7 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         editSearch.clearFocus();
-        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
         if (in != null)
             in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
     }

@@ -35,20 +35,25 @@ public class AddTravelRoomActivity extends AppCompatActivity {
     private Button btnEndDate;
     private int flag;
 
+    private DatePickerDialog datePickerDialog;
     private final int SET_START_DATE = 1;
     private final int SET_END_DATE = 2;
 
     private EditText editSearch;
+    private EditText editTitle;
     private ChipGroup chipGroup;
     private RecyclerView countrySearchRecycler;
     private SearchCountryAdapter countryAdapter;
+    private InputMethodManager in;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_travel_room);
 
+        in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         setSaveAndCancelButtons();
+        setTitleText();
         setDateButtons();
         setSearchBar();
         setCountryList();
@@ -72,12 +77,38 @@ public class AddTravelRoomActivity extends AppCompatActivity {
         });
     }
 
+    private void setTitleText() {
+        editTitle = findViewById(R.id.edit_travel_title);
+        editTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b)
+                    if (in != null)
+                        in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
+            }
+        });
+    }
+
     private void setSearchBar() {
         editSearch = findViewById(R.id.search_country);
         chipGroup = findViewById(R.id.chip_group);
 
         final Button btnClear = findViewById(R.id.btn_clear);
         final FrameLayout btnClearOut = findViewById(R.id.btn_clear_out);
+
+        editSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b)
+                    countrySearchRecycler.setVisibility(View.VISIBLE);
+                else {
+                    countrySearchRecycler.setVisibility(View.GONE);
+
+                    if (in != null)
+                        in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
+                }
+            }
+        });
 
         editSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -86,14 +117,12 @@ public class AddTravelRoomActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 btnClear.setVisibility(View.VISIBLE);
-                countrySearchRecycler.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
                 if (editSearch.getText().toString().equals("")) {
                     btnClear.setVisibility(View.INVISIBLE);
-                    countrySearchRecycler.setVisibility(View.GONE);
                 }
 
                 countryAdapter.searchItem(editable.toString());
@@ -132,9 +161,6 @@ public class AddTravelRoomActivity extends AppCompatActivity {
         }
 
         editSearch.clearFocus();
-        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (in != null)
-            in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
     }
 
     private void setCountryList() {
@@ -181,7 +207,7 @@ public class AddTravelRoomActivity extends AppCompatActivity {
         int year = Calendar.getInstance().get(Calendar.YEAR);
         int month = Calendar.getInstance().get(Calendar.MONTH);
         int date = Calendar.getInstance().get(Calendar.DATE);
-        final DatePickerDialog datePickerDialog = new DatePickerDialog(this, listener, year, month, date);
+        datePickerDialog = new DatePickerDialog(this, listener, year, month, date);
 
         btnStartDate = findViewById(R.id.btn_pick_start_date);
         btnEndDate = findViewById(R.id.btn_pick_end_date);
@@ -189,18 +215,23 @@ public class AddTravelRoomActivity extends AppCompatActivity {
         btnStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                flag = SET_START_DATE;
-                datePickerDialog.show();
+                clickDateButton(SET_START_DATE);
             }
         });
 
         btnEndDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                flag = SET_END_DATE;
-                datePickerDialog.show();
+                clickDateButton(SET_END_DATE);
             }
         });
+    }
+
+    private void clickDateButton(int flag) {
+        editSearch.clearFocus();
+        editTitle.clearFocus();
+        this.flag = flag;
+        datePickerDialog.show();
     }
 
     private DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
