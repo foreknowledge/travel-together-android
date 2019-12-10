@@ -23,7 +23,7 @@
         <item name="android:paddingStart">13dp</item>
         <item name="android:paddingEnd">13dp</item>
         <item name="android:fontFamily">@font/dxkyungpil</item>
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:background">@drawable/dr_tag_rounded</item>
     </style>
@@ -34,7 +34,7 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:fontFamily">@font/dxkyungpil</item>
         <item name="android:textColor">@color/colorGray</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
 
