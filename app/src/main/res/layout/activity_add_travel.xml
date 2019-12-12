@@ -16,7 +16,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/dxkyungpil"
             android:textColor="@android:color/black"
             android:textSize="24sp"
             android:text="@string/title_create_travel_room"/>
@@ -28,7 +27,6 @@
             android:layout_gravity="end"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:fontFamily="@font/dxkyungpil"
             android:textColor="@color/colorPrimary"
             android:text="@string/btn_text_save"
             android:textSize="18sp"
@@ -42,7 +40,6 @@
             android:layout_gravity="start"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:fontFamily="@font/dxkyungpil"
             android:textColor="@color/colorPrimary"
             android:text="@string/btn_text_cancel"
             android:textSize="18sp"
@@ -65,7 +62,6 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:background="@android:color/white"
-        android:fontFamily="@font/dxkyungpil"
         android:inputType="text"
         android:hint="@string/hint_title"
         android:importantForAutofill="no" />
@@ -89,7 +85,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="20dp"
-            android:fontFamily="@font/dxkyungpil"
             android:textSize="17sp"
             android:textColor="@android:color/black"
             android:text="@string/btn_text_start_date"/>
@@ -99,7 +94,6 @@
             android:layout_width="0dp"
             android:layout_height="19dp"
             android:layout_weight="1"
-            android:fontFamily="@font/dxkyungpil"
             android:textColor="@color/colorGrayLight"
             android:text="@string/hint_start_date"
             android:background="@android:color/transparent"/>
@@ -125,7 +119,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="20dp"
-            android:fontFamily="@font/dxkyungpil"
             android:textSize="17sp"
             android:textColor="@android:color/black"
             android:text="@string/btn_text_end_date"/>
@@ -135,7 +128,6 @@
             android:layout_width="0dp"
             android:layout_height="19dp"
             android:layout_weight="1"
-            android:fontFamily="@font/dxkyungpil"
             android:textColor="@color/colorGrayLight"
             android:text="@string/hint_end_date"
             android:background="@android:color/transparent"/>
@@ -162,7 +154,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginStart="20dp"
-            android:fontFamily="@font/dxkyungpil"
             android:textSize="17sp"
             android:textColor="@android:color/black"
             android:text="@string/btn_text_country"/>
@@ -197,7 +188,6 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:inputType="text"
-                android:fontFamily="@font/dxkyungpil"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/colorGrayLight"

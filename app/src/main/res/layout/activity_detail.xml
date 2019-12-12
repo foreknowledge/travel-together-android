@@ -50,7 +50,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
-                android:fontFamily="@font/dxkyungpil"
                 android:textColor="@color/colorBack"
                 android:textSize="16sp" />
 
@@ -66,7 +65,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
-                android:fontFamily="@font/dxkyungpil"
                 android:textColor="@android:color/white"
                 android:textSize="23sp" />
 
@@ -76,7 +74,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="13dp"
-                android:fontFamily="@font/dxkyungpil"
                 android:textColor="@color/colorBack"
                 android:textSize="18sp" />
 
@@ -99,7 +96,6 @@
                     android:layout_height="32dp"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:fontFamily="@font/dxkyungpil"
                     android:paddingStart="95dp"
                     android:paddingEnd="20dp"
                     android:background="@drawable/dr_trasn_rounded">
@@ -115,7 +111,6 @@
                     android:layout_width="85dp"
                     android:layout_height="32dp"
                     android:gravity="center"
-                    android:fontFamily="@font/dxkyungpil"
                     android:text="@string/text_destination"
                     android:textSize="16sp"
                     android:textColor="@android:color/black"
@@ -134,7 +129,6 @@
                     android:layout_height="45dp"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:fontFamily="@font/dxkyungpil"
                     android:paddingStart="95dp"
                     android:paddingEnd="20dp"
                     android:background="@drawable/dr_trasn_rounded">
@@ -150,7 +144,6 @@
                     android:layout_width="85dp"
                     android:layout_height="45dp"
                     android:gravity="center"
-                    android:fontFamily="@font/dxkyungpil"
                     android:text="@string/text_member"
                     android:textSize="16sp"
                     android:textColor="@android:color/black"
@@ -200,7 +193,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/dxkyungpil"
                 android:text="@string/text_notice"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
@@ -230,7 +222,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/dxkyungpil"
                 android:text="@string/text_supplies"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
@@ -260,7 +251,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/dxkyungpil"
                 android:text="@string/text_schedule"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
@@ -290,7 +280,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/dxkyungpil"
                 android:text="@string/text_account_book"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
@@ -320,7 +309,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/dxkyungpil"
                 android:text="@string/text_diary"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />

@@ -7,14 +7,12 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
-        <item name="android:fontFamily">@font/dxkyungpil</item>
         <item name="android:textSize">16sp</item>
         <item name="android:fontStyle">normal</item>
     </style>
 
     <style name="chip_text_style">
         <item name="android:textSize">14sp</item>
-        <item name="android:fontFamily">@font/dxkyungpil</item>
     </style>
 
     <style name="profile_tag_style">
@@ -22,7 +20,6 @@
         <item name="android:paddingBottom">5dp</item>
         <item name="android:paddingStart">13dp</item>
         <item name="android:paddingEnd">13dp</item>
-        <item name="android:fontFamily">@font/dxkyungpil</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:background">@drawable/dr_tag_rounded</item>
@@ -32,7 +29,6 @@
         <item name="android:drawableEnd">@drawable/ic_keyboard_arrow_right_black_24dp</item>
         <item name="android:padding">12dp</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:fontFamily">@font/dxkyungpil</item>
         <item name="android:textColor">@color/colorGray</item>
         <item name="android:textSize">18sp</item>
         <item name="android:background">@android:color/transparent</item>

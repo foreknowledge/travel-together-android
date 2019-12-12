@@ -33,17 +33,17 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="9dp"
+            android:paddingBottom="9dp"
             android:background="@android:color/white"
-            android:fontFamily="@font/dxkyungpil"
             android:hint="@string/hint_search_travel"
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:textColor="@android:color/black"
             android:textColorHint="@color/colorGrayLight"
             android:textSize="18sp"
-            android:autofillHints="false" />
+            android:autofillHints="false"
+            android:backgroundTint="@android:color/transparent" />
 
         <FrameLayout
             android:id="@+id/btn_clear_out"

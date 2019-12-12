@@ -289,7 +289,7 @@ public class TravelHelper {
 
         List<TravelRoom> travelRooms = new ArrayList<>();
         travelRooms.add(new TravelRoom(1, "엄마와 함께하는 4박 5일 홍콩여행", "20.01.12","20.01.16", countries, R.drawable.travel_room_sample_01, members));
-        travelRooms.add(new TravelRoom(2, "친구들과 처음가는 배낭 여행", "2019.12.09", "19.12.29", countries2, R.drawable.travel_room_sample_02, members2));
+        travelRooms.add(new TravelRoom(2, "친구들과 처음가는 배낭 여행", "19.12.09", "19.12.29", countries2, R.drawable.travel_room_sample_02, members2));
         travelRooms.add(new TravelRoom(3, "마카오로 호캉스~~!!", "19.10.11", "19.10.15", countries3, R.drawable.travel_room_sample_03, members3));
         travelRooms.add(new TravelRoom(4, "앗싸 퇴직여행 ✈️", "19.08.15", "19.08.18", countries, R.drawable.travel_room_sample_04, members));
         travelRooms.add(new TravelRoom(5, "혼자가는 러시아 일주 \uD83C\uDFA1", "19.07.12", "19.07.16", countries2, R.drawable.travel_room_sample_01, members2));

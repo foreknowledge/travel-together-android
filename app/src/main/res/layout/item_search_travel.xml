@@ -47,8 +47,7 @@
                 android:id="@+id/travel_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/dxkyungpil"
-                android:paddingBottom="10dp"
+                android:paddingBottom="5dp"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 
@@ -56,7 +55,6 @@
                 android:id="@+id/travel_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/dxkyungpil"
                 android:textSize="15sp" />
 
         </LinearLayout>
