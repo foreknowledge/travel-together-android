@@ -236,6 +236,7 @@ public class TravelHelper {
         countries.add(Arrays.asList("트리니다드 토바고", "\uD83C\uDDF9\uD83C\uDDF9", ""));
         countries.add(Arrays.asList("투발루", "\uD83C\uDDF9\uD83C\uDDFB", ""));
         countries.add(Arrays.asList("대만", "\uD83C\uDDF9\uD83C\uDDFC", ""));
+        countries.add(Arrays.asList("마카오", "\uD83C\uDDF2\uD83C\uDDF4", ""));
         countries.add(Arrays.asList("탄자니아", "\uD83C\uDDF9\uD83C\uDDFF", ""));
         countries.add(Arrays.asList("우크라이나", "\uD83C\uDDFA\uD83C\uDDE6", ""));
         countries.add(Arrays.asList("우간다", "\uD83C\uDDFA\uD83C\uDDEC", ""));

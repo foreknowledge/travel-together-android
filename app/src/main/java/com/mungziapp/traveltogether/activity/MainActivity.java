@@ -185,7 +185,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
-                TravelItem item = adapter.getItem(position);
+                final TravelItem item = adapter.getItem(position);
 
                 AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
                         .setTitle(item.getTravelTitle())
@@ -194,7 +194,9 @@ public class MainActivity extends BaseActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 switch (i) {
                                     case 0:
-                                        Toast.makeText(MainActivity.this, "여행방 편집", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(MainActivity.this, EditTravelActivity.class);
+                                        intent.putExtra("travel_id", item.getId());
+                                        startActivity(intent);
                                         break;
                                     case 1:
                                         deleteDialog.show();

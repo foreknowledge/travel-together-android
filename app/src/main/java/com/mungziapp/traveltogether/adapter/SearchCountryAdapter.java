@@ -27,6 +27,13 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
     public SearchCountryAdapter(Context context) { this.context = context; }
 
     public SearchCountryItem getSearchItem(int position) { return searchItems.get(position); }
+    public SearchCountryItem getItem(String countryFlag) {
+        for (SearchCountryItem item : items) {
+            if (item.getCountryFlag().equals(countryFlag)) return item;
+        }
+
+        return null;
+    }
 
     public void selectItem(SearchCountryItem item) {
         item.setIsSelected(true);

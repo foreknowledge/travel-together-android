@@ -173,27 +173,9 @@ public class AddTravelActivity extends AppCompatActivity {
         countryAdapter.setClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
-                final SearchCountryItem item = countryAdapter.getSearchItem(position);
+                SearchCountryItem item = countryAdapter.getSearchItem(position);
 
-                Chip chip = new Chip(AddTravelActivity.this);
-                chip.setText(item.getCountryName());
-                chip.setCloseIconVisible(true);
-                chip.setTextAppearance(R.style.chip_text_style);
-                ChipDrawable chipDrawable = (ChipDrawable) chip.getChipDrawable();
-                chipDrawable.setChipBackgroundColorResource(R.color.color_clip_back);
-                chipDrawable.setCloseIconResource(R.drawable.ic_clear_black_24dp);
-                chip.setCheckable(false);
-                chip.setClickable(false);
-                chip.setOnCloseIconClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        chipGroup.removeView(view);
-                        countryAdapter.deselectItem(item);
-                        countryAdapter.searchItem(editSearch.getText().toString());
-                    }
-                });
-
-                chipGroup.addView(chip);
+                chipGroup.addView(makeChip(item));
 
                 countryAdapter.selectItem(item);
                 countryAdapter.searchItem(editSearch.getText().toString());
@@ -206,6 +188,28 @@ public class AddTravelActivity extends AppCompatActivity {
         });
 
         countrySearchRecycler.setAdapter(countryAdapter);
+    }
+
+    private Chip makeChip(final SearchCountryItem item) {
+        Chip chip = new Chip(AddTravelActivity.this);
+        chip.setText(item.getCountryName());
+        chip.setCloseIconVisible(true);
+        chip.setTextAppearance(R.style.chip_text_style);
+        ChipDrawable chipDrawable = (ChipDrawable) chip.getChipDrawable();
+        chipDrawable.setChipBackgroundColorResource(R.color.color_clip_back);
+        chipDrawable.setCloseIconResource(R.drawable.ic_clear_black_24dp);
+        chip.setCheckable(false);
+        chip.setClickable(false);
+        chip.setOnCloseIconClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chipGroup.removeView(view);
+                countryAdapter.deselectItem(item);
+                countryAdapter.searchItem(editSearch.getText().toString());
+            }
+        });
+
+        return chip;
     }
 
     private void setDateButtons() {
@@ -242,7 +246,7 @@ public class AddTravelActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-            String text = i + ". " + i1 + ". " + i2;
+            String text = String.valueOf(i).substring(2) + ". " + i1 + ". " + i2;
 
             if (flag == SET_START_DATE)
                 btnStartDate.setText(text);
