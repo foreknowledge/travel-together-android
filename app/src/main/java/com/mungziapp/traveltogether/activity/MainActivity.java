@@ -1,16 +1,21 @@
 package com.mungziapp.traveltogether.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.mungziapp.traveltogether.OnItemClickListener;
 import com.mungziapp.traveltogether.adapter.TravelsRecyclerAdapter;
 import com.mungziapp.traveltogether.adapter.OuterPagerAdapter;
 import com.mungziapp.traveltogether.app.DatabaseManager;
@@ -20,10 +25,11 @@ import com.mungziapp.traveltogether.item.TravelItem;
 import com.mungziapp.traveltogether.table.TravelRoomTable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends BaseActivity {
     private ViewPager outerViewPager;
-    private final String TAG = "MainActivity";
+    private static final String TAG = "MainActivity :: ";
 
     private FragmentManager fm;
 
@@ -42,7 +48,61 @@ public class MainActivity extends BaseActivity {
     }
 
     private void setAdapters() {
-        TravelsRecyclerAdapter oncommingAdapter = new TravelsRecyclerAdapter(getApplicationContext());
+        final TravelsRecyclerAdapter oncommingAdapter = new TravelsRecyclerAdapter(getApplicationContext());
+        oncommingAdapter.setClickListener(new OnItemClickListener() {
+            private String[] option = { "여행 편집", "나가기" };
+
+            final AlertDialog deleteDialog = new AlertDialog.Builder(MainActivity.this)
+                    .setMessage("정말로 나가시겠습니까?")
+                    .setPositiveButton("네"
+                            , new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Toast.makeText(MainActivity.this, "여행방 사라짐.", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                    .setNegativeButton("아니요"
+                            , new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            }).create();
+
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
+                    TravelItem item = oncommingAdapter.getItem(position);
+
+                    Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                    intent.putExtra("id", item.getId());
+
+                    startActivity(intent);
+            }
+
+            @Override
+            public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
+                TravelItem item = oncommingAdapter.getItem(position);
+
+                AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+                        .setTitle(item.getTravelTitle())
+                        .setItems(option, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                switch (i) {
+                                    case 0:
+                                        Toast.makeText(MainActivity.this, "여행방 편집", Toast.LENGTH_SHORT).show(); break;
+                                    case 1:
+                                        deleteDialog.show(); break;
+                                }
+                            }
+                        }).create();
+
+                dialog.show();
+
+                return true;
+            }
+        });
+
         TravelsRecyclerAdapter lastTravelAdapter = new TravelsRecyclerAdapter(getApplicationContext());
 
         Cursor cursor = DatabaseManager.database.rawQuery(TravelRoomTable.SELECT_QUERY, null);
@@ -60,9 +120,7 @@ public class MainActivity extends BaseActivity {
             int thumb = cursor.getInt(cursor.getColumnIndex("thumb"));
             int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
 
-            ArrayList<String> countries = new ArrayList<>();
-            for (String s : countryCodes.split(","))
-                countries.add(s);
+            ArrayList<String> countries = new ArrayList<>(Arrays.asList(countryCodes.split(",")));
 
             if (Integer.valueOf(endDate.substring(0,2)) < 19)
                 lastTravelAdapter.addItem(new TravelItem(id, title, startDate, endDate, countries, numOfMembers, thumb));
@@ -121,7 +179,7 @@ public class MainActivity extends BaseActivity {
         btnAddTravelRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), AddTravelRoomActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddTravelActivity.class);
                 startActivity(intent);
             }
         });

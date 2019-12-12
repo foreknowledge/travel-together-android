@@ -65,7 +65,7 @@ public class GlobalApplication extends Application {
         KakaoSDK.init(new KakaoSDKAdapter());
 
         requestQueue = Volley.newRequestQueue(this);
-        RequestManager.setmRequestQueue(requestQueue);
+        RequestManager.setRequestQueue(requestQueue);
 
         ImageLoader.ImageCache imageCache = new ImageLoader.ImageCache() {
             final LruCache<String, Bitmap> imageCache = new LruCache<>(30);

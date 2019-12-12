@@ -30,14 +30,14 @@ import com.mungziapp.traveltogether.item.SearchCountryItem;
 
 import java.util.Calendar;
 
-public class AddTravelRoomActivity extends AppCompatActivity {
+public class AddTravelActivity extends AppCompatActivity {
     private Button btnStartDate;
     private Button btnEndDate;
     private int flag;
 
     private DatePickerDialog datePickerDialog;
-    private final int SET_START_DATE = 1;
-    private final int SET_END_DATE = 2;
+    private static final int SET_START_DATE = 1;
+    private static final int SET_END_DATE = 2;
 
     private EditText editSearch;
     private EditText editTitle;
@@ -49,7 +49,7 @@ public class AddTravelRoomActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_travel_room);
+        setContentView(R.layout.activity_add_travel);
 
         in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         setSaveAndCancelButtons();
@@ -172,10 +172,10 @@ public class AddTravelRoomActivity extends AppCompatActivity {
         countryAdapter.initItem();
         countryAdapter.setClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(SearchCountryAdapter.ViewHolder viewHolder, View view, int position) {
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
                 final SearchCountryItem item = countryAdapter.getSearchItem(position);
 
-                Chip chip = new Chip(AddTravelRoomActivity.this);
+                Chip chip = new Chip(AddTravelActivity.this);
                 chip.setText(item.getCountryName());
                 chip.setCloseIconVisible(true);
                 chip.setTextAppearance(R.style.chip_text_style);
@@ -197,6 +197,11 @@ public class AddTravelRoomActivity extends AppCompatActivity {
 
                 countryAdapter.selectItem(item);
                 countryAdapter.searchItem(editSearch.getText().toString());
+            }
+
+            @Override
+            public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
+                return null;
             }
         });
 

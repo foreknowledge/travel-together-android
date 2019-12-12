@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.SearchActivity"></activity>
+        <activity android:name=".activity.EditTravelActivity"></activity>
+        <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.TravelActivity" />
         <activity android:name=".activity.SettingsActivity" />
         <activity android:name=".activity.DetailActivity" />
@@ -31,7 +32,7 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
-        <activity android:name=".activity.AddTravelRoomActivity" />
+        <activity android:name=".activity.AddTravelActivity" />
         <activity android:name=".activity.MainActivity" />
     </application>
 

@@ -82,7 +82,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     public class SessionCallback implements ISessionCallback {
-        private final String TAG = "SessionCallback :: ";
+        private static final String TAG = "SessionCallback :: ";
         private Context mContext;
 
         SessionCallback(Context mContext) { this.mContext = mContext; }

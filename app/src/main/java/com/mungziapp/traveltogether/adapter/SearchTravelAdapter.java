@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mungziapp.traveltogether.OnItemClickListener;
 import com.mungziapp.traveltogether.activity.DetailActivity;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.app.DatabaseManager;
@@ -25,7 +26,10 @@ public class SearchTravelAdapter extends RecyclerView.Adapter<SearchTravelAdapte
     private ArrayList<SearchTravelItem> items = new ArrayList<>();
     private ArrayList<SearchTravelItem> filteredItems = new ArrayList<>();
 
+    private OnItemClickListener listener;
+
     public SearchTravelAdapter(Context context) { this.context = context; }
+    public SearchTravelItem getItem(int position) { return filteredItems.get(position); }
 
     public void initItem() {
         Cursor cursor = DatabaseManager.database.rawQuery(TravelRoomTable.SELECT_QUERY, null);
@@ -66,13 +70,15 @@ public class SearchTravelAdapter extends RecyclerView.Adapter<SearchTravelAdapte
         notifyDataSetChanged();
     }
 
+    public void setClickListener(OnItemClickListener listener) { this.listener = listener; }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = inflater.inflate(R.layout.item_search_travel, parent, false);
 
-        return new ViewHolder(itemView, filteredItems, context);
+        return new ViewHolder(itemView, listener);
     }
 
     @Override
@@ -90,7 +96,7 @@ public class SearchTravelAdapter extends RecyclerView.Adapter<SearchTravelAdapte
         private TextView travelTitle;
         private TextView travelDuration;
 
-        ViewHolder(@NonNull final View itemView, final ArrayList<SearchTravelItem> items, final Context context) {
+        ViewHolder(@NonNull final View itemView, final OnItemClickListener listener) {
             super(itemView);
 
             this.travelThumbnail = itemView.findViewById(R.id.travel_thumbnail);
@@ -100,13 +106,8 @@ public class SearchTravelAdapter extends RecyclerView.Adapter<SearchTravelAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    SearchTravelItem item = items.get(getAdapterPosition());
-
-                    Intent intent = new Intent(context, DetailActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra("id", item.getId());
-
-                    context.startActivity(intent);
+                    if (listener != null)
+                        listener.onItemClick(SearchTravelAdapter.ViewHolder.this, view, getAdapterPosition());
                 }
             });
 

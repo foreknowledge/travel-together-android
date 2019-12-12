@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,8 +19,10 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mungziapp.traveltogether.OnItemClickListener;
 import com.mungziapp.traveltogether.adapter.SearchTravelAdapter;
 import com.mungziapp.traveltogether.R;
+import com.mungziapp.traveltogether.item.SearchTravelItem;
 
 public class SearchActivity extends AppCompatActivity {
     private EditText editSearch;
@@ -126,6 +129,22 @@ public class SearchActivity extends AppCompatActivity {
 
         searchAdapter = new SearchTravelAdapter(getApplicationContext());
         searchAdapter.initItem();
+        searchAdapter.setClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
+                SearchTravelItem item = searchAdapter.getItem(position);
+
+                Intent intent = new Intent(SearchActivity.this, DetailActivity.class);
+                intent.putExtra("id", item.getId());
+
+                startActivity(intent);
+            }
+
+            @Override
+            public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
+                return null;
+            }
+        });
 
         searchRecycler.setAdapter(searchAdapter);
     }

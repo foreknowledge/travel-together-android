@@ -21,9 +21,9 @@ import com.mungziapp.traveltogether.ActivityCallback;
 import com.mungziapp.traveltogether.R;
 
 public class TravelActivity extends AppCompatActivity implements ActivityCallback {
-    private final String[] titles = {"공지사항", "준비물", "일정", "가계부", "일기"};
-    private final int[] icons = {R.drawable.ic_notice, R.drawable.ic_supplies, R.drawable.ic_schedule, R.drawable.ic_account, R.drawable.ic_diary};
-    private final int[] icons_selected = {R.drawable.ic_notice_selected, R.drawable.ic_supplies_selected, R.drawable.ic_schedule_selected,
+    private static final String[] titles = {"공지사항", "준비물", "일정", "가계부", "일기"};
+    private static final int[] icons = {R.drawable.ic_notice, R.drawable.ic_supplies, R.drawable.ic_schedule, R.drawable.ic_account, R.drawable.ic_diary};
+    private static final int[] icons_selected = {R.drawable.ic_notice_selected, R.drawable.ic_supplies_selected, R.drawable.ic_schedule_selected,
             R.drawable.ic_account_selected, R.drawable.ic_diary_selected};
 
     private ViewPager innerViewPager;

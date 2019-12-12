@@ -17,8 +17,7 @@ import com.mungziapp.traveltogether.item.SearchCountryItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdapter.ViewHolder>
-        implements OnItemClickListener {
+public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdapter.ViewHolder> {
     private Context context;
     private ArrayList<SearchCountryItem> items = new ArrayList<>();
     private ArrayList<SearchCountryItem> searchItems = new ArrayList<>();
@@ -69,12 +68,6 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
 
     public void setClickListener(OnItemClickListener listener) { this.listener = listener; }
 
-    @Override
-    public void onItemClick(ViewHolder viewHolder, View view, int position) {
-        if (listener != null)
-            listener.onItemClick(viewHolder, view, position);
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -94,7 +87,7 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
         return searchItems.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder{
         private TextView countryFlag;
         private TextView countryName;
 

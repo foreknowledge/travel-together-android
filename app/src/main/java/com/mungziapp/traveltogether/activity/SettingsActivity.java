@@ -14,12 +14,13 @@ import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.mungziapp.traveltogether.R;
 
 public class SettingsActivity extends BaseActivity {
-    private final String TAG = "Settings :: ";
+    private static final String TAG = "Settings :: ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
 
         Button btnGoBefore = findViewById(R.id.btn_go_before);
         btnGoBefore.setOnClickListener(new View.OnClickListener() {

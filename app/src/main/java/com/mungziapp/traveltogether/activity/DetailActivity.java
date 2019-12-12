@@ -22,9 +22,10 @@ import com.mungziapp.traveltogether.app.DatabaseManager;
 import com.mungziapp.traveltogether.table.TravelRoomTable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DetailActivity extends AppCompatActivity {
-    private final String TAG = "DetailActivity";
+    private static final String TAG = "DetailActivity :: ";
 
     private String travelTitle;
     private String travelStartDate;
@@ -64,8 +65,7 @@ public class DetailActivity extends AppCompatActivity {
             this.travelImg = cursor.getInt(cursor.getColumnIndex("thumb"));
             int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
 
-            for (String s : countryCodes.split(","))
-                travelCountries.add(s);
+            travelCountries.addAll(Arrays.asList(countryCodes.split(",")));
 
             for (int j = 0; j < numOfMembers; ++j)
                 this.travelMembers.add(R.drawable.user_img);

@@ -11,7 +11,8 @@ import com.mungziapp.traveltogether.data.TravelRoom;
 import java.util.List;
 
 public class DatabaseManager {
-    public static final String TAG = "Database Manager";
+    private static final String TAG = "Database Manager :: ";
+
     public static SQLiteDatabase database;
     private static DatabaseManager instance = new DatabaseManager();
 

@@ -13,12 +13,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RequestManager {
-    private final String TAG = "RequestManager :: ";
+    private static final String TAG = "RequestManager :: ";
     private static RequestManager instance = new RequestManager();
-    private static RequestQueue mRequestQueue;
+    private static RequestQueue requestQueue;
 
     private RequestManager() {}
-    static void setmRequestQueue(RequestQueue requestQueue) { mRequestQueue = requestQueue; }
+    static void setRequestQueue(RequestQueue _requestQueue) { requestQueue = _requestQueue; }
 
     public static RequestManager getInstance() {
         return instance;
@@ -76,6 +76,6 @@ public class RequestManager {
         };
 
         request.setShouldCache(false);
-        mRequestQueue.add(request);
+        requestQueue.add(request);
     }
 }

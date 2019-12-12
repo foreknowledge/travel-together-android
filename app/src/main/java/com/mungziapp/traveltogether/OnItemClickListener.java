@@ -2,8 +2,9 @@ package com.mungziapp.traveltogether;
 
 import android.view.View;
 
-import com.mungziapp.traveltogether.adapter.SearchCountryAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 
 public interface OnItemClickListener {
-    void onItemClick(SearchCountryAdapter.ViewHolder viewHolder, View view, int position);
+    void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position);
+    Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position);
 }
