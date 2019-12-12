@@ -48,87 +48,13 @@ public class MainActivity extends BaseActivity {
     }
 
     private void setAdapters() {
-        final TravelsRecyclerAdapter oncommingAdapter = new TravelsRecyclerAdapter(getApplicationContext());
-        oncommingAdapter.setClickListener(new OnItemClickListener() {
-            private String[] option = { "여행 편집", "나가기" };
-
-            final AlertDialog deleteDialog = new AlertDialog.Builder(MainActivity.this)
-                    .setMessage("정말로 나가시겠습니까?")
-                    .setPositiveButton("네"
-                            , new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(MainActivity.this, "여행방 사라짐.", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                    .setNegativeButton("아니요"
-                            , new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            }).create();
-
-            @Override
-            public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
-                    TravelItem item = oncommingAdapter.getItem(position);
-
-                    Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                    intent.putExtra("id", item.getId());
-
-                    startActivity(intent);
-            }
-
-            @Override
-            public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
-                TravelItem item = oncommingAdapter.getItem(position);
-
-                AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
-                        .setTitle(item.getTravelTitle())
-                        .setItems(option, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                switch (i) {
-                                    case 0:
-                                        Toast.makeText(MainActivity.this, "여행방 편집", Toast.LENGTH_SHORT).show(); break;
-                                    case 1:
-                                        deleteDialog.show(); break;
-                                }
-                            }
-                        }).create();
-
-                dialog.show();
-
-                return true;
-            }
-        });
+        TravelsRecyclerAdapter oncommingAdapter = new TravelsRecyclerAdapter(getApplicationContext());
+        oncommingAdapter.setClickListener(makeItemClickListener(oncommingAdapter));
 
         TravelsRecyclerAdapter lastTravelAdapter = new TravelsRecyclerAdapter(getApplicationContext());
+        lastTravelAdapter.setClickListener(makeItemClickListener(lastTravelAdapter));
 
-        Cursor cursor = DatabaseManager.database.rawQuery(TravelRoomTable.SELECT_QUERY, null);
-        int numOfRecords = cursor.getCount();
-        Log.d(TAG, "레코드 개수: " + numOfRecords);
-
-        for (int i=0; i<numOfRecords; ++i) {
-            cursor.moveToNext();
-
-            int id = cursor.getInt(cursor.getColumnIndex("id"));
-            String title = cursor.getString(cursor.getColumnIndex("name"));
-            String startDate = cursor.getString(cursor.getColumnIndex("start_date"));
-            String endDate = cursor.getString(cursor.getColumnIndex("end_date"));
-            String countryCodes = cursor.getString(cursor.getColumnIndex("country_codes"));
-            int thumb = cursor.getInt(cursor.getColumnIndex("thumb"));
-            int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
-
-            ArrayList<String> countries = new ArrayList<>(Arrays.asList(countryCodes.split(",")));
-
-            if (Integer.valueOf(endDate.substring(0,2)) < 19)
-                lastTravelAdapter.addItem(new TravelItem(id, title, startDate, endDate, countries, numOfMembers, thumb));
-            else
-                oncommingAdapter.addItem(new TravelItem(id, title, startDate, endDate, countries, numOfMembers, thumb));
-        }
-
-        cursor.close();
+        setAdapterItems(oncommingAdapter, lastTravelAdapter);
 
         TravelsFragment oncommingTravels = new TravelsFragment(oncommingAdapter);
         TravelsFragment lastTravels = new TravelsFragment(lastTravelAdapter);
@@ -194,5 +120,93 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void setAdapterItems(TravelsRecyclerAdapter oncommingAdapter, TravelsRecyclerAdapter lastTravelAdapter) {
+        Cursor cursor = DatabaseManager.database.rawQuery(TravelRoomTable.SELECT_QUERY, null);
+        int numOfRecords = cursor.getCount();
+        Log.d(TAG, "레코드 개수: " + numOfRecords);
+
+        for (int i=0; i<numOfRecords; ++i) {
+            cursor.moveToNext();
+
+            int id = cursor.getInt(cursor.getColumnIndex("id"));
+            String title = cursor.getString(cursor.getColumnIndex("name"));
+            String startDate = cursor.getString(cursor.getColumnIndex("start_date"));
+            String endDate = cursor.getString(cursor.getColumnIndex("end_date"));
+            String countryCodes = cursor.getString(cursor.getColumnIndex("country_codes"));
+            int thumb = cursor.getInt(cursor.getColumnIndex("thumb"));
+            int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
+
+            ArrayList<String> countries = new ArrayList<>(Arrays.asList(countryCodes.split(",")));
+
+            if (Integer.valueOf(endDate.substring(0,2)) < 19)
+                lastTravelAdapter.addItem(new TravelItem(id, title, startDate, endDate, countries, numOfMembers, thumb));
+            else
+                oncommingAdapter.addItem(new TravelItem(id, title, startDate, endDate, countries, numOfMembers, thumb));
+        }
+
+        oncommingAdapter.notifyDataSetChanged();
+        lastTravelAdapter.notifyDataSetChanged();
+
+        cursor.close();
+    }
+
+    private OnItemClickListener makeItemClickListener(final TravelsRecyclerAdapter adapter) {
+        return new OnItemClickListener() {
+            private String[] option = {"여행 편집", "나가기"};
+
+            final AlertDialog deleteDialog = new AlertDialog.Builder(MainActivity.this)
+                    .setMessage("정말로 나가시겠습니까?")
+                    .setPositiveButton("네"
+                            , new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Toast.makeText(MainActivity.this, "여행방 사라짐.", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                    .setNegativeButton("아니요"
+                            , new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            }).create();
+
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
+                TravelItem item = adapter.getItem(position);
+
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                intent.putExtra("id", item.getId());
+
+                startActivity(intent);
+            }
+
+            @Override
+            public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
+                TravelItem item = adapter.getItem(position);
+
+                AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+                        .setTitle(item.getTravelTitle())
+                        .setItems(option, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                switch (i) {
+                                    case 0:
+                                        Toast.makeText(MainActivity.this, "여행방 편집", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 1:
+                                        deleteDialog.show();
+                                        break;
+                                }
+                            }
+                        }).create();
+
+                dialog.show();
+
+                return true;
+            }
+        };
     }
 }
