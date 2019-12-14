@@ -39,9 +39,9 @@
 	<string name="btn_remove_account">회원 탈퇴</string>
 	<string name="btn_text_edit">Edit</string>
 
-	<string name="title_create_travel_room">여행방 생성</string>
-	<string name="title_edit_travel_room">여행방 편집</string>
-	<string name="title_travel_room">여행방</string>
+	<string name="title_create_travel_room">여행 추가</string>
+	<string name="title_edit_travel_room">여행 편집</string>
+	<string name="title_travel_room">여행</string>
 
 	<string name="desc_icon_person">person icon</string>
 	<string name="desc_app_logo">app logo</string>

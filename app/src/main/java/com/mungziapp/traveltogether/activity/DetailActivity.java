@@ -9,13 +9,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mungziapp.traveltogether.adapter.TravelCountryAdapter;
 import com.mungziapp.traveltogether.adapter.TravelMemberAdapter;
@@ -28,8 +26,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DetailActivity extends AppCompatActivity {
-	private static final String TAG = "DetailActivity :: ";
-
 	private int travelId;
 	private String travelName;
 	private String travelStartDate;
@@ -56,26 +52,21 @@ public class DetailActivity extends AppCompatActivity {
 
 	private void setDataFromDB(int id) {
 		Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + id, null);
-		int numOfRecords = cursor.getCount();
-		Log.d(TAG, "레코드 개수: " + numOfRecords);
+		cursor.moveToNext();
 
-		for (int i = 0; i < numOfRecords; ++i) {
-			cursor.moveToNext();
+		this.travelId = id;
+		this.travelName = cursor.getString(cursor.getColumnIndex("name"));
+		this.travelStartDate = cursor.getString(cursor.getColumnIndex("start_date"));
+		this.travelEndDate = cursor.getString(cursor.getColumnIndex("end_date"));
+		String countryCodes = cursor.getString(cursor.getColumnIndex("country_codes"));
+		this.travelImg = cursor.getInt(cursor.getColumnIndex("thumb"));
+		int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
 
-			this.travelId = cursor.getInt(cursor.getColumnIndex("id"));
-			this.travelName = cursor.getString(cursor.getColumnIndex("name"));
-			this.travelStartDate = cursor.getString(cursor.getColumnIndex("start_date"));
-			this.travelEndDate = cursor.getString(cursor.getColumnIndex("end_date"));
-			String countryCodes = cursor.getString(cursor.getColumnIndex("country_codes"));
-			this.travelImg = cursor.getInt(cursor.getColumnIndex("thumb"));
-			int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
+		if (countryCodes != null)
+			travelCountries.addAll(Arrays.asList(countryCodes.split(",")));
 
-			if (countryCodes != null)
-				travelCountries.addAll(Arrays.asList(countryCodes.split(",")));
-
-			for (int j = 0; j < numOfMembers; ++j)
-				this.travelMembers.add(R.drawable.user_img);
-		}
+		for (int j = 0; j < numOfMembers; ++j)
+			this.travelMembers.add(R.drawable.user_img);
 
 		cursor.close();
 	}
