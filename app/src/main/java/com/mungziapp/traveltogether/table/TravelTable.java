@@ -8,7 +8,7 @@ public class TravelTable implements BaseColumns {
 	private static String START_DATE = "start_date";
 	private static String END_DATE = "end_date";
 	private static String COUNTRY_CODES = "country_codes";
-	private static String THUMB = "thumb";
+	private static String COVER = "cover";
 	private static String MEMBERS = "members";
 
 	public static String TABLE_NAME = "travelRoom";
@@ -21,7 +21,7 @@ public class TravelTable implements BaseColumns {
 			START_DATE + " TEXT, " +
 			END_DATE + " TEXT, " +
 			COUNTRY_CODES + " TEXT, " +
-			THUMB + " INTEGER, " +
+			COVER + " INTEGER, " +
 			MEMBERS + " INTEGER);";
 
 	public static final String DROP_QUERY = "DROP TABLE " + TABLE_NAME;

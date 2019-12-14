@@ -76,17 +76,20 @@ public class EditTravelActivity extends AppCompatActivity {
 		if (!cursor.isNull(cursor.getColumnIndex("end_date")))
 			btnEndDate.setText(cursor.getString(cursor.getColumnIndex("end_date")));
 		String countryCodes = cursor.getString(cursor.getColumnIndex("country_codes"));
-		if (!cursor.isNull(cursor.getColumnIndex("thumb")))
-			btnRePickCoverImg.setBackgroundResource(cursor.getInt(cursor.getColumnIndex("thumb")));
+		int cover = cursor.getInt(cursor.getColumnIndex("cover"));
+		if (cover != 0)
+			btnRePickCoverImg.setBackgroundResource(cover);
 
-		for (String countryFlag : countryCodes.split(",")) {
-			SearchCountryItem item = countryAdapter.getItem(countryFlag);
+		if (countryCodes != null) {
+			for (String countryFlag : countryCodes.split(",")) {
+				SearchCountryItem item = countryAdapter.getItem(countryFlag);
 
-			if (item != null) {
-				chipGroup.addView(makeChip(item));
+				if (item != null) {
+					chipGroup.addView(makeChip(item));
 
-				countryAdapter.selectItem(item);
-				countryAdapter.searchItem(editSearch.getText().toString());
+					countryAdapter.selectItem(item);
+					countryAdapter.searchItem(editSearch.getText().toString());
+				}
 			}
 		}
 

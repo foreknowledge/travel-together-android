@@ -134,13 +134,13 @@ public class MainActivity extends BaseActivity {
 			String startDate = cursor.getString(cursor.getColumnIndex("start_date"));
 			String endDate = cursor.getString(cursor.getColumnIndex("end_date"));
 			String countryCodes = cursor.getString(cursor.getColumnIndex("country_codes"));
-			int thumb = cursor.getInt(cursor.getColumnIndex("thumb"));
+			int cover = cursor.getInt(cursor.getColumnIndex("cover"));
 			int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
 
 			if (id > 7)
-				lastTravelAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes, thumb, numOfMembers));
+				lastTravelAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes, cover, numOfMembers));
 			else
-				oncommingAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes, thumb, numOfMembers));
+				oncommingAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes, cover, numOfMembers));
 		}
 
 		oncommingAdapter.notifyDataSetChanged();

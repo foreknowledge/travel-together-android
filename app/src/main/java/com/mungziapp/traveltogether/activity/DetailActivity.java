@@ -32,7 +32,7 @@ public class DetailActivity extends AppCompatActivity {
 	private String travelEndDate;
 	private ArrayList<String> travelCountries = new ArrayList<>();
 	private ArrayList<Integer> travelMembers = new ArrayList<>();
-	private int travelImg;
+	private int travelCover;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class DetailActivity extends AppCompatActivity {
 		this.travelStartDate = cursor.getString(cursor.getColumnIndex("start_date"));
 		this.travelEndDate = cursor.getString(cursor.getColumnIndex("end_date"));
 		String countryCodes = cursor.getString(cursor.getColumnIndex("country_codes"));
-		this.travelImg = cursor.getInt(cursor.getColumnIndex("thumb"));
+		this.travelCover = cursor.getInt(cursor.getColumnIndex("cover"));
 		int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
 
 		if (countryCodes != null)
@@ -104,9 +104,9 @@ public class DetailActivity extends AppCompatActivity {
 		memberRecyclerView.setAdapter(travelMemberAdapter);
 
 		// 여행 커버 이미지 설정
-		if (travelImg != 0) {
+		if (travelCover != 0) {
 			FrameLayout travelLayout = findViewById(R.id.travel_layout);
-			travelLayout.setBackgroundResource(this.travelImg);
+			travelLayout.setBackgroundResource(this.travelCover);
 		}
 	}
 
