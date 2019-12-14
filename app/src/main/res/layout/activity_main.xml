@@ -44,7 +44,7 @@
 				android:background="@drawable/ic_settings_black_24dp" />
 
 			<Button
-				android:id="@+id/btn_add_travel_room"
+				android:id="@+id/btn_add_travel"
 				android:layout_width="30dp"
 				android:layout_height="30dp"
 				android:layout_gravity="end"

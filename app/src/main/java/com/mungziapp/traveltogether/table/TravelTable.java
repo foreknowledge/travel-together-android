@@ -11,7 +11,7 @@ public class TravelTable implements BaseColumns {
 	private static String COVER = "cover";
 	private static String MEMBERS = "members";
 
-	public static String TABLE_NAME = "travelRoom";
+	public static String TABLE_NAME = "travel";
 
 	private TravelTable() { }
 

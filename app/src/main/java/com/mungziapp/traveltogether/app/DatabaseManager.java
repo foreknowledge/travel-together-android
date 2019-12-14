@@ -30,12 +30,12 @@ public class DatabaseManager {
 
 	static void createTables() {
 		database.execSQL(TravelTable.CREATE_QUERY);
-		Log.d(TAG, "travelRoom 테이블 오픈.");
+		Log.d(TAG, "travel 테이블 오픈.");
 	}
 
 	static void dropTables() {
 		database.execSQL(TravelTable.DROP_QUERY);
-		Log.d(TAG, "travelRoom 테이블 삭제.");
+		Log.d(TAG, "travel 테이블 삭제.");
 	}
 
 	static void insertDummyData(List<TravelData> travelData) {

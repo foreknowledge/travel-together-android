@@ -45,7 +45,7 @@ public class DetailActivity extends AppCompatActivity {
 			int id = intent.getIntExtra("id", 0);
 
 			setDataFromDB(id);
-			setRoomInfo();
+			setTravelInfo();
 			setButtons();
 		}
 	}
@@ -71,7 +71,7 @@ public class DetailActivity extends AppCompatActivity {
 		cursor.close();
 	}
 
-	private void setRoomInfo() {
+	private void setTravelInfo() {
 		// 여행 제목 설정
 		TextView travelName = findViewById(R.id.travel_name);
 		travelName.setText(this.travelName);

@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity {
 
 		setAdapters();
 		setTabBar();
-		setAddTravelRoomButton();
+		setAddTravelButton();
 		setSettingsButton();
 		setSearchButton();
 	}
@@ -99,9 +99,9 @@ public class MainActivity extends BaseActivity {
 		});
 	}
 
-	private void setAddTravelRoomButton() {
-		Button btnAddTravelRoom = findViewById(R.id.btn_add_travel_room);
-		btnAddTravelRoom.setOnClickListener(new View.OnClickListener() {
+	private void setAddTravelButton() {
+		Button btnAddTravel = findViewById(R.id.btn_add_travel);
+		btnAddTravel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				Intent intent = new Intent(getApplicationContext(), AddTravelActivity.class);

@@ -290,22 +290,22 @@ public class TravelHelper {
 		int members3 = 2;
 
 		List<TravelData> travelData = new ArrayList<>();
-		travelData.add(new TravelData(1, "엄마와 함께하는 4박 5일 홍콩여행", "2020.01.12", "2020.01.16", countries, R.drawable.travel_room_sample_01, members));
-		travelData.add(new TravelData(2, "친구들과 처음가는 배낭 여행", "2019.12.09", "2019.12.29", countries2, R.drawable.travel_room_sample_02, members2));
-		travelData.add(new TravelData(3, "마카오로 호캉스~~!!", "2019.10.11", "2019.10.15", countries3, R.drawable.travel_room_sample_03, members3));
-		travelData.add(new TravelData(4, "앗싸 퇴직여행 ✈️", "2019.08.15", "2019.08.18", countries, R.drawable.travel_room_sample_04, members));
-		travelData.add(new TravelData(5, "혼자가는 러시아 일주 \uD83C\uDFA1", "2019.07.12", "2019.07.16", countries2, R.drawable.travel_room_sample_01, members2));
-		travelData.add(new TravelData(6, "찐친들 - 미국 횡단 일주", "2019.06.09", "2019.06.29", countries3, R.drawable.travel_room_sample_02, members3));
+		travelData.add(new TravelData(1, "엄마와 함께하는 4박 5일 홍콩여행", "2020.01.12", "2020.01.16", countries, R.drawable.travel_sample_01, members));
+		travelData.add(new TravelData(2, "친구들과 처음가는 배낭 여행", "2019.12.09", "2019.12.29", countries2, R.drawable.travel_sample_02, members2));
+		travelData.add(new TravelData(3, "마카오로 호캉스~~!!", "2019.10.11", "2019.10.15", countries3, R.drawable.travel_sample_03, members3));
+		travelData.add(new TravelData(4, "앗싸 퇴직여행 ✈️", "2019.08.15", "2019.08.18", countries, R.drawable.travel_sample_04, members));
+		travelData.add(new TravelData(5, "혼자가는 러시아 일주 \uD83C\uDFA1", "2019.07.12", "2019.07.16", countries2, R.drawable.travel_sample_01, members2));
+		travelData.add(new TravelData(6, "찐친들 - 미국 횡단 일주", "2019.06.09", "2019.06.29", countries3, R.drawable.travel_sample_02, members3));
 		travelData.add(new TravelData(7, "여행 갈까 말까 던질까 말까", null, null, null, 0, 0));
 
-		travelData.add(new TravelData(8, "가치 같이 여행", "2018.10.12", "2018.10.16", countries2, R.drawable.travel_room_sample_05, members2));
-		travelData.add(new TravelData(9, "일주일 제주 여행", "2018.06.09", "2019.06.29", countries3, R.drawable.travel_room_sample_06, members3));
-		travelData.add(new TravelData(10, "내일로 전국 일주~~", "2018.02.11", "2018.02.15", countries, R.drawable.travel_room_sample_07, members));
-		travelData.add(new TravelData(11, "가자 파리로~!", "2017.12.15", "2017.12.28", countries2, R.drawable.travel_room_sample_01, members2));
-		travelData.add(new TravelData(12, "얄리얄리얄라셩 얄라리얄라", "2017.10.12", "2017.10.16", countries3, R.drawable.travel_room_sample_05, members3));
-		travelData.add(new TravelData(13, "일주일 제주 여행", "2017.06.09", "2017.06.29", countries, R.drawable.travel_room_sample_06, members));
-		travelData.add(new TravelData(14, "내일로 전국 일주~~", "2017.02.11", "2017.02.15", countries2, R.drawable.travel_room_sample_07, members2));
-		travelData.add(new TravelData(15, "가자 파리로~!", "2016.08.19", "2016.09.02", countries3, R.drawable.travel_room_sample_01, members3));
+		travelData.add(new TravelData(8, "가치 같이 여행", "2018.10.12", "2018.10.16", countries2, R.drawable.travel_sample_05, members2));
+		travelData.add(new TravelData(9, "일주일 제주 여행", "2018.06.09", "2019.06.29", countries3, R.drawable.travel_sample_06, members3));
+		travelData.add(new TravelData(10, "내일로 전국 일주~~", "2018.02.11", "2018.02.15", countries, R.drawable.travel_sample_07, members));
+		travelData.add(new TravelData(11, "가자 파리로~!", "2017.12.15", "2017.12.28", countries2, R.drawable.travel_sample_01, members2));
+		travelData.add(new TravelData(12, "얄리얄리얄라셩 얄라리얄라", "2017.10.12", "2017.10.16", countries3, R.drawable.travel_sample_05, members3));
+		travelData.add(new TravelData(13, "일주일 제주 여행", "2017.06.09", "2017.06.29", countries, R.drawable.travel_sample_06, members));
+		travelData.add(new TravelData(14, "내일로 전국 일주~~", "2017.02.11", "2017.02.15", countries2, R.drawable.travel_sample_07, members2));
+		travelData.add(new TravelData(15, "가자 파리로~!", "2016.08.19", "2016.09.02", countries3, R.drawable.travel_sample_01, members3));
 
 		return travelData;
 	}

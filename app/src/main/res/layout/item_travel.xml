@@ -12,8 +12,7 @@
 	<View
 		android:id="@+id/travel_layout"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:background="@drawable/travel_room_sample_01" />
+		android:layout_height="match_parent" />
 
 	<View
 		android:layout_width="match_parent"
