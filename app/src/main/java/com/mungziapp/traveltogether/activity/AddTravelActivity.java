@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,7 +87,6 @@ public class AddTravelActivity extends AppCompatActivity {
 
 	private void setSearchBar() {
 		editSearch = findViewById(R.id.search_country);
-		chipGroup = findViewById(R.id.chip_group);
 
 		final Button btnClear = findViewById(R.id.btn_clear);
 		final FrameLayout btnClearOut = findViewById(R.id.btn_clear_out);
@@ -160,6 +160,10 @@ public class AddTravelActivity extends AppCompatActivity {
 	}
 
 	private void setCountryList() {
+		chipGroup = findViewById(R.id.chip_group);
+
+		final ScrollView scrollView = findViewById(R.id.scroll_view);
+
 		countrySearchRecycler = findViewById(R.id.country_search_recycler);
 		LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
 		countrySearchRecycler.setLayoutManager(layoutManager);
@@ -172,6 +176,12 @@ public class AddTravelActivity extends AppCompatActivity {
 				SearchCountryItem item = countryAdapter.getSearchItem(position);
 
 				chipGroup.addView(makeChip(item));
+				scrollView.post(new Runnable() {
+					@Override
+					public void run() {
+						scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+					}
+				});
 
 				countryAdapter.selectItem(item);
 				countryAdapter.searchItem(editSearch.getText().toString());
