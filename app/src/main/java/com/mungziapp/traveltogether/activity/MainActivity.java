@@ -19,13 +19,10 @@ import com.mungziapp.traveltogether.OnItemClickListener;
 import com.mungziapp.traveltogether.adapter.TravelsRecyclerAdapter;
 import com.mungziapp.traveltogether.adapter.OuterPagerAdapter;
 import com.mungziapp.traveltogether.app.DatabaseManager;
+import com.mungziapp.traveltogether.data.TravelData;
 import com.mungziapp.traveltogether.fragment.TravelsFragment;
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.item.TravelItem;
-import com.mungziapp.traveltogether.table.TravelRoomTable;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.mungziapp.traveltogether.table.TravelTable;
 
 public class MainActivity extends BaseActivity {
     private ViewPager outerViewPager;
@@ -123,7 +120,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void setAdapterItems(TravelsRecyclerAdapter oncommingAdapter, TravelsRecyclerAdapter lastTravelAdapter) {
-        Cursor cursor = DatabaseManager.database.rawQuery(TravelRoomTable.SELECT_QUERY, null);
+        Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY, null);
         int numOfRecords = cursor.getCount();
         Log.d(TAG, "레코드 개수: " + numOfRecords);
 
@@ -138,12 +135,10 @@ public class MainActivity extends BaseActivity {
             int thumb = cursor.getInt(cursor.getColumnIndex("thumb"));
             int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
 
-            ArrayList<String> countries = new ArrayList<>(Arrays.asList(countryCodes.split(",")));
-
-            if (Integer.valueOf(endDate.substring(0,2)) < 19)
-                lastTravelAdapter.addItem(new TravelItem(id, title, startDate, endDate, countries, numOfMembers, thumb));
+            if (id > 7)
+                lastTravelAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes, thumb, numOfMembers));
             else
-                oncommingAdapter.addItem(new TravelItem(id, title, startDate, endDate, countries, numOfMembers, thumb));
+                oncommingAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes, thumb, numOfMembers));
         }
 
         oncommingAdapter.notifyDataSetChanged();
@@ -175,7 +170,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
-                TravelItem item = adapter.getItem(position);
+                TravelData item = adapter.getItem(position);
 
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                 intent.putExtra("id", item.getId());
@@ -185,10 +180,10 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
-                final TravelItem item = adapter.getItem(position);
+                final TravelData item = adapter.getItem(position);
 
                 AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
-                        .setTitle(item.getTravelTitle())
+                        .setTitle(item.getName())
                         .setItems(option, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {

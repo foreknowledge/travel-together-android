@@ -1,23 +1,20 @@
 package com.mungziapp.traveltogether.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mungziapp.traveltogether.OnItemClickListener;
-import com.mungziapp.traveltogether.activity.DetailActivity;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.app.DatabaseManager;
 import com.mungziapp.traveltogether.item.SearchTravelItem;
-import com.mungziapp.traveltogether.table.TravelRoomTable;
+import com.mungziapp.traveltogether.table.TravelTable;
 
 import java.util.ArrayList;
 
@@ -32,7 +29,7 @@ public class SearchTravelAdapter extends RecyclerView.Adapter<SearchTravelAdapte
     public SearchTravelItem getItem(int position) { return filteredItems.get(position); }
 
     public void initItem() {
-        Cursor cursor = DatabaseManager.database.rawQuery(TravelRoomTable.SELECT_QUERY, null);
+        Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY, null);
         int numOfRecords = cursor.getCount();
 
         for (int i=0; i<numOfRecords; ++i) {

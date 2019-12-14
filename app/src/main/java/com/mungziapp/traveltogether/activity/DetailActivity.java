@@ -19,7 +19,7 @@ import com.mungziapp.traveltogether.adapter.TravelMemberAdapter;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.SearchType;
 import com.mungziapp.traveltogether.app.DatabaseManager;
-import com.mungziapp.traveltogether.table.TravelRoomTable;
+import com.mungziapp.traveltogether.table.TravelTable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,7 +51,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void setDataFromDB(int id) {
-        Cursor cursor = DatabaseManager.database.rawQuery(TravelRoomTable.SELECT_QUERY + " WHERE id = " + id, null);
+        Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + id, null);
         int numOfRecords = cursor.getCount();
         Log.d(TAG, "레코드 개수: " + numOfRecords);
 
@@ -65,7 +65,8 @@ public class DetailActivity extends AppCompatActivity {
             this.travelImg = cursor.getInt(cursor.getColumnIndex("thumb"));
             int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
 
-            travelCountries.addAll(Arrays.asList(countryCodes.split(",")));
+            if (countryCodes != null)
+                travelCountries.addAll(Arrays.asList(countryCodes.split(",")));
 
             for (int j = 0; j < numOfMembers; ++j)
                 this.travelMembers.add(R.drawable.user_img);
@@ -79,14 +80,16 @@ public class DetailActivity extends AppCompatActivity {
         TextView travelTitle = findViewById(R.id.travel_title);
         travelTitle.setText(this.travelTitle);
 
-        // 여행 기간 설정
-        TextView travelDuration = findViewById(R.id.travel_duration);
-        String strDuration = this.travelStartDate + " ~ " + this.travelEndDate + " (N일간)";
-        travelDuration.setText(strDuration);
+        if (travelStartDate != null && travelEndDate != null) {
+            // 여행 기간 설정
+            TextView travelDuration = findViewById(R.id.travel_duration);
+            String strDuration = this.travelStartDate + " ~ " + this.travelEndDate + " (N일간)";
+            travelDuration.setText(strDuration);
 
-        // 여행 D-Day 설정
-        TextView travelDDay = findViewById(R.id.travel_d_day);
-        travelDDay.setText("D - N");
+            // 여행 D-Day 설정
+            TextView travelDDay = findViewById(R.id.travel_d_day);
+            travelDDay.setText("D - N");
+        }
 
         // 여행지 설정
         RecyclerView countryRecyclerView = findViewById(R.id.country_recycler_view);
@@ -105,8 +108,10 @@ public class DetailActivity extends AppCompatActivity {
         memberRecyclerView.setAdapter(travelMemberAdapter);
 
         // 여행 커버 이미지 설정
-        FrameLayout travelLayout = findViewById(R.id.travel_layout);
-        travelLayout.setBackgroundResource(this.travelImg);
+        if (travelImg != 0) {
+            FrameLayout travelLayout = findViewById(R.id.travel_layout);
+            travelLayout.setBackgroundResource(this.travelImg);
+        }
     }
 
     private void setButtons() {

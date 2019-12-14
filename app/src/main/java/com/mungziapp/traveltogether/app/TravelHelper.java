@@ -3,7 +3,7 @@ package com.mungziapp.traveltogether.app;
 import android.content.Context;
 
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.data.TravelRoom;
+import com.mungziapp.traveltogether.data.TravelData;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -273,10 +273,10 @@ public class TravelHelper {
         DatabaseManager.openDatabase(context);
         DatabaseManager.dropTables();
         DatabaseManager.createTables();
-        DatabaseManager.insertDummyData(makeTravelRoom());
+        DatabaseManager.insertDummyData(makeTravelItems());
     }
 
-    private static List<TravelRoom> makeTravelRoom() {
+    private static List<TravelData> makeTravelItems() {
         String countries = "\uD83C\uDDF0\uD83C\uDDF7,\uD83C\uDDFA\uD83C\uDDF8,\uD83C\uDDED\uD83C\uDDF0,\uD83C\uDDEB\uD83C\uDDF7" +
                 ",\uD83C\uDDEC\uD83C\uDDFA,\uD83C\uDDFB\uD83C\uDDF3,\uD83C\uDDF2\uD83C\uDDF4,\uD83C\uDDF3\uD83C\uDDF5" +
                 ",\uD83C\uDDEC\uD83C\uDDF9,\uD83C\uDDEC\uD83C\uDDE9,\uD83C\uDDEC\uD83C\uDDF7,\uD83C\uDDEC\uD83C\uDDF1";
@@ -287,23 +287,24 @@ public class TravelHelper {
         int members2 = 1;
         int members3 = 2;
 
-        List<TravelRoom> travelRooms = new ArrayList<>();
-        travelRooms.add(new TravelRoom(1, "엄마와 함께하는 4박 5일 홍콩여행", "20.01.12","20.01.16", countries, R.drawable.travel_room_sample_01, members));
-        travelRooms.add(new TravelRoom(2, "친구들과 처음가는 배낭 여행", "19.12.09", "19.12.29", countries2, R.drawable.travel_room_sample_02, members2));
-        travelRooms.add(new TravelRoom(3, "마카오로 호캉스~~!!", "19.10.11", "19.10.15", countries3, R.drawable.travel_room_sample_03, members3));
-        travelRooms.add(new TravelRoom(4, "앗싸 퇴직여행 ✈️", "19.08.15", "19.08.18", countries, R.drawable.travel_room_sample_04, members));
-        travelRooms.add(new TravelRoom(5, "혼자가는 러시아 일주 \uD83C\uDFA1", "19.07.12", "19.07.16", countries2, R.drawable.travel_room_sample_01, members2));
-        travelRooms.add(new TravelRoom(6, "찐친들 - 미국 횡단 일주", "19.06.09", "19.06.29", countries3, R.drawable.travel_room_sample_02, members3));
+        List<TravelData> travelData = new ArrayList<>();
+        travelData.add(new TravelData(1, "엄마와 함께하는 4박 5일 홍콩여행", "2020.01.12","2020.01.16", countries, R.drawable.travel_room_sample_01, members));
+        travelData.add(new TravelData(2, "친구들과 처음가는 배낭 여행", "2019.12.09", "2019.12.29", countries2, R.drawable.travel_room_sample_02, members2));
+        travelData.add(new TravelData(3, "마카오로 호캉스~~!!", "2019.10.11", "2019.10.15", countries3, R.drawable.travel_room_sample_03, members3));
+        travelData.add(new TravelData(4, "앗싸 퇴직여행 ✈️", "2019.08.15", "2019.08.18", countries, R.drawable.travel_room_sample_04, members));
+        travelData.add(new TravelData(5, "혼자가는 러시아 일주 \uD83C\uDFA1", "2019.07.12", "2019.07.16", countries2, R.drawable.travel_room_sample_01, members2));
+        travelData.add(new TravelData(6, "찐친들 - 미국 횡단 일주", "2019.06.09", "2019.06.29", countries3, R.drawable.travel_room_sample_02, members3));
+        travelData.add(new TravelData(7, "여행 갈까 말까 던질까 말까", null, null, null, 0, 0));
 
-        travelRooms.add(new TravelRoom(7, "가치 같이 여행", "18.10.12", "18.10.16", countries2, R.drawable.travel_room_sample_05, members2));
-        travelRooms.add(new TravelRoom(8, "일주일 제주 여행", "18.06.09", "19.06.29", countries3, R.drawable.travel_room_sample_06, members3));
-        travelRooms.add(new TravelRoom(9, "내일로 전국 일주~~", "18.02.11", "18.02.15", countries, R.drawable.travel_room_sample_07, members));
-        travelRooms.add(new TravelRoom(10, "가자 파리로~!", "17.12.15", "17.12.28", countries2, R.drawable.travel_room_sample_01, members2));
-        travelRooms.add(new TravelRoom(11, "얄리얄리얄라셩 얄라리얄라", "17.10.12", "17.10.16", countries3, R.drawable.travel_room_sample_05, members3));
-        travelRooms.add(new TravelRoom(12, "일주일 제주 여행", "17.06.09", "17.06.29", countries, R.drawable.travel_room_sample_06, members));
-        travelRooms.add(new TravelRoom(13, "내일로 전국 일주~~", "17.02.11", "17.02.15", countries2, R.drawable.travel_room_sample_07, members2));
-        travelRooms.add(new TravelRoom(14, "가자 파리로~!", "16.08.19", "16.09.02", countries3, R.drawable.travel_room_sample_01, members3));
+        travelData.add(new TravelData(8, "가치 같이 여행", "2018.10.12", "2018.10.16", countries2, R.drawable.travel_room_sample_05, members2));
+        travelData.add(new TravelData(9, "일주일 제주 여행", "2018.06.09", "2019.06.29", countries3, R.drawable.travel_room_sample_06, members3));
+        travelData.add(new TravelData(10, "내일로 전국 일주~~", "2018.02.11", "2018.02.15", countries, R.drawable.travel_room_sample_07, members));
+        travelData.add(new TravelData(11, "가자 파리로~!", "2017.12.15", "2017.12.28", countries2, R.drawable.travel_room_sample_01, members2));
+        travelData.add(new TravelData(12, "얄리얄리얄라셩 얄라리얄라", "2017.10.12", "2017.10.16", countries3, R.drawable.travel_room_sample_05, members3));
+        travelData.add(new TravelData(13, "일주일 제주 여행", "2017.06.09", "2017.06.29", countries, R.drawable.travel_room_sample_06, members));
+        travelData.add(new TravelData(14, "내일로 전국 일주~~", "2017.02.11", "2017.02.15", countries2, R.drawable.travel_room_sample_07, members2));
+        travelData.add(new TravelData(15, "가자 파리로~!", "2016.08.19", "2016.09.02", countries3, R.drawable.travel_room_sample_01, members3));
 
-        return travelRooms;
+        return travelData;
     }
 }

@@ -29,18 +29,13 @@ import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.adapter.SearchCountryAdapter;
 import com.mungziapp.traveltogether.app.DatabaseManager;
 import com.mungziapp.traveltogether.item.SearchCountryItem;
-import com.mungziapp.traveltogether.table.TravelRoomTable;
+import com.mungziapp.traveltogether.table.TravelTable;
 
 import java.util.Calendar;
 
 public class EditTravelActivity extends AppCompatActivity {
     private Button btnStartDate;
     private Button btnEndDate;
-    private int flag;
-
-    private DatePickerDialog datePickerDialog;
-    private static final int SET_START_DATE = 1;
-    private static final int SET_END_DATE = 2;
 
     private EditText editSearch;
     private EditText editTitle;
@@ -70,14 +65,17 @@ public class EditTravelActivity extends AppCompatActivity {
 
         int travelId = getIntent().getIntExtra("travel_id", 0);
 
-        Cursor cursor = DatabaseManager.database.rawQuery(TravelRoomTable.SELECT_QUERY + " WHERE id = " + travelId, null);
+        Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + travelId, null);
         cursor.moveToNext();
 
         editTitle.setText(cursor.getString(cursor.getColumnIndex("name")));
-        btnStartDate.setText(cursor.getString(cursor.getColumnIndex("start_date")));
-        btnEndDate.setText(cursor.getString(cursor.getColumnIndex("end_date")));
+        if (!cursor.isNull(cursor.getColumnIndex("start_date")))
+        	  btnStartDate.setText(cursor.getString(cursor.getColumnIndex("start_date")));
+        if (!cursor.isNull(cursor.getColumnIndex("end_date")))
+        	  btnEndDate.setText(cursor.getString(cursor.getColumnIndex("end_date")));
         String countryCodes = cursor.getString(cursor.getColumnIndex("country_codes"));
-        btnRePickCoverImg.setBackgroundResource(cursor.getInt(cursor.getColumnIndex("thumb")));
+        if(!cursor.isNull(cursor.getColumnIndex("thumb")))
+        	  btnRePickCoverImg.setBackgroundResource(cursor.getInt(cursor.getColumnIndex("thumb")));
 
         for (String countryFlag : countryCodes.split(",")) {
             SearchCountryItem item = countryAdapter.getItem(countryFlag);
@@ -248,45 +246,69 @@ public class EditTravelActivity extends AppCompatActivity {
     }
 
     private void setDateButtons() {
-        int year = Calendar.getInstance().get(Calendar.YEAR);
-        int month = Calendar.getInstance().get(Calendar.MONTH);
-        int date = Calendar.getInstance().get(Calendar.DATE);
-        datePickerDialog = new DatePickerDialog(this, listener, year, month, date);
-
         btnStartDate = findViewById(R.id.btn_pick_start_date);
         btnEndDate = findViewById(R.id.btn_pick_end_date);
 
         btnStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickDateButton(SET_START_DATE);
+                clearFocus();
+
+                int year, month, date;
+
+                String[] startDate = btnStartDate.getText().toString().split("\\.");
+                if (startDate.length == 3) {
+                    year = Integer.valueOf(startDate[0]);
+                    month = Integer.valueOf(startDate[1]) - 1;
+                    date = Integer.valueOf(startDate[2]);
+                }
+                else {
+                    year = Calendar.getInstance().get(Calendar.YEAR);
+                    month = Calendar.getInstance().get(Calendar.MONTH);
+                    date = Calendar.getInstance().get(Calendar.DATE);
+                }
+                new DatePickerDialog(EditTravelActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        String text = i + "." + (i1 + 1) + "." + i2;
+                        btnStartDate.setText(text);
+                    }
+                }, year, month, date).show();
+
             }
         });
 
         btnEndDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickDateButton(SET_END_DATE);
+                clearFocus();
+
+                int year, month, date;
+
+                String[] endDate = btnEndDate.getText().toString().split("\\.");
+                if (endDate.length == 3) {
+                    year = Integer.valueOf(endDate[0]);
+                    month = Integer.valueOf(endDate[1]) - 1;
+                    date = Integer.valueOf(endDate[2]);
+                }
+                else {
+                    year = Calendar.getInstance().get(Calendar.YEAR);
+                    month = Calendar.getInstance().get(Calendar.MONTH);
+                    date = Calendar.getInstance().get(Calendar.DATE);
+                }
+                new DatePickerDialog(EditTravelActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        String text = i + "." + (i1 + 1) + "." + i2;
+                        btnEndDate.setText(text);
+                    }
+                }, year, month, date).show();
             }
         });
     }
 
-    private void clickDateButton(int flag) {
+    private void clearFocus() {
         editSearch.clearFocus();
         editTitle.clearFocus();
-        this.flag = flag;
-        datePickerDialog.show();
     }
-
-    private DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-            String text = String.valueOf(i).substring(2) + ". " + i1 + ". " + i2;
-
-            if (flag == SET_START_DATE)
-                btnStartDate.setText(text);
-            else if (flag == SET_END_DATE)
-                btnEndDate.setText(text);
-        }
-    };
 }

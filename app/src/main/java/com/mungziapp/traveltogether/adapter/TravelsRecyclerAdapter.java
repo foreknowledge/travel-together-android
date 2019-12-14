@@ -12,19 +12,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mungziapp.traveltogether.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.item.TravelItem;
+import com.mungziapp.traveltogether.data.TravelData;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecyclerAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<TravelItem> items = new ArrayList<>();
+    private ArrayList<TravelData> items = new ArrayList<>();
 
     private OnItemClickListener listener;
 
     public TravelsRecyclerAdapter(Context context) { this.context = context; }
-    public void addItem(TravelItem item) { items.add(item); }
-    public TravelItem getItem(int position) { return items.get(position); }
+    public void addItem(TravelData item) { items.add(item); }
+    public TravelData getItem(int position) { return items.get(position); }
 
     public void setClickListener(OnItemClickListener listener) { this.listener = listener; }
 
@@ -49,7 +50,7 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private View travelLayout;
-        private TextView travelTitle;
+        private TextView travelName;
         private TextView travelDuration;
         private TextView numOfTravelMembers;
         private TextView travelDday;
@@ -63,7 +64,7 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
             this.context = context;
 
             this.travelLayout = itemView.findViewById(R.id.travel_layout);
-            this.travelTitle = itemView.findViewById(R.id.travel_title);
+            this.travelName = itemView.findViewById(R.id.travel_name);
             this.travelDuration = itemView.findViewById(R.id.travel_duration);
             this.numOfTravelMembers = itemView.findViewById(R.id.travel_members);
             this.travelDday = itemView.findViewById(R.id.travel_d_day);
@@ -91,22 +92,27 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 
         }
 
-        void setItem(TravelItem item) {
-            this.travelLayout.setBackgroundResource(item.getImgResId());
-            this.travelTitle.setText(item.getTravelTitle());
+        void setItem(TravelData item) {
+            this.travelName.setText(item.getName());
 
-            String strDuration = item.getTravelStartDate() + " ~ " + item.getTravelEndDate() + " (N일간)";
-            this.travelDuration.setText(strDuration);
+            this.travelLayout.setBackgroundResource(item.getThumb());
 
-            String numOfTravelMembers = Integer.toString(item.getNumOfTravelMembers());
+            String numOfTravelMembers = Integer.toString(item.getMembers());
             this.numOfTravelMembers.setText(numOfTravelMembers);
 
-            travelDday.setText("D - N");
+            if (item.getStartDate() != null && item.getEndDate() != null) {
+                String strDuration = item.getStartDate() + " ~ " + item.getEndDate() + " (N일간)";
+                this.travelDuration.setText(strDuration);
 
-            ArrayList<String> countries = item.getTravelCountries();
-            TravelCountryAdapter travelCountryAdapter = new TravelCountryAdapter(context);
-            for (String country: countries) travelCountryAdapter.addItem(country);
-            countryRecyclerView.setAdapter(travelCountryAdapter);
+                travelDday.setText("D - N");
+            }
+
+            if (item.getCountryCodes() != null) {
+                ArrayList<String> countries = new ArrayList<>(Arrays.asList(item.getCountryCodes().split(",")));
+                TravelCountryAdapter travelCountryAdapter = new TravelCountryAdapter(context);
+                for (String country : countries) travelCountryAdapter.addItem(country);
+                countryRecyclerView.setAdapter(travelCountryAdapter);
+            }
         }
     }
 }

@@ -33,11 +33,6 @@ import java.util.Calendar;
 public class AddTravelActivity extends AppCompatActivity {
     private Button btnStartDate;
     private Button btnEndDate;
-    private int flag;
-
-    private DatePickerDialog datePickerDialog;
-    private static final int SET_START_DATE = 1;
-    private static final int SET_END_DATE = 2;
 
     private EditText editSearch;
     private EditText editTitle;
@@ -213,46 +208,68 @@ public class AddTravelActivity extends AppCompatActivity {
     }
 
     private void setDateButtons() {
-        int year = Calendar.getInstance().get(Calendar.YEAR);
-        int month = Calendar.getInstance().get(Calendar.MONTH);
-        int date = Calendar.getInstance().get(Calendar.DATE);
-        datePickerDialog = new DatePickerDialog(this, listener, year, month, date);
-
         btnStartDate = findViewById(R.id.btn_pick_start_date);
         btnEndDate = findViewById(R.id.btn_pick_end_date);
 
         btnStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickDateButton(SET_START_DATE);
+                clearFocus();
+
+                int year, month, date;
+
+                String[] startDate = btnStartDate.getText().toString().split("\\.");
+                if (startDate.length == 3) {
+                    year = Integer.valueOf(startDate[0]);
+                    month = Integer.valueOf(startDate[1]) - 1;
+                    date = Integer.valueOf(startDate[2]);
+                } else {
+                    year = Calendar.getInstance().get(Calendar.YEAR);
+                    month = Calendar.getInstance().get(Calendar.MONTH);
+                    date = Calendar.getInstance().get(Calendar.DATE);
+                }
+                new DatePickerDialog(AddTravelActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        String text = i + "." + (i1 + 1) + "." + i2;
+                        btnStartDate.setText(text);
+                    }
+                }, year, month, date).show();
+
             }
         });
 
         btnEndDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickDateButton(SET_END_DATE);
+                clearFocus();
+
+                int year, month, date;
+
+                String[] endDate = btnEndDate.getText().toString().split("\\.");
+                if (endDate.length == 3) {
+                    year = Integer.valueOf(endDate[0]);
+                    month = Integer.valueOf(endDate[1]) - 1;
+                    date = Integer.valueOf(endDate[2]);
+                } else {
+                    year = Calendar.getInstance().get(Calendar.YEAR);
+                    month = Calendar.getInstance().get(Calendar.MONTH);
+                    date = Calendar.getInstance().get(Calendar.DATE);
+                }
+                new DatePickerDialog(AddTravelActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        String text = i + "." + (i1 + 1) + "." + i2;
+                        btnEndDate.setText(text);
+                    }
+                }, year, month, date).show();
             }
         });
     }
 
-    private void clickDateButton(int flag) {
+    private void clearFocus() {
         editSearch.clearFocus();
         editTitle.clearFocus();
-        this.flag = flag;
-        datePickerDialog.show();
     }
-
-    private DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-            String text = String.valueOf(i).substring(2) + ". " + i1 + ". " + i2;
-
-            if (flag == SET_START_DATE)
-                btnStartDate.setText(text);
-            else if (flag == SET_END_DATE)
-                btnEndDate.setText(text);
-        }
-    };
 
 }
