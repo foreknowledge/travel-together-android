@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mungziapp.traveltogether.OnItemClickListener;
+import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.app.TravelHelper;
 import com.mungziapp.traveltogether.item.SearchCountryItem;

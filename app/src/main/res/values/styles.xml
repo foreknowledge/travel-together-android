@@ -2,7 +2,7 @@
 
 	<!-- Base application theme. -->
 	<style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge" >
-		<item name="colorAccent">@color/colorPrimary</item>
+		<item name="colorAccent">@color/colorSecondary</item>
 		<item name="colorControlNormal">@color/colorBackDark</item>
 	</style>
 

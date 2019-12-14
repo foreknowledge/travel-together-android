@@ -1,4 +1,4 @@
-package com.mungziapp.traveltogether;
+package com.mungziapp.traveltogether.interfaces;
 
 public interface ActivityCallback {
 	void setFragmentTitle(String title);

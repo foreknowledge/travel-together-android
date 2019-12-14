@@ -1,4 +1,4 @@
-package com.mungziapp.traveltogether;
+package com.mungziapp.traveltogether.data;
 
 public class SearchType {
 	public static final int NOTICE = 0;

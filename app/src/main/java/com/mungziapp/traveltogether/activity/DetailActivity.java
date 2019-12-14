@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.mungziapp.traveltogether.adapter.TravelCountryAdapter;
 import com.mungziapp.traveltogether.adapter.TravelMemberAdapter;
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.SearchType;
+import com.mungziapp.traveltogether.data.SearchType;
 import com.mungziapp.traveltogether.app.DatabaseManager;
 import com.mungziapp.traveltogether.table.TravelTable;
 

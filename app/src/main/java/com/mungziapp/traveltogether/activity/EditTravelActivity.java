@@ -20,13 +20,14 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
-import com.mungziapp.traveltogether.OnItemClickListener;
+import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.adapter.SearchCountryAdapter;
 import com.mungziapp.traveltogether.app.DatabaseManager;
@@ -40,10 +41,10 @@ public class EditTravelActivity extends AppCompatActivity {
 	private Button btnEndDate;
 	private Button btnRePickCoverImg;
 
+	private RecyclerView countrySearchRecycler;
 	private EditText editSearch;
 	private EditText editTitle;
 	private ChipGroup chipGroup;
-	private RecyclerView countrySearchRecycler;
 	private SearchCountryAdapter countryAdapter;
 	private InputMethodManager in;
 
@@ -164,8 +165,7 @@ public class EditTravelActivity extends AppCompatActivity {
 
 		editSearch.addTextChangedListener(new TextWatcher() {
 			@Override
-			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-			}
+			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
 			@Override
 			public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -174,9 +174,8 @@ public class EditTravelActivity extends AppCompatActivity {
 
 			@Override
 			public void afterTextChanged(Editable editable) {
-				if (editSearch.getText().toString().equals("")) {
+				if (editSearch.getText().toString().equals(""))
 					btnClear.setVisibility(View.INVISIBLE);
-				}
 
 				countryAdapter.searchItem(editable.toString());
 			}
@@ -219,6 +218,8 @@ public class EditTravelActivity extends AppCompatActivity {
 	private void setCountryList() {
 		chipGroup = findViewById(R.id.chip_group);
 
+		final ScrollView scrollView = findViewById(R.id.scroll_view);
+
 		countrySearchRecycler = findViewById(R.id.country_search_recycler);
 		LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
 		countrySearchRecycler.setLayoutManager(layoutManager);
@@ -231,6 +232,12 @@ public class EditTravelActivity extends AppCompatActivity {
 				SearchCountryItem item = countryAdapter.getSearchItem(position);
 
 				chipGroup.addView(makeChip(item));
+				scrollView.post(new Runnable() {
+					@Override
+					public void run() {
+						scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+					}
+				});
 
 				countryAdapter.selectItem(item);
 				countryAdapter.searchItem(editSearch.getText().toString());

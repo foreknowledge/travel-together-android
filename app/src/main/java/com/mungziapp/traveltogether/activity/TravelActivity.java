@@ -17,7 +17,7 @@ import com.mungziapp.traveltogether.fragment.DiaryFragment;
 import com.mungziapp.traveltogether.fragment.NoticeFragment;
 import com.mungziapp.traveltogether.fragment.ScheduleFragment;
 import com.mungziapp.traveltogether.fragment.SuppliesFragment;
-import com.mungziapp.traveltogether.ActivityCallback;
+import com.mungziapp.traveltogether.interfaces.ActivityCallback;
 import com.mungziapp.traveltogether.R;
 
 public class TravelActivity extends AppCompatActivity implements ActivityCallback {

@@ -24,8 +24,8 @@ import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.OptionalBoolean;
 import com.kakao.util.exception.KakaoException;
-import com.mungziapp.traveltogether.ApolloConnector;
-import com.mungziapp.traveltogether.FirstMutation;
+import com.mungziapp.traveltogether.app.ApolloConnector;
+import com.mungziapp.traveltogether.app.FirstMutation;
 import com.mungziapp.traveltogether.R;
 
 import org.jetbrains.annotations.NotNull;

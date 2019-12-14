@@ -1,4 +1,4 @@
-package com.mungziapp.traveltogether;
+package com.mungziapp.traveltogether.app;
 
 import com.apollographql.apollo.ApolloClient;
 
