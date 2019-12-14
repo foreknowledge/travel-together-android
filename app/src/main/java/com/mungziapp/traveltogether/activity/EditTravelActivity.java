@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
@@ -104,7 +106,23 @@ public class EditTravelActivity extends AppCompatActivity {
 		btnCancel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				finish();
+				AlertDialog dialog = new AlertDialog.Builder(EditTravelActivity.this)
+						.setMessage(getString(R.string.cancel_message))
+						.setPositiveButton(getString(R.string.btn_ok_text), new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+								finish();
+							}
+						})
+						.setNegativeButton(getString(R.string.btn_cancel_text), new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+								dialogInterface.dismiss();
+							}
+						}).create();
+
+				clearFocus();
+				dialog.show();
 			}
 		});
 	}

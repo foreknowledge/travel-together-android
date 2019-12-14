@@ -83,6 +83,7 @@
 				android:gravity="center"
 				android:textColor="@android:color/black"
 				android:textSize="23sp"
+				android:drawableEnd="@drawable/ic_edit_black_24dp"
 				android:hint="@string/hint_name"
 				android:maxLines="1"
 				android:maxLength="20"
@@ -107,11 +108,13 @@
 				android:gravity="center"
 				android:textColor="@android:color/black"
 				android:textSize="18sp"
+				android:drawableEnd="@drawable/ic_edit_black_24dp"
 				android:hint="@string/hint_message"
 				android:maxLines="1"
 				android:maxLength="60"
 				android:inputType="text"
 				android:autofillHints="false"
+
 				android:visibility="gone" />
 
 		</LinearLayout>

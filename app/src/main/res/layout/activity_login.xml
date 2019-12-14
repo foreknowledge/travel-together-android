@@ -83,6 +83,7 @@
 			android:textColor="@color/color_kakao_front"
 			android:paddingStart="30dp"
 			android:paddingEnd="0dp"
+			android:textSize="18sp"
 			android:background="@drawable/login_for_kakao" />
 
 	</LinearLayout>

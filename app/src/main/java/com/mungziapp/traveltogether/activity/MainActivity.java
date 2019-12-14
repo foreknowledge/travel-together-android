@@ -151,18 +151,18 @@ public class MainActivity extends BaseActivity {
 
 	private OnItemClickListener makeItemClickListener(final TravelsRecyclerAdapter adapter) {
 		return new OnItemClickListener() {
-			private String[] option = {"여행 편집", "나가기"};
+			private String[] options = getResources().getStringArray(R.array.option_travel);
 
 			final AlertDialog deleteDialog = new AlertDialog.Builder(MainActivity.this)
-					.setMessage("정말로 나가시겠습니까?")
-					.setPositiveButton("네"
+					.setMessage(getString(R.string.delete_message))
+					.setPositiveButton(getString(R.string.btn_ok_text)
 							, new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									Toast.makeText(MainActivity.this, "여행방 사라짐.", Toast.LENGTH_SHORT).show();
 								}
 							})
-					.setNegativeButton("아니요"
+					.setNegativeButton(getString(R.string.btn_cancel_text)
 							, new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
@@ -186,7 +186,7 @@ public class MainActivity extends BaseActivity {
 
 				AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
 						.setTitle(item.getName())
-						.setItems(option, new DialogInterface.OnClickListener() {
+						.setItems(options, new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialogInterface, int i) {
 								switch (i) {

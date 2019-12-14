@@ -1,14 +1,17 @@
 package com.mungziapp.traveltogether.activity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
@@ -24,6 +27,7 @@ public class SettingsActivity extends BaseActivity {
 	private static final int EDIT_MODE = 1;
 
 	private int mode = NORMAL_MODE;
+	private InputMethodManager in;
 
 	private Button btnEdit;
 	private Button btnGoBefore;
@@ -97,16 +101,62 @@ public class SettingsActivity extends BaseActivity {
 		btnCancel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				// dialog 보여주기
-				setNormalMode();
+				AlertDialog dialog = new AlertDialog.Builder(SettingsActivity.this)
+						.setMessage(getString(R.string.cancel_message))
+						.setPositiveButton(getString(R.string.btn_ok_text), new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+								setNormalMode();
+							}
+						})
+						.setNegativeButton(getString(R.string.btn_cancel_text), new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+								dialogInterface.dismiss();
+							}
+						}).create();
+
+				if (!profileMessage.getText().toString().equals(editMessage.getText().toString())
+						|| !profileName.getText().toString().equals(editName.getText().toString())) {
+					hideKeyboard();
+					dialog.show();
+				}
+				else
+					setNormalMode();
 			}
 		});
 
 		CircleImageView profileImg = findViewById(R.id.profile_img);
 		profileImg.setOnClickListener(new View.OnClickListener() {
+			String[] options = getResources().getStringArray(R.array.option_profile_img);
+
 			@Override
 			public void onClick(View view) {
+				switch (mode) {
+					case EDIT_MODE:
+						AlertDialog dialog = new AlertDialog.Builder(SettingsActivity.this)
+								.setTitle(getString(R.string.profile_img))
+								.setItems(options, new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialogInterface, int i) {
+										switch (i) {
+											case 0:
+												Toast.makeText(SettingsActivity.this, "기본 이미지로 변경", Toast.LENGTH_SHORT).show();
+												break;
+											case 1:
+												Toast.makeText(SettingsActivity.this, "갤러 이미지로 변경", Toast.LENGTH_SHORT).show();
+												break;
+										}
+									}
+								}).create();
 
+						hideKeyboard();
+						dialog.show();
+						break;
+					case NORMAL_MODE:
+						Toast.makeText(SettingsActivity.this, "프로필 사진 보여주는 화면 띄우기", Toast.LENGTH_SHORT).show();
+						break;
+				}
 			}
 		});
 
@@ -115,6 +165,8 @@ public class SettingsActivity extends BaseActivity {
 		editName = findViewById(R.id.edit_name);
 		editMessage = findViewById(R.id.edit_message);
 		buttons = findViewById(R.id.buttons);
+
+		in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 	}
 
 	private void setNormalMode() {
@@ -132,6 +184,8 @@ public class SettingsActivity extends BaseActivity {
 		profileMessage.setVisibility(View.VISIBLE);
 		editName.setVisibility(View.GONE);
 		editMessage.setVisibility(View.GONE);
+
+		hideKeyboard();
 	}
 
 	private void setEditMode() {
@@ -140,8 +194,8 @@ public class SettingsActivity extends BaseActivity {
 		btnGoBefore.setVisibility(View.INVISIBLE);
 		btnCancel.setVisibility(View.VISIBLE);
 
-		String strDone = "Done";
-		btnEdit.setText(strDone);
+		String strSave = "Save";
+		btnEdit.setText(strSave);
 
 		buttons.setVisibility(View.INVISIBLE);
 
@@ -149,6 +203,16 @@ public class SettingsActivity extends BaseActivity {
 		profileMessage.setVisibility(View.GONE);
 		editName.setVisibility(View.VISIBLE);
 		editMessage.setVisibility(View.VISIBLE);
+
+		hideKeyboard();
+	}
+
+	private void hideKeyboard() {
+		editName.clearFocus();
+		editMessage.clearFocus();
+
+		if (in != null)
+			in.hideSoftInputFromWindow(editName.getWindowToken(), 0);
 	}
 
 	private void onClickLogout() {

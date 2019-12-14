@@ -1,10 +1,12 @@
 <resources>
 
 	<!-- Base application theme. -->
-	<style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge" />
+	<style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge" >
+		<item name="colorAccent">@color/colorPrimary</item>
+		<item name="colorControlNormal">@color/colorBackDark</item>
+	</style>
 
 	<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
 	<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 	<style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">

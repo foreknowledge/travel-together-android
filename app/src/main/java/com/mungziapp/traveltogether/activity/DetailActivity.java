@@ -119,23 +119,20 @@ public class DetailActivity extends AppCompatActivity {
 			}
 		});
 
-
-
 		Button btnMore = findViewById(R.id.btn_more);
 		btnMore.setOnClickListener(new View.OnClickListener() {
-
-			private String[] option = {"여행 편집", "나가기"};
+			private String[] options = getResources().getStringArray(R.array.option_travel);
 
 			final AlertDialog deleteDialog = new AlertDialog.Builder(DetailActivity.this)
-					.setMessage("정말로 나가시겠습니까?")
-					.setPositiveButton("네"
+					.setMessage(getString(R.string.delete_message))
+					.setPositiveButton(getString(R.string.btn_ok_text)
 							, new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									finish();
 								}
 							})
-					.setNegativeButton("아니요"
+					.setNegativeButton(getString(R.string.btn_cancel_text)
 							, new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
@@ -147,7 +144,7 @@ public class DetailActivity extends AppCompatActivity {
 			public void onClick(View view) {
 				AlertDialog dialog = new AlertDialog.Builder(DetailActivity.this)
 						.setTitle(travelName)
-						.setItems(option, new DialogInterface.OnClickListener() {
+						.setItems(options, new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialogInterface, int i) {
 								switch (i) {
