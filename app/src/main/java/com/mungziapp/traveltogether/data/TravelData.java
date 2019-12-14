@@ -6,16 +6,16 @@ public class TravelData {
 	private String startDate;
 	private String endDate;
 	private String countryCodes;
-	private int thumb;
+	private int cover;
 	private int members = 1;
 
-	public TravelData(int id, String name, String startDate, String endDate, String countryCodes, int thumb, int members) {
+	public TravelData(int id, String name, String startDate, String endDate, String countryCodes, int cover, int members) {
 		this.id = id;
 		this.name = name;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.countryCodes = countryCodes;
-		this.thumb = thumb;
+		this.cover = cover;
 		if (members != 0)
 			this.members = members;
 	}
@@ -40,8 +40,8 @@ public class TravelData {
 		return countryCodes;
 	}
 
-	public int getThumb() {
-		return thumb;
+	public int getCover() {
+		return cover;
 	}
 
 	public int getMembers() {

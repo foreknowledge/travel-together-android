@@ -38,6 +38,7 @@ import java.util.Calendar;
 public class EditTravelActivity extends AppCompatActivity {
 	private Button btnStartDate;
 	private Button btnEndDate;
+	private Button btnRePickCoverImg;
 
 	private EditText editSearch;
 	private EditText editTitle;
@@ -58,13 +59,12 @@ public class EditTravelActivity extends AppCompatActivity {
 		setDateButtons();
 		setSearchBar();
 		setCountryList();
+		setCoverImg();
 
 		init();
 	}
 
 	private void init() {
-		Button btnRePickCoverImg = findViewById(R.id.btn_re_pick_cover_img);
-
 		int travelId = getIntent().getIntExtra("travel_id", 0);
 
 		Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + travelId, null);
@@ -320,6 +320,35 @@ public class EditTravelActivity extends AppCompatActivity {
 						btnEndDate.setText(text);
 					}
 				}, year, month, date).show();
+			}
+		});
+	}
+
+	private void setCoverImg() {
+		btnRePickCoverImg = findViewById(R.id.btn_re_pick_cover_img);
+		btnRePickCoverImg.setOnClickListener(new View.OnClickListener() {
+			String[] options = getResources().getStringArray(R.array.option_profile_img);
+
+			@Override
+			public void onClick(View view) {
+				AlertDialog dialog = new AlertDialog.Builder(EditTravelActivity.this)
+						.setTitle(getString(R.string.cover_img))
+						.setItems(options, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+								switch (i) {
+									case 0:
+										Toast.makeText(EditTravelActivity.this, "기본 이미지로 변경", Toast.LENGTH_SHORT).show();
+										break;
+									case 1:
+										Toast.makeText(EditTravelActivity.this, "갤러리 이미지로 변경", Toast.LENGTH_SHORT).show();
+										break;
+								}
+							}
+						}).create();
+
+				clearFocus();
+				dialog.show();
 			}
 		});
 	}

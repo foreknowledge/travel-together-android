@@ -105,7 +105,7 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 		void setItem(TravelData item) {
 			this.travelName.setText(item.getName());
 
-			this.travelLayout.setBackgroundResource(item.getThumb());
+			this.travelLayout.setBackgroundResource(item.getCover());
 
 			String numOfTravelMembers = Integer.toString(item.getMembers());
 			this.numOfTravelMembers.setText(numOfTravelMembers);

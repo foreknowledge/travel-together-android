@@ -144,7 +144,7 @@ public class SettingsActivity extends BaseActivity {
 												Toast.makeText(SettingsActivity.this, "기본 이미지로 변경", Toast.LENGTH_SHORT).show();
 												break;
 											case 1:
-												Toast.makeText(SettingsActivity.this, "갤러 이미지로 변경", Toast.LENGTH_SHORT).show();
+												Toast.makeText(SettingsActivity.this, "갤러리 이미지로 변경", Toast.LENGTH_SHORT).show();
 												break;
 										}
 									}
