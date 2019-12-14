@@ -1,139 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBack">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/colorBack">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_go_before"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="10dp"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/ic_arrow_back_24dp"/>
+		<Button
+			android:id="@+id/btn_go_before"
+			android:layout_width="30dp"
+			android:layout_height="30dp"
+			android:layout_margin="10dp"
+			android:layout_gravity="center_vertical"
+			android:background="@drawable/ic_arrow_back_24dp" />
 
-        <Button
-            android:id="@+id/btn_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:textColor="@color/colorPrimary"
-            android:text="@string/btn_text_edit"
-            android:textSize="18sp"
-            android:background="@android:color/transparent"
-            style="?attr/buttonBarStyle"/>
+		<Button
+			android:id="@+id/btn_edit"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end"
+			android:textColor="@color/colorPrimary"
+			android:text="@string/btn_text_edit"
+			android:textSize="18sp"
+			android:background="@android:color/transparent"
+			style="?attr/buttonBarStyle" />
 
-    </FrameLayout>
+	</FrameLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="10dp"
-            android:gravity="center">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:layout_margin="10dp"
+			android:gravity="center">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_margin="15dp"
-                android:src="@drawable/ic_person_black_120dp"
-                app:civ_border_width="2dp"
-                app:civ_border_color="@color/colorGrayLight"/>
+			<de.hdodenhof.circleimageview.CircleImageView
+				android:layout_width="120dp"
+				android:layout_height="120dp"
+				android:layout_margin="15dp"
+				android:src="@drawable/ic_person_black_120dp"
+				app:civ_border_width="2dp"
+				app:civ_border_color="@color/colorGrayLight" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="김예지"
-                android:textColor="@android:color/black"
-                android:textSize="23sp" />
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="김예지"
+				android:textColor="@android:color/black"
+				android:textSize="23sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="상태 메시지"
-                android:textSize="18sp" />
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="10dp"
+				android:text="상태 메시지"
+				android:textSize="18sp" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp" >
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:layout_marginBottom="15dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:text="#편안한"
-                    style="@style/profile_tag_style" />
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="5dp"
+					android:text="#편안한"
+					style="@style/profile_tag_style" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:text="#감성적인"
-                    style="@style/profile_tag_style" />
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="5dp"
+					android:text="#감성적인"
+					style="@style/profile_tag_style" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:text="#물놀이"
-                    style="@style/profile_tag_style" />
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="5dp"
+					android:text="#물놀이"
+					style="@style/profile_tag_style" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="#맛집"
-                    style="@style/profile_tag_style" />
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="#맛집"
+					style="@style/profile_tag_style" />
 
-            </LinearLayout>
+			</LinearLayout>
 
-        </LinearLayout>
+		</LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingStart="23dp"
-            android:paddingEnd="0dp"
-            android:gravity="center">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingStart="23dp"
+			android:paddingEnd="0dp"
+			android:gravity="center">
 
-            <Button
-                android:id="@+id/btn_push_notification"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_push_notification"
-                style="@style/settings_btn_items" />
+			<Button
+				android:id="@+id/btn_push_notification"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/btn_push_notification"
+				style="@style/settings_btn_items" />
 
-            <Button
-                android:id="@+id/btn_logout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_logout"
-                style="@style/settings_btn_items" />
+			<Button
+				android:id="@+id/btn_logout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/btn_logout"
+				style="@style/settings_btn_items" />
 
-            <Button
-                android:id="@+id/btn_remove_account"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_remove_account"
-                style="@style/settings_btn_items" />
+			<Button
+				android:id="@+id/btn_remove_account"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/btn_remove_account"
+				style="@style/settings_btn_items" />
 
-        </LinearLayout>
+		</LinearLayout>
 
-    </LinearLayout>
+	</LinearLayout>
 
 </LinearLayout>

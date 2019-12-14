@@ -1,319 +1,319 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/travel_layout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constrainedHeight="true"
-        app:layout_constraintHeight_percent="0.45"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+	<FrameLayout
+		android:id="@+id/travel_layout"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		app:layout_constrainedHeight="true"
+		app:layout_constraintHeight_percent="0.45"
+		app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#69000000" />
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="#69000000" />
 
-        <Button
-            android:id="@+id/btn_go_before"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="15dp"
-            android:background="@drawable/ic_arrow_back_white_24dp" />
+		<Button
+			android:id="@+id/btn_go_before"
+			android:layout_width="30dp"
+			android:layout_height="30dp"
+			android:layout_margin="15dp"
+			android:background="@drawable/ic_arrow_back_white_24dp" />
 
-        <Button
-            android:id="@+id/btn_more"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="end"
-            android:layout_margin="15dp"
-            android:background="@drawable/ic_more_vert_white_24dp" />
+		<Button
+			android:id="@+id/btn_more"
+			android:layout_width="30dp"
+			android:layout_height="30dp"
+			android:layout_gravity="end"
+			android:layout_margin="15dp"
+			android:background="@drawable/ic_more_vert_white_24dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:paddingBottom="100dp">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:gravity="center_vertical"
+			android:orientation="vertical"
+			android:paddingBottom="100dp">
 
-            <TextView
-                android:id="@+id/travel_d_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:textColor="@color/colorBack"
-                android:textSize="16sp" />
+			<TextView
+				android:id="@+id/travel_d_day"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_margin="5dp"
+				android:textColor="@color/colorBack"
+				android:textSize="16sp" />
 
-            <View
-                android:layout_width="55dp"
-                android:layout_height="1.5dp"
-                android:layout_gravity="center"
-                android:background="#EE702E" />
+			<View
+				android:layout_width="55dp"
+				android:layout_height="1.5dp"
+				android:layout_gravity="center"
+				android:background="#EE702E" />
 
-            <TextView
-                android:id="@+id/travel_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:textColor="@android:color/white"
-                android:textSize="23sp" />
+			<TextView
+				android:id="@+id/travel_title"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginTop="50dp"
+				android:textColor="@android:color/white"
+				android:textSize="23sp" />
 
-            <TextView
-                android:id="@+id/travel_duration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="13dp"
-                android:textColor="@color/colorBack"
-                android:textSize="18sp" />
+			<TextView
+				android:id="@+id/travel_duration"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_margin="13dp"
+				android:textColor="@color/colorBack"
+				android:textSize="18sp" />
 
-        </LinearLayout>
+		</LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="30dp"
-            android:gravity="bottom"
-            android:orientation="vertical">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_margin="30dp"
+			android:gravity="bottom"
+			android:orientation="vertical">
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp" >
+			<FrameLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="20dp">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingStart="95dp"
-                    android:paddingEnd="20dp"
-                    android:background="@drawable/dr_trans_rounded">
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="32dp"
+					android:orientation="horizontal"
+					android:gravity="center_vertical"
+					android:paddingStart="95dp"
+					android:paddingEnd="20dp"
+					android:background="@drawable/dr_trans_rounded">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/country_recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+					<androidx.recyclerview.widget.RecyclerView
+						android:id="@+id/country_recycler_view"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content" />
 
-                </LinearLayout>
+				</LinearLayout>
 
-                <TextView
-                    android:layout_width="85dp"
-                    android:layout_height="32dp"
-                    android:gravity="center"
-                    android:text="@string/text_destination"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/black"
-                    android:background="@drawable/dr_trans_rounded"
-                    android:clickable="true" />
+				<TextView
+					android:layout_width="85dp"
+					android:layout_height="32dp"
+					android:gravity="center"
+					android:text="@string/text_destination"
+					android:textSize="16sp"
+					android:textColor="@android:color/black"
+					android:background="@drawable/dr_trans_rounded"
+					android:clickable="true" />
 
-            </FrameLayout>
+			</FrameLayout>
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" >
+			<FrameLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingStart="95dp"
-                    android:paddingEnd="20dp"
-                    android:background="@drawable/dr_trans_rounded">
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="45dp"
+					android:orientation="horizontal"
+					android:gravity="center_vertical"
+					android:paddingStart="95dp"
+					android:paddingEnd="20dp"
+					android:background="@drawable/dr_trans_rounded">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/member_recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+					<androidx.recyclerview.widget.RecyclerView
+						android:id="@+id/member_recycler_view"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content" />
 
-                </LinearLayout>
+				</LinearLayout>
 
-                <TextView
-                    android:layout_width="85dp"
-                    android:layout_height="45dp"
-                    android:gravity="center"
-                    android:text="@string/text_member"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/black"
-                    android:background="@drawable/dr_trans_rounded"
-                    android:clickable="true" />
+				<TextView
+					android:layout_width="85dp"
+					android:layout_height="45dp"
+					android:gravity="center"
+					android:text="@string/text_member"
+					android:textSize="16sp"
+					android:textColor="@android:color/black"
+					android:background="@drawable/dr_trans_rounded"
+					android:clickable="true" />
 
-            </FrameLayout>
+			</FrameLayout>
 
-        </LinearLayout>
+		</LinearLayout>
 
-    </FrameLayout>
+	</FrameLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/colorDetailBack"
-        android:orientation="vertical"
-        android:padding="5dp"
-        app:layout_constrainedHeight="true"
-        app:layout_constraintHeight_percent="0.55"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/travel_layout">
+	<LinearLayout
+		android:id="@+id/linearLayout"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:background="@color/colorDetailBack"
+		android:orientation="vertical"
+		android:padding="5dp"
+		app:layout_constrainedHeight="true"
+		app:layout_constraintHeight_percent="0.55"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/travel_layout">
 
-        <LinearLayout
-            android:id="@+id/btn_notice"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="3dp"
-            android:layout_weight="1"
-            android:background="@drawable/dr_shadow_rounded"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+		<LinearLayout
+			android:id="@+id/btn_notice"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_margin="3dp"
+			android:layout_weight="1"
+			android:background="@drawable/dr_shadow_rounded"
+			android:clickable="true"
+			android:gravity="center_vertical"
+			android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:contentDescription="@string/text_notice"
-                android:src="@drawable/ic_notice_selected" />
+			<ImageView
+				android:layout_width="50dp"
+				android:layout_height="40dp"
+				android:layout_gravity="center"
+				android:layout_marginStart="40dp"
+				android:layout_marginEnd="40dp"
+				android:contentDescription="@string/text_notice"
+				android:src="@drawable/ic_notice_selected" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_notice"
-                android:textColor="@android:color/black"
-                android:textSize="20sp" />
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/text_notice"
+				android:textColor="@android:color/black"
+				android:textSize="20sp" />
 
-        </LinearLayout>
+		</LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/btn_supplies"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="3dp"
-            android:layout_weight="1"
-            android:background="@drawable/dr_shadow_rounded"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+		<LinearLayout
+			android:id="@+id/btn_supplies"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_margin="3dp"
+			android:layout_weight="1"
+			android:background="@drawable/dr_shadow_rounded"
+			android:clickable="true"
+			android:gravity="center_vertical"
+			android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="45dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:contentDescription="@string/text_supplies"
-                android:src="@drawable/ic_supplies_selected" />
+			<ImageView
+				android:layout_width="50dp"
+				android:layout_height="45dp"
+				android:layout_gravity="center"
+				android:layout_marginStart="40dp"
+				android:layout_marginEnd="40dp"
+				android:contentDescription="@string/text_supplies"
+				android:src="@drawable/ic_supplies_selected" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_supplies"
-                android:textColor="@android:color/black"
-                android:textSize="20sp" />
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/text_supplies"
+				android:textColor="@android:color/black"
+				android:textSize="20sp" />
 
-        </LinearLayout>
+		</LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/btn_schedule"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="3dp"
-            android:layout_weight="1"
-            android:background="@drawable/dr_shadow_rounded"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+		<LinearLayout
+			android:id="@+id/btn_schedule"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_margin="3dp"
+			android:layout_weight="1"
+			android:background="@drawable/dr_shadow_rounded"
+			android:clickable="true"
+			android:gravity="center_vertical"
+			android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:contentDescription="@string/text_schedule"
-                android:src="@drawable/ic_schedule_selected" />
+			<ImageView
+				android:layout_width="50dp"
+				android:layout_height="40dp"
+				android:layout_gravity="center"
+				android:layout_marginStart="40dp"
+				android:layout_marginEnd="40dp"
+				android:contentDescription="@string/text_schedule"
+				android:src="@drawable/ic_schedule_selected" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_schedule"
-                android:textColor="@android:color/black"
-                android:textSize="20sp" />
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/text_schedule"
+				android:textColor="@android:color/black"
+				android:textSize="20sp" />
 
-        </LinearLayout>
+		</LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/btn_account"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="3dp"
-            android:layout_weight="1"
-            android:background="@drawable/dr_shadow_rounded"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+		<LinearLayout
+			android:id="@+id/btn_account"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_margin="3dp"
+			android:layout_weight="1"
+			android:background="@drawable/dr_shadow_rounded"
+			android:clickable="true"
+			android:gravity="center_vertical"
+			android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:contentDescription="@string/text_account_book"
-                android:src="@drawable/ic_account_selected" />
+			<ImageView
+				android:layout_width="50dp"
+				android:layout_height="40dp"
+				android:layout_gravity="center"
+				android:layout_marginStart="40dp"
+				android:layout_marginEnd="40dp"
+				android:contentDescription="@string/text_account_book"
+				android:src="@drawable/ic_account_selected" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_account_book"
-                android:textColor="@android:color/black"
-                android:textSize="20sp" />
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/text_account_book"
+				android:textColor="@android:color/black"
+				android:textSize="20sp" />
 
-        </LinearLayout>
+		</LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/btn_diary"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="3dp"
-            android:layout_weight="1"
-            android:background="@drawable/dr_shadow_rounded"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+		<LinearLayout
+			android:id="@+id/btn_diary"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_margin="3dp"
+			android:layout_weight="1"
+			android:background="@drawable/dr_shadow_rounded"
+			android:clickable="true"
+			android:gravity="center_vertical"
+			android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:contentDescription="@string/text_diary"
-                android:src="@drawable/ic_diary_selected" />
+			<ImageView
+				android:layout_width="50dp"
+				android:layout_height="40dp"
+				android:layout_gravity="center"
+				android:layout_marginStart="40dp"
+				android:layout_marginEnd="40dp"
+				android:contentDescription="@string/text_diary"
+				android:src="@drawable/ic_diary_selected" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_diary"
-                android:textColor="@android:color/black"
-                android:textSize="20sp" />
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/text_diary"
+				android:textColor="@android:color/black"
+				android:textSize="20sp" />
 
-        </LinearLayout>
+		</LinearLayout>
 
-    </LinearLayout>
+	</LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

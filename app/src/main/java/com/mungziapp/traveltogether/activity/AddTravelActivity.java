@@ -31,245 +31,246 @@ import com.mungziapp.traveltogether.item.SearchCountryItem;
 import java.util.Calendar;
 
 public class AddTravelActivity extends AppCompatActivity {
-    private Button btnStartDate;
-    private Button btnEndDate;
+	private Button btnStartDate;
+	private Button btnEndDate;
 
-    private EditText editSearch;
-    private EditText editTitle;
-    private ChipGroup chipGroup;
-    private RecyclerView countrySearchRecycler;
-    private SearchCountryAdapter countryAdapter;
-    private InputMethodManager in;
+	private EditText editSearch;
+	private EditText editTitle;
+	private ChipGroup chipGroup;
+	private RecyclerView countrySearchRecycler;
+	private SearchCountryAdapter countryAdapter;
+	private InputMethodManager in;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_travel);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_add_travel);
 
-        in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        setSaveAndCancelButtons();
-        setTitleText();
-        setDateButtons();
-        setSearchBar();
-        setCountryList();
-    }
+		in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		setSaveAndCancelButtons();
+		setTitleText();
+		setDateButtons();
+		setSearchBar();
+		setCountryList();
+	}
 
-    private void setSaveAndCancelButtons() {
-        Button btnSave = findViewById(R.id.btn_save);
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+	private void setSaveAndCancelButtons() {
+		Button btnSave = findViewById(R.id.btn_save);
+		btnSave.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				finish();
+			}
+		});
 
-        Button btnCancel = findViewById(R.id.btn_cancel);
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-    }
+		Button btnCancel = findViewById(R.id.btn_cancel);
+		btnCancel.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				finish();
+			}
+		});
+	}
 
-    private void setTitleText() {
-        editTitle = findViewById(R.id.edit_travel_title);
-        editTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (!b)
-                    if (in != null)
-                        in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
-            }
-        });
-    }
+	private void setTitleText() {
+		editTitle = findViewById(R.id.edit_travel_title);
+		editTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View view, boolean b) {
+				if (!b)
+					if (in != null)
+						in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
+			}
+		});
+	}
 
-    private void setSearchBar() {
-        editSearch = findViewById(R.id.search_country);
-        chipGroup = findViewById(R.id.chip_group);
+	private void setSearchBar() {
+		editSearch = findViewById(R.id.search_country);
+		chipGroup = findViewById(R.id.chip_group);
 
-        final Button btnClear = findViewById(R.id.btn_clear);
-        final FrameLayout btnClearOut = findViewById(R.id.btn_clear_out);
+		final Button btnClear = findViewById(R.id.btn_clear);
+		final FrameLayout btnClearOut = findViewById(R.id.btn_clear_out);
 
-        editSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (b)
-                    countrySearchRecycler.setVisibility(View.VISIBLE);
-                else {
-                    countrySearchRecycler.setVisibility(View.GONE);
+		editSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View view, boolean b) {
+				if (b)
+					countrySearchRecycler.setVisibility(View.VISIBLE);
+				else {
+					countrySearchRecycler.setVisibility(View.GONE);
 
-                    if (in != null)
-                        in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
-                }
-            }
-        });
+					if (in != null)
+						in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
+				}
+			}
+		});
 
-        editSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+		editSearch.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+			}
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                btnClear.setVisibility(View.VISIBLE);
-            }
+			@Override
+			public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+				btnClear.setVisibility(View.VISIBLE);
+			}
 
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (editSearch.getText().toString().equals("")) {
-                    btnClear.setVisibility(View.INVISIBLE);
-                }
+			@Override
+			public void afterTextChanged(Editable editable) {
+				if (editSearch.getText().toString().equals("")) {
+					btnClear.setVisibility(View.INVISIBLE);
+				}
 
-                countryAdapter.searchItem(editable.toString());
-            }
-        });
+				countryAdapter.searchItem(editable.toString());
+			}
+		});
 
-        editSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEARCH) {
-                    performSearch();
-                    return true;
-                }
-                return false;
-            }
-        });
+		editSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+			@Override
+			public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+				if (i == EditorInfo.IME_ACTION_SEARCH) {
+					performSearch();
+					return true;
+				}
+				return false;
+			}
+		});
 
-        btnClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editSearch.setText("");
-            }
-        });
-        btnClearOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editSearch.setText("");
-            }
-        });
-    }
+		btnClear.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				editSearch.setText("");
+			}
+		});
+		btnClearOut.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				editSearch.setText("");
+			}
+		});
+	}
 
-    private void performSearch() {
-        if (editSearch.getText().toString().equals("")) {
-            Toast.makeText(this, "검색어를 입력 해 주세요.", Toast.LENGTH_SHORT).show();
-            return;
-        }
+	private void performSearch() {
+		if (editSearch.getText().toString().equals("")) {
+			Toast.makeText(this, "검색어를 입력 해 주세요.", Toast.LENGTH_SHORT).show();
+			return;
+		}
 
-        editSearch.clearFocus();
-    }
+		editSearch.clearFocus();
+	}
 
-    private void setCountryList() {
-        countrySearchRecycler = findViewById(R.id.country_search_recycler);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        countrySearchRecycler.setLayoutManager(layoutManager);
+	private void setCountryList() {
+		countrySearchRecycler = findViewById(R.id.country_search_recycler);
+		LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+		countrySearchRecycler.setLayoutManager(layoutManager);
 
-        countryAdapter = new SearchCountryAdapter(getApplicationContext());
-        countryAdapter.initItem();
-        countryAdapter.setClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
-                SearchCountryItem item = countryAdapter.getSearchItem(position);
+		countryAdapter = new SearchCountryAdapter(getApplicationContext());
+		countryAdapter.initItem();
+		countryAdapter.setClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
+				SearchCountryItem item = countryAdapter.getSearchItem(position);
 
-                chipGroup.addView(makeChip(item));
+				chipGroup.addView(makeChip(item));
 
-                countryAdapter.selectItem(item);
-                countryAdapter.searchItem(editSearch.getText().toString());
-            }
+				countryAdapter.selectItem(item);
+				countryAdapter.searchItem(editSearch.getText().toString());
+			}
 
-            @Override
-            public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
-                return null;
-            }
-        });
+			@Override
+			public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
+				return null;
+			}
+		});
 
-        countrySearchRecycler.setAdapter(countryAdapter);
-    }
+		countrySearchRecycler.setAdapter(countryAdapter);
+	}
 
-    private Chip makeChip(final SearchCountryItem item) {
-        Chip chip = new Chip(AddTravelActivity.this);
-        chip.setText(item.getCountryName());
-        chip.setCloseIconVisible(true);
-        chip.setTextAppearance(R.style.chip_text_style);
-        ChipDrawable chipDrawable = (ChipDrawable) chip.getChipDrawable();
-        chipDrawable.setChipBackgroundColorResource(R.color.color_clip_back);
-        chipDrawable.setCloseIconResource(R.drawable.ic_clear_black_24dp);
-        chip.setCheckable(false);
-        chip.setClickable(false);
-        chip.setOnCloseIconClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chipGroup.removeView(view);
-                countryAdapter.deselectItem(item);
-                countryAdapter.searchItem(editSearch.getText().toString());
-            }
-        });
+	private Chip makeChip(final SearchCountryItem item) {
+		Chip chip = new Chip(AddTravelActivity.this);
+		chip.setText(item.getCountryName());
+		chip.setCloseIconVisible(true);
+		chip.setTextAppearance(R.style.chip_text_style);
+		ChipDrawable chipDrawable = (ChipDrawable) chip.getChipDrawable();
+		chipDrawable.setChipBackgroundColorResource(R.color.color_clip_back);
+		chipDrawable.setCloseIconResource(R.drawable.ic_clear_black_24dp);
+		chip.setCheckable(false);
+		chip.setClickable(false);
+		chip.setOnCloseIconClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				chipGroup.removeView(view);
+				countryAdapter.deselectItem(item);
+				countryAdapter.searchItem(editSearch.getText().toString());
+			}
+		});
 
-        return chip;
-    }
+		return chip;
+	}
 
-    private void setDateButtons() {
-        btnStartDate = findViewById(R.id.btn_pick_start_date);
-        btnEndDate = findViewById(R.id.btn_pick_end_date);
+	private void setDateButtons() {
+		btnStartDate = findViewById(R.id.btn_pick_start_date);
+		btnEndDate = findViewById(R.id.btn_pick_end_date);
 
-        btnStartDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clearFocus();
+		btnStartDate.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				clearFocus();
 
-                int year, month, date;
+				int year, month, date;
 
-                String[] startDate = btnStartDate.getText().toString().split("\\.");
-                if (startDate.length == 3) {
-                    year = Integer.valueOf(startDate[0]);
-                    month = Integer.valueOf(startDate[1]) - 1;
-                    date = Integer.valueOf(startDate[2]);
-                } else {
-                    year = Calendar.getInstance().get(Calendar.YEAR);
-                    month = Calendar.getInstance().get(Calendar.MONTH);
-                    date = Calendar.getInstance().get(Calendar.DATE);
-                }
-                new DatePickerDialog(AddTravelActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        String text = i + "." + (i1 + 1) + "." + i2;
-                        btnStartDate.setText(text);
-                    }
-                }, year, month, date).show();
+				String[] startDate = btnStartDate.getText().toString().split("\\.");
+				if (startDate.length == 3) {
+					year = Integer.valueOf(startDate[0]);
+					month = Integer.valueOf(startDate[1]) - 1;
+					date = Integer.valueOf(startDate[2]);
+				} else {
+					year = Calendar.getInstance().get(Calendar.YEAR);
+					month = Calendar.getInstance().get(Calendar.MONTH);
+					date = Calendar.getInstance().get(Calendar.DATE);
+				}
+				new DatePickerDialog(AddTravelActivity.this, new DatePickerDialog.OnDateSetListener() {
+					@Override
+					public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+						String text = i + "." + (i1 + 1) + "." + i2;
+						btnStartDate.setText(text);
+					}
+				}, year, month, date).show();
 
-            }
-        });
+			}
+		});
 
-        btnEndDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clearFocus();
+		btnEndDate.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				clearFocus();
 
-                int year, month, date;
+				int year, month, date;
 
-                String[] endDate = btnEndDate.getText().toString().split("\\.");
-                if (endDate.length == 3) {
-                    year = Integer.valueOf(endDate[0]);
-                    month = Integer.valueOf(endDate[1]) - 1;
-                    date = Integer.valueOf(endDate[2]);
-                } else {
-                    year = Calendar.getInstance().get(Calendar.YEAR);
-                    month = Calendar.getInstance().get(Calendar.MONTH);
-                    date = Calendar.getInstance().get(Calendar.DATE);
-                }
-                new DatePickerDialog(AddTravelActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        String text = i + "." + (i1 + 1) + "." + i2;
-                        btnEndDate.setText(text);
-                    }
-                }, year, month, date).show();
-            }
-        });
-    }
+				String[] endDate = btnEndDate.getText().toString().split("\\.");
+				if (endDate.length == 3) {
+					year = Integer.valueOf(endDate[0]);
+					month = Integer.valueOf(endDate[1]) - 1;
+					date = Integer.valueOf(endDate[2]);
+				} else {
+					year = Calendar.getInstance().get(Calendar.YEAR);
+					month = Calendar.getInstance().get(Calendar.MONTH);
+					date = Calendar.getInstance().get(Calendar.DATE);
+				}
+				new DatePickerDialog(AddTravelActivity.this, new DatePickerDialog.OnDateSetListener() {
+					@Override
+					public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+						String text = i + "." + (i1 + 1) + "." + i2;
+						btnEndDate.setText(text);
+					}
+				}, year, month, date).show();
+			}
+		});
+	}
 
-    private void clearFocus() {
-        editSearch.clearFocus();
-        editTitle.clearFocus();
-    }
+	private void clearFocus() {
+		editSearch.clearFocus();
+		editTitle.clearFocus();
+	}
 
 }

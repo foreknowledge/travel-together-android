@@ -18,105 +18,112 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdapter.ViewHolder> {
-    private Context context;
-    private ArrayList<SearchCountryItem> items = new ArrayList<>();
-    private ArrayList<SearchCountryItem> searchItems = new ArrayList<>();
+	private Context context;
+	private ArrayList<SearchCountryItem> items = new ArrayList<>();
+	private ArrayList<SearchCountryItem> searchItems = new ArrayList<>();
 
-    private OnItemClickListener listener;
+	private OnItemClickListener listener;
 
-    public SearchCountryAdapter(Context context) { this.context = context; }
+	public SearchCountryAdapter(Context context) {
+		this.context = context;
+	}
 
-    public SearchCountryItem getSearchItem(int position) { return searchItems.get(position); }
-    public SearchCountryItem getItem(String countryFlag) {
-        for (SearchCountryItem item : items) {
-            if (item.getCountryFlag().equals(countryFlag)) return item;
-        }
+	public SearchCountryItem getSearchItem(int position) {
+		return searchItems.get(position);
+	}
 
-        return null;
-    }
+	public SearchCountryItem getItem(String countryFlag) {
+		for (SearchCountryItem item : items) {
+			if (item.getCountryFlag().equals(countryFlag)) return item;
+		}
 
-    public void selectItem(SearchCountryItem item) {
-        item.setIsSelected(true);
-        notifyDataSetChanged();
-    }
+		return null;
+	}
 
-    public void deselectItem(SearchCountryItem item) {
-        item.setIsSelected(false);
-        notifyDataSetChanged();
-    }
+	public void selectItem(SearchCountryItem item) {
+		item.setIsSelected(true);
+		notifyDataSetChanged();
+	}
 
-    public void initItem() {
-        for (String countryName: TravelHelper.countryMap.keySet()) {
-            List<String> countryInfo = TravelHelper.countryMap.get(countryName);
-            String countryFlag = countryInfo.get(0);
-            //String countryCode = countryInfo.get(1);
-            items.add(new SearchCountryItem(countryFlag, countryName));
-        }
-        notifyDataSetChanged();
-    }
+	public void deselectItem(SearchCountryItem item) {
+		item.setIsSelected(false);
+		notifyDataSetChanged();
+	}
 
-    public void searchItem(String word) {
-        searchItems.clear();
+	public void initItem() {
+		for (String countryName : TravelHelper.countryMap.keySet()) {
+			List<String> countryInfo = TravelHelper.countryMap.get(countryName);
+			String countryFlag = countryInfo.get(0);
+			//String countryCode = countryInfo.get(1);
+			items.add(new SearchCountryItem(countryFlag, countryName));
+		}
+		notifyDataSetChanged();
+	}
 
-        if (word.equals("")) {
-            notifyDataSetChanged();
-            return;
-        }
+	public void searchItem(String word) {
+		searchItems.clear();
 
-        for (int i=0; i<items.size(); ++i) {
-            SearchCountryItem item = items.get(i);
-            if (!item.getIsSelected() && item.getCountryName().replace(" ", "").contains(word)) {
-                searchItems.add(item);
-            }
-        }
+		if (word.equals("")) {
+			notifyDataSetChanged();
+			return;
+		}
 
-        notifyDataSetChanged();
-    }
+		for (int i = 0; i < items.size(); ++i) {
+			SearchCountryItem item = items.get(i);
+			if (!item.getIsSelected() && item.getCountryName().replace(" ", "").contains(word)) {
+				searchItems.add(item);
+			}
+		}
 
-    public void setClickListener(OnItemClickListener listener) { this.listener = listener; }
+		notifyDataSetChanged();
+	}
 
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = inflater.inflate(R.layout.item_search_country, parent, false);
+	public void setClickListener(OnItemClickListener listener) {
+		this.listener = listener;
+	}
 
-        return new ViewHolder(itemView, listener);
-    }
+	@NonNull
+	@Override
+	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View itemView = inflater.inflate(R.layout.item_search_country, parent, false);
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setItem(searchItems.get(position));
-    }
+		return new ViewHolder(itemView, listener);
+	}
 
-    @Override
-    public int getItemCount() {
-        return searchItems.size();
-    }
+	@Override
+	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+		holder.setItem(searchItems.get(position));
+	}
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView countryFlag;
-        private TextView countryName;
+	@Override
+	public int getItemCount() {
+		return searchItems.size();
+	}
 
-        ViewHolder(@NonNull final View itemView, final OnItemClickListener listener) {
-            super(itemView);
+	static class ViewHolder extends RecyclerView.ViewHolder {
+		private TextView countryFlag;
+		private TextView countryName;
 
-            this.countryFlag = itemView.findViewById(R.id.country_flag);
-            this.countryName = itemView.findViewById(R.id.country_name);
+		ViewHolder(@NonNull final View itemView, final OnItemClickListener listener) {
+			super(itemView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (listener != null)
-                        listener.onItemClick(ViewHolder.this, view, getAdapterPosition());
-                }
-            });
+			this.countryFlag = itemView.findViewById(R.id.country_flag);
+			this.countryName = itemView.findViewById(R.id.country_name);
 
-        }
+			itemView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					if (listener != null)
+						listener.onItemClick(ViewHolder.this, view, getAdapterPosition());
+				}
+			});
 
-        void setItem(SearchCountryItem item) {
-            this.countryFlag.setText(item.getCountryFlag());
-            this.countryName.setText(item.getCountryName());
-        }
-    }
+		}
+
+		void setItem(SearchCountryItem item) {
+			this.countryFlag.setText(item.getCountryFlag());
+			this.countryName.setText(item.getCountryName());
+		}
+	}
 }

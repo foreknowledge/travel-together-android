@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#E25F1A</color>
-    <color name="colorSecondary">#EA986D</color>
-    <color name="colorText">#F7E4DA</color>
+	<color name="colorPrimary">#E25F1A</color>
+	<color name="colorSecondary">#EA986D</color>
+	<color name="colorText">#F7E4DA</color>
 
-    <color name="colorBack">#F5F5F5</color>
-    <color name="colorBackDark">#C6C6C6</color>
-    <color name="colorAccent">#D81B60</color>
+	<color name="colorBack">#F5F5F5</color>
+	<color name="colorBackDark">#C6C6C6</color>
+	<color name="colorAccent">#D81B60</color>
 
-    <color name="colorGray">#5F5C5C</color>
-    <color name="colorGrayLight">#95989A</color>
+	<color name="colorGray">#5F5C5C</color>
+	<color name="colorGrayLight">#95989A</color>
 
-    <color name="colorDetailBack">#F2F2F2</color>
+	<color name="colorDetailBack">#F2F2F2</color>
 
-    <color name="colorTransparent">#AAF2F2F2</color>
-    <color name="colorShadow">#10000000</color>
+	<color name="colorTransparent">#AAF2F2F2</color>
+	<color name="colorShadow">#10000000</color>
 
-    <color name="color_clip_back">#3DE87C43</color>
-    <color name="color_kakao_front">#3C1E1E</color>
+	<color name="color_clip_back">#3DE87C43</color>
+	<color name="color_kakao_front">#3C1E1E</color>
 </resources>

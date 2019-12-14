@@ -15,23 +15,25 @@ import com.mungziapp.traveltogether.adapter.TravelsRecyclerAdapter;
 import com.mungziapp.traveltogether.R;
 
 public class TravelsFragment extends Fragment {
-    private TravelsRecyclerAdapter travelsRecyclerAdapter;
+	private TravelsRecyclerAdapter travelsRecyclerAdapter;
 
-    public TravelsFragment() {}
-    public TravelsFragment(TravelsRecyclerAdapter travelsRecyclerAdapter) {
-        this.travelsRecyclerAdapter = travelsRecyclerAdapter;
-    }
+	public TravelsFragment() {
+	}
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_travels, container, false);
+	public TravelsFragment(TravelsRecyclerAdapter travelsRecyclerAdapter) {
+		this.travelsRecyclerAdapter = travelsRecyclerAdapter;
+	}
 
-        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.fragment_travels, container, false);
 
-        recyclerView.setAdapter(travelsRecyclerAdapter);
+		RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        return rootView;
-    }
+		recyclerView.setAdapter(travelsRecyclerAdapter);
+
+		return rootView;
+	}
 }

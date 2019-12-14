@@ -25,185 +25,187 @@ import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.table.TravelTable;
 
 public class MainActivity extends BaseActivity {
-    private ViewPager outerViewPager;
-    private static final String TAG = "MainActivity :: ";
+	private ViewPager outerViewPager;
+	private static final String TAG = "MainActivity :: ";
 
-    private FragmentManager fm;
+	private FragmentManager fm;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
 
-        fm = getSupportFragmentManager();
+		fm = getSupportFragmentManager();
 
-        setAdapters();
-        setTabBar();
-        setAddTravelRoomButton();
-        setSettingsButton();
-        setSearchButton();
-    }
+		setAdapters();
+		setTabBar();
+		setAddTravelRoomButton();
+		setSettingsButton();
+		setSearchButton();
+	}
 
-    private void setAdapters() {
-        TravelsRecyclerAdapter oncommingAdapter = new TravelsRecyclerAdapter(getApplicationContext());
-        oncommingAdapter.setClickListener(makeItemClickListener(oncommingAdapter));
+	private void setAdapters() {
+		TravelsRecyclerAdapter oncommingAdapter = new TravelsRecyclerAdapter(getApplicationContext());
+		oncommingAdapter.setClickListener(makeItemClickListener(oncommingAdapter));
 
-        TravelsRecyclerAdapter lastTravelAdapter = new TravelsRecyclerAdapter(getApplicationContext());
-        lastTravelAdapter.setClickListener(makeItemClickListener(lastTravelAdapter));
+		TravelsRecyclerAdapter lastTravelAdapter = new TravelsRecyclerAdapter(getApplicationContext());
+		lastTravelAdapter.setClickListener(makeItemClickListener(lastTravelAdapter));
 
-        setAdapterItems(oncommingAdapter, lastTravelAdapter);
+		setAdapterItems(oncommingAdapter, lastTravelAdapter);
 
-        TravelsFragment oncommingTravels = new TravelsFragment(oncommingAdapter);
-        TravelsFragment lastTravels = new TravelsFragment(lastTravelAdapter);
+		TravelsFragment oncommingTravels = new TravelsFragment(oncommingAdapter);
+		TravelsFragment lastTravels = new TravelsFragment(lastTravelAdapter);
 
-        OuterPagerAdapter outerPagerAdapter = new OuterPagerAdapter(fm);
-        outerPagerAdapter.addItem(oncommingTravels);
-        outerPagerAdapter.addItem(lastTravels);
+		OuterPagerAdapter outerPagerAdapter = new OuterPagerAdapter(fm);
+		outerPagerAdapter.addItem(oncommingTravels);
+		outerPagerAdapter.addItem(lastTravels);
 
-        outerPagerAdapter.notifyDataSetChanged();
+		outerPagerAdapter.notifyDataSetChanged();
 
-        outerViewPager = findViewById(R.id.outer_view_pager);
-        outerViewPager.setOffscreenPageLimit(outerPagerAdapter.getCount());
-        outerViewPager.setAdapter(outerPagerAdapter);
-    }
+		outerViewPager = findViewById(R.id.outer_view_pager);
+		outerViewPager.setOffscreenPageLimit(outerPagerAdapter.getCount());
+		outerViewPager.setAdapter(outerPagerAdapter);
+	}
 
-    private void setTabBar() {
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(outerViewPager);
+	private void setTabBar() {
+		TabLayout tabLayout = findViewById(R.id.tabLayout);
+		tabLayout.setupWithViewPager(outerViewPager);
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                outerViewPager.setCurrentItem(tab.getPosition());
-            }
+		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+			@Override
+			public void onTabSelected(TabLayout.Tab tab) {
+				outerViewPager.setCurrentItem(tab.getPosition());
+			}
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) { }
+			@Override
+			public void onTabUnselected(TabLayout.Tab tab) {
+			}
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) { }
-        });
-    }
+			@Override
+			public void onTabReselected(TabLayout.Tab tab) {
+			}
+		});
+	}
 
-    private void setSearchButton() {
-        Button btnSearch = findViewById(R.id.btn_search);
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                startActivity(intent);
-            }
-        });
-    }
+	private void setSearchButton() {
+		Button btnSearch = findViewById(R.id.btn_search);
+		btnSearch.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+				startActivity(intent);
+			}
+		});
+	}
 
-    private void setAddTravelRoomButton() {
-        Button btnAddTravelRoom = findViewById(R.id.btn_add_travel_room);
-        btnAddTravelRoom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), AddTravelActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
+	private void setAddTravelRoomButton() {
+		Button btnAddTravelRoom = findViewById(R.id.btn_add_travel_room);
+		btnAddTravelRoom.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(getApplicationContext(), AddTravelActivity.class);
+				startActivity(intent);
+			}
+		});
+	}
 
-    private void setSettingsButton() {
-        Button btnGoSettings = findViewById(R.id.btn_go_settings);
-        btnGoSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
+	private void setSettingsButton() {
+		Button btnGoSettings = findViewById(R.id.btn_go_settings);
+		btnGoSettings.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+				startActivity(intent);
+			}
+		});
+	}
 
-    private void setAdapterItems(TravelsRecyclerAdapter oncommingAdapter, TravelsRecyclerAdapter lastTravelAdapter) {
-        Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY, null);
-        int numOfRecords = cursor.getCount();
-        Log.d(TAG, "레코드 개수: " + numOfRecords);
+	private void setAdapterItems(TravelsRecyclerAdapter oncommingAdapter, TravelsRecyclerAdapter lastTravelAdapter) {
+		Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY, null);
+		int numOfRecords = cursor.getCount();
+		Log.d(TAG, "레코드 개수: " + numOfRecords);
 
-        for (int i=0; i<numOfRecords; ++i) {
-            cursor.moveToNext();
+		for (int i = 0; i < numOfRecords; ++i) {
+			cursor.moveToNext();
 
-            int id = cursor.getInt(cursor.getColumnIndex("id"));
-            String title = cursor.getString(cursor.getColumnIndex("name"));
-            String startDate = cursor.getString(cursor.getColumnIndex("start_date"));
-            String endDate = cursor.getString(cursor.getColumnIndex("end_date"));
-            String countryCodes = cursor.getString(cursor.getColumnIndex("country_codes"));
-            int thumb = cursor.getInt(cursor.getColumnIndex("thumb"));
-            int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
+			int id = cursor.getInt(cursor.getColumnIndex("id"));
+			String title = cursor.getString(cursor.getColumnIndex("name"));
+			String startDate = cursor.getString(cursor.getColumnIndex("start_date"));
+			String endDate = cursor.getString(cursor.getColumnIndex("end_date"));
+			String countryCodes = cursor.getString(cursor.getColumnIndex("country_codes"));
+			int thumb = cursor.getInt(cursor.getColumnIndex("thumb"));
+			int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
 
-            if (id > 7)
-                lastTravelAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes, thumb, numOfMembers));
-            else
-                oncommingAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes, thumb, numOfMembers));
-        }
+			if (id > 7)
+				lastTravelAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes, thumb, numOfMembers));
+			else
+				oncommingAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes, thumb, numOfMembers));
+		}
 
-        oncommingAdapter.notifyDataSetChanged();
-        lastTravelAdapter.notifyDataSetChanged();
+		oncommingAdapter.notifyDataSetChanged();
+		lastTravelAdapter.notifyDataSetChanged();
 
-        cursor.close();
-    }
+		cursor.close();
+	}
 
-    private OnItemClickListener makeItemClickListener(final TravelsRecyclerAdapter adapter) {
-        return new OnItemClickListener() {
-            private String[] option = {"여행 편집", "나가기"};
+	private OnItemClickListener makeItemClickListener(final TravelsRecyclerAdapter adapter) {
+		return new OnItemClickListener() {
+			private String[] option = {"여행 편집", "나가기"};
 
-            final AlertDialog deleteDialog = new AlertDialog.Builder(MainActivity.this)
-                    .setMessage("정말로 나가시겠습니까?")
-                    .setPositiveButton("네"
-                            , new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(MainActivity.this, "여행방 사라짐.", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                    .setNegativeButton("아니요"
-                            , new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            }).create();
+			final AlertDialog deleteDialog = new AlertDialog.Builder(MainActivity.this)
+					.setMessage("정말로 나가시겠습니까?")
+					.setPositiveButton("네"
+							, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									Toast.makeText(MainActivity.this, "여행방 사라짐.", Toast.LENGTH_SHORT).show();
+								}
+							})
+					.setNegativeButton("아니요"
+							, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									dialog.dismiss();
+								}
+							}).create();
 
-            @Override
-            public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
-                TravelData item = adapter.getItem(position);
+			@Override
+			public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
+				TravelData item = adapter.getItem(position);
 
-                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                intent.putExtra("id", item.getId());
+				Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+				intent.putExtra("id", item.getId());
 
-                startActivity(intent);
-            }
+				startActivity(intent);
+			}
 
-            @Override
-            public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
-                final TravelData item = adapter.getItem(position);
+			@Override
+			public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
+				final TravelData item = adapter.getItem(position);
 
-                AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
-                        .setTitle(item.getName())
-                        .setItems(option, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                switch (i) {
-                                    case 0:
-                                        Intent intent = new Intent(MainActivity.this, EditTravelActivity.class);
-                                        intent.putExtra("travel_id", item.getId());
-                                        startActivity(intent);
-                                        break;
-                                    case 1:
-                                        deleteDialog.show();
-                                        break;
-                                }
-                            }
-                        }).create();
+				AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+						.setTitle(item.getName())
+						.setItems(option, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+								switch (i) {
+									case 0:
+										Intent intent = new Intent(MainActivity.this, EditTravelActivity.class);
+										intent.putExtra("travel_id", item.getId());
+										startActivity(intent);
+										break;
+									case 1:
+										deleteDialog.show();
+										break;
+								}
+							}
+						}).create();
 
-                dialog.show();
+				dialog.show();
 
-                return true;
-            }
-        };
-    }
+				return true;
+			}
+		};
+	}
 }

@@ -19,103 +19,110 @@ import com.mungziapp.traveltogether.table.TravelTable;
 import java.util.ArrayList;
 
 public class SearchTravelAdapter extends RecyclerView.Adapter<SearchTravelAdapter.ViewHolder> {
-    private Context context;
-    private ArrayList<SearchTravelItem> items = new ArrayList<>();
-    private ArrayList<SearchTravelItem> filteredItems = new ArrayList<>();
+	private Context context;
+	private ArrayList<SearchTravelItem> items = new ArrayList<>();
+	private ArrayList<SearchTravelItem> filteredItems = new ArrayList<>();
 
-    private OnItemClickListener listener;
+	private OnItemClickListener listener;
 
-    public SearchTravelAdapter(Context context) { this.context = context; }
-    public SearchTravelItem getItem(int position) { return filteredItems.get(position); }
+	public SearchTravelAdapter(Context context) {
+		this.context = context;
+	}
 
-    public void initItem() {
-        Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY, null);
-        int numOfRecords = cursor.getCount();
+	public SearchTravelItem getItem(int position) {
+		return filteredItems.get(position);
+	}
 
-        for (int i=0; i<numOfRecords; ++i) {
-            cursor.moveToNext();
+	public void initItem() {
+		Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY, null);
+		int numOfRecords = cursor.getCount();
 
-            int id = cursor.getInt(cursor.getColumnIndex("id"));
-            String title = cursor.getString(cursor.getColumnIndex("name"));
-            String startDate = cursor.getString(cursor.getColumnIndex("start_date"));
-            String endDate = cursor.getString(cursor.getColumnIndex("end_date"));
-            int thumb = cursor.getInt(cursor.getColumnIndex("thumb"));
+		for (int i = 0; i < numOfRecords; ++i) {
+			cursor.moveToNext();
 
-            items.add(new SearchTravelItem(id, title, startDate, endDate, thumb));
-        }
+			int id = cursor.getInt(cursor.getColumnIndex("id"));
+			String title = cursor.getString(cursor.getColumnIndex("name"));
+			String startDate = cursor.getString(cursor.getColumnIndex("start_date"));
+			String endDate = cursor.getString(cursor.getColumnIndex("end_date"));
+			int thumb = cursor.getInt(cursor.getColumnIndex("thumb"));
 
-        cursor.close();
+			items.add(new SearchTravelItem(id, title, startDate, endDate, thumb));
+		}
 
-        notifyDataSetChanged();
-    }
+		cursor.close();
 
-    public void searchItem(String word) {
-        filteredItems.clear();
+		notifyDataSetChanged();
+	}
 
-        if (word.equals("")) {
-            notifyDataSetChanged();
-            return;
-        }
+	public void searchItem(String word) {
+		filteredItems.clear();
 
-        for (int i=0; i<items.size(); ++i) {
-            SearchTravelItem item = items.get(i);
-            if (item.getTravelTitle().replace(" ", "").contains(word)) {
-                filteredItems.add(item);
-            }
-        }
+		if (word.equals("")) {
+			notifyDataSetChanged();
+			return;
+		}
 
-        notifyDataSetChanged();
-    }
+		for (int i = 0; i < items.size(); ++i) {
+			SearchTravelItem item = items.get(i);
+			if (item.getTravelTitle().replace(" ", "").contains(word)) {
+				filteredItems.add(item);
+			}
+		}
 
-    public void setClickListener(OnItemClickListener listener) { this.listener = listener; }
+		notifyDataSetChanged();
+	}
 
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = inflater.inflate(R.layout.item_search_travel, parent, false);
+	public void setClickListener(OnItemClickListener listener) {
+		this.listener = listener;
+	}
 
-        return new ViewHolder(itemView, listener);
-    }
+	@NonNull
+	@Override
+	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View itemView = inflater.inflate(R.layout.item_search_travel, parent, false);
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setItem(filteredItems.get(position));
-    }
+		return new ViewHolder(itemView, listener);
+	}
 
-    @Override
-    public int getItemCount() {
-        return filteredItems.size();
-    }
+	@Override
+	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+		holder.setItem(filteredItems.get(position));
+	}
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
-        private View travelThumbnail;
-        private TextView travelTitle;
-        private TextView travelDuration;
+	@Override
+	public int getItemCount() {
+		return filteredItems.size();
+	}
 
-        ViewHolder(@NonNull final View itemView, final OnItemClickListener listener) {
-            super(itemView);
+	static class ViewHolder extends RecyclerView.ViewHolder {
+		private View travelThumbnail;
+		private TextView travelTitle;
+		private TextView travelDuration;
 
-            this.travelThumbnail = itemView.findViewById(R.id.travel_thumbnail);
-            this.travelTitle = itemView.findViewById(R.id.travel_title);
-            this.travelDuration = itemView.findViewById(R.id.travel_duration);
+		ViewHolder(@NonNull final View itemView, final OnItemClickListener listener) {
+			super(itemView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (listener != null)
-                        listener.onItemClick(SearchTravelAdapter.ViewHolder.this, view, getAdapterPosition());
-                }
-            });
+			this.travelThumbnail = itemView.findViewById(R.id.travel_thumbnail);
+			this.travelTitle = itemView.findViewById(R.id.travel_title);
+			this.travelDuration = itemView.findViewById(R.id.travel_duration);
 
-        }
+			itemView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					if (listener != null)
+						listener.onItemClick(SearchTravelAdapter.ViewHolder.this, view, getAdapterPosition());
+				}
+			});
 
-        void setItem(SearchTravelItem item) {
-            this.travelThumbnail.setBackgroundResource(item.getImgResId());
-            this.travelTitle.setText(item.getTravelTitle());
+		}
 
-            String strDuration = "(" + item.getTravelStartDate() + " ~ " + item.getTravelEndDate() + ")";
-            this.travelDuration.setText(strDuration);
-        }
-    }
+		void setItem(SearchTravelItem item) {
+			this.travelThumbnail.setBackgroundResource(item.getImgResId());
+			this.travelTitle.setText(item.getTravelTitle());
+
+			String strDuration = "(" + item.getTravelStartDate() + " ~ " + item.getTravelEndDate() + ")";
+			this.travelDuration.setText(strDuration);
+		}
+	}
 }

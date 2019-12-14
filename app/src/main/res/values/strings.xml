@@ -1,61 +1,61 @@
 <resources>
-    <string name="app_name">Travel Together</string>
-    <string name="app_name_kor">가치 여행</string>
+	<string name="app_name">Travel Together</string>
+	<string name="app_name_kor">가치 여행</string>
 
-    <string name="app_name_start">가치</string>
-    <string name="app_name_end">여행</string>
-    <string name="app_desc_start">같이 쓰는 </string>
-    <string name="app_desc_middle1">여행 계획으로 </string>
-    <string name="app_desc_middle2">더욱 </string>
-    <string name="app_desc_middle3">가치 있는 </string>
-    <string name="app_desc_end">여행을!</string>
-    <string name="app_developers">Developed by Teamot</string>
+	<string name="app_name_start">가치</string>
+	<string name="app_name_end">여행</string>
+	<string name="app_desc_start">같이 쓰는 </string>
+	<string name="app_desc_middle1">여행 계획으로 </string>
+	<string name="app_desc_middle2">더욱 </string>
+	<string name="app_desc_middle3">가치 있는 </string>
+	<string name="app_desc_end">여행을!</string>
+	<string name="app_developers">Developed by Teamot</string>
 
-    <string name="login_kor">로그인</string>
-    <string name="kakao_login_kor">카카오 계정으로 로그인</string>
-    <string name="email_kor">이메일</string>
-    <string name="password_kor">비밀번호</string>
-    <string name="forgot_password">비밀번호를 잊어버렸나요?</string>
-    <string name="go_sign_up">회원가입 하러가기</string>
+	<string name="login_kor">로그인</string>
+	<string name="kakao_login_kor">카카오 계정으로 로그인</string>
+	<string name="email_kor">이메일</string>
+	<string name="password_kor">비밀번호</string>
+	<string name="forgot_password">비밀번호를 잊어버렸나요?</string>
+	<string name="go_sign_up">회원가입 하러가기</string>
 
-    <string name="text_notice">공지사항</string>
-    <string name="text_supplies">준비물</string>
-    <string name="text_schedule">일정</string>
-    <string name="text_account_book">가계부</string>
-    <string name="text_diary">일기</string>
-    <string name="text_destination">여행지</string>
-    <string name="text_member">여행 멤버</string>
+	<string name="text_notice">공지사항</string>
+	<string name="text_supplies">준비물</string>
+	<string name="text_schedule">일정</string>
+	<string name="text_account_book">가계부</string>
+	<string name="text_diary">일기</string>
+	<string name="text_destination">여행지</string>
+	<string name="text_member">여행 멤버</string>
 
-    <string name="btn_text_save">Save</string>
-    <string name="btn_text_cancel">Cancel</string>
-    <string name="btn_text_start_date">여행 시작일</string>
-    <string name="btn_text_end_date">여행 종료일</string>
-    <string name="btn_text_country">여행지 추가</string>
-    <string name="btn_text_cover_img">커버 이미지 변경</string>
-    <string name="btn_text_photo">사진 추가</string>
+	<string name="btn_text_save">Save</string>
+	<string name="btn_text_cancel">Cancel</string>
+	<string name="btn_text_start_date">여행 시작일</string>
+	<string name="btn_text_end_date">여행 종료일</string>
+	<string name="btn_text_country">여행지 추가</string>
+	<string name="btn_text_cover_img">커버 이미지 변경</string>
+	<string name="btn_text_photo">사진 추가</string>
 
-    <string name="btn_push_notification">푸시 알림 설정</string>
-    <string name="btn_logout">로그 아웃</string>
-    <string name="btn_remove_account">회원 탈퇴</string>
-    <string name="btn_text_edit">Edit</string>
+	<string name="btn_push_notification">푸시 알림 설정</string>
+	<string name="btn_logout">로그 아웃</string>
+	<string name="btn_remove_account">회원 탈퇴</string>
+	<string name="btn_text_edit">Edit</string>
 
-    <string name="title_create_travel_room">여행방 생성</string>
-    <string name="title_edit_travel_room">여행방 편집</string>
-    <string name="title_travel_room">여행방</string>
+	<string name="title_create_travel_room">여행방 생성</string>
+	<string name="title_edit_travel_room">여행방 편집</string>
+	<string name="title_travel_room">여행방</string>
 
-    <string name="desc_icon_person">person icon</string>
-    <string name="desc_app_logo">app logo</string>
-    <string name="desc_splash_calendar">calendar</string>
-    <string name="desc_calligraphy">travel together</string>
+	<string name="desc_icon_person">person icon</string>
+	<string name="desc_app_logo">app logo</string>
+	<string name="desc_splash_calendar">calendar</string>
+	<string name="desc_calligraphy">travel together</string>
 
-    <string name="hint_title">제목</string>
-    <string name="hint_start_date">시작일을 선택 해 주세요.</string>
-    <string name="hint_end_date">종료일을 선택 해 주세요.</string>
-    <string name="hint_search_country">국가 검색</string>
-    <string name="hint_search_travel">제목 검색</string>
+	<string name="hint_title">제목</string>
+	<string name="hint_start_date">시작일을 선택 해 주세요.</string>
+	<string name="hint_end_date">종료일을 선택 해 주세요.</string>
+	<string name="hint_search_country">국가 검색</string>
+	<string name="hint_search_travel">제목 검색</string>
 
-    <string name="menu_travel_edit">여행 편집</string>
-    <string name="menu_travel_delete">여행 삭제</string>
+	<string name="menu_travel_edit">여행 편집</string>
+	<string name="menu_travel_delete">여행 삭제</string>
 
-    <string name="kakao_app_key">411c1f05ffdee3dc3ae05dd3de07ab7b</string>
+	<string name="kakao_app_key">411c1f05ffdee3dc3ae05dd3de07ab7b</string>
 </resources>

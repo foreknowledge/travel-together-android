@@ -39,89 +39,89 @@ import com.mungziapp.traveltogether.adapter.KakaoSDKAdapter;
  * @author MJ
  */
 public class GlobalApplication extends Application {
-    private static volatile GlobalApplication instance = null;
-    private ImageLoader imageLoader;
-    private static RequestQueue requestQueue;
+	private static volatile GlobalApplication instance = null;
+	private ImageLoader imageLoader;
+	private static RequestQueue requestQueue;
 
-    /**
-     * singleton 애플리케이션 객체를 얻는다.
-     *
-     * @return singleton 애플리케이션 객체
-     */
-    public static GlobalApplication getGlobalApplicationContext() {
-        if (instance == null)
-            throw new IllegalStateException("this application does not inherit com.kakao.GlobalApplication");
-        return instance;
-    }
+	/**
+	 * singleton 애플리케이션 객체를 얻는다.
+	 *
+	 * @return singleton 애플리케이션 객체
+	 */
+	public static GlobalApplication getGlobalApplicationContext() {
+		if (instance == null)
+			throw new IllegalStateException("this application does not inherit com.kakao.GlobalApplication");
+		return instance;
+	}
 
-    /**
-     * 이미지 로더, 이미지 캐시, 요청 큐를 초기화한다.
-     */
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        instance = this;
+	/**
+	 * 이미지 로더, 이미지 캐시, 요청 큐를 초기화한다.
+	 */
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		instance = this;
 
-        KakaoSDK.init(new KakaoSDKAdapter());
+		KakaoSDK.init(new KakaoSDKAdapter());
 
-        requestQueue = Volley.newRequestQueue(this);
-        RequestManager.setRequestQueue(requestQueue);
+		requestQueue = Volley.newRequestQueue(this);
+		RequestManager.setRequestQueue(requestQueue);
 
-        ImageLoader.ImageCache imageCache = new ImageLoader.ImageCache() {
-            final LruCache<String, Bitmap> imageCache = new LruCache<>(30);
+		ImageLoader.ImageCache imageCache = new ImageLoader.ImageCache() {
+			final LruCache<String, Bitmap> imageCache = new LruCache<>(30);
 
-            @Override
-            public void putBitmap(String key, Bitmap value) {
-                imageCache.put(key, value);
-            }
+			@Override
+			public void putBitmap(String key, Bitmap value) {
+				imageCache.put(key, value);
+			}
 
-            @Override
-            public Bitmap getBitmap(String key) {
-                return imageCache.get(key);
-            }
-        };
+			@Override
+			public Bitmap getBitmap(String key) {
+				return imageCache.get(key);
+			}
+		};
 
-        imageLoader = new ImageLoader(requestQueue, imageCache);
+		imageLoader = new ImageLoader(requestQueue, imageCache);
 
-        createNotificationChannel();
-    }
+		createNotificationChannel();
+	}
 
-    /**
-     * 이미지 로더를 반환한다.
-     *
-     * @return 이미지 로더
-     */
-    public ImageLoader getImageLoader() {
-        return imageLoader;
-    }
+	/**
+	 * 이미지 로더를 반환한다.
+	 *
+	 * @return 이미지 로더
+	 */
+	public ImageLoader getImageLoader() {
+		return imageLoader;
+	}
 
-    /**
-     * 애플리케이션 종료시 singleton 어플리케이션 객체 초기화한다.
-     */
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
-        instance = null;
-    }
+	/**
+	 * 애플리케이션 종료시 singleton 어플리케이션 객체 초기화한다.
+	 */
+	@Override
+	public void onTerminate() {
+		super.onTerminate();
+		instance = null;
+	}
 
-    /**
-     * For API level above or equalt o 26, Separate notification
-     */
-    private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            if (nm == null) {
-                Logger.e("Failed to fetch NotificationManager from context.");
-                return;
-            }
-            String channelId = "kakao_push_channel";
-            String channelName = "Kakao SDK Push";
-            NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT);
-            channel.enableLights(true);
-            channel.setLightColor(Color.RED);
-            channel.enableVibration(true);
-            nm.createNotificationChannel(channel);
-            Logger.d("successfully created a notification channel.");
-        }
-    }
+	/**
+	 * For API level above or equalt o 26, Separate notification
+	 */
+	private void createNotificationChannel() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+			if (nm == null) {
+				Logger.e("Failed to fetch NotificationManager from context.");
+				return;
+			}
+			String channelId = "kakao_push_channel";
+			String channelName = "Kakao SDK Push";
+			NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT);
+			channel.enableLights(true);
+			channel.setLightColor(Color.RED);
+			channel.enableVibration(true);
+			nm.createNotificationChannel(channel);
+			Logger.d("successfully created a notification channel.");
+		}
+	}
 }

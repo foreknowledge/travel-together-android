@@ -11,57 +11,61 @@ import com.mungziapp.traveltogether.table.TravelTable;
 import java.util.List;
 
 public class DatabaseManager {
-    private static final String TAG = "Database Manager :: ";
+	private static final String TAG = "Database Manager :: ";
 
-    public static SQLiteDatabase database;
-    private static DatabaseManager instance = new DatabaseManager();
+	public static SQLiteDatabase database;
+	private static DatabaseManager instance = new DatabaseManager();
 
-    private DatabaseManager() {}
-    public static DatabaseManager getInstance() { return instance; }
+	private DatabaseManager() {
+	}
 
-    static void openDatabase(Context context) {
-        database = context.openOrCreateDatabase("TRAVEL_TOGETHER.db", Context.MODE_PRIVATE, null);
-        Log.d(TAG, "TRAVEL_TOGETHER 데이터베이스 오픈.");
-    }
+	public static DatabaseManager getInstance() {
+		return instance;
+	}
 
-    static void createTables() {
-        database.execSQL(TravelTable.CREATE_QUERY);
-        Log.d(TAG, "travelRoom 테이블 오픈.");
-    }
+	static void openDatabase(Context context) {
+		database = context.openOrCreateDatabase("TRAVEL_TOGETHER.db", Context.MODE_PRIVATE, null);
+		Log.d(TAG, "TRAVEL_TOGETHER 데이터베이스 오픈.");
+	}
 
-    static void dropTables() {
-        database.execSQL(TravelTable.DROP_QUERY);
-        Log.d(TAG, "travelRoom 테이블 삭제.");
-    }
+	static void createTables() {
+		database.execSQL(TravelTable.CREATE_QUERY);
+		Log.d(TAG, "travelRoom 테이블 오픈.");
+	}
 
-    static void insertDummyData(List<TravelData> travelData) {
-        Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY, null);
-        cursor.moveToNext();
-        if (cursor.getCount() != 0) return;
+	static void dropTables() {
+		database.execSQL(TravelTable.DROP_QUERY);
+		Log.d(TAG, "travelRoom 테이블 삭제.");
+	}
 
-        for (TravelData data : travelData) {
-            String sql = "INSERT INTO " + TravelTable.TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)";
-            Object[] params = {data.getId(), data.getName(), data.getStartDate(), data.getEndDate(), data.getCountryCodes(), data.getThumb(), data.getMembers()};
+	static void insertDummyData(List<TravelData> travelData) {
+		Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY, null);
+		cursor.moveToNext();
+		if (cursor.getCount() != 0) return;
 
-            DatabaseManager.database.execSQL(sql, params);
-        }
-        Log.d(TAG, "travel 데이터 추가됨.");
+		for (TravelData data : travelData) {
+			String sql = "INSERT INTO " + TravelTable.TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)";
+			Object[] params = {data.getId(), data.getName(), data.getStartDate(), data.getEndDate(), data.getCountryCodes(), data.getThumb(), data.getMembers()};
 
-        cursor.close();
-    }
+			DatabaseManager.database.execSQL(sql, params);
+		}
+		Log.d(TAG, "travel 데이터 추가됨.");
 
-    static void insertTravelsData(TravelData travelData) {
-        Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + travelData.getId(), null);
-        cursor.moveToNext();
-        if (cursor.getCount() == 0) {
-            // 테이블에 데이터가 없다면 데이터 넣기
-            String sql = "INSERT INTO movieDetail VALUES (?, ?, ?, ?, ?, ?, ?)";
-            Object[] params = {travelData.getId(), travelData.getName(), travelData.getStartDate(), travelData.getEndDate(), travelData.getCountryCodes(), travelData.getThumb(), travelData.getMembers()};
+		cursor.close();
+	}
 
-            DatabaseManager.database.execSQL(sql, params);
-            Log.d(TAG, "movieDetail [" + travelData.getId() + "] 데이터 추가됨.");
-        }
+	static void insertTravelsData(TravelData travelData) {
+		Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + travelData.getId(), null);
+		cursor.moveToNext();
+		if (cursor.getCount() == 0) {
+			// 테이블에 데이터가 없다면 데이터 넣기
+			String sql = "INSERT INTO movieDetail VALUES (?, ?, ?, ?, ?, ?, ?)";
+			Object[] params = {travelData.getId(), travelData.getName(), travelData.getStartDate(), travelData.getEndDate(), travelData.getCountryCodes(), travelData.getThumb(), travelData.getMembers()};
 
-        cursor.close();
-    }
+			DatabaseManager.database.execSQL(sql, params);
+			Log.d(TAG, "movieDetail [" + travelData.getId() + "] 데이터 추가됨.");
+		}
+
+		cursor.close();
+	}
 }

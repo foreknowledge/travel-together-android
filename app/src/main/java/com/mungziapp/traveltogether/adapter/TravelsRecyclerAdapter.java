@@ -18,101 +18,111 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecyclerAdapter.ViewHolder> {
-    private Context context;
-    private ArrayList<TravelData> items = new ArrayList<>();
+	private Context context;
+	private ArrayList<TravelData> items = new ArrayList<>();
 
-    private OnItemClickListener listener;
+	private OnItemClickListener listener;
 
-    public TravelsRecyclerAdapter(Context context) { this.context = context; }
-    public void addItem(TravelData item) { items.add(item); }
-    public TravelData getItem(int position) { return items.get(position); }
+	public TravelsRecyclerAdapter(Context context) {
+		this.context = context;
+	}
 
-    public void setClickListener(OnItemClickListener listener) { this.listener = listener; }
+	public void addItem(TravelData item) {
+		items.add(item);
+	}
 
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = inflater.inflate(R.layout.item_travel, parent, false);
+	public TravelData getItem(int position) {
+		return items.get(position);
+	}
 
-        return new ViewHolder(itemView, listener, context);
-    }
+	public void setClickListener(OnItemClickListener listener) {
+		this.listener = listener;
+	}
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setItem(items.get(position));
-    }
+	@NonNull
+	@Override
+	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View itemView = inflater.inflate(R.layout.item_travel, parent, false);
 
-    @Override
-    public int getItemCount() {
-        return items.size();
-    }
+		return new ViewHolder(itemView, listener, context);
+	}
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        private View travelLayout;
-        private TextView travelName;
-        private TextView travelDuration;
-        private TextView numOfTravelMembers;
-        private TextView travelDday;
-        private RecyclerView countryRecyclerView;
+	@Override
+	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+		holder.setItem(items.get(position));
+	}
 
-        private Context context;
+	@Override
+	public int getItemCount() {
+		return items.size();
+	}
 
-        ViewHolder(@NonNull final View itemView, final OnItemClickListener listener, final Context context) {
-            super(itemView);
+	static class ViewHolder extends RecyclerView.ViewHolder {
+		private View travelLayout;
+		private TextView travelName;
+		private TextView travelDuration;
+		private TextView numOfTravelMembers;
+		private TextView travelDday;
+		private RecyclerView countryRecyclerView;
 
-            this.context = context;
+		private Context context;
 
-            this.travelLayout = itemView.findViewById(R.id.travel_layout);
-            this.travelName = itemView.findViewById(R.id.travel_name);
-            this.travelDuration = itemView.findViewById(R.id.travel_duration);
-            this.numOfTravelMembers = itemView.findViewById(R.id.travel_members);
-            this.travelDday = itemView.findViewById(R.id.travel_d_day);
+		ViewHolder(@NonNull final View itemView, final OnItemClickListener listener, final Context context) {
+			super(itemView);
 
-            this.countryRecyclerView = itemView.findViewById(R.id.country_recycler_view);
-            countryRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+			this.context = context;
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (listener != null)
-                        listener.onItemClick(TravelsRecyclerAdapter.ViewHolder.this, view, getAdapterPosition());
-                }
-            });
+			this.travelLayout = itemView.findViewById(R.id.travel_layout);
+			this.travelName = itemView.findViewById(R.id.travel_name);
+			this.travelDuration = itemView.findViewById(R.id.travel_duration);
+			this.numOfTravelMembers = itemView.findViewById(R.id.travel_members);
+			this.travelDday = itemView.findViewById(R.id.travel_d_day);
 
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    if (listener != null)
-                        return listener.onItemLongClick(TravelsRecyclerAdapter.ViewHolder.this, view, getAdapterPosition());
+			this.countryRecyclerView = itemView.findViewById(R.id.country_recycler_view);
+			countryRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
 
-                    return false;
-                }
-            });
+			itemView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					if (listener != null)
+						listener.onItemClick(TravelsRecyclerAdapter.ViewHolder.this, view, getAdapterPosition());
+				}
+			});
 
-        }
+			itemView.setOnLongClickListener(new View.OnLongClickListener() {
+				@Override
+				public boolean onLongClick(View view) {
+					if (listener != null)
+						return listener.onItemLongClick(TravelsRecyclerAdapter.ViewHolder.this, view, getAdapterPosition());
 
-        void setItem(TravelData item) {
-            this.travelName.setText(item.getName());
+					return false;
+				}
+			});
 
-            this.travelLayout.setBackgroundResource(item.getThumb());
+		}
 
-            String numOfTravelMembers = Integer.toString(item.getMembers());
-            this.numOfTravelMembers.setText(numOfTravelMembers);
+		void setItem(TravelData item) {
+			this.travelName.setText(item.getName());
 
-            if (item.getStartDate() != null && item.getEndDate() != null) {
-                String strDuration = item.getStartDate() + " ~ " + item.getEndDate() + " (N일간)";
-                this.travelDuration.setText(strDuration);
+			this.travelLayout.setBackgroundResource(item.getThumb());
 
-                travelDday.setText("D - N");
-            }
+			String numOfTravelMembers = Integer.toString(item.getMembers());
+			this.numOfTravelMembers.setText(numOfTravelMembers);
 
-            if (item.getCountryCodes() != null) {
-                ArrayList<String> countries = new ArrayList<>(Arrays.asList(item.getCountryCodes().split(",")));
-                TravelCountryAdapter travelCountryAdapter = new TravelCountryAdapter(context);
-                for (String country : countries) travelCountryAdapter.addItem(country);
-                countryRecyclerView.setAdapter(travelCountryAdapter);
-            }
-        }
-    }
+			if (item.getStartDate() != null && item.getEndDate() != null) {
+				String strDuration = item.getStartDate() + " ~ " + item.getEndDate() + " (N일간)";
+				this.travelDuration.setText(strDuration);
+
+				travelDday.setText("D - N");
+			}
+
+			if (item.getCountryCodes() != null) {
+				ArrayList<String> countries = new ArrayList<>(Arrays.asList(item.getCountryCodes().split(",")));
+				TravelCountryAdapter travelCountryAdapter = new TravelCountryAdapter(context);
+				for (String country : countries) travelCountryAdapter.addItem(country);
+				countryRecyclerView.setAdapter(travelCountryAdapter);
+			}
+		}
+	}
 }

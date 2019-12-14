@@ -25,127 +25,128 @@ import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.item.SearchTravelItem;
 
 public class SearchActivity extends AppCompatActivity {
-    private EditText editSearch;
-    private SearchTravelAdapter searchAdapter;
-    private InputMethodManager in;
+	private EditText editSearch;
+	private SearchTravelAdapter searchAdapter;
+	private InputMethodManager in;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_search);
 
-        in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        setGoBeforeButton();
-        setSearchBar();
-        setRecyclerView();
-    }
+		in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		setGoBeforeButton();
+		setSearchBar();
+		setRecyclerView();
+	}
 
-    private void setGoBeforeButton() {
-        Button btnGoBefore = findViewById(R.id.btn_go_before);
-        btnGoBefore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-    }
+	private void setGoBeforeButton() {
+		Button btnGoBefore = findViewById(R.id.btn_go_before);
+		btnGoBefore.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				finish();
+			}
+		});
+	}
 
-    private void setSearchBar() {
-        editSearch = findViewById(R.id.search_travel);
+	private void setSearchBar() {
+		editSearch = findViewById(R.id.search_travel);
 
-        editSearch.setFocusableInTouchMode(true);
-        editSearch.setFocusable(true);
-        editSearch.requestFocus();
+		editSearch.setFocusableInTouchMode(true);
+		editSearch.setFocusable(true);
+		editSearch.requestFocus();
 
-        Button btnClear = findViewById(R.id.btn_clear);
-        final FrameLayout btnClearOut = findViewById(R.id.btn_clear_out);
-        Button btnSearch = findViewById(R.id.btn_search);
+		Button btnClear = findViewById(R.id.btn_clear);
+		final FrameLayout btnClearOut = findViewById(R.id.btn_clear_out);
+		Button btnSearch = findViewById(R.id.btn_search);
 
-        editSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+		editSearch.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+			}
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                btnClearOut.setVisibility(View.VISIBLE);
-            }
+			@Override
+			public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+				btnClearOut.setVisibility(View.VISIBLE);
+			}
 
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (editSearch.getText().toString().equals(""))
-                    btnClearOut.setVisibility(View.INVISIBLE);
+			@Override
+			public void afterTextChanged(Editable editable) {
+				if (editSearch.getText().toString().equals(""))
+					btnClearOut.setVisibility(View.INVISIBLE);
 
-                searchAdapter.searchItem(editable.toString());
-            }
-        });
+				searchAdapter.searchItem(editable.toString());
+			}
+		});
 
-        editSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEARCH) {
-                    performSearch();
-                    return true;
-                }
-                return false;
-            }
-        });
+		editSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+			@Override
+			public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+				if (i == EditorInfo.IME_ACTION_SEARCH) {
+					performSearch();
+					return true;
+				}
+				return false;
+			}
+		});
 
-        btnClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editSearch.setText("");
-            }
-        });
-        btnClearOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editSearch.setText("");
-            }
-        });
+		btnClear.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				editSearch.setText("");
+			}
+		});
+		btnClearOut.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				editSearch.setText("");
+			}
+		});
 
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                performSearch();
-            }
-        });
-    }
+		btnSearch.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				performSearch();
+			}
+		});
+	}
 
-    private void performSearch() {
-        if (editSearch.getText().toString().equals("")) {
-            Toast.makeText(this, "검색어를 입력 해 주세요.", Toast.LENGTH_SHORT).show();
-            return;
-        }
+	private void performSearch() {
+		if (editSearch.getText().toString().equals("")) {
+			Toast.makeText(this, "검색어를 입력 해 주세요.", Toast.LENGTH_SHORT).show();
+			return;
+		}
 
-        editSearch.clearFocus();
+		editSearch.clearFocus();
 
-        if (in != null)
-            in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
-    }
+		if (in != null)
+			in.hideSoftInputFromWindow(editSearch.getWindowToken(), 0);
+	}
 
-    private void setRecyclerView() {
-        RecyclerView searchRecycler = findViewById(R.id.search_recycler);
-        searchRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+	private void setRecyclerView() {
+		RecyclerView searchRecycler = findViewById(R.id.search_recycler);
+		searchRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        searchAdapter = new SearchTravelAdapter(getApplicationContext());
-        searchAdapter.initItem();
-        searchAdapter.setClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
-                SearchTravelItem item = searchAdapter.getItem(position);
+		searchAdapter = new SearchTravelAdapter(getApplicationContext());
+		searchAdapter.initItem();
+		searchAdapter.setClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
+				SearchTravelItem item = searchAdapter.getItem(position);
 
-                Intent intent = new Intent(SearchActivity.this, DetailActivity.class);
-                intent.putExtra("id", item.getId());
+				Intent intent = new Intent(SearchActivity.this, DetailActivity.class);
+				intent.putExtra("id", item.getId());
 
-                startActivity(intent);
-            }
+				startActivity(intent);
+			}
 
-            @Override
-            public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
-                return null;
-            }
-        });
+			@Override
+			public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
+				return null;
+			}
+		});
 
-        searchRecycler.setAdapter(searchAdapter);
-    }
+		searchRecycler.setAdapter(searchAdapter);
+	}
 }

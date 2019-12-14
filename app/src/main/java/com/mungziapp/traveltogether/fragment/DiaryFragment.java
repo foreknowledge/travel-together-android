@@ -14,29 +14,29 @@ import com.mungziapp.traveltogether.ActivityCallback;
 import com.mungziapp.traveltogether.R;
 
 public class DiaryFragment extends Fragment {
-    private ActivityCallback callback;
+	private ActivityCallback callback;
 
-    @Override
-    public void setMenuVisibility(boolean menuVisible) {
-        super.setMenuVisibility(menuVisible);
+	@Override
+	public void setMenuVisibility(boolean menuVisible) {
+		super.setMenuVisibility(menuVisible);
 
-        if (menuVisible && callback != null)
-            callback.setFragmentTitle("일기");
-    }
+		if (menuVisible && callback != null)
+			callback.setFragmentTitle("일기");
+	}
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
+	@Override
+	public void onAttach(@NonNull Context context) {
+		super.onAttach(context);
 
-        if (context instanceof ActivityCallback)
-            callback = (ActivityCallback) context;
-    }
+		if (context instanceof ActivityCallback)
+			callback = (ActivityCallback) context;
+	}
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_diary, container, false);
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.fragment_diary, container, false);
 
-        return rootView;
-    }
+		return rootView;
+	}
 }

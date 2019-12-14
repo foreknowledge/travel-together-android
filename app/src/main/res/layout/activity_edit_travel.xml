@@ -1,283 +1,283 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/white"
-        android:padding="10dp"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
+	<androidx.appcompat.widget.Toolbar
+		android:layout_width="match_parent"
+		android:layout_height="?attr/actionBarSize"
+		android:background="@android:color/white"
+		android:padding="10dp"
+		app:popupTheme="@style/AppTheme.PopupOverlay">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:text="@string/title_edit_travel_room"/>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:textColor="@android:color/black"
+			android:textSize="24sp"
+			android:text="@string/title_edit_travel_room" />
 
-        <Button
-            android:id="@+id/btn_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:textColor="@color/colorPrimary"
-            android:text="@string/btn_text_save"
-            android:textSize="18sp"
-            android:background="@android:color/transparent"
-            style="?attr/buttonBarStyle"/>
+		<Button
+			android:id="@+id/btn_save"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end"
+			android:layout_marginStart="5dp"
+			android:layout_marginEnd="5dp"
+			android:textColor="@color/colorPrimary"
+			android:text="@string/btn_text_save"
+			android:textSize="18sp"
+			android:background="@android:color/transparent"
+			style="?attr/buttonBarStyle" />
 
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:textColor="@color/colorPrimary"
-            android:text="@string/btn_text_cancel"
-            android:textSize="18sp"
-            android:background="@android:color/transparent"
-            style="?attr/buttonBarStyle"/>
+		<Button
+			android:id="@+id/btn_cancel"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="start"
+			android:layout_marginStart="5dp"
+			android:layout_marginEnd="5dp"
+			android:textColor="@color/colorPrimary"
+			android:text="@string/btn_text_cancel"
+			android:textSize="18sp"
+			android:background="@android:color/transparent"
+			style="?attr/buttonBarStyle" />
 
-    </androidx.appcompat.widget.Toolbar>
+	</androidx.appcompat.widget.Toolbar>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/colorBack"/>
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="10dp"
+		android:background="@color/colorBack" />
 
-    <EditText
-        android:id="@+id/edit_travel_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="30dp"
-        android:paddingEnd="30dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:background="@android:color/white"
-        android:inputType="text"
-        android:hint="@string/hint_title"
-        android:importantForAutofill="no" />
+	<EditText
+		android:id="@+id/edit_travel_title"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingStart="30dp"
+		android:paddingEnd="30dp"
+		android:paddingTop="10dp"
+		android:paddingBottom="10dp"
+		android:background="@android:color/white"
+		android:inputType="text"
+		android:hint="@string/hint_title"
+		android:importantForAutofill="no" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:background="@color/colorBack"/>
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="20dp"
+		android:background="@color/colorBack" />
 
-    <!--여행 시작일 레이아웃-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="10dp"
-        android:background="@android:color/white" >
+	<!--여행 시작일 레이아웃-->
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center_vertical"
+		android:padding="10dp"
+		android:background="@android:color/white">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="20dp"
-            android:textSize="17sp"
-            android:textColor="@android:color/black"
-            android:text="@string/btn_text_start_date"/>
+		<TextView
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:layout_marginStart="20dp"
+			android:textSize="17sp"
+			android:textColor="@android:color/black"
+			android:text="@string/btn_text_start_date" />
 
-        <Button
-            android:id="@+id/btn_pick_start_date"
-            android:layout_width="0dp"
-            android:layout_height="19dp"
-            android:layout_weight="1"
-            android:textColor="@color/colorGrayLight"
-            android:text="@string/hint_start_date"
-            android:background="@android:color/transparent"/>
+		<Button
+			android:id="@+id/btn_pick_start_date"
+			android:layout_width="0dp"
+			android:layout_height="19dp"
+			android:layout_weight="1"
+			android:textColor="@color/colorGrayLight"
+			android:text="@string/hint_start_date"
+			android:background="@android:color/transparent" />
 
-    </LinearLayout>
+	</LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/colorBack"/>
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="2dp"
+		android:background="@color/colorBack" />
 
-    <!--여행 종료일 레이아웃-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="10dp"
-        android:background="@android:color/white" >
+	<!--여행 종료일 레이아웃-->
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center_vertical"
+		android:padding="10dp"
+		android:background="@android:color/white">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="20dp"
-            android:textSize="17sp"
-            android:textColor="@android:color/black"
-            android:text="@string/btn_text_end_date"/>
+		<TextView
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:layout_marginStart="20dp"
+			android:textSize="17sp"
+			android:textColor="@android:color/black"
+			android:text="@string/btn_text_end_date" />
 
-        <Button
-            android:id="@+id/btn_pick_end_date"
-            android:layout_width="0dp"
-            android:layout_height="19dp"
-            android:layout_weight="1"
-            android:textColor="@color/colorGrayLight"
-            android:text="@string/hint_end_date"
-            android:background="@android:color/transparent"/>
+		<Button
+			android:id="@+id/btn_pick_end_date"
+			android:layout_width="0dp"
+			android:layout_height="19dp"
+			android:layout_weight="1"
+			android:textColor="@color/colorGrayLight"
+			android:text="@string/hint_end_date"
+			android:background="@android:color/transparent" />
 
-    </LinearLayout>
+	</LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/colorBack"/>
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="2dp"
+		android:background="@color/colorBack" />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
 
-            <!--여행지 추가 레이아웃-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@android:color/white"
-                android:paddingTop="10dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp">
+			<!--여행지 추가 레이아웃-->
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:background="@android:color/white"
+				android:paddingTop="10dp"
+				android:paddingStart="10dp"
+				android:paddingEnd="10dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginStart="20dp"
-                    android:textSize="17sp"
-                    android:textColor="@android:color/black"
-                    android:text="@string/btn_text_country"/>
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="10dp"
+					android:layout_marginStart="20dp"
+					android:textSize="17sp"
+					android:textColor="@android:color/black"
+					android:text="@string/btn_text_country" />
 
-                <LinearLayout
-                    android:id="@+id/search_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/dr_search_rounded">
+				<LinearLayout
+					android:id="@+id/search_layout"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="5dp"
+					android:layout_marginStart="15dp"
+					android:layout_marginEnd="15dp"
+					android:orientation="horizontal"
+					android:gravity="center_vertical"
+					android:background="@drawable/dr_search_rounded">
 
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="0"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="5dp"
-                        android:src="@drawable/ic_search_black_24dp"
-                        android:contentDescription="@string/hint_search_travel" />
+					<ImageView
+						android:layout_width="30dp"
+						android:layout_height="30dp"
+						android:layout_weight="0"
+						android:layout_marginTop="5dp"
+						android:layout_marginBottom="5dp"
+						android:layout_marginStart="10dp"
+						android:layout_marginEnd="5dp"
+						android:src="@drawable/ic_search_black_24dp"
+						android:contentDescription="@string/hint_search_travel" />
 
-                    <EditText
-                        android:id="@+id/search_country"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:inputType="text"
-                        android:textSize="16sp"
-                        android:textColor="@android:color/black"
-                        android:textColorHint="@color/colorGrayLight"
-                        android:hint="@string/hint_search_country"
-                        android:background="@android:color/white"
-                        android:imeOptions="actionSearch"
-                        android:autofillHints="false" />
+					<EditText
+						android:id="@+id/search_country"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:paddingTop="8dp"
+						android:paddingBottom="8dp"
+						android:inputType="text"
+						android:textSize="16sp"
+						android:textColor="@android:color/black"
+						android:textColorHint="@color/colorGrayLight"
+						android:hint="@string/hint_search_country"
+						android:background="@android:color/white"
+						android:imeOptions="actionSearch"
+						android:autofillHints="false" />
 
-                    <FrameLayout
-                        android:id="@+id/btn_clear_out"
-                        android:layout_width="40dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="0"
-                        android:clickable="true" >
+					<FrameLayout
+						android:id="@+id/btn_clear_out"
+						android:layout_width="40dp"
+						android:layout_height="30dp"
+						android:layout_gravity="center_vertical"
+						android:layout_weight="0"
+						android:clickable="true">
 
-                        <Button
-                            android:id="@+id/btn_clear"
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:layout_gravity="center"
-                            android:background="@drawable/ic_clear_black_24dp"
-                            android:visibility="invisible" />
+						<Button
+							android:id="@+id/btn_clear"
+							android:layout_width="18dp"
+							android:layout_height="18dp"
+							android:layout_gravity="center"
+							android:background="@drawable/ic_clear_black_24dp"
+							android:visibility="invisible" />
 
-                    </FrameLayout>
+					</FrameLayout>
 
-                </LinearLayout>
+				</LinearLayout>
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chip_group"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    app:chipSpacing="5dp"/>
+				<com.google.android.material.chip.ChipGroup
+					android:id="@+id/chip_group"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="10dp"
+					app:chipSpacing="5dp" />
 
-            </LinearLayout>
+			</LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/colorBack"/>
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="2dp"
+				android:background="@color/colorBack" />
 
-            <!--커버 이미지 레이아웃-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:background="@android:color/white" >
+			<!--커버 이미지 레이아웃-->
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:gravity="center_vertical"
+				android:padding="10dp"
+				android:background="@android:color/white">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="20dp"
-                    android:layout_gravity="start"
-                    android:text="@string/btn_text_cover_img"
-                    android:textColor="@android:color/black"
-                    android:textSize="17sp" />
+				<TextView
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:layout_marginStart="20dp"
+					android:layout_gravity="start"
+					android:text="@string/btn_text_cover_img"
+					android:textColor="@android:color/black"
+					android:textSize="17sp" />
 
-                <Button
-                    android:id="@+id/btn_re_pick_cover_img"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorBack" />
+				<Button
+					android:id="@+id/btn_re_pick_cover_img"
+					android:layout_width="0dp"
+					android:layout_height="100dp"
+					android:layout_weight="1"
+					android:background="@color/colorBack" />
 
-            </LinearLayout>
+			</LinearLayout>
 
-        </LinearLayout>
+		</LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/country_search_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="85dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginEnd="60dp"
-            android:background="@color/colorBackDark" />
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/country_search_recycler"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="85dp"
+			android:layout_marginStart="60dp"
+			android:layout_marginEnd="60dp"
+			android:background="@color/colorBackDark" />
 
-    </FrameLayout>
+	</FrameLayout>
 
 </LinearLayout>

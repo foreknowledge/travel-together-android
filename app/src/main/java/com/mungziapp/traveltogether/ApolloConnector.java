@@ -6,12 +6,12 @@ import okhttp3.OkHttpClient;
 
 public class ApolloConnector {
 
-    private static final String BASE_URL = "http://192.168.0.16:4000";
+	private static final String BASE_URL = "http://192.168.0.16:4000";
 
-    public static ApolloClient setupApollo(){
+	public static ApolloClient setupApollo() {
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
+		OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
 
-        return ApolloClient.builder().serverUrl(BASE_URL).okHttpClient(okHttpClient).build();
-    }
+		return ApolloClient.builder().serverUrl(BASE_URL).okHttpClient(okHttpClient).build();
+	}
 }
