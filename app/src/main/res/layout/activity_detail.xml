@@ -59,7 +59,7 @@
 				android:background="#EE702E" />
 
 			<TextView
-				android:id="@+id/travel_title"
+				android:id="@+id/travel_name"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"

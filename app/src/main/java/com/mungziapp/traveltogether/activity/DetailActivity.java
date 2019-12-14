@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mungziapp.traveltogether.adapter.TravelCountryAdapter;
 import com.mungziapp.traveltogether.adapter.TravelMemberAdapter;
@@ -27,7 +30,8 @@ import java.util.Arrays;
 public class DetailActivity extends AppCompatActivity {
 	private static final String TAG = "DetailActivity :: ";
 
-	private String travelTitle;
+	private int travelId;
+	private String travelName;
 	private String travelStartDate;
 	private String travelEndDate;
 	private ArrayList<String> travelCountries = new ArrayList<>();
@@ -58,7 +62,8 @@ public class DetailActivity extends AppCompatActivity {
 		for (int i = 0; i < numOfRecords; ++i) {
 			cursor.moveToNext();
 
-			this.travelTitle = cursor.getString(cursor.getColumnIndex("name"));
+			this.travelId = cursor.getInt(cursor.getColumnIndex("id"));
+			this.travelName = cursor.getString(cursor.getColumnIndex("name"));
 			this.travelStartDate = cursor.getString(cursor.getColumnIndex("start_date"));
 			this.travelEndDate = cursor.getString(cursor.getColumnIndex("end_date"));
 			String countryCodes = cursor.getString(cursor.getColumnIndex("country_codes"));
@@ -77,8 +82,8 @@ public class DetailActivity extends AppCompatActivity {
 
 	private void setRoomInfo() {
 		// 여행 제목 설정
-		TextView travelTitle = findViewById(R.id.travel_title);
-		travelTitle.setText(this.travelTitle);
+		TextView travelName = findViewById(R.id.travel_name);
+		travelName.setText(this.travelName);
 
 		if (travelStartDate != null && travelEndDate != null) {
 			// 여행 기간 설정
@@ -123,11 +128,51 @@ public class DetailActivity extends AppCompatActivity {
 			}
 		});
 
+
+
 		Button btnMore = findViewById(R.id.btn_more);
 		btnMore.setOnClickListener(new View.OnClickListener() {
+
+			private String[] option = {"여행 편집", "나가기"};
+
+			final AlertDialog deleteDialog = new AlertDialog.Builder(DetailActivity.this)
+					.setMessage("정말로 나가시겠습니까?")
+					.setPositiveButton("네"
+							, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									finish();
+								}
+							})
+					.setNegativeButton("아니요"
+							, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									dialog.dismiss();
+								}
+							}).create();
+
 			@Override
 			public void onClick(View view) {
+				AlertDialog dialog = new AlertDialog.Builder(DetailActivity.this)
+						.setTitle(travelName)
+						.setItems(option, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+								switch (i) {
+									case 0:
+										Intent intent = new Intent(DetailActivity.this, EditTravelActivity.class);
+										intent.putExtra("travel_id", travelId);
+										startActivity(intent);
+										break;
+									case 1:
+										deleteDialog.show();
+										break;
+								}
+							}
+						}).create();
 
+				dialog.show();
 			}
 		});
 
