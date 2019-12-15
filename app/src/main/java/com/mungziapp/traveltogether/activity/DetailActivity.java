@@ -42,9 +42,7 @@ public class DetailActivity extends AppCompatActivity {
 		// Detail Fragment 초기화
 		Intent intent = getIntent();
 		if (intent != null) {
-			int id = intent.getIntExtra("id", 0);
-
-			setDataFromDB(id);
+			setDataFromDB(intent.getIntExtra("id", 0));
 			setTravelInfo();
 			setButtons();
 		}
@@ -201,6 +199,16 @@ public class DetailActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				startTravelActivity(SearchType.DIARY);
+			}
+		});
+
+		TextView textMember = findViewById(R.id.txt_member);
+		textMember.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(DetailActivity.this, CheckMemberActivity.class);
+				intent.putExtra("travel_id", travelId);
+				startActivity(intent);
 			}
 		});
 	}

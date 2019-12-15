@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	tools:context=".activity.CheckMemberActivity">
+
+	<androidx.appcompat.widget.Toolbar
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@android:color/white"
+		android:padding="10dp">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:layout_marginEnd="10dp"
+			android:text="@string/text_member"
+			android:textColor="@android:color/black"
+			android:textSize="24sp" />
+
+		<TextView
+			android:id="@+id/num_of_members"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:textColor="@color/colorPrimary"
+			android:textSize="22sp" />
+
+		<Button
+			android:id="@+id/btn_go_before"
+			android:layout_width="30dp"
+			android:layout_height="30dp"
+			android:layout_gravity="start"
+			android:layout_marginStart="5dp"
+			android:layout_marginLeft="5dp"
+			android:layout_marginEnd="5dp"
+			android:layout_marginRight="5dp"
+			android:background="@drawable/ic_arrow_back_24dp" />
+
+	</androidx.appcompat.widget.Toolbar>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingTop="20dp"
+		android:paddingBottom="20dp"
+		android:background="@android:color/white">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="35dp"
+			android:layout_gravity="center_vertical"
+			android:text="@string/text_member_invitation"
+			android:textColor="@color/colorGrayLight" />
+
+		<TextView
+			android:id="@+id/invite_for_kakao"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end|center_vertical"
+			android:layout_marginEnd="30dp"
+			android:drawableStart="@drawable/dr_kakao_logo_15dp"
+			android:drawablePadding="10dp"
+			android:paddingTop="10dp"
+			android:paddingBottom="10dp"
+			android:paddingStart="18dp"
+			android:paddingEnd="18dp"
+			android:text="@string/text_kakao_invitation"
+			android:textSize="12sp"
+			android:textColor="@color/color_kakao_front"
+			android:background="@drawable/dr_kakao_login_rounded_30dp"
+			android:clickable="true" />
+
+	</FrameLayout>
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/member_recycler_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dp"
+		android:padding="15dp"
+		android:background="@android:color/white" />
+
+</LinearLayout>

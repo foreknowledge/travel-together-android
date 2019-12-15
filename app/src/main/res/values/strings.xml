@@ -25,6 +25,8 @@
 	<string name="text_diary">일기</string>
 	<string name="text_destination">여행지</string>
 	<string name="text_member">여행 멤버</string>
+	<string name="text_member_invitation">함께 여행할 멤버를 초대해서\n여행 일정을 함께 계획해 보세요!</string>
+	<string name="text_kakao_invitation">카카오톡 초대</string>
 
 	<string name="btn_text_save">Save</string>
 	<string name="btn_text_cancel">Cancel</string>

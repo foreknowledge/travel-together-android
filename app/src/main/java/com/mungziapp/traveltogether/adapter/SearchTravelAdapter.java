@@ -121,8 +121,10 @@ public class SearchTravelAdapter extends RecyclerView.Adapter<SearchTravelAdapte
 			this.travelCover.setBackgroundResource(item.getImgResId());
 			this.travelTitle.setText(item.getTravelTitle());
 
-			String strDuration = "(" + item.getTravelStartDate() + " ~ " + item.getTravelEndDate() + ")";
-			this.travelDuration.setText(strDuration);
+			if (item.getTravelStartDate() != null && item.getTravelEndDate() != null) {
+				String strDuration = "(" + item.getTravelStartDate() + " ~ " + item.getTravelEndDate() + ")";
+				this.travelDuration.setText(strDuration);
+			}
 		}
 	}
 }
