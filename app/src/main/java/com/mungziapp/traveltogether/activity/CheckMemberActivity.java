@@ -17,8 +17,6 @@ import com.mungziapp.traveltogether.adapter.CheckMembersAdapter;
 import com.mungziapp.traveltogether.app.DatabaseManager;
 import com.mungziapp.traveltogether.table.TravelTable;
 
-import java.util.Arrays;
-
 public class CheckMemberActivity extends AppCompatActivity {
 	private int numOfMembers;
 
@@ -71,6 +69,13 @@ public class CheckMemberActivity extends AppCompatActivity {
 
 		CheckMembersAdapter membersAdapter = new CheckMembersAdapter(CheckMemberActivity.this);
 		membersAdapter.initItem(numOfMembers);
+		membersAdapter.setOnImageClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(CheckMemberActivity.this, PhotoViewActivity.class);
+				startActivity(intent);
+			}
+		});
 
 		memberRecycler.setAdapter(membersAdapter);
 	}

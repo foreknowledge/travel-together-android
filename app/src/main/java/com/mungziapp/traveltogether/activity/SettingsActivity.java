@@ -162,7 +162,8 @@ public class SettingsActivity extends BaseActivity {
 						dialog.show();
 						break;
 					case NORMAL_MODE:
-						Toast.makeText(SettingsActivity.this, "프로필 사진 보여주는 화면 띄우기", Toast.LENGTH_SHORT).show();
+						Intent intent = new Intent(SettingsActivity.this, PhotoViewActivity.class);
+						startActivity(intent);
 						break;
 				}
 			}

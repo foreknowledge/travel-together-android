@@ -18,10 +18,13 @@
 		android:layout_weight="0"
 		app:cardCornerRadius="35dp">
 
-		<View
+		<ImageView
 			android:id="@+id/profile_img"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent" />
+			android:layout_height="match_parent"
+			android:contentDescription="@string/profile_img"
+			android:clickable="true"
+			android:scaleType="centerCrop" />
 
 	</androidx.cardview.widget.CardView>
 
