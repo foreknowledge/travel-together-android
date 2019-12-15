@@ -117,7 +117,8 @@ public class EditTravelActivity extends AppCompatActivity {
 		btnCancel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				AlertDialog dialog = new AlertDialog.Builder(EditTravelActivity.this)
+				clearFocus();
+				new AlertDialog.Builder(EditTravelActivity.this)
 						.setMessage(getString(R.string.cancel_message))
 						.setPositiveButton(getString(R.string.btn_ok_text), new DialogInterface.OnClickListener() {
 							@Override
@@ -130,10 +131,7 @@ public class EditTravelActivity extends AppCompatActivity {
 							public void onClick(DialogInterface dialogInterface, int i) {
 								dialogInterface.dismiss();
 							}
-						}).create();
-
-				clearFocus();
-				dialog.show();
+						}).show();
 			}
 		});
 	}
@@ -348,7 +346,8 @@ public class EditTravelActivity extends AppCompatActivity {
 
 			@Override
 			public void onClick(View view) {
-				AlertDialog dialog = new AlertDialog.Builder(EditTravelActivity.this)
+				clearFocus();
+				new AlertDialog.Builder(EditTravelActivity.this)
 						.setTitle(getString(R.string.cover_img))
 						.setItems(options, new DialogInterface.OnClickListener() {
 							@Override
@@ -364,10 +363,7 @@ public class EditTravelActivity extends AppCompatActivity {
 										break;
 								}
 							}
-						}).create();
-
-				clearFocus();
-				dialog.show();
+						}).show();
 			}
 		});
 	}

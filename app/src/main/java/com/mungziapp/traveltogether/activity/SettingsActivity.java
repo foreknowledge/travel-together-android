@@ -107,25 +107,23 @@ public class SettingsActivity extends BaseActivity {
 		btnCancel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				AlertDialog dialog = new AlertDialog.Builder(SettingsActivity.this)
-						.setMessage(getString(R.string.cancel_message))
-						.setPositiveButton(getString(R.string.btn_ok_text), new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialogInterface, int i) {
-								setNormalMode();
-							}
-						})
-						.setNegativeButton(getString(R.string.btn_cancel_text), new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialogInterface, int i) {
-								dialogInterface.dismiss();
-							}
-						}).create();
-
 				if (!profileMessage.getText().toString().equals(editMessage.getText().toString())
 						|| !profileName.getText().toString().equals(editName.getText().toString())) {
 					hideKeyboard();
-					dialog.show();
+					new AlertDialog.Builder(SettingsActivity.this)
+							.setMessage(getString(R.string.cancel_message))
+							.setPositiveButton(getString(R.string.btn_ok_text), new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialogInterface, int i) {
+									setNormalMode();
+								}
+							})
+							.setNegativeButton(getString(R.string.btn_cancel_text), new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialogInterface, int i) {
+									dialogInterface.dismiss();
+								}
+							}).show();
 				}
 				else
 					setNormalMode();
@@ -140,7 +138,8 @@ public class SettingsActivity extends BaseActivity {
 			public void onClick(View view) {
 				switch (mode) {
 					case EDIT_MODE:
-						AlertDialog dialog = new AlertDialog.Builder(SettingsActivity.this)
+						hideKeyboard();
+						new AlertDialog.Builder(SettingsActivity.this)
 								.setTitle(getString(R.string.profile_img))
 								.setItems(options, new DialogInterface.OnClickListener() {
 									@Override
@@ -156,10 +155,7 @@ public class SettingsActivity extends BaseActivity {
 												break;
 										}
 									}
-								}).create();
-
-						hideKeyboard();
-						dialog.show();
+								}).show();
 						break;
 					case NORMAL_MODE:
 						Intent intent = new Intent(SettingsActivity.this, PhotoViewActivity.class);
@@ -233,13 +229,26 @@ public class SettingsActivity extends BaseActivity {
 	}
 
 	private void onClickLogout() {
-		UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
-			@Override
-			public void onCompleteLogout() {
-				Log.d(TAG, "onCompleteLogout");
-				redirectLoginActivity();
-			}
-		});
+		new AlertDialog.Builder(SettingsActivity.this)
+				.setMessage(getString(R.string.logout_message))
+				.setPositiveButton(getString(R.string.btn_ok_text), new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+						UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
+							@Override
+							public void onCompleteLogout() {
+								Log.d(TAG, "onCompleteLogout");
+								redirectLoginActivity();
+							}
+						});
+					}
+				})
+				.setNegativeButton(getString(R.string.btn_cancel_text), new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+						dialogInterface.dismiss();
+					}
+				}).show();
 	}
 
 	private void onClickUnlink() {

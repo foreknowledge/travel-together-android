@@ -153,7 +153,7 @@ public class DetailActivity extends AppCompatActivity {
 
 			@Override
 			public void onClick(View view) {
-				AlertDialog dialog = new AlertDialog.Builder(DetailActivity.this)
+				new AlertDialog.Builder(DetailActivity.this)
 						.setTitle(travelName)
 						.setItems(options, new DialogInterface.OnClickListener() {
 							@Override
@@ -169,9 +169,7 @@ public class DetailActivity extends AppCompatActivity {
 										break;
 								}
 							}
-						}).create();
-
-				dialog.show();
+						}).show();
 			}
 		});
 

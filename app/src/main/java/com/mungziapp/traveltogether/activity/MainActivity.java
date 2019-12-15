@@ -189,7 +189,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 			public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
 				final TravelData item = adapter.getItem(position);
 
-				AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+				new AlertDialog.Builder(MainActivity.this)
 						.setTitle(item.getName())
 						.setItems(options, new DialogInterface.OnClickListener() {
 							@Override
@@ -205,9 +205,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 										break;
 								}
 							}
-						}).create();
-
-				dialog.show();
+						}).show();
 
 				return true;
 			}
@@ -223,12 +221,12 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 	// 사용자 응답이 denied 일 때 콜백
 	@Override
 	public void onDenied(int i, String[] strings) {
-		//Toast.makeText(this, "permissions denied : " + strings.length, Toast.LENGTH_LONG).show();
+		Log.d(TAG, "permission denied : " + strings.length);
 	}
 
 	// 사용자 응답이 granted 일 때 콜백
 	@Override
 	public void onGranted(int i, String[] strings) {
-		//Toast.makeText(this, "permissions granted : " + strings.length, Toast.LENGTH_LONG).show();
+		Log.d(TAG, "permission granted : " + strings.length);
 	}
 }
