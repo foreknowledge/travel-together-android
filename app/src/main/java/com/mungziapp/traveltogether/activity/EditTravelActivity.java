@@ -1,5 +1,6 @@
 package com.mungziapp.traveltogether.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,8 +9,10 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -20,6 +23,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +31,7 @@ import android.widget.Toast;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
+import com.mungziapp.traveltogether.app.GalleryImageSetter;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.adapter.SearchCountryAdapter;
@@ -37,9 +42,11 @@ import com.mungziapp.traveltogether.table.TravelTable;
 import java.util.Calendar;
 
 public class EditTravelActivity extends AppCompatActivity {
+	private static final int PICK_FROM_ALBUM = 101;
+
 	private Button btnStartDate;
 	private Button btnEndDate;
-	private Button btnRePickCoverImg;
+	private ImageView btnRePickCoverImg;
 
 	private RecyclerView countrySearchRecycler;
 	private EditText editSearch;
@@ -79,7 +86,7 @@ public class EditTravelActivity extends AppCompatActivity {
 		String countryCodes = cursor.getString(cursor.getColumnIndex("country_codes"));
 		int cover = cursor.getInt(cursor.getColumnIndex("cover"));
 		if (cover != 0)
-			btnRePickCoverImg.setBackgroundResource(cover);
+			btnRePickCoverImg.setImageResource(cover);
 
 		if (countryCodes != null) {
 			for (String countryFlag : countryCodes.split(",")) {
@@ -351,7 +358,9 @@ public class EditTravelActivity extends AppCompatActivity {
 										Toast.makeText(EditTravelActivity.this, "기본 이미지로 변경", Toast.LENGTH_SHORT).show();
 										break;
 									case 1:
-										Toast.makeText(EditTravelActivity.this, "갤러리 이미지로 변경", Toast.LENGTH_SHORT).show();
+										Intent intent = new Intent(Intent.ACTION_PICK);
+										intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+										startActivityForResult(intent, PICK_FROM_ALBUM);
 										break;
 								}
 							}
@@ -366,5 +375,13 @@ public class EditTravelActivity extends AppCompatActivity {
 	private void clearFocus() {
 		editSearch.clearFocus();
 		editTitle.clearFocus();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if (requestCode == PICK_FROM_ALBUM && data != null)
+			new GalleryImageSetter().setImageInImgView(data, EditTravelActivity.this, btnRePickCoverImg);
 	}
 }
