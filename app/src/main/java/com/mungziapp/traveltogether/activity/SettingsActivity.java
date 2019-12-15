@@ -4,9 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -26,8 +23,7 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.mungziapp.traveltogether.R;
-
-import java.io.File;
+import com.mungziapp.traveltogether.app.GalleryImageSetter;
 
 public class SettingsActivity extends BaseActivity {
 	private static final String TAG = "Settings :: ";
@@ -48,8 +44,6 @@ public class SettingsActivity extends BaseActivity {
 	private TextView profileMessage;
 	private EditText editName;
 	private EditText editMessage;
-
-	private File tempFile;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -187,30 +181,8 @@ public class SettingsActivity extends BaseActivity {
 	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		if (requestCode == PICK_FROM_ALBUM && data != null) {
-			Uri photoUri = data.getData();
-			Cursor cursor = null;
-			try {
-				String[] proj = { MediaStore.Images.Media.DATA };
-
-				if (photoUri != null)
-					cursor = getContentResolver().query(photoUri, proj, null, null, null);
-
-				if (cursor != null) {
-					int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-
-					cursor.moveToFirst();
-
-					tempFile = new File(cursor.getString(column_index));
-				}
-			}
-			finally {
-				if (cursor != null)
-					cursor.close();
-			}
-
-			profileImg.setImageBitmap(BitmapFactory.decodeFile(tempFile.getAbsolutePath(), new BitmapFactory.Options()));
-		}
+		if (requestCode == PICK_FROM_ALBUM && data != null)
+			new GalleryImageSetter().setImageInImgView(data, SettingsActivity.this, profileImg);
 	}
 
 	private void setNormalMode() {
