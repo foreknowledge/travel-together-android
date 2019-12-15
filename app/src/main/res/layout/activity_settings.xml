@@ -64,12 +64,14 @@
 				android:layout_margin="15dp"
 				app:cardCornerRadius="60dp">
 
-				<View
+				<ImageView
 					android:id="@+id/profile_img"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:background="@drawable/usr_profile_img"
-					android:clickable="true"/>
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:src="@drawable/usr_profile_img"
+					android:scaleType="centerCrop"
+					android:clickable="true"
+					android:contentDescription="@string/profile_img" />
 
 			</androidx.cardview.widget.CardView>
 

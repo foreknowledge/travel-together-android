@@ -3,15 +3,23 @@ package com.mungziapp.traveltogether.activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
@@ -19,12 +27,13 @@ import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.mungziapp.traveltogether.R;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+import java.io.File;
 
 public class SettingsActivity extends BaseActivity {
 	private static final String TAG = "Settings :: ";
 	private static final int NORMAL_MODE = 0;
 	private static final int EDIT_MODE = 1;
+	private static final int PICK_FROM_ALBUM = 101;
 
 	private int mode = NORMAL_MODE;
 	private InputMethodManager in;
@@ -34,10 +43,13 @@ public class SettingsActivity extends BaseActivity {
 	private Button btnCancel;
 	private LinearLayout buttons;
 
+	private ImageView profileImg;
 	private TextView profileName;
 	private TextView profileMessage;
 	private EditText editName;
 	private EditText editMessage;
+
+	private File tempFile;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +138,7 @@ public class SettingsActivity extends BaseActivity {
 			}
 		});
 
-		View profileImg = findViewById(R.id.profile_img);
+		profileImg = findViewById(R.id.profile_img);
 		profileImg.setOnClickListener(new View.OnClickListener() {
 			String[] options = getResources().getStringArray(R.array.option_profile_img);
 
@@ -144,7 +156,9 @@ public class SettingsActivity extends BaseActivity {
 												Toast.makeText(SettingsActivity.this, "기본 이미지로 변경", Toast.LENGTH_SHORT).show();
 												break;
 											case 1:
-												Toast.makeText(SettingsActivity.this, "갤러리 이미지로 변경", Toast.LENGTH_SHORT).show();
+												Intent intent = new Intent(Intent.ACTION_PICK);
+												intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+												startActivityForResult(intent, PICK_FROM_ALBUM);
 												break;
 										}
 									}
@@ -167,6 +181,36 @@ public class SettingsActivity extends BaseActivity {
 		buttons = findViewById(R.id.buttons);
 
 		in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if (requestCode == PICK_FROM_ALBUM && data != null) {
+			Uri photoUri = data.getData();
+			Cursor cursor = null;
+			try {
+				String[] proj = { MediaStore.Images.Media.DATA };
+
+				if (photoUri != null)
+					cursor = getContentResolver().query(photoUri, proj, null, null, null);
+
+				if (cursor != null) {
+					int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+					cursor.moveToFirst();
+
+					tempFile = new File(cursor.getString(column_index));
+				}
+			}
+			finally {
+				if (cursor != null)
+					cursor.close();
+			}
+
+			profileImg.setImageBitmap(BitmapFactory.decodeFile(tempFile.getAbsolutePath(), new BitmapFactory.Options()));
+		}
 	}
 
 	private void setNormalMode() {

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -23,8 +24,10 @@ import com.mungziapp.traveltogether.data.TravelData;
 import com.mungziapp.traveltogether.fragment.TravelsFragment;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.table.TravelTable;
+import com.pedro.library.AutoPermissions;
+import com.pedro.library.AutoPermissionsListener;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements AutoPermissionsListener {
 	private ViewPager outerViewPager;
 	private static final String TAG = "MainActivity :: ";
 
@@ -42,6 +45,8 @@ public class MainActivity extends BaseActivity {
 		setAddTravelButton();
 		setSettingsButton();
 		setSearchButton();
+
+		AutoPermissions.Companion.loadAllPermissions(this, 101);
 	}
 
 	private void setAdapters() {
@@ -207,5 +212,23 @@ public class MainActivity extends BaseActivity {
 				return true;
 			}
 		};
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		AutoPermissions.Companion.parsePermissions(this, requestCode, permissions, this);
+	}
+
+	// 사용자 응답이 denied 일 때 콜백
+	@Override
+	public void onDenied(int i, String[] strings) {
+		//Toast.makeText(this, "permissions denied : " + strings.length, Toast.LENGTH_LONG).show();
+	}
+
+	// 사용자 응답이 granted 일 때 콜백
+	@Override
+	public void onGranted(int i, String[] strings) {
+		//Toast.makeText(this, "permissions granted : " + strings.length, Toast.LENGTH_LONG).show();
 	}
 }
