@@ -58,14 +58,20 @@
 			android:layout_margin="10dp"
 			android:gravity="center">
 
-			<de.hdodenhof.circleimageview.CircleImageView
-				android:id="@+id/profile_img"
+			<androidx.cardview.widget.CardView
 				android:layout_width="120dp"
 				android:layout_height="120dp"
 				android:layout_margin="15dp"
-				android:src="@drawable/ic_person_black_120dp"
-				app:civ_border_width="2dp"
-				app:civ_border_color="@color/colorGrayLight" />
+				app:cardCornerRadius="60dp">
+
+				<View
+					android:id="@+id/profile_img"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/usr_profile_img"
+					android:clickable="true"/>
+
+			</androidx.cardview.widget.CardView>
 
 			<TextView
 				android:id="@+id/text_name"

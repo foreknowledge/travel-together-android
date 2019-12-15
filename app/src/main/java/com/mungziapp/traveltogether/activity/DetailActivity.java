@@ -20,6 +20,7 @@ import com.mungziapp.traveltogether.adapter.TravelMemberAdapter;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.data.SearchType;
 import com.mungziapp.traveltogether.app.DatabaseManager;
+import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.table.TravelTable;
 
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public class DetailActivity extends AppCompatActivity {
 			travelCountries.addAll(Arrays.asList(countryCodes.split(",")));
 
 		for (int j = 0; j < numOfMembers; ++j)
-			this.travelMembers.add(R.drawable.user_img);
+			this.travelMembers.add(R.drawable.usr_profile_img);
 
 		cursor.close();
 	}
@@ -99,6 +100,18 @@ public class DetailActivity extends AppCompatActivity {
 
 		TravelMemberAdapter travelMemberAdapter = new TravelMemberAdapter(getApplicationContext());
 		for (Integer member : travelMembers) travelMemberAdapter.addItem(member);
+		travelMemberAdapter.setClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
+				startCheckMemberActivity();
+			}
+
+			@Override
+			public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
+				return null;
+			}
+		});
+
 		memberRecyclerView.setAdapter(travelMemberAdapter);
 
 		// 여행 커버 이미지 설정
@@ -206,9 +219,7 @@ public class DetailActivity extends AppCompatActivity {
 		textMember.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(DetailActivity.this, CheckMemberActivity.class);
-				intent.putExtra("travel_id", travelId);
-				startActivity(intent);
+				startCheckMemberActivity();
 			}
 		});
 	}
@@ -216,6 +227,12 @@ public class DetailActivity extends AppCompatActivity {
 	private void startTravelActivity(int type) {
 		Intent intent = new Intent(getApplicationContext(), TravelActivity.class);
 		intent.putExtra("caller", type);
+		startActivity(intent);
+	}
+
+	private void startCheckMemberActivity() {
+		Intent intent = new Intent(DetailActivity.this, CheckMemberActivity.class);
+		intent.putExtra("travel_id", travelId);
 		startActivity(intent);
 	}
 }

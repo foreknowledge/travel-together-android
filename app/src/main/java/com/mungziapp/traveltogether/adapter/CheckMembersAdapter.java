@@ -23,14 +23,14 @@ public class CheckMembersAdapter extends RecyclerView.Adapter<CheckMembersAdapte
 
 	public void initItem(int numOfMembers) {
 		for (int i=0; i<numOfMembers; ++i)
-			items.add(R.drawable.user_img);
+			items.add(R.drawable.usr_profile_img);
 	}
 
 	@NonNull
 	@Override
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View itemView = inflater.inflate(R.layout.item_search_travel, parent, false);
+		View itemView = inflater.inflate(R.layout.item_travel_member, parent, false);
 
 		return new ViewHolder(itemView);
 	}
@@ -53,9 +53,9 @@ public class CheckMembersAdapter extends RecyclerView.Adapter<CheckMembersAdapte
 		ViewHolder(@NonNull final View itemView) {
 			super(itemView);
 
-			this.profileImage = itemView.findViewById(R.id.travel_cover);
-			this.profileName = itemView.findViewById(R.id.travel_title);
-			this.profileMessage = itemView.findViewById(R.id.travel_duration);
+			this.profileImage = itemView.findViewById(R.id.profile_img);
+			this.profileName = itemView.findViewById(R.id.profile_name);
+			this.profileMessage = itemView.findViewById(R.id.profile_message);
 		}
 
 		void setItem(int image) {

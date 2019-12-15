@@ -126,7 +126,7 @@ public class SettingsActivity extends BaseActivity {
 			}
 		});
 
-		CircleImageView profileImg = findViewById(R.id.profile_img);
+		View profileImg = findViewById(R.id.profile_img);
 		profileImg.setOnClickListener(new View.OnClickListener() {
 			String[] options = getResources().getStringArray(R.array.option_profile_img);
 
