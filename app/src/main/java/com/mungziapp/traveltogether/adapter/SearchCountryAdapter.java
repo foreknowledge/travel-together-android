@@ -9,9 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mungziapp.traveltogether.data.Countries;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.app.TravelHelper;
 import com.mungziapp.traveltogether.item.SearchCountryItem;
 
 import java.util.ArrayList;
@@ -51,12 +51,11 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
 	}
 
 	public void initItem() {
-		for (String countryName : TravelHelper.countryMap.keySet()) {
-			List<String> countryInfo = TravelHelper.countryMap.get(countryName);
-			String countryFlag = countryInfo.get(0);
-			//String countryCode = countryInfo.get(1);
-			items.add(new SearchCountryItem(countryFlag, countryName));
-		}
+		List<Countries.Country> countryList = Countries.getCountryList();
+
+		for (Countries.Country country : countryList)
+			items.add(new SearchCountryItem(country.getCountryFlag(), country.getCountryKrName()));
+
 		notifyDataSetChanged();
 	}
 

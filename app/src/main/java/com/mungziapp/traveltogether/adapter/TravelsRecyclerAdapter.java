@@ -27,14 +27,10 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 		this.context = context;
 	}
 
-	public void addItem(TravelData item) {
-		items.add(item);
-	}
-
+	public void addItem(TravelData item) { items.add(item); }
 	public TravelData getItem(int position) {
 		return items.get(position);
 	}
-
 	public void setClickListener(OnItemClickListener listener) {
 		this.listener = listener;
 	}
