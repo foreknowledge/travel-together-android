@@ -49,6 +49,9 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
 	public void initItem() {
 		List<CountryItem> countryList = Countries.getCountryList();
 
+		for (CountryItem item: countryList)
+			item.setIsSelected(false);
+
 		items.addAll(countryList);
 		notifyDataSetChanged();
 	}
