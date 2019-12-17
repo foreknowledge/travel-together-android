@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class CheckMembersAdapter extends RecyclerView.Adapter<CheckMembersAdapter.ViewHolder> {
 	private Context context;
-	private ArrayList<Integer> items = new ArrayList<>();
+	private ArrayList<Integer> memberProfiles = new ArrayList<>();
 	private View.OnClickListener listener;
 
 	public CheckMembersAdapter(Context context) {
@@ -25,7 +25,7 @@ public class CheckMembersAdapter extends RecyclerView.Adapter<CheckMembersAdapte
 
 	public void initItem(int numOfMembers) {
 		for (int i=0; i<numOfMembers; ++i)
-			items.add(R.drawable.usr_profile_img);
+			memberProfiles.add(R.drawable.usr_profile_img);
 	}
 
 	public void setOnImageClickListener(View.OnClickListener listener) { this.listener = listener; }
@@ -41,12 +41,12 @@ public class CheckMembersAdapter extends RecyclerView.Adapter<CheckMembersAdapte
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		holder.setItem(items.get(position));
+		holder.setItem(memberProfiles.get(position));
 	}
 
 	@Override
 	public int getItemCount() {
-		return items.size();
+		return memberProfiles.size();
 	}
 
 	static class ViewHolder extends RecyclerView.ViewHolder {

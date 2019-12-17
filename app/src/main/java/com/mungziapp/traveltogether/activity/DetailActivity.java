@@ -31,8 +31,8 @@ public class DetailActivity extends AppCompatActivity {
 	private String travelName;
 	private String travelStartDate;
 	private String travelEndDate;
-	private ArrayList<String> travelCountries = new ArrayList<>();
-	private ArrayList<Integer> travelMembers = new ArrayList<>();
+	private ArrayList<String> travelCountryCodes = new ArrayList<>();
+	private ArrayList<Integer> travelMemberProfiles = new ArrayList<>();
 	private int travelCover;
 
 	@Override
@@ -62,10 +62,10 @@ public class DetailActivity extends AppCompatActivity {
 		int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
 
 		if (countryCodes != null)
-			travelCountries.addAll(Arrays.asList(countryCodes.split(",")));
+			travelCountryCodes.addAll(Arrays.asList(countryCodes.split(",")));
 
 		for (int j = 0; j < numOfMembers; ++j)
-			this.travelMembers.add(R.drawable.usr_profile_img);
+			this.travelMemberProfiles.add(R.drawable.usr_profile_img);
 
 		cursor.close();
 	}
@@ -91,7 +91,7 @@ public class DetailActivity extends AppCompatActivity {
 		countryRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
 
 		TravelCountryAdapter travelCountryAdapter = new TravelCountryAdapter(getApplicationContext());
-		for (String country : travelCountries) travelCountryAdapter.addItem(country);
+		for (String countryCode : travelCountryCodes) travelCountryAdapter.addItem(countryCode);
 		countryRecyclerView.setAdapter(travelCountryAdapter);
 
 		// 여행 멤버 설정
@@ -99,7 +99,7 @@ public class DetailActivity extends AppCompatActivity {
 		memberRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
 
 		TravelMemberAdapter travelMemberAdapter = new TravelMemberAdapter(getApplicationContext());
-		for (Integer member : travelMembers) travelMemberAdapter.addItem(member);
+		for (Integer memberProfile : travelMemberProfiles) travelMemberAdapter.addItem(memberProfile);
 		travelMemberAdapter.setClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {

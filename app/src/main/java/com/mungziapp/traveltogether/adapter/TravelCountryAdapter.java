@@ -15,7 +15,6 @@ import com.mungziapp.traveltogether.item.CountryItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class TravelCountryAdapter extends RecyclerView.Adapter<TravelCountryAdapter.ViewHolder> {
 	private Context context;

@@ -10,7 +10,7 @@ import com.mungziapp.traveltogether.fragment.TravelsFragment;
 import java.util.ArrayList;
 
 public class OuterPagerAdapter extends FragmentStatePagerAdapter {
-	private ArrayList<TravelsFragment> items = new ArrayList<>();
+	private ArrayList<TravelsFragment> travelsFragments = new ArrayList<>();
 
 	public OuterPagerAdapter(FragmentManager fm) {
 		super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
@@ -19,12 +19,12 @@ public class OuterPagerAdapter extends FragmentStatePagerAdapter {
 	@NonNull
 	@Override
 	public TravelsFragment getItem(int position) {
-		return items.get(position);
+		return travelsFragments.get(position);
 	}
 
 	@Override
 	public int getCount() {
-		return items.size();
+		return travelsFragments.size();
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class OuterPagerAdapter extends FragmentStatePagerAdapter {
 	}
 
 	public void addItem(TravelsFragment travelsFragment) {
-		items.add(travelsFragment);
+		travelsFragments.add(travelsFragment);
 	}
 }
 

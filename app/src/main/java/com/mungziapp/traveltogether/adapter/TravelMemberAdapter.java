@@ -16,15 +16,15 @@ import java.util.ArrayList;
 
 public class TravelMemberAdapter extends RecyclerView.Adapter<TravelMemberAdapter.ViewHolder> {
 	private Context context;
-	private ArrayList<Integer> items = new ArrayList<>();
+	private ArrayList<Integer> memberProfiles = new ArrayList<>();
 	private OnItemClickListener listener;
 
 	public TravelMemberAdapter(Context context) {
 		this.context = context;
 	}
 
-	public void addItem(int item) {
-		items.add(item);
+	public void addItem(int memberProfile) {
+		memberProfiles.add(memberProfile);
 	}
 
 	public void setClickListener(OnItemClickListener listener) {
@@ -33,7 +33,7 @@ public class TravelMemberAdapter extends RecyclerView.Adapter<TravelMemberAdapte
 
 	@Override   // 아이템의 개수 리턴
 	public int getItemCount() {
-		return items.size();
+		return memberProfiles.size();
 	}
 
 	@NonNull
@@ -47,7 +47,7 @@ public class TravelMemberAdapter extends RecyclerView.Adapter<TravelMemberAdapte
 
 	@Override   // 데이터와 뷰가 결합되는 시점에 호출되는 메서드
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		holder.setItem(items.get(position));
+		holder.setItem(memberProfiles.get(position));
 	}
 
 	static class ViewHolder extends RecyclerView.ViewHolder {

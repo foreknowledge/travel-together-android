@@ -19,7 +19,7 @@ import java.util.Arrays;
 
 public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecyclerAdapter.ViewHolder> {
 	private Context context;
-	private ArrayList<TravelData> items = new ArrayList<>();
+	private ArrayList<TravelData> travelData = new ArrayList<>();
 
 	private OnItemClickListener listener;
 
@@ -27,9 +27,9 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 		this.context = context;
 	}
 
-	public void addItem(TravelData item) { items.add(item); }
+	public void addItem(TravelData item) { travelData.add(item); }
 	public TravelData getItem(int position) {
-		return items.get(position);
+		return travelData.get(position);
 	}
 	public void setClickListener(OnItemClickListener listener) {
 		this.listener = listener;
@@ -46,12 +46,12 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		holder.setItem(items.get(position));
+		holder.setItem(travelData.get(position));
 	}
 
 	@Override
 	public int getItemCount() {
-		return items.size();
+		return travelData.size();
 	}
 
 	static class ViewHolder extends RecyclerView.ViewHolder {

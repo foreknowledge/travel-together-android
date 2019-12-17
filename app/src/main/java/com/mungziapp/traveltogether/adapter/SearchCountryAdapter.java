@@ -33,11 +33,7 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
 	}
 
 	public CountryItem getItem(String countryCode) {
-		for (CountryItem item : items) {
-			if (item.getCountryCode().equals(countryCode)) return item;
-		}
-
-		return null;
+		return Countries.getCountryMap().get(countryCode);
 	}
 
 	public void selectItem(CountryItem item) {

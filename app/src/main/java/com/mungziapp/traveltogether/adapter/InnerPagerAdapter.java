@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import java.util.ArrayList;
 
 public class InnerPagerAdapter extends FragmentStatePagerAdapter {
-	private ArrayList<Fragment> items = new ArrayList<>();
+	private ArrayList<Fragment> fragments = new ArrayList<>();
 
 	public InnerPagerAdapter(FragmentManager fm) {
 		super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
@@ -17,12 +17,12 @@ public class InnerPagerAdapter extends FragmentStatePagerAdapter {
 	@NonNull
 	@Override
 	public Fragment getItem(int position) {
-		return items.get(position);
+		return fragments.get(position);
 	}
 
 	@Override
 	public int getCount() {
-		return items.size();
+		return fragments.size();
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class InnerPagerAdapter extends FragmentStatePagerAdapter {
 	}
 
 	public void addItem(Fragment fragment) {
-		items.add(fragment);
+		fragments.add(fragment);
 	}
 }
 
