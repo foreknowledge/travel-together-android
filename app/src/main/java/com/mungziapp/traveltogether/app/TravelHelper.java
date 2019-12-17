@@ -13,7 +13,7 @@ public class TravelHelper {
 	private static TravelHelper instance = new TravelHelper();
 
 	public static TravelHelper getInstance() { return instance; }
-	private TravelHelper() { Countries.setCountryList(); }
+	private TravelHelper() { Countries.setCountryListAndHash(); }
 
 	public static void init(Context context) {
 		DatabaseManager.openDatabase(context);
@@ -23,11 +23,9 @@ public class TravelHelper {
 	}
 
 	private static List<TravelData> makeTravelItems() {
-		String countries = "\uD83C\uDDF0\uD83C\uDDF7,\uD83C\uDDFA\uD83C\uDDF8,\uD83C\uDDED\uD83C\uDDF0,\uD83C\uDDEB\uD83C\uDDF7" +
-				",\uD83C\uDDEC\uD83C\uDDFA,\uD83C\uDDFB\uD83C\uDDF3,\uD83C\uDDF2\uD83C\uDDF4,\uD83C\uDDF3\uD83C\uDDF5" +
-				",\uD83C\uDDEC\uD83C\uDDF9,\uD83C\uDDEC\uD83C\uDDE9,\uD83C\uDDEC\uD83C\uDDF7,\uD83C\uDDEC\uD83C\uDDF1";
+		String countries = "KR,US,HK,FR,GU,VN,MO,NP,GT,GD,GR,GL";
 		String countries2 = "";
-		String countries3 = "\uD83C\uDDF7\uD83C\uDDFA";
+		String countries3 = "RU";
 
 		int members = 9;
 		int members2 = 1;

@@ -36,7 +36,7 @@ import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.adapter.SearchCountryAdapter;
 import com.mungziapp.traveltogether.app.DatabaseManager;
-import com.mungziapp.traveltogether.item.SearchCountryItem;
+import com.mungziapp.traveltogether.item.CountryItem;
 import com.mungziapp.traveltogether.table.TravelTable;
 
 import java.util.Calendar;
@@ -89,8 +89,8 @@ public class EditTravelActivity extends AppCompatActivity {
 			btnRePickCoverImg.setImageResource(cover);
 
 		if (countryCodes != null) {
-			for (String countryFlag : countryCodes.split(",")) {
-				SearchCountryItem item = countryAdapter.getItem(countryFlag);
+			for (String countryCode : countryCodes.split(",")) {
+				CountryItem item = countryAdapter.getItem(countryCode);
 
 				if (item != null) {
 					chipGroup.addView(makeChip(item));
@@ -234,7 +234,7 @@ public class EditTravelActivity extends AppCompatActivity {
 		countryAdapter.setClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
-				SearchCountryItem item = countryAdapter.getSearchItem(position);
+				CountryItem item = countryAdapter.getSearchItem(position);
 
 				chipGroup.addView(makeChip(item));
 				scrollView.post(new Runnable() {
@@ -257,9 +257,9 @@ public class EditTravelActivity extends AppCompatActivity {
 		countrySearchRecycler.setAdapter(countryAdapter);
 	}
 
-	private Chip makeChip(final SearchCountryItem item) {
+	private Chip makeChip(final CountryItem item) {
 		Chip chip = new Chip(EditTravelActivity.this);
-		chip.setText(item.getCountryName());
+		chip.setText(item.getCountryKrName());
 		chip.setCloseIconVisible(true);
 		chip.setTextAppearance(R.style.chip_text_style);
 		ChipDrawable chipDrawable = (ChipDrawable) chip.getChipDrawable();

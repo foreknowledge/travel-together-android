@@ -10,24 +10,31 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mungziapp.traveltogether.R;
+import com.mungziapp.traveltogether.data.Countries;
+import com.mungziapp.traveltogether.item.CountryItem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class TravelCountryAdapter extends RecyclerView.Adapter<TravelCountryAdapter.ViewHolder> {
 	private Context context;
-	private ArrayList<String> items = new ArrayList<>();
+	private ArrayList<String> countryFlags = new ArrayList<>();
 
 	public TravelCountryAdapter(Context context) {
 		this.context = context;
 	}
 
-	public void addItem(String item) {
-		items.add(item);
+	public void addItem(String countryCode) {
+		HashMap<String, CountryItem> countryMap = Countries.getCountryMap();
+
+		CountryItem item = countryMap.get(countryCode);
+		if (item != null) countryFlags.add(item.getCountryFlag());
 	}
 
 	@Override   // 아이템의 개수 리턴
 	public int getItemCount() {
-		return items.size();
+		return countryFlags.size();
 	}
 
 	@NonNull
@@ -41,7 +48,7 @@ public class TravelCountryAdapter extends RecyclerView.Adapter<TravelCountryAdap
 
 	@Override   // 데이터와 뷰가 결합되는 시점에 호출되는 메서드
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		holder.setItem(items.get(position));
+		holder.setItem(countryFlags.get(position));
 	}
 
 	static class ViewHolder extends RecyclerView.ViewHolder {

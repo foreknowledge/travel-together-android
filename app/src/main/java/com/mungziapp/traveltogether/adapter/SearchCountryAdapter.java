@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mungziapp.traveltogether.data.Countries;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.item.SearchCountryItem;
+import com.mungziapp.traveltogether.item.CountryItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdapter.ViewHolder> {
 	private Context context;
-	private ArrayList<SearchCountryItem> items = new ArrayList<>();
-	private ArrayList<SearchCountryItem> searchItems = new ArrayList<>();
+	private ArrayList<CountryItem> items = new ArrayList<>();
+	private ArrayList<CountryItem> searchItems = new ArrayList<>();
 
 	private OnItemClickListener listener;
 
@@ -28,34 +28,32 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
 		this.context = context;
 	}
 
-	public SearchCountryItem getSearchItem(int position) {
+	public CountryItem getSearchItem(int position) {
 		return searchItems.get(position);
 	}
 
-	public SearchCountryItem getItem(String countryFlag) {
-		for (SearchCountryItem item : items) {
-			if (item.getCountryFlag().equals(countryFlag)) return item;
+	public CountryItem getItem(String countryCode) {
+		for (CountryItem item : items) {
+			if (item.getCountryCode().equals(countryCode)) return item;
 		}
 
 		return null;
 	}
 
-	public void selectItem(SearchCountryItem item) {
+	public void selectItem(CountryItem item) {
 		item.setIsSelected(true);
 		notifyDataSetChanged();
 	}
 
-	public void deselectItem(SearchCountryItem item) {
+	public void deselectItem(CountryItem item) {
 		item.setIsSelected(false);
 		notifyDataSetChanged();
 	}
 
 	public void initItem() {
-		List<Countries.Country> countryList = Countries.getCountryList();
+		List<CountryItem> countryList = Countries.getCountryList();
 
-		for (Countries.Country country : countryList)
-			items.add(new SearchCountryItem(country.getCountryFlag(), country.getCountryKrName()));
-
+		items.addAll(countryList);
 		notifyDataSetChanged();
 	}
 
@@ -68,8 +66,8 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
 		}
 
 		for (int i = 0; i < items.size(); ++i) {
-			SearchCountryItem item = items.get(i);
-			if (!item.getIsSelected() && item.getCountryName().replace(" ", "").contains(word)) {
+			CountryItem item = items.get(i);
+			if (!item.getSelected() && item.getCountryKrName().replace(" ", "").contains(word)) {
 				searchItems.add(item);
 			}
 		}
@@ -120,9 +118,9 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
 
 		}
 
-		void setItem(SearchCountryItem item) {
+		void setItem(CountryItem item) {
 			this.countryFlag.setText(item.getCountryFlag());
-			this.countryName.setText(item.getCountryName());
+			this.countryName.setText(item.getCountryKrName());
 		}
 	}
 }
