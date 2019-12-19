@@ -2,8 +2,19 @@
 
 	<!-- Base application theme. -->
 	<style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge" >
+		<item name="colorPrimaryDark">@android:color/transparent</item>
 		<item name="colorAccent">@color/colorSecondary</item>
 		<item name="colorControlNormal">@color/colorBackDark</item>
+		<item name="android:windowLightStatusBar">true</item>
+	</style>
+
+	<style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge" >
+		<item name="colorPrimaryDark">@color/colorPrimary</item>
+		<item name="android:windowBackground">@drawable/splash_background</item>
+	</style>
+
+	<style name="AppThemeDark" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+		<item name="colorPrimaryDark">@color/colorGray</item>
 	</style>
 
 	<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
