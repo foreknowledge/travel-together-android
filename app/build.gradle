@@ -2,6 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 
+def appkeyPropertiesFile = rootProject.file("appkey.properties")
+def appkeyProperties = new Properties()
+appkeyProperties.load(new FileInputStream(appkeyPropertiesFile))
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -12,6 +16,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        resValue "string", "kakao_app_key", appkeyProperties['KAKAO_APP_KEY']
     }
     buildTypes {
         release {
