@@ -5,24 +5,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.mungziapp.traveltogether.interfaces.ActivityCallback;
 import com.mungziapp.traveltogether.R;
+import com.mungziapp.traveltogether.interfaces.ActivityCallback;
 
 public class AccountFragment extends Fragment {
+	private View rootView;
 	private ActivityCallback callback;
-
-	@Override
-	public void setMenuVisibility(boolean menuVisible) {
-		super.setMenuVisibility(menuVisible);
-
-		if (menuVisible && callback != null)
-			callback.setFragmentTitle("가계부");
-	}
 
 	@Override
 	public void onAttach(@NonNull Context context) {
@@ -35,8 +29,20 @@ public class AccountFragment extends Fragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_account, container, false);
+		rootView = inflater.inflate(R.layout.fragment_account, container, false);
+
+		setButtons();
 
 		return rootView;
+	}
+
+	private void setButtons() {
+		Button btnGoBefore = rootView.findViewById(R.id.btn_go_before);
+		btnGoBefore.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				callback.finishActivity();
+			}
+		});
 	}
 }

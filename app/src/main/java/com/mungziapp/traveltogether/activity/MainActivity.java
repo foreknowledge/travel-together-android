@@ -18,7 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.adapter.TravelsRecyclerAdapter;
-import com.mungziapp.traveltogether.adapter.OuterPagerAdapter;
+import com.mungziapp.traveltogether.adapter.MainPagerAdapter;
 import com.mungziapp.traveltogether.app.DatabaseManager;
 import com.mungziapp.traveltogether.data.TravelData;
 import com.mungziapp.traveltogether.fragment.TravelsFragment;
@@ -61,15 +61,15 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		TravelsFragment oncommingTravels = new TravelsFragment(oncommingAdapter);
 		TravelsFragment lastTravels = new TravelsFragment(lastTravelAdapter);
 
-		OuterPagerAdapter outerPagerAdapter = new OuterPagerAdapter(fm);
-		outerPagerAdapter.addItem(oncommingTravels);
-		outerPagerAdapter.addItem(lastTravels);
+		MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(fm);
+		mainPagerAdapter.addItem(oncommingTravels);
+		mainPagerAdapter.addItem(lastTravels);
 
-		outerPagerAdapter.notifyDataSetChanged();
+		mainPagerAdapter.notifyDataSetChanged();
 
 		outerViewPager = findViewById(R.id.outer_view_pager);
-		outerViewPager.setOffscreenPageLimit(outerPagerAdapter.getCount());
-		outerViewPager.setAdapter(outerPagerAdapter);
+		outerViewPager.setOffscreenPageLimit(mainPagerAdapter.getCount());
+		outerViewPager.setAdapter(mainPagerAdapter);
 	}
 
 	private void setTabBar() {

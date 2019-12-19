@@ -9,10 +9,10 @@ import com.mungziapp.traveltogether.fragment.TravelsFragment;
 
 import java.util.ArrayList;
 
-public class OuterPagerAdapter extends FragmentStatePagerAdapter {
+public class MainPagerAdapter extends FragmentStatePagerAdapter {
 	private ArrayList<TravelsFragment> travelsFragments = new ArrayList<>();
 
-	public OuterPagerAdapter(FragmentManager fm) {
+	public MainPagerAdapter(FragmentManager fm) {
 		super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 	}
 

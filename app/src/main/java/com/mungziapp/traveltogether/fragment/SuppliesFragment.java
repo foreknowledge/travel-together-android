@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,24 +15,15 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.mungziapp.traveltogether.adapter.SuppliesPagerAdapter;
-import com.mungziapp.traveltogether.interfaces.ActivityCallback;
 import com.mungziapp.traveltogether.R;
+import com.mungziapp.traveltogether.interfaces.ActivityCallback;
 
 public class SuppliesFragment extends Fragment {
+	private View rootView;
 	private ActivityCallback callback;
 
-	private View rootView;
 	private ViewPager suppliesViewPager;
-
 	private FragmentManager fm;
-
-	@Override
-	public void setMenuVisibility(boolean menuVisible) {
-		super.setMenuVisibility(menuVisible);
-
-		if (menuVisible && callback != null)
-			callback.setFragmentTitle("준비물");
-	}
 
 	@Override
 	public void onAttach(@NonNull Context context) {
@@ -50,6 +42,7 @@ public class SuppliesFragment extends Fragment {
 
 		setAdapters();
 		setTabBar();
+		setButtons();
 
 		return rootView;
 	}
@@ -84,6 +77,16 @@ public class SuppliesFragment extends Fragment {
 
 			@Override
 			public void onTabReselected(TabLayout.Tab tab) {
+			}
+		});
+	}
+
+	private void setButtons() {
+		Button btnGoBefore = rootView.findViewById(R.id.btn_go_before);
+		btnGoBefore.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				callback.finishActivity();
 			}
 		});
 	}

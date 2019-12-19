@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<item
+		android:id="@+id/notification"
+		android:icon="@drawable/dr_notice"
+		android:title="@string/text_notice"/>
+
+	<item
+		android:id="@+id/supplies"
+		android:icon="@drawable/dr_supplies"
+		android:title="@string/text_supplies"/>
+
+	<item
+		android:id="@+id/schedule"
+		android:icon="@drawable/dr_schedule"
+		android:title="@string/text_schedule"/>
+
+	<item
+		android:id="@+id/account_book"
+		android:icon="@drawable/dr_account"
+		android:title="@string/text_account_book"/>
+
+	<item
+		android:id="@+id/diary"
+		android:icon="@drawable/dr_diary"
+		android:title="@string/text_diary"/>
+
+</menu>

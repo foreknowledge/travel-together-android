@@ -18,13 +18,15 @@ import android.widget.TextView;
 import com.mungziapp.traveltogether.adapter.TravelCountryAdapter;
 import com.mungziapp.traveltogether.adapter.TravelMemberAdapter;
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.data.SearchType;
 import com.mungziapp.traveltogether.app.DatabaseManager;
+import com.mungziapp.traveltogether.data.FragmentType;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.table.TravelTable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static com.mungziapp.traveltogether.data.FragmentType.*;
 
 public class DetailActivity extends AppCompatActivity {
 	private int travelId;
@@ -177,7 +179,7 @@ public class DetailActivity extends AppCompatActivity {
 		notice.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				startTravelActivity(SearchType.NOTICE);
+				startTravelActivity(NOTICE);
 			}
 		});
 
@@ -185,7 +187,7 @@ public class DetailActivity extends AppCompatActivity {
 		supplies.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				startTravelActivity(SearchType.SUPPLIES);
+				startTravelActivity(SUPPLIES);
 			}
 		});
 
@@ -193,7 +195,7 @@ public class DetailActivity extends AppCompatActivity {
 		schedule.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				startTravelActivity(SearchType.SCHEDULE);
+				startTravelActivity(SCHEDULE);
 			}
 		});
 
@@ -201,7 +203,7 @@ public class DetailActivity extends AppCompatActivity {
 		account.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				startTravelActivity(SearchType.ACCOUNT);
+				startTravelActivity(ACCOUNT);
 			}
 		});
 
@@ -209,7 +211,7 @@ public class DetailActivity extends AppCompatActivity {
 		diary.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				startTravelActivity(SearchType.DIARY);
+				startTravelActivity(DIARY);
 			}
 		});
 
@@ -222,7 +224,7 @@ public class DetailActivity extends AppCompatActivity {
 		});
 	}
 
-	private void startTravelActivity(int type) {
+	private void startTravelActivity(FragmentType type) {
 		Intent intent = new Intent(getApplicationContext(), TravelActivity.class);
 		intent.putExtra("caller", type);
 		startActivity(intent);
