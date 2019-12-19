@@ -114,9 +114,9 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 			}
 
 			if (item.getCountryCodes() != null) {
-				ArrayList<String> countries = new ArrayList<>(Arrays.asList(item.getCountryCodes().split(",")));
+				ArrayList<String> countryCodes = new ArrayList<>(Arrays.asList(item.getCountryCodes().split(",")));
 				TravelCountryAdapter travelCountryAdapter = new TravelCountryAdapter(context);
-				for (String country : countries) travelCountryAdapter.addItem(country);
+				for (String countryCode : countryCodes) travelCountryAdapter.addItem(countryCode);
 				countryRecyclerView.setAdapter(travelCountryAdapter);
 			}
 		}

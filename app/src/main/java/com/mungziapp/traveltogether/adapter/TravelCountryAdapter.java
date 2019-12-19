@@ -19,14 +19,14 @@ import java.util.HashMap;
 public class TravelCountryAdapter extends RecyclerView.Adapter<TravelCountryAdapter.ViewHolder> {
 	private Context context;
 	private ArrayList<String> countryFlags = new ArrayList<>();
+	private HashMap<String, CountryItem> countryMap;
 
 	public TravelCountryAdapter(Context context) {
 		this.context = context;
+		countryMap = Countries.getCountryMap();
 	}
 
 	public void addItem(String countryCode) {
-		HashMap<String, CountryItem> countryMap = Countries.getCountryMap();
-
 		CountryItem item = countryMap.get(countryCode);
 		if (item != null) countryFlags.add(item.getCountryFlag());
 	}
