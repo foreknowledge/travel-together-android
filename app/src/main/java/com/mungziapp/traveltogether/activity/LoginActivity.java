@@ -8,9 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.apollographql.apollo.ApolloCall;
-import com.apollographql.apollo.api.Response;
-import com.apollographql.apollo.exception.ApolloException;
 import com.kakao.auth.ApiResponseCallback;
 import com.kakao.auth.AuthService;
 import com.kakao.auth.AuthType;
@@ -24,11 +21,11 @@ import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.OptionalBoolean;
 import com.kakao.util.exception.KakaoException;
-import com.mungziapp.traveltogether.app.ApolloConnector;
-import com.mungziapp.traveltogether.app.FirstMutation;
 import com.mungziapp.traveltogether.R;
+import com.mungziapp.traveltogether.app.RequestManager;
+import com.mungziapp.traveltogether.interfaces.SetResponseListener;
 
-import org.jetbrains.annotations.NotNull;
+import java.util.Map;
 
 public class LoginActivity extends BaseActivity {
 
@@ -171,28 +168,22 @@ public class LoginActivity extends BaseActivity {
 					Log.d(TAG, "this access token is for userId=" + userId);
 
 					// 서버로 access token & user id 전송
-					getOauthLogin();
+					String url = "http://192.168.0.56/tt/api/v1/users/" + userId;
+					RequestManager requestManager = RequestManager.getInstance();
+					requestManager.onSendPostRequest(url, new SetResponseListener() {
+						@Override
+						public void onResponse(String response) {
+							Log.d(TAG, "응답 = " + response);
+						}
+
+						@Override
+						public void setParams(Map<String, String> params) {
+							params.put("accessToken", token);
+							params.put("resourceServer", "kakao");
+						}
+					});
 				}
 			});
 		}
-
-		private void getOauthLogin() {
-			ApolloConnector.setupApollo().mutate(
-					FirstMutation
-							.builder()
-							.build())
-					.enqueue(new ApolloCall.Callback<FirstMutation.Data>() {
-						@Override
-						public void onResponse(@NotNull Response<FirstMutation.Data> response) {
-							Log.d(TAG, "Response: " + response.data());
-						}
-
-						@Override
-						public void onFailure(@NotNull ApolloException e) {
-							Log.d(TAG, "Exception " + e.getMessage(), e);
-						}
-					});
-		}
-
 	}
 }
