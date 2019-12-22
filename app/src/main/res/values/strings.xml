@@ -35,14 +35,17 @@
 	<string name="btn_text_country">여행지 추가</string>
 	<string name="btn_text_cover_img">커버 이미지 변경</string>
 	<string name="btn_text_photo">사진 추가</string>
+	<string name="btn_text_normal_schedule">일반 일정</string>
+	<string name="btn_text_move_schedule">이동 일정</string>
 
 	<string name="btn_push_notification">푸시 알림 설정</string>
 	<string name="btn_logout">로그 아웃</string>
 	<string name="btn_remove_account">회원 탈퇴</string>
 	<string name="btn_text_edit">Edit</string>
 
-	<string name="title_create_travel">여행 추가</string>
+	<string name="title_add_travel">여행 추가</string>
 	<string name="title_edit_travel">여행 편집</string>
+	<string name="title_add_schedule">일정 추가</string>
 	<string name="title_travel">여행</string>
 
 	<string name="desc_icon_person">person icon</string>
@@ -57,6 +60,9 @@
 	<string name="hint_search_travel">제목 검색</string>
 	<string name="hint_name">이름</string>
 	<string name="hint_message">상태 메시지</string>
+	<string name="hint_time">시간</string>
+	<string name="hint_place">장소</string>
+	<string name="hint_memo">메모</string>
 
 	<string name="menu_travel_edit">여행 편집</string>
 	<string name="menu_travel_delete">여행 삭제</string>
