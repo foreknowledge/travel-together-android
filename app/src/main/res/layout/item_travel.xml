@@ -9,10 +9,12 @@
 	app:cardCornerRadius="10dp"
 	app:cardElevation="3dp">
 
-	<View
-		android:id="@+id/travel_layout"
+	<ImageView
+		android:id="@+id/travel_cover"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent" />
+		android:layout_height="match_parent"
+		android:scaleType="centerCrop"
+		android:contentDescription="@string/cover_img" />
 
 	<View
 		android:layout_width="match_parent"

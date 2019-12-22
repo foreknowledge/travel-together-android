@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -118,8 +119,8 @@ public class DetailActivity extends AppCompatActivity {
 
 		// 여행 커버 이미지 설정
 		if (travelCover != 0) {
-			FrameLayout travelLayout = findViewById(R.id.travel_layout);
-			travelLayout.setBackgroundResource(this.travelCover);
+			ImageView travelCover = findViewById(R.id.travel_cover);
+			travelCover.setImageResource(this.travelCover);
 		}
 	}
 

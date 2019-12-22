@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -55,7 +56,7 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 	}
 
 	static class ViewHolder extends RecyclerView.ViewHolder {
-		private View travelLayout;
+		private ImageView travelCover;
 		private TextView travelName;
 		private TextView travelDuration;
 		private TextView numOfTravelMembers;
@@ -69,7 +70,7 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 
 			this.context = context;
 
-			this.travelLayout = itemView.findViewById(R.id.travel_layout);
+			this.travelCover = itemView.findViewById(R.id.travel_cover);
 			this.travelName = itemView.findViewById(R.id.travel_name);
 			this.travelDuration = itemView.findViewById(R.id.travel_duration);
 			this.numOfTravelMembers = itemView.findViewById(R.id.travel_members);
@@ -101,7 +102,7 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 		void setItem(TravelData item) {
 			this.travelName.setText(item.getName());
 
-			this.travelLayout.setBackgroundResource(item.getCover());
+			this.travelCover.setImageResource(item.getCover());
 
 			String numOfTravelMembers = Integer.toString(item.getMembers());
 			this.numOfTravelMembers.setText(numOfTravelMembers);
