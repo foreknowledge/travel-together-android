@@ -69,6 +69,7 @@
 
 	<string name="btn_ok_text">확인</string>
 	<string name="btn_cancel_text">취소</string>
+	<string name="btn_add_text">추가</string>
 
 	<string-array name="option_travel">
 		<item>여행 편집</item>

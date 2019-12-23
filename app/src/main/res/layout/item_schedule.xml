@@ -2,37 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
+	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
-	<androidx.constraintlayout.widget.ConstraintLayout
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:gravity="center_vertical"
+		android:orientation="horizontal"
 		android:padding="10dp">
 
 		<View
-			android:id="@+id/view"
-			android:layout_width="wrap_content"
+			android:layout_width="30dp"
 			android:layout_height="5dp"
-			android:layout_gravity="center"
 			android:layout_marginEnd="10dp"
-			android:background="@color/colorBackMiddle"
-			app:layout_constrainedWidth="true"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent"
-			app:layout_constraintEnd_toStartOf="@+id/btn_add"/>
+			android:background="@color/colorBackMiddle"/>
 
 		<TextView
 			android:id="@+id/text_day_n"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_gravity="start"
-			android:background="@color/colorBack"
-			android:layout_marginStart="30dp"
 			android:paddingStart="10dp"
 			android:paddingEnd="5dp"
-			android:text="Day 1"
 			android:textColor="@android:color/black"
 			android:textSize="20sp"
 			android:textStyle="bold"
@@ -44,19 +35,21 @@
 			android:id="@+id/text_date"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_gravity="start"
-			android:background="@color/colorBack"
 			android:paddingStart="0dp"
 			android:paddingEnd="10dp"
-			android:text="(2019.2.5)"
 			android:textColor="@android:color/black"
-			android:textSize="16sp"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintStart_toEndOf="@id/text_day_n"
-			app:layout_constraintTop_toTopOf="parent" />
+			android:textSize="16sp" />
+
+		<View
+			android:layout_width="0dp"
+			android:layout_height="5dp"
+			android:layout_weight="1"
+			android:layout_marginStart="10dp"
+			android:layout_marginEnd="10dp"
+			android:background="@color/colorBackMiddle"/>
 
 		<TextView
-			android:id="@+id/btn_add"
+			android:id="@+id/btn_add_schedule"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:background="@drawable/dr_add_rounded"
@@ -65,14 +58,10 @@
 			android:paddingTop="5dp"
 			android:paddingEnd="15dp"
 			android:paddingBottom="5dp"
-			android:text="추가"
-			android:textColor="@color/colorGrayLight"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toEndOf="@+id/view"
-			app:layout_constraintTop_toTopOf="parent" />
+			android:text="@string/btn_add_text"
+			android:textColor="@color/colorGrayLight" />
 
-	</androidx.constraintlayout.widget.ConstraintLayout>
+	</LinearLayout>
 
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/detail_schedule_recycler"
