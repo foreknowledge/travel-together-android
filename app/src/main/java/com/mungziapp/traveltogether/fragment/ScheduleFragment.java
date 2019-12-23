@@ -10,8 +10,11 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.mungziapp.traveltogether.R;
+import com.mungziapp.traveltogether.adapter.ScheduleAdapter;
 import com.mungziapp.traveltogether.interfaces.ActivityCallback;
 
 public class ScheduleFragment extends Fragment {
@@ -32,6 +35,7 @@ public class ScheduleFragment extends Fragment {
 		rootView = inflater.inflate(R.layout.fragment_schedule, container, false);
 
 		setButtons();
+		setRecyclerView();
 
 		return rootView;
 	}
@@ -44,5 +48,12 @@ public class ScheduleFragment extends Fragment {
 				callback.finishActivity();
 			}
 		});
+	}
+
+	private void setRecyclerView() {
+		RecyclerView scheduleRecycler = rootView.findViewById(R.id.schedule_recycler);
+		scheduleRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+
+		ScheduleAdapter scheduleAdapter = new ScheduleAdapter(getContext());
 	}
 }
