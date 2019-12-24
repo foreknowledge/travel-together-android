@@ -5,12 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
+import com.mungziapp.traveltogether.item.DetailScheduleItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +42,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View itemView = inflater.inflate(R.layout.item_schedule, parent, false);
 
-		return new ViewHolder(itemView, listener);
+		return new ViewHolder(itemView, context, listener);
 	}
 
 	@Override
@@ -56,7 +59,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 		private TextView textDayN;
 		private TextView textDate;
 
-		ViewHolder(@NonNull final View itemView, final OnItemClickListener listener) {
+		ViewHolder(@NonNull final View itemView, final Context context, final OnItemClickListener listener) {
 			super(itemView);
 
 			textDayN = itemView.findViewById(R.id.text_day_n);
@@ -70,6 +73,26 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 				}
 			});
 
+			RecyclerView detailRecycler = itemView.findViewById(R.id.detail_schedule_recycler);
+			detailRecycler.setLayoutManager(new LinearLayoutManager(context));
+
+			DetailScheduleAdapter detailRecyclerAdapter =  new DetailScheduleAdapter(context);
+			detailRecyclerAdapter.addItem(new DetailScheduleItem(false, "호텔 조식 냥", "8:00", null, null, null));
+			detailRecyclerAdapter.addItem(new DetailScheduleItem(false, "준비하고 출발!", "10:00", null, null, null));
+			detailRecyclerAdapter.addItem(new DetailScheduleItem(true, "260번 버스 타고 센트럴역으로 이동", null, null, "준비물 - 물병, 셀카봉, 지갑, 핸드폰, 보조배터리", null));
+			detailRecyclerAdapter.setClickListener(new OnItemClickListener() {
+				@Override
+				public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
+					Toast.makeText(context, "item 클릭함.", Toast.LENGTH_SHORT).show();
+				}
+
+				@Override
+				public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
+					return null;
+				}
+			});
+
+			detailRecycler.setAdapter(detailRecyclerAdapter);
 		}
 
 		void setItem(List<String> date) {

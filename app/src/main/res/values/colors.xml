@@ -13,6 +13,7 @@
 	<color name="colorGrayLight">#95989A</color>
 
 	<color name="colorDetailBack">#F2F2F2</color>
+	<color name="colorScheduleTitle">#3E3E3E</color>
 
 	<color name="colorTransparent">#AAF2F2F2</color>
 	<color name="colorShadow">#10000000</color>
