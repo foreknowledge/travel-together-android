@@ -7,7 +7,7 @@ public class TravelData {
 	private String endDate;
 	private String countryCodes;
 	private int cover;
-	private int members = 1;
+	private int members;
 
 	public TravelData(int id, String name, String startDate, String endDate, String countryCodes, int cover, int members) {
 		this.id = id;
@@ -16,8 +16,7 @@ public class TravelData {
 		this.endDate = endDate;
 		this.countryCodes = countryCodes;
 		this.cover = cover;
-		if (members != 0)
-			this.members = members;
+		this.members = members;
 	}
 
 	public int getId() {

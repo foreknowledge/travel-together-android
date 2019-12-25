@@ -19,14 +19,17 @@ import com.mungziapp.traveltogether.adapter.TravelCountryAdapter;
 import com.mungziapp.traveltogether.adapter.TravelMemberAdapter;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.app.DatabaseManager;
+import com.mungziapp.traveltogether.data.DateObject;
 import com.mungziapp.traveltogether.data.FragmentType;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.table.TravelTable;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static com.mungziapp.traveltogether.data.FragmentType.*;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class DetailActivity extends AppCompatActivity {
 	private int travelId;
@@ -78,9 +81,14 @@ public class DetailActivity extends AppCompatActivity {
 		travelName.setText(this.travelName);
 
 		if (travelStartDate != null && travelEndDate != null) {
+			LocalDate startLocalDate = DateObject.stringToLocalDate(travelStartDate);
+			LocalDate endLocalDate = DateObject.stringToLocalDate(travelEndDate);
+
+			long daysBetween = DAYS.between(startLocalDate, endLocalDate) + 1;
+			String strDuration = travelStartDate + " ~ " + travelEndDate + " (" + daysBetween + "일간)";
+
 			// 여행 기간 설정
 			TextView travelDuration = findViewById(R.id.travel_duration);
-			String strDuration = this.travelStartDate + " ~ " + this.travelEndDate + " (N일간)";
 			travelDuration.setText(strDuration);
 
 			// 여행 D-Day 설정

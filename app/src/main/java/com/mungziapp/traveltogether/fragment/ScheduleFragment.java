@@ -100,10 +100,10 @@ public class ScheduleFragment extends Fragment {
 
 		if (startLocalDate == null || endLocalDate == null) return;
 
-		long daysBetween = DAYS.between(startLocalDate, endLocalDate);
+		long daysBetween = DAYS.between(startLocalDate, endLocalDate) + 1;
 
 		LocalDate date = startLocalDate;
-		for (int i = 0; i < daysBetween + 1; ++i) {
+		for (int i = 0; i < daysBetween; ++i) {
 			String dayN = String.valueOf(i + 1);
 			scheduleAdapter.addDate(Arrays.asList(dayN, date.toString()));
 
