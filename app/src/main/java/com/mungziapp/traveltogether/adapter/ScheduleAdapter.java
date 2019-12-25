@@ -58,12 +58,14 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 	static class ViewHolder extends RecyclerView.ViewHolder {
 		private TextView textDayN;
 		private TextView textDate;
+		private TextView scheduleNotice;
 
 		ViewHolder(@NonNull final View itemView, final Context context, final OnItemClickListener listener) {
 			super(itemView);
 
 			textDayN = itemView.findViewById(R.id.text_day_n);
 			textDate = itemView.findViewById(R.id.text_date);
+			scheduleNotice = itemView.findViewById(R.id.schedule_notice);
 
 			TextView addSchedule = itemView.findViewById(R.id.btn_add_schedule);
 			addSchedule.setOnClickListener(new View.OnClickListener() {
@@ -77,9 +79,9 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 			detailRecycler.setLayoutManager(new LinearLayoutManager(context));
 
 			DetailScheduleAdapter detailRecyclerAdapter =  new DetailScheduleAdapter(context);
-			detailRecyclerAdapter.addItem(new DetailScheduleItem("호텔 조식 냠", "8:00", null, null, null));
-			detailRecyclerAdapter.addItem(new DetailScheduleItem("준비하고 출발!", "10:00", "준비물 - 물병, 셀카봉, 지갑, 핸드폰, 보조배터리", null, null));
-			detailRecyclerAdapter.addItem(new DetailScheduleItem(true, "260번 버스 타고 센트럴역으로 이동", null, null, null, null));
+//			detailRecyclerAdapter.addItem(new DetailScheduleItem("호텔 조식 냠", "8:00", null, null, null));
+//			detailRecyclerAdapter.addItem(new DetailScheduleItem("준비하고 출발!", "10:00", "준비물 - 물병, 셀카봉, 지갑, 핸드폰, 보조배터리", null, null));
+//			detailRecyclerAdapter.addItem(new DetailScheduleItem(true, "260번 버스 타고 센트럴역으로 이동", null, null, null, null));
 			detailRecyclerAdapter.setClickListener(new OnItemClickListener() {
 				@Override
 				public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {

@@ -51,7 +51,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
 			android:layout_margin="20dp"
-			android:text="@string/text_schedule_notice"
+			android:text="@string/text_duration_notice"
 			android:textSize="20sp"
 			android:visibility="invisible" />
 

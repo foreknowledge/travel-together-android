@@ -58,7 +58,6 @@ public class DetailScheduleAdapter extends RecyclerView.Adapter<DetailScheduleAd
 
 		ViewHolder(@NonNull final View itemView, final OnItemClickListener listener) {
 			super(itemView);
-
 			scheduleType = itemView.findViewById(R.id.schedule_type);
 			scheduleTime = itemView.findViewById(R.id.schedule_time);
 			scheduleTitle = itemView.findViewById(R.id.schedule_title);

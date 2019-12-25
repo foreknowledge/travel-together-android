@@ -61,9 +61,24 @@
 
 	</LinearLayout>
 
-	<androidx.recyclerview.widget.RecyclerView
-		android:id="@+id/detail_schedule_recycler"
+	<FrameLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content" />
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="10dp">
+
+		<TextView
+			android:id="@+id/schedule_notice"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:text="@string/text_schedule_notice"
+			android:textSize="16sp"/>
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/detail_schedule_recycler"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+	</FrameLayout>
 
 </LinearLayout>
