@@ -22,7 +22,7 @@ public class DetailScheduleAdapter extends RecyclerView.Adapter<DetailScheduleAd
 
 	private OnItemClickListener listener;
 
-	public DetailScheduleAdapter(Context context) {
+	DetailScheduleAdapter(Context context) {
 		this.context = context;
 	}
 
@@ -37,7 +37,7 @@ public class DetailScheduleAdapter extends RecyclerView.Adapter<DetailScheduleAd
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View itemView = inflater.inflate(R.layout.item_detail_schedule, parent, false);
 
-		return new ViewHolder(itemView, listener);
+		return new ViewHolder(itemView, context, listener);
 	}
 
 	@Override
@@ -56,8 +56,12 @@ public class DetailScheduleAdapter extends RecyclerView.Adapter<DetailScheduleAd
 		private TextView scheduleTitle;
 		private TextView scheduleMemo;
 
-		ViewHolder(@NonNull final View itemView, final OnItemClickListener listener) {
+		private Context context;
+
+		ViewHolder(@NonNull final View itemView, Context context, final OnItemClickListener listener) {
 			super(itemView);
+
+			this.context = context;
 
 			scheduleType = itemView.findViewById(R.id.schedule_type);
 			scheduleTime = itemView.findViewById(R.id.schedule_time);
@@ -84,6 +88,9 @@ public class DetailScheduleAdapter extends RecyclerView.Adapter<DetailScheduleAd
 
 			if (item.getTime() != null)
 				scheduleTime.setText(item.getTime());
+
+			if (item.isMove())
+				scheduleType.setBackgroundResource(R.drawable.dr_schedule_move);
 		}
 	}
 }
