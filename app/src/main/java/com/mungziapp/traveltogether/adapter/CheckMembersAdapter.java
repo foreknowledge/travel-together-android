@@ -13,10 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mungziapp.traveltogether.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CheckMembersAdapter extends RecyclerView.Adapter<CheckMembersAdapter.ViewHolder> {
 	private Context context;
-	private ArrayList<Integer> memberProfiles = new ArrayList<>();
+	private List<Integer> memberProfiles = new ArrayList<>();
 	private View.OnClickListener listener;
 
 	public CheckMembersAdapter(Context context) {

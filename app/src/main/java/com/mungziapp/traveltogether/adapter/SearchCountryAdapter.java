@@ -19,8 +19,8 @@ import java.util.List;
 
 public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdapter.ViewHolder> {
 	private Context context;
-	private ArrayList<CountryItem> items = new ArrayList<>();
-	private ArrayList<CountryItem> searchItems = new ArrayList<>();
+	private List<CountryItem> items = new ArrayList<>();
+	private List<CountryItem> searchItems = new ArrayList<>();
 
 	private OnItemClickListener listener;
 

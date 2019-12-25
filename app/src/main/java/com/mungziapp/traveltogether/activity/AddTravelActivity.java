@@ -29,7 +29,7 @@ import com.mungziapp.traveltogether.adapter.SearchCountryAdapter;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.item.CountryItem;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 public class AddTravelActivity extends AppCompatActivity {
 	private Button btnStartDate;
@@ -235,9 +235,10 @@ public class AddTravelActivity extends AppCompatActivity {
 					month = Integer.valueOf(startDate[1]) - 1;
 					date = Integer.valueOf(startDate[2]);
 				} else {
-					year = Calendar.getInstance().get(Calendar.YEAR);
-					month = Calendar.getInstance().get(Calendar.MONTH);
-					date = Calendar.getInstance().get(Calendar.DATE);
+					LocalDate localDate = LocalDate.now();
+					year = localDate.getYear();
+					month = localDate.getMonthValue();
+					date = localDate.getDayOfMonth();
 				}
 				new DatePickerDialog(AddTravelActivity.this, new DatePickerDialog.OnDateSetListener() {
 					@Override
@@ -263,9 +264,10 @@ public class AddTravelActivity extends AppCompatActivity {
 					month = Integer.valueOf(endDate[1]) - 1;
 					date = Integer.valueOf(endDate[2]);
 				} else {
-					year = Calendar.getInstance().get(Calendar.YEAR);
-					month = Calendar.getInstance().get(Calendar.MONTH);
-					date = Calendar.getInstance().get(Calendar.DATE);
+					LocalDate localDate = LocalDate.now();
+					year = localDate.getYear();
+					month = localDate.getMonthValue();
+					date = localDate.getDayOfMonth();
 				}
 				new DatePickerDialog(AddTravelActivity.this, new DatePickerDialog.OnDateSetListener() {
 					@Override

@@ -11,7 +11,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -228,6 +227,7 @@ public class DetailActivity extends AppCompatActivity {
 	private void startTravelActivity(FragmentType type) {
 		Intent intent = new Intent(getApplicationContext(), TravelActivity.class);
 		intent.putExtra("caller", type);
+		intent.putExtra("travel_id", travelId);
 		startActivity(intent);
 	}
 

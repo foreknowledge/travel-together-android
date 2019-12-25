@@ -2,12 +2,12 @@ package com.mungziapp.traveltogether.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,14 +18,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.activity.AddScheduleActivity;
 import com.mungziapp.traveltogether.adapter.ScheduleAdapter;
+import com.mungziapp.traveltogether.app.DatabaseManager;
 import com.mungziapp.traveltogether.interfaces.ActivityCallback;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
+import com.mungziapp.traveltogether.table.TravelTable;
 
 import java.util.Arrays;
+
 
 public class ScheduleFragment extends Fragment {
 	private View rootView;
 	private ActivityCallback callback;
+
+	private String travelStartDate;
+	private String travelEndDate;
 
 	@Override
 	public void onAttach(@NonNull Context context) {
@@ -40,10 +46,26 @@ public class ScheduleFragment extends Fragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.fragment_schedule, container, false);
 
+		int travelId = 0;
+		Bundle bundle = getArguments();
+		if (bundle != null)
+			travelId = bundle.getInt("travel_id");
+
+		setDataFromDB(travelId);
 		setButtons();
 		setRecyclerView();
 
 		return rootView;
+	}
+
+	private void setDataFromDB(int id) {
+		Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + id, null);
+		cursor.moveToNext();
+
+		this.travelStartDate = cursor.getString(cursor.getColumnIndex("start_date"));
+		this.travelEndDate = cursor.getString(cursor.getColumnIndex("end_date"));
+
+		cursor.close();
 	}
 
 	private void setButtons() {
@@ -61,6 +83,9 @@ public class ScheduleFragment extends Fragment {
 		scheduleRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		final ScheduleAdapter scheduleAdapter = new ScheduleAdapter(getContext());
+		String[] startDate = travelStartDate.split("\\.");
+		String[] endDate = travelEndDate.split("\\.");
+
 		scheduleAdapter.addDate(Arrays.asList("1", "2020.01.02"));
 		scheduleAdapter.addDate(Arrays.asList("2", "2020.01.03"));
 		scheduleAdapter.addDate(Arrays.asList("3", "2020.01.04"));

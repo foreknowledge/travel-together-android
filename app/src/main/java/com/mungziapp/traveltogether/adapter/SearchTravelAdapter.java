@@ -17,11 +17,12 @@ import com.mungziapp.traveltogether.item.SearchTravelItem;
 import com.mungziapp.traveltogether.table.TravelTable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchTravelAdapter extends RecyclerView.Adapter<SearchTravelAdapter.ViewHolder> {
 	private Context context;
-	private ArrayList<SearchTravelItem> items = new ArrayList<>();
-	private ArrayList<SearchTravelItem> filteredItems = new ArrayList<>();
+	private List<SearchTravelItem> items = new ArrayList<>();
+	private List<SearchTravelItem> filteredItems = new ArrayList<>();
 
 	private OnItemClickListener listener;
 

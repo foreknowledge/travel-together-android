@@ -7,9 +7,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SuppliesPagerAdapter extends FragmentStatePagerAdapter {
-	private ArrayList<Fragment> fragments = new ArrayList<>();
+	private List<Fragment> fragments = new ArrayList<>();
 
 	public SuppliesPagerAdapter(FragmentManager fm) {
 		super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);

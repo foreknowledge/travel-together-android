@@ -37,7 +37,7 @@ public class DetailScheduleAdapter extends RecyclerView.Adapter<DetailScheduleAd
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View itemView = inflater.inflate(R.layout.item_detail_schedule, parent, false);
 
-		return new ViewHolder(itemView, context, listener);
+		return new ViewHolder(itemView, listener);
 	}
 
 	@Override
@@ -56,12 +56,8 @@ public class DetailScheduleAdapter extends RecyclerView.Adapter<DetailScheduleAd
 		private TextView scheduleTitle;
 		private TextView scheduleMemo;
 
-		private Context context;
-
-		ViewHolder(@NonNull final View itemView, Context context, final OnItemClickListener listener) {
+		ViewHolder(@NonNull final View itemView, final OnItemClickListener listener) {
 			super(itemView);
-
-			this.context = context;
 
 			scheduleType = itemView.findViewById(R.id.schedule_type);
 			scheduleTime = itemView.findViewById(R.id.schedule_time);

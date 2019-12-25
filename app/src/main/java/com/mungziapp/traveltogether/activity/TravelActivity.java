@@ -37,17 +37,22 @@ public class TravelActivity extends AppCompatActivity implements ActivityCallbac
 
 		Intent intent = getIntent();
 		FragmentType type = (FragmentType) intent.getSerializableExtra("caller");
-		if (type != null) setPagerAdapter(type);
+		if (type != null) setPagerAdapter(type, intent.getIntExtra("travel_id", 0));
 	}
 
-	private void setPagerAdapter(final FragmentType type) {
+	private void setPagerAdapter(final FragmentType type, int travelId) {
 		fragments.add(new NoticeFragment());
 		fragments.add(new SuppliesFragment());
 		fragments.add(new ScheduleFragment());
 		fragments.add(new AccountFragment());
 		fragments.add(new DiaryFragment());
 
+		Bundle bundle = new Bundle();
+		bundle.putInt("travel_id", travelId);
+
 		for (Fragment fragment: fragments) {
+			fragment.setArguments(bundle);
+
 			fragmentManager.beginTransaction().add(R.id.travel_frame, fragment).commit();
 			fragmentManager.beginTransaction().hide(fragment).commit();
 		}

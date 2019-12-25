@@ -15,10 +15,11 @@ import com.mungziapp.traveltogether.item.CountryItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class TravelCountryAdapter extends RecyclerView.Adapter<TravelCountryAdapter.ViewHolder> {
 	private Context context;
-	private ArrayList<String> countryFlags = new ArrayList<>();
+	private List<String> countryFlags = new ArrayList<>();
 	private HashMap<String, CountryItem> countryMap;
 
 	public TravelCountryAdapter(Context context) {

@@ -8,9 +8,10 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import com.mungziapp.traveltogether.fragment.TravelsFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainPagerAdapter extends FragmentStatePagerAdapter {
-	private ArrayList<TravelsFragment> travelsFragments = new ArrayList<>();
+	private List<TravelsFragment> travelsFragments = new ArrayList<>();
 
 	public MainPagerAdapter(FragmentManager fm) {
 		super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);

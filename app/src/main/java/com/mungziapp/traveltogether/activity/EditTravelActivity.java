@@ -39,7 +39,7 @@ import com.mungziapp.traveltogether.app.DatabaseManager;
 import com.mungziapp.traveltogether.item.CountryItem;
 import com.mungziapp.traveltogether.table.TravelTable;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 public class EditTravelActivity extends AppCompatActivity {
 	private static final int PICK_FROM_ALBUM = 101;
@@ -296,9 +296,10 @@ public class EditTravelActivity extends AppCompatActivity {
 					month = Integer.valueOf(startDate[1]) - 1;
 					date = Integer.valueOf(startDate[2]);
 				} else {
-					year = Calendar.getInstance().get(Calendar.YEAR);
-					month = Calendar.getInstance().get(Calendar.MONTH);
-					date = Calendar.getInstance().get(Calendar.DATE);
+					LocalDate localDate = LocalDate.now();
+					year = localDate.getYear();
+					month = localDate.getMonthValue();
+					date = localDate.getDayOfMonth();
 				}
 				new DatePickerDialog(EditTravelActivity.this, new DatePickerDialog.OnDateSetListener() {
 					@Override
@@ -324,9 +325,10 @@ public class EditTravelActivity extends AppCompatActivity {
 					month = Integer.valueOf(endDate[1]) - 1;
 					date = Integer.valueOf(endDate[2]);
 				} else {
-					year = Calendar.getInstance().get(Calendar.YEAR);
-					month = Calendar.getInstance().get(Calendar.MONTH);
-					date = Calendar.getInstance().get(Calendar.DATE);
+					LocalDate localDate = LocalDate.now();
+					year = localDate.getYear();
+					month = localDate.getMonthValue();
+					date = localDate.getDayOfMonth();
 				}
 				new DatePickerDialog(EditTravelActivity.this, new DatePickerDialog.OnDateSetListener() {
 					@Override

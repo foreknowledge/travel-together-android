@@ -13,10 +13,11 @@ import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TravelMemberAdapter extends RecyclerView.Adapter<TravelMemberAdapter.ViewHolder> {
 	private Context context;
-	private ArrayList<Integer> memberProfiles = new ArrayList<>();
+	private List<Integer> memberProfiles = new ArrayList<>();
 	private OnItemClickListener listener;
 
 	public TravelMemberAdapter(Context context) {

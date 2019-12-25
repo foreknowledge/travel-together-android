@@ -17,10 +17,11 @@ import com.mungziapp.traveltogether.data.TravelData;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecyclerAdapter.ViewHolder> {
 	private Context context;
-	private ArrayList<TravelData> travelData = new ArrayList<>();
+	private List<TravelData> travelData = new ArrayList<>();
 
 	private OnItemClickListener listener;
 
