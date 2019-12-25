@@ -24,12 +24,11 @@ import android.widget.Toast;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
+import com.mungziapp.traveltogether.data.DateObject;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.adapter.SearchCountryAdapter;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.item.CountryItem;
-
-import java.time.LocalDate;
 
 public class AddTravelActivity extends AppCompatActivity {
 	private Button btnStartDate;
@@ -235,10 +234,10 @@ public class AddTravelActivity extends AppCompatActivity {
 					month = Integer.valueOf(startDate[1]) - 1;
 					date = Integer.valueOf(startDate[2]);
 				} else {
-					LocalDate localDate = LocalDate.now();
-					year = localDate.getYear();
-					month = localDate.getMonthValue();
-					date = localDate.getDayOfMonth();
+					DateObject now = new DateObject();
+					year = now.getYear();
+					month = now.getMonth();
+					date = now.getDayOfMonth();
 				}
 				new DatePickerDialog(AddTravelActivity.this, new DatePickerDialog.OnDateSetListener() {
 					@Override
@@ -264,10 +263,10 @@ public class AddTravelActivity extends AppCompatActivity {
 					month = Integer.valueOf(endDate[1]) - 1;
 					date = Integer.valueOf(endDate[2]);
 				} else {
-					LocalDate localDate = LocalDate.now();
-					year = localDate.getYear();
-					month = localDate.getMonthValue();
-					date = localDate.getDayOfMonth();
+					DateObject now = new DateObject();
+					year = now.getYear();
+					month = now.getMonth();
+					date = now.getDayOfMonth();
 				}
 				new DatePickerDialog(AddTravelActivity.this, new DatePickerDialog.OnDateSetListener() {
 					@Override

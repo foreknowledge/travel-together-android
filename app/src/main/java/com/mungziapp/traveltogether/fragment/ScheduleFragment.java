@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,12 +20,15 @@ import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.activity.AddScheduleActivity;
 import com.mungziapp.traveltogether.adapter.ScheduleAdapter;
 import com.mungziapp.traveltogether.app.DatabaseManager;
+import com.mungziapp.traveltogether.data.DateObject;
 import com.mungziapp.traveltogether.interfaces.ActivityCallback;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.table.TravelTable;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class ScheduleFragment extends Fragment {
 	private View rootView;
@@ -79,20 +83,32 @@ public class ScheduleFragment extends Fragment {
 	}
 
 	private void setRecyclerView() {
+		if (travelStartDate == null || travelEndDate == null) {
+			TextView textScheduleNotice = rootView.findViewById(R.id.text_schedule_notice);
+			textScheduleNotice.setVisibility(View.VISIBLE);
+
+			return;
+		}
+
 		RecyclerView scheduleRecycler = rootView.findViewById(R.id.schedule_recycler);
 		scheduleRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		final ScheduleAdapter scheduleAdapter = new ScheduleAdapter(getContext());
-		String[] startDate = travelStartDate.split("\\.");
-		String[] endDate = travelEndDate.split("\\.");
 
-		scheduleAdapter.addDate(Arrays.asList("1", "2020.01.02"));
-		scheduleAdapter.addDate(Arrays.asList("2", "2020.01.03"));
-		scheduleAdapter.addDate(Arrays.asList("3", "2020.01.04"));
-		scheduleAdapter.addDate(Arrays.asList("4", "2020.01.20"));
-		scheduleAdapter.addDate(Arrays.asList("5", "2020.01.05"));
-		scheduleAdapter.addDate(Arrays.asList("6", "2020.01.06"));
-		scheduleAdapter.addDate(Arrays.asList("7", "2020.01.07"));
+		LocalDate startLocalDate = DateObject.stringToLocalDate(travelStartDate);
+		LocalDate endLocalDate = DateObject.stringToLocalDate(travelEndDate);
+
+		if (startLocalDate == null || endLocalDate == null) return;
+
+		long daysBetween = DAYS.between(startLocalDate, endLocalDate);
+
+		LocalDate date = startLocalDate;
+		for (int i = 0; i < daysBetween + 1; ++i) {
+			String dayN = String.valueOf(i + 1);
+			scheduleAdapter.addDate(Arrays.asList(dayN, date.toString()));
+
+			date = date.plusDays(1);
+		}
 
 		scheduleAdapter.setClickListener(new OnItemClickListener() {
 			@Override
