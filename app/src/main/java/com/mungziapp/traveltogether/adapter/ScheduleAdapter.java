@@ -1,6 +1,7 @@
 package com.mungziapp.traveltogether.adapter;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,20 +13,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mungziapp.traveltogether.R;
+import com.mungziapp.traveltogether.app.DatabaseManager;
+import com.mungziapp.traveltogether.data.ScheduleData;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
-import com.mungziapp.traveltogether.item.DetailScheduleItem;
+import com.mungziapp.traveltogether.table.ScheduleTable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHolder> {
 	private Context context;
+	private int travelId;
 	private List<List<String>> dates = new ArrayList<>();
 
 	private OnItemClickListener listener;
 
-	public ScheduleAdapter(Context context) {
+	public ScheduleAdapter(Context context, int travelId) {
 		this.context = context;
+		this.travelId = travelId;
 	}
 
 	public void addDate(List<String> date) { dates.add(date); }
@@ -47,7 +52,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		holder.setItem(dates.get(position));
+		holder.setItem(dates.get(position), travelId);
 	}
 
 	@Override
@@ -60,9 +65,13 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 		private TextView textDate;
 		private TextView scheduleNotice;
 
-		ViewHolder(@NonNull final View itemView, final Context context, final OnItemClickListener listener) {
+		private Context context;
+		private RecyclerView detailRecycler;
+
+		ViewHolder(@NonNull final View itemView, Context context, final OnItemClickListener listener) {
 			super(itemView);
 
+			this.context = context;
 			textDayN = itemView.findViewById(R.id.text_day_n);
 			textDate = itemView.findViewById(R.id.text_date);
 			scheduleNotice = itemView.findViewById(R.id.schedule_notice);
@@ -75,14 +84,46 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 				}
 			});
 
-			RecyclerView detailRecycler = itemView.findViewById(R.id.detail_schedule_recycler);
+			detailRecycler = itemView.findViewById(R.id.detail_schedule_recycler);
 			detailRecycler.setLayoutManager(new LinearLayoutManager(context));
+		}
 
-			DetailScheduleAdapter detailRecyclerAdapter =  new DetailScheduleAdapter(context);
-//			detailRecyclerAdapter.addItem(new DetailScheduleItem("호텔 조식 냠", "8:00", null, null, null));
-//			detailRecyclerAdapter.addItem(new DetailScheduleItem("준비하고 출발!", "10:00", "준비물 - 물병, 셀카봉, 지갑, 핸드폰, 보조배터리", null, null));
-//			detailRecyclerAdapter.addItem(new DetailScheduleItem(true, "260번 버스 타고 센트럴역으로 이동", null, null, null, null));
-			detailRecyclerAdapter.setClickListener(new OnItemClickListener() {
+		private void setScheduleData(int travelId, int dayN, DetailScheduleAdapter detailScheduleAdapter) {
+			Cursor cursor = DatabaseManager.database.rawQuery(ScheduleTable.SELECT_QUERY + " WHERE travel_id = " + travelId + " AND day_n = " + dayN, null);
+			int numOfRecords = cursor.getCount();
+
+			if (numOfRecords != 0) scheduleNotice.setVisibility(View.INVISIBLE);
+
+			for (int i = 0; i < numOfRecords; ++i) {
+				cursor.moveToNext();
+
+				int id = cursor.getInt(cursor.getColumnIndex("id"));
+				int type = cursor.getInt(cursor.getColumnIndex("type"));
+				String title = cursor.getString(cursor.getColumnIndex("title"));
+				String time = cursor.getString(cursor.getColumnIndex("time"));
+				String place = cursor.getString(cursor.getColumnIndex("place"));
+				String memo = cursor.getString(cursor.getColumnIndex("memo"));
+				String photos = cursor.getString(cursor.getColumnIndex("photos"));
+
+				detailScheduleAdapter.addItem(new ScheduleData(id, travelId, dayN, type, title, time, place, memo, photos));
+			}
+
+			cursor.close();
+
+			detailScheduleAdapter.notifyDataSetChanged();
+		}
+
+		void setItem(List<String> date, int travelId) {
+			DetailScheduleAdapter detailScheduleAdapter =  new DetailScheduleAdapter(context);
+
+			String strDayN = "DAY " + date.get(0);
+			textDayN.setText(strDayN);
+			String strDate = "(" + date.get(1) + ")";
+			textDate.setText(strDate);
+
+			setScheduleData(travelId, Integer.valueOf(date.get(0)), detailScheduleAdapter);
+
+			detailScheduleAdapter.setClickListener(new OnItemClickListener() {
 				@Override
 				public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
 					Toast.makeText(context, "item 클릭함.", Toast.LENGTH_SHORT).show();
@@ -94,14 +135,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 				}
 			});
 
-			detailRecycler.setAdapter(detailRecyclerAdapter);
-		}
-
-		void setItem(List<String> date) {
-			String strDayN = "DAY " + date.get(0);
-			textDayN.setText(strDayN);
-			String strDate = "(" + date.get(1) + ")";
-			textDate.setText(strDate);
+			detailRecycler.setAdapter(detailScheduleAdapter);
 		}
 	}
 }

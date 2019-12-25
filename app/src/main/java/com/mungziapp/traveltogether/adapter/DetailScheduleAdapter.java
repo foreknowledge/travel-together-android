@@ -10,15 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mungziapp.traveltogether.R;
+import com.mungziapp.traveltogether.data.ScheduleData;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
-import com.mungziapp.traveltogether.item.DetailScheduleItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DetailScheduleAdapter extends RecyclerView.Adapter<DetailScheduleAdapter.ViewHolder> {
 	private Context context;
-	private List<DetailScheduleItem> scheduleItems = new ArrayList<>();
+	private List<ScheduleData> scheduleItems = new ArrayList<>();
 
 	private OnItemClickListener listener;
 
@@ -26,7 +26,8 @@ public class DetailScheduleAdapter extends RecyclerView.Adapter<DetailScheduleAd
 		this.context = context;
 	}
 
-	public void addItem(DetailScheduleItem item) { scheduleItems.add(item); }
+	public void addItem(ScheduleData item) { scheduleItems.add(item); }
+	public ScheduleData getItem(int position) { return scheduleItems.get(position); }
 	public void setClickListener(OnItemClickListener listener) {
 		this.listener = listener;
 	}
@@ -73,7 +74,7 @@ public class DetailScheduleAdapter extends RecyclerView.Adapter<DetailScheduleAd
 
 		}
 
-		void setItem(DetailScheduleItem item) {
+		void setItem(ScheduleData item) {
 			scheduleTitle.setText(item.getTitle());
 
 			if (item.getMemo() != null) {
@@ -84,7 +85,7 @@ public class DetailScheduleAdapter extends RecyclerView.Adapter<DetailScheduleAd
 			if (item.getTime() != null)
 				scheduleTime.setText(item.getTime());
 
-			if (item.isMove())
+			if (item.getType() == 1)
 				scheduleType.setBackgroundResource(R.drawable.dr_schedule_move);
 		}
 	}

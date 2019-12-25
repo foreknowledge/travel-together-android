@@ -3,14 +3,19 @@ package com.mungziapp.traveltogether.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.mungziapp.traveltogether.R;
+import com.mungziapp.traveltogether.data.DateObject;
 
 public class AddScheduleActivity extends AppCompatActivity {
 	private boolean btnNormalChecked = true;
@@ -27,14 +32,18 @@ public class AddScheduleActivity extends AppCompatActivity {
 
 		init();
 		setButtons();
-		TextView DayN = findViewById(R.id.text_day_n);
-		String strDayN = "DAY 1";
-		DayN.setText(strDayN);
+		setTimePicker();
 	}
 
 	private void init() {
 		whiteColor = Color.parseColor("#FFFFFF");
 		normalColor = ContextCompat.getColor(getApplicationContext(), R.color.colorGrayLight);
+
+		TextView textDayN = findViewById(R.id.text_day_n);
+
+		Intent intent = getIntent();
+		String strDayN = "DAY " + intent.getStringExtra("day_n");
+		textDayN.setText(strDayN);
 	}
 
 	private void setButtons() {
@@ -81,6 +90,33 @@ public class AddScheduleActivity extends AppCompatActivity {
 
 					btnNormalChecked = false;
 				}
+			}
+		});
+	}
+
+	private void setTimePicker() {
+		final EditText scheduleTime = findViewById(R.id.schedule_time);
+		scheduleTime.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				int hour, minute;
+
+				String[] time = scheduleTime.getText().toString().split(":");
+				if (time.length == 2) {
+					hour = Integer.valueOf(time[0]);
+					minute = Integer.valueOf(time[1]);
+				} else {
+					DateObject now = new DateObject();
+					hour = now.getHour();
+					minute = now.getMinute();
+				}
+				new TimePickerDialog(AddScheduleActivity.this, new TimePickerDialog.OnTimeSetListener() {
+					@Override
+					public void onTimeSet(TimePicker timePicker, int i, int i1) {
+						String strTime = i + ":" + i1;
+						scheduleTime.setText(strTime);
+					}
+				}, hour, minute, true).show();
 			}
 		});
 	}

@@ -115,13 +115,15 @@
 			android:autofillHints="no" />
 
 		<EditText
+			android:id="@+id/schedule_time"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:layout_marginStart="5dp"
 			android:hint="@string/hint_time"
 			android:inputType="time"
-			android:autofillHints="no" />
+			android:autofillHints="no"
+			android:clickable="true" />
 
 	</LinearLayout>
 

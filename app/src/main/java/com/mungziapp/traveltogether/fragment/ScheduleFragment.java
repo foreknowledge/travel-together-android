@@ -27,6 +27,7 @@ import com.mungziapp.traveltogether.table.TravelTable;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.List;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -34,6 +35,7 @@ public class ScheduleFragment extends Fragment {
 	private View rootView;
 	private ActivityCallback callback;
 
+	private int travelId;
 	private String travelStartDate;
 	private String travelEndDate;
 
@@ -50,7 +52,6 @@ public class ScheduleFragment extends Fragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.fragment_schedule, container, false);
 
-		int travelId = 0;
 		Bundle bundle = getArguments();
 		if (bundle != null)
 			travelId = bundle.getInt("travel_id");
@@ -93,7 +94,7 @@ public class ScheduleFragment extends Fragment {
 		RecyclerView scheduleRecycler = rootView.findViewById(R.id.schedule_recycler);
 		scheduleRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
-		final ScheduleAdapter scheduleAdapter = new ScheduleAdapter(getContext());
+		final ScheduleAdapter scheduleAdapter = new ScheduleAdapter(getContext(), travelId);
 
 		LocalDate startLocalDate = DateObject.stringToLocalDate(travelStartDate);
 		LocalDate endLocalDate = DateObject.stringToLocalDate(travelEndDate);
@@ -113,7 +114,10 @@ public class ScheduleFragment extends Fragment {
 		scheduleAdapter.setClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
+				List<String> date = scheduleAdapter.getDate(position);
+
 				Intent intent = new Intent(getContext(), AddScheduleActivity.class);
+				intent.putExtra("day_n", date.get(0));
 				startActivity(intent);
 			}
 
