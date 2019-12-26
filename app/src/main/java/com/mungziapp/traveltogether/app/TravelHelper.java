@@ -7,7 +7,6 @@ import com.mungziapp.traveltogether.data.Countries;
 import com.mungziapp.traveltogether.data.ScheduleData;
 import com.mungziapp.traveltogether.data.TravelData;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

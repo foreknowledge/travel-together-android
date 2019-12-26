@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -95,13 +94,13 @@ public class AddScheduleActivity extends AppCompatActivity {
 	}
 
 	private void setTimePicker() {
-		final EditText scheduleTime = findViewById(R.id.schedule_time);
-		scheduleTime.setOnClickListener(new View.OnClickListener() {
+		final Button btnScheduleTime = findViewById(R.id.schedule_time);
+		btnScheduleTime.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				int hour, minute;
 
-				String[] time = scheduleTime.getText().toString().split(":");
+				String[] time = btnScheduleTime.getText().toString().split(":");
 				if (time.length == 2) {
 					hour = Integer.valueOf(time[0]);
 					minute = Integer.valueOf(time[1]);
@@ -113,10 +112,15 @@ public class AddScheduleActivity extends AppCompatActivity {
 				new TimePickerDialog(AddScheduleActivity.this, new TimePickerDialog.OnTimeSetListener() {
 					@Override
 					public void onTimeSet(TimePicker timePicker, int i, int i1) {
-						String strTime = i + ":" + i1;
-						scheduleTime.setText(strTime);
+						String strTime;
+						if (i1 < 10)
+							strTime = i + ":0" + i1;
+						else
+							strTime = i + ":" + i1;
+
+						btnScheduleTime.setText(strTime);
 					}
-				}, hour, minute, true).show();
+				}, hour, minute, false).show();
 			}
 		});
 	}
