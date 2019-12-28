@@ -123,14 +123,8 @@ public class LoginActivity extends BaseActivity {
 					if (result.hasSignedUp() == OptionalBoolean.FALSE) {
 						Log.e(TAG, "result has not signed up.");
 						Toast.makeText(mContext, "카카오톡에 가입되지 않은 유저입니다.", Toast.LENGTH_SHORT).show();
-					} else {
-						long id = result.getId();
-						Log.d(TAG, "id = " + id);
-
+					} else
 						requestAccessTokenInfo();
-						redirectMainActivity();
-						Toast.makeText(mContext, "로그인 성공~!", Toast.LENGTH_SHORT).show();
-					}
 				}
 			});
 		}
@@ -164,22 +158,25 @@ public class LoginActivity extends BaseActivity {
 					final String token = accessToken.getAccessToken();
 					Log.d(TAG, "Access token is " + token);
 
-					long userId = accessTokenInfoResponse.getUserId();
-					Log.d(TAG, "this access token is for userId=" + userId);
+					final String userId = String.valueOf(accessTokenInfoResponse.getUserId());
+					Log.d(TAG, "this access token is for userId = " + userId);
 
 					// 서버로 access token & user id 전송
-					String url = "http://192.168.0.56/tt/api/v1/users/" + userId;
+					String url = RequestManager.HOST + "/auth/oauth/login";
 					RequestManager requestManager = RequestManager.getInstance();
 					requestManager.onSendPostRequest(url, new SetResponseListener() {
 						@Override
 						public void onResponse(String response) {
 							Log.d(TAG, "응답 = " + response);
+							redirectMainActivity();
+							Toast.makeText(mContext, "로그인 성공~!", Toast.LENGTH_SHORT).show();
 						}
 
 						@Override
 						public void setParams(Map<String, String> params) {
-							params.put("accessToken", token);
-							params.put("resourceServer", "kakao");
+							params.put("oauthToken", token);
+							params.put("oauthId", userId);
+							params.put("oauthServer", "kakao");
 						}
 					});
 				}

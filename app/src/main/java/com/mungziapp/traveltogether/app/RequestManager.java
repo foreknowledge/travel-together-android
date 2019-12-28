@@ -14,6 +14,7 @@ import java.util.Map;
 
 public class RequestManager {
 	private static final String TAG = "RequestManager :: ";
+	public static final String HOST = "http://192.168.1.81:3000";
 	private static RequestManager instance = new RequestManager();
 	private static RequestQueue requestQueue;
 
