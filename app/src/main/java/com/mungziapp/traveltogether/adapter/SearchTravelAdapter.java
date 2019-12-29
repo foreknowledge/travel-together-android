@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.app.DatabaseManager;
-import com.mungziapp.traveltogether.item.SearchTravelItem;
-import com.mungziapp.traveltogether.table.TravelTable;
+import com.mungziapp.traveltogether.app.helper.DatabaseHelper;
+import com.mungziapp.traveltogether.model.item.SearchTravelItem;
+import com.mungziapp.traveltogether.model.table.TravelTable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class SearchTravelAdapter extends RecyclerView.Adapter<SearchTravelAdapte
 	}
 
 	public void initItem() {
-		Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY, null);
+		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY, null);
 		int numOfRecords = cursor.getCount();
 
 		for (int i = 0; i < numOfRecords; ++i) {

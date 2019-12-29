@@ -1,6 +1,6 @@
-package com.mungziapp.traveltogether.data;
+package com.mungziapp.traveltogether.model;
 
-import com.mungziapp.traveltogether.item.CountryItem;
+import com.mungziapp.traveltogether.model.item.CountryItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.mungziapp.traveltogether.data;
+package com.mungziapp.traveltogether.model.data;
 
 public class TravelData {
 	private int id;

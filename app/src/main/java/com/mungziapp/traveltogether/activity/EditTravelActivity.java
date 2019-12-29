@@ -32,13 +32,13 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
 import com.mungziapp.traveltogether.app.GalleryImageSetter;
-import com.mungziapp.traveltogether.data.DateObject;
+import com.mungziapp.traveltogether.model.DateObject;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.adapter.SearchCountryAdapter;
-import com.mungziapp.traveltogether.app.DatabaseManager;
-import com.mungziapp.traveltogether.item.CountryItem;
-import com.mungziapp.traveltogether.table.TravelTable;
+import com.mungziapp.traveltogether.app.helper.DatabaseHelper;
+import com.mungziapp.traveltogether.model.item.CountryItem;
+import com.mungziapp.traveltogether.model.table.TravelTable;
 
 public class EditTravelActivity extends AppCompatActivity {
 	private static final int PICK_FROM_ALBUM = 101;
@@ -74,7 +74,7 @@ public class EditTravelActivity extends AppCompatActivity {
 	private void init() {
 		int travelId = getIntent().getIntExtra("travel_id", 0);
 
-		Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + travelId, null);
+		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + travelId, null);
 		cursor.moveToNext();
 
 		editTitle.setText(cursor.getString(cursor.getColumnIndex("name")));

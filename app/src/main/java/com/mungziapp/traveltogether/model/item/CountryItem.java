@@ -1,4 +1,4 @@
-package com.mungziapp.traveltogether.item;
+package com.mungziapp.traveltogether.model.item;
 
 import java.util.List;
 

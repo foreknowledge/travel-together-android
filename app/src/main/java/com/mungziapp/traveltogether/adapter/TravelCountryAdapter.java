@@ -10,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.data.Countries;
-import com.mungziapp.traveltogether.item.CountryItem;
+import com.mungziapp.traveltogether.model.Countries;
+import com.mungziapp.traveltogether.model.item.CountryItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;

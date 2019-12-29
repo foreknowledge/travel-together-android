@@ -1,4 +1,4 @@
-package com.mungziapp.traveltogether.item;
+package com.mungziapp.traveltogether.model.item;
 
 public class SearchTravelItem {
 	private int id;

@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.data.ScheduleData;
+import com.mungziapp.traveltogether.model.data.ScheduleData;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 
 import java.util.ArrayList;

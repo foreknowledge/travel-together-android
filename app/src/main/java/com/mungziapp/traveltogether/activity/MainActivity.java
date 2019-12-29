@@ -19,11 +19,11 @@ import com.google.android.material.tabs.TabLayout;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.adapter.TravelsRecyclerAdapter;
 import com.mungziapp.traveltogether.adapter.MainPagerAdapter;
-import com.mungziapp.traveltogether.app.DatabaseManager;
-import com.mungziapp.traveltogether.data.TravelData;
+import com.mungziapp.traveltogether.app.helper.DatabaseHelper;
+import com.mungziapp.traveltogether.model.data.TravelData;
 import com.mungziapp.traveltogether.fragment.TravelsFragment;
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.table.TravelTable;
+import com.mungziapp.traveltogether.model.table.TravelTable;
 import com.pedro.library.AutoPermissions;
 import com.pedro.library.AutoPermissionsListener;
 
@@ -127,7 +127,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 	}
 
 	private void setAdapterItems(TravelsRecyclerAdapter oncommingAdapter, TravelsRecyclerAdapter lastTravelAdapter) {
-		Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY, null);
+		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY, null);
 		int numOfRecords = cursor.getCount();
 		Log.d(TAG, "레코드 개수: " + numOfRecords);
 

@@ -2,12 +2,14 @@ package com.mungziapp.traveltogether.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.kakao.auth.ApiResponseCallback;
 import com.kakao.auth.AuthService;
 import com.kakao.auth.AuthType;
@@ -22,12 +24,16 @@ import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.OptionalBoolean;
 import com.kakao.util.exception.KakaoException;
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.app.RequestManager;
-import com.mungziapp.traveltogether.interfaces.SetResponseListener;
+import com.mungziapp.traveltogether.app.TokenManager;
+import com.mungziapp.traveltogether.app.helper.RequestHelper;
+import com.mungziapp.traveltogether.interfaces.OnResponseListener;
+import com.mungziapp.traveltogether.model.DateObject;
+import com.mungziapp.traveltogether.model.response.TokenResponse;
 
 import java.util.Map;
 
 public class LoginActivity extends BaseActivity {
+	private Gson gson = new Gson();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -155,26 +161,48 @@ public class LoginActivity extends BaseActivity {
 				@Override
 				public void onSuccess(AccessTokenInfoResponse accessTokenInfoResponse) {
 					AccessToken accessToken = AccessToken.Factory.getInstance();
-					final String token = accessToken.getAccessToken();
-					Log.d(TAG, "Access token is " + token);
+					final String oauthToken = accessToken.getAccessToken();
+					Log.d(TAG, "Oauth access token is " + oauthToken);
 
 					final String userId = String.valueOf(accessTokenInfoResponse.getUserId());
-					Log.d(TAG, "this access token is for userId = " + userId);
+					Log.d(TAG, "this oauth access token is for userId = " + userId);
 
 					// 서버로 access token & user id 전송
-					String url = RequestManager.HOST + "/auth/oauth/login";
-					RequestManager requestManager = RequestManager.getInstance();
-					requestManager.onSendPostRequest(url, new SetResponseListener() {
+					String url = RequestHelper.HOST + "/auth/oauth/login";
+					RequestHelper.getInstance().onSendPostRequest(url, new OnResponseListener() {
 						@Override
 						public void onResponse(String response) {
-							Log.d(TAG, "응답 = " + response);
+							TokenResponse tokenResponse = gson.fromJson(response, TokenResponse.class);
+							String accessToken = tokenResponse.getToken();
+							String refreshToken = tokenResponse.getRefreshToken();
+							long exp = tokenResponse.getPayload().getExp();
+
+							SharedPreferences prefs = getSharedPreferences(TokenManager.prefFileName, MODE_PRIVATE);
+							SharedPreferences.Editor editor = prefs.edit();
+							if (!prefs.getString(TokenManager.refreshToken, "").equals("")) {
+								editor.remove(TokenManager.refreshToken);
+								Log.d(TAG, "refresh token delete.");
+							}
+
+							editor.putString(TokenManager.refreshToken, refreshToken).apply();
+							Log.d(TAG, "refresh token add. new refresh token = " + refreshToken);
+
+							TokenManager.getInstance()
+									.setAccessToken(accessToken)
+									.setDuration(DateObject.getLocalDateTime(exp));
+
 							redirectMainActivity();
 							Toast.makeText(mContext, "로그인 성공~!", Toast.LENGTH_SHORT).show();
 						}
 
 						@Override
+						public Map<String, String> getHeaders() {
+							return null;
+						}
+
+						@Override
 						public void setParams(Map<String, String> params) {
-							params.put("oauthToken", token);
+							params.put("oauthToken", oauthToken);
 							params.put("oauthId", userId);
 							params.put("oauthServer", "kakao");
 						}

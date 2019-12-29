@@ -31,6 +31,7 @@ import com.android.volley.toolbox.Volley;
 import com.kakao.auth.KakaoSDK;
 import com.kakao.util.helper.log.Logger;
 import com.mungziapp.traveltogether.adapter.KakaoSDKAdapter;
+import com.mungziapp.traveltogether.app.helper.RequestHelper;
 
 /**
  * 이미지를 캐시를 앱 수준에서 관리하기 위한 애플리케이션 객체이다.
@@ -65,7 +66,7 @@ public class GlobalApplication extends Application {
 		KakaoSDK.init(new KakaoSDKAdapter());
 
 		requestQueue = Volley.newRequestQueue(this);
-		RequestManager.setRequestQueue(requestQueue);
+		RequestHelper.setRequestQueue(requestQueue);
 
 		ImageLoader.ImageCache imageCache = new ImageLoader.ImageCache() {
 			final LruCache<String, Bitmap> imageCache = new LruCache<>(30);

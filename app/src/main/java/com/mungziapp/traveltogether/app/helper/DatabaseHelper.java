@@ -1,26 +1,26 @@
-package com.mungziapp.traveltogether.app;
+package com.mungziapp.traveltogether.app.helper;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.mungziapp.traveltogether.data.ScheduleData;
-import com.mungziapp.traveltogether.data.TravelData;
-import com.mungziapp.traveltogether.table.ScheduleTable;
-import com.mungziapp.traveltogether.table.TravelTable;
+import com.mungziapp.traveltogether.model.data.ScheduleData;
+import com.mungziapp.traveltogether.model.data.TravelData;
+import com.mungziapp.traveltogether.model.table.ScheduleTable;
+import com.mungziapp.traveltogether.model.table.TravelTable;
 
 import java.util.List;
 
-public class DatabaseManager {
+public class DatabaseHelper {
 	private static final String TAG = "Database Manager :: ";
 
 	public static SQLiteDatabase database;
-	private static DatabaseManager instance = new DatabaseManager();
+	private static DatabaseHelper instance = new DatabaseHelper();
 
-	private DatabaseManager() { }
+	private DatabaseHelper() { }
 
-	public static DatabaseManager getInstance() {
+	public static DatabaseHelper getInstance() {
 		return instance;
 	}
 
@@ -46,7 +46,7 @@ public class DatabaseManager {
 	}
 
 	static void insertDummyData(List<TravelData> travelData) {
-		Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY, null);
+		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY, null);
 		cursor.moveToNext();
 		if (cursor.getCount() != 0) return;
 
@@ -54,7 +54,7 @@ public class DatabaseManager {
 			String sql = "INSERT INTO " + TravelTable.TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 			Object[] params = {data.getId(), data.getName(), data.getStartDate(), data.getEndDate(), data.getCountryCodes(), data.getCover(), data.getMembers()};
 
-			DatabaseManager.database.execSQL(sql, params);
+			DatabaseHelper.database.execSQL(sql, params);
 		}
 		Log.d(TAG, "travel 데이터 추가됨.");
 
@@ -62,7 +62,7 @@ public class DatabaseManager {
 	}
 
 	static void insertScheduleDummyData(List<ScheduleData> scheduleData) {
-		Cursor cursor = DatabaseManager.database.rawQuery(ScheduleTable.SELECT_QUERY, null);
+		Cursor cursor = DatabaseHelper.database.rawQuery(ScheduleTable.SELECT_QUERY, null);
 		cursor.moveToNext();
 		if (cursor.getCount() != 0) return;
 
@@ -70,7 +70,7 @@ public class DatabaseManager {
 			String sql = "INSERT INTO " + ScheduleTable.TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			Object[] params = {data.getId(), data.getTravelId(), data.getDayN(), data.getType(), data.getTitle(), data.getTime(), data.getPlace(), data.getMemo(), data.getPhotos()};
 
-			DatabaseManager.database.execSQL(sql, params);
+			DatabaseHelper.database.execSQL(sql, params);
 		}
 		Log.d(TAG, "schedule 데이터 추가됨.");
 
@@ -78,14 +78,14 @@ public class DatabaseManager {
 	}
 
 	static void insertTravelsData(TravelData travelData) {
-		Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + travelData.getId(), null);
+		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + travelData.getId(), null);
 		cursor.moveToNext();
 		if (cursor.getCount() == 0) {
 			// 테이블에 데이터가 없다면 데이터 넣기
 			String sql = "INSERT INTO movieDetail VALUES (?, ?, ?, ?, ?, ?, ?)";
 			Object[] params = {travelData.getId(), travelData.getName(), travelData.getStartDate(), travelData.getEndDate(), travelData.getCountryCodes(), travelData.getCover(), travelData.getMembers()};
 
-			DatabaseManager.database.execSQL(sql, params);
+			DatabaseHelper.database.execSQL(sql, params);
 			Log.d(TAG, "movieDetail [" + travelData.getId() + "] 데이터 추가됨.");
 		}
 

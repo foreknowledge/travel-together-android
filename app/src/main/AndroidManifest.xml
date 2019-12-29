@@ -14,7 +14,12 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme"
 		android:usesCleartextTraffic="true">
-		<activity android:name=".activity.AddScheduleActivity"></activity>
+		<service
+			android:name=".ServerService"
+			android:enabled="true"
+			android:exported="true"></service>
+
+		<activity android:name=".activity.AddScheduleActivity" />
 		<activity android:name=".activity.PhotoViewActivity" />
 		<activity android:name=".activity.CheckMemberActivity" />
 		<activity android:name=".activity.EditTravelActivity" />

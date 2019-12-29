@@ -1,4 +1,4 @@
-package com.mungziapp.traveltogether.app;
+package com.mungziapp.traveltogether.app.helper;
 
 import android.util.Log;
 
@@ -7,35 +7,36 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.mungziapp.traveltogether.interfaces.SetResponseListener;
+import com.mungziapp.traveltogether.interfaces.OnResponseListener;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class RequestManager {
-	private static final String TAG = "RequestManager :: ";
+public class RequestHelper {
+	private static final String TAG = "RequestHelper :: ";
 	public static final String HOST = "http://192.168.1.81:3000";
-	private static RequestManager instance = new RequestManager();
+
+	private static RequestHelper instance = new RequestHelper();
 	private static RequestQueue requestQueue;
 
-	private RequestManager() {
-	}
+	private RequestHelper() { }
 
-	static void setRequestQueue(RequestQueue _requestQueue) {
+	public static void setRequestQueue(RequestQueue _requestQueue) {
 		requestQueue = _requestQueue;
 	}
 
-	public static RequestManager getInstance() {
+	public static RequestHelper getInstance() {
 		return instance;
 	}
 
-	public void onSendGetRequest(String url, final SetResponseListener listener) {
+	public void onSendGetRequest(String url, final OnResponseListener listener) {
 		StringRequest request = new StringRequest(
 				Request.Method.GET,
 				url,
 				new Response.Listener<String>() {
 					@Override
 					public void onResponse(String response) {
+						Log.d(TAG, "get method response = " + response);
 						listener.onResponse(response);
 					}
 				},
@@ -45,16 +46,25 @@ public class RequestManager {
 						Log.d(TAG, error.toString());
 					}
 				}
-		);
+		) {
+			@Override
+			public Map<String, String> getHeaders() {
+				return listener.getHeaders();
+			}
+		};
+
+		request.setShouldCache(false);
+		requestQueue.add(request);
 	}
 
-	public void onSendPostRequest(String url, final SetResponseListener listener) {
+	public void onSendPostRequest(String url, final OnResponseListener listener) {
 		StringRequest request = new StringRequest(
 				Request.Method.POST,
 				url,
 				new Response.Listener<String>() {
 					@Override
 					public void onResponse(String response) {
+						Log.d(TAG, "post method response = " + response);
 						listener.onResponse(response);
 					}
 				},

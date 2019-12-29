@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.adapter.SearchTravelAdapter;
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.item.SearchTravelItem;
+import com.mungziapp.traveltogether.model.item.SearchTravelItem;
 
 public class SearchActivity extends AppCompatActivity {
 	private EditText editSearch;

@@ -1,11 +1,11 @@
-package com.mungziapp.traveltogether.app;
+package com.mungziapp.traveltogether.app.helper;
 
 import android.content.Context;
 
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.data.Countries;
-import com.mungziapp.traveltogether.data.ScheduleData;
-import com.mungziapp.traveltogether.data.TravelData;
+import com.mungziapp.traveltogether.model.Countries;
+import com.mungziapp.traveltogether.model.data.ScheduleData;
+import com.mungziapp.traveltogether.model.data.TravelData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +17,11 @@ public class TravelHelper {
 	private TravelHelper() { Countries.setCountryListAndHash(); }
 
 	public static void init(Context context) {
-		DatabaseManager.openDatabase(context);
-		DatabaseManager.dropTables();
-		DatabaseManager.createTables();
-		DatabaseManager.insertDummyData(makeTravelItems());
-		DatabaseManager.insertScheduleDummyData(makeScheduleItems());
+		DatabaseHelper.openDatabase(context);
+		DatabaseHelper.dropTables();
+		DatabaseHelper.createTables();
+		DatabaseHelper.insertDummyData(makeTravelItems());
+		DatabaseHelper.insertScheduleDummyData(makeScheduleItems());
 	}
 
 	private static List<TravelData> makeTravelItems() {

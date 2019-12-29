@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -24,6 +25,7 @@ import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.app.GalleryImageSetter;
+import com.mungziapp.traveltogether.app.TokenManager;
 
 public class SettingsActivity extends BaseActivity {
 	private static final String TAG = "Settings :: ";
@@ -237,6 +239,7 @@ public class SettingsActivity extends BaseActivity {
 						UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
 							@Override
 							public void onCompleteLogout() {
+								removeRefreshToken();
 								Log.d(TAG, "onCompleteLogout");
 								redirectLoginActivity();
 							}
@@ -279,7 +282,8 @@ public class SettingsActivity extends BaseActivity {
 
 									@Override
 									public void onSuccess(Long userId) {
-										Log.d(TAG, "onSuccess");
+										removeRefreshToken();
+										Log.d(TAG, "onSuccess Unlink");
 										redirectLoginActivity();
 									}
 								});
@@ -293,5 +297,13 @@ public class SettingsActivity extends BaseActivity {
 								dialog.dismiss();
 							}
 						}).show();
+	}
+
+	private void removeRefreshToken() {
+		SharedPreferences prefs = getSharedPreferences(TokenManager.prefFileName, MODE_PRIVATE);
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.remove(TokenManager.refreshToken).apply();
+
+		Log.d(TAG, "refresh token remove.");
 	}
 }

@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.adapter.CheckMembersAdapter;
-import com.mungziapp.traveltogether.app.DatabaseManager;
-import com.mungziapp.traveltogether.table.TravelTable;
+import com.mungziapp.traveltogether.app.helper.DatabaseHelper;
+import com.mungziapp.traveltogether.model.table.TravelTable;
 
 public class CheckMemberActivity extends AppCompatActivity {
 	private int numOfMembers;
@@ -34,7 +34,7 @@ public class CheckMemberActivity extends AppCompatActivity {
 	}
 
 	private void setDataFromDB(int id) {
-		Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + id, null);
+		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + id, null);
 		cursor.moveToNext();
 
 		this.numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));

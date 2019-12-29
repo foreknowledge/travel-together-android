@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.mungziapp.traveltogether.data.FragmentType;
+import com.mungziapp.traveltogether.model.FragmentType;
 import com.mungziapp.traveltogether.fragment.AccountFragment;
 import com.mungziapp.traveltogether.fragment.DiaryFragment;
 import com.mungziapp.traveltogether.fragment.NoticeFragment;

@@ -19,11 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.activity.AddScheduleActivity;
 import com.mungziapp.traveltogether.adapter.ScheduleAdapter;
-import com.mungziapp.traveltogether.app.DatabaseManager;
-import com.mungziapp.traveltogether.data.DateObject;
+import com.mungziapp.traveltogether.app.helper.DatabaseHelper;
+import com.mungziapp.traveltogether.model.DateObject;
 import com.mungziapp.traveltogether.interfaces.ActivityCallback;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
-import com.mungziapp.traveltogether.table.TravelTable;
+import com.mungziapp.traveltogether.model.table.TravelTable;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -64,7 +64,7 @@ public class ScheduleFragment extends Fragment {
 	}
 
 	private void setDataFromDB(int id) {
-		Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + id, null);
+		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + id, null);
 		cursor.moveToNext();
 
 		this.travelStartDate = cursor.getString(cursor.getColumnIndex("start_date"));

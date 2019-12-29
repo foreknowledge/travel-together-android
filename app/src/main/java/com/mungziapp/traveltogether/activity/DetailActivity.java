@@ -18,17 +18,17 @@ import android.widget.TextView;
 import com.mungziapp.traveltogether.adapter.TravelCountryAdapter;
 import com.mungziapp.traveltogether.adapter.TravelMemberAdapter;
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.app.DatabaseManager;
-import com.mungziapp.traveltogether.data.DateObject;
-import com.mungziapp.traveltogether.data.FragmentType;
+import com.mungziapp.traveltogether.app.helper.DatabaseHelper;
+import com.mungziapp.traveltogether.model.DateObject;
+import com.mungziapp.traveltogether.model.FragmentType;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
-import com.mungziapp.traveltogether.table.TravelTable;
+import com.mungziapp.traveltogether.model.table.TravelTable;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static com.mungziapp.traveltogether.data.FragmentType.*;
+import static com.mungziapp.traveltogether.model.FragmentType.*;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class DetailActivity extends AppCompatActivity {
@@ -55,7 +55,7 @@ public class DetailActivity extends AppCompatActivity {
 	}
 
 	private void setDataFromDB(int id) {
-		Cursor cursor = DatabaseManager.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + id, null);
+		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + id, null);
 		cursor.moveToNext();
 
 		this.travelId = id;

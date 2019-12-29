@@ -1,4 +1,4 @@
-package com.mungziapp.traveltogether.data;
+package com.mungziapp.traveltogether.model;
 
 import com.mungziapp.traveltogether.R;
 

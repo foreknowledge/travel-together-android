@@ -1,4 +1,4 @@
-package com.mungziapp.traveltogether.table;
+package com.mungziapp.traveltogether.model.table;
 
 import android.provider.BaseColumns;
 

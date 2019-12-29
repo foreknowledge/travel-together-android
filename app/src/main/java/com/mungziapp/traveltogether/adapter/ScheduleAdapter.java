@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.app.DatabaseManager;
-import com.mungziapp.traveltogether.data.ScheduleData;
+import com.mungziapp.traveltogether.app.helper.DatabaseHelper;
+import com.mungziapp.traveltogether.model.data.ScheduleData;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
-import com.mungziapp.traveltogether.table.ScheduleTable;
+import com.mungziapp.traveltogether.model.table.ScheduleTable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +89,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 		}
 
 		private void setScheduleData(int travelId, int dayN, DetailScheduleAdapter detailScheduleAdapter) {
-			Cursor cursor = DatabaseManager.database.rawQuery(ScheduleTable.SELECT_QUERY + " WHERE travel_id = " + travelId + " AND day_n = " + dayN, null);
+			Cursor cursor = DatabaseHelper.database.rawQuery(ScheduleTable.SELECT_QUERY + " WHERE travel_id = " + travelId + " AND day_n = " + dayN, null);
 			int numOfRecords = cursor.getCount();
 
 			if (numOfRecords != 0) scheduleNotice.setVisibility(View.INVISIBLE);
