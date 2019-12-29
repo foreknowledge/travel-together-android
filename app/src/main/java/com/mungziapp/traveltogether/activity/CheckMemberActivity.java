@@ -72,8 +72,7 @@ public class CheckMemberActivity extends AppCompatActivity {
 		membersAdapter.setOnImageClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(CheckMemberActivity.this, PhotoViewActivity.class);
-				startActivity(intent);
+				startActivity(new Intent(CheckMemberActivity.this, PhotoViewActivity.class));
 			}
 		});
 

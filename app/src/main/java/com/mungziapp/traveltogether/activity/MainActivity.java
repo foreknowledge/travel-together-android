@@ -39,8 +39,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		Intent service = new Intent(MainActivity.this, ServerService.class);
-		startService(service);
+		startService(new Intent(MainActivity.this, ServerService.class));
 
 		fm = getSupportFragmentManager();
 
@@ -113,8 +112,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		btnAddTravel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(getApplicationContext(), AddTravelActivity.class);
-				startActivity(intent);
+				startActivity(new Intent(getApplicationContext(), AddTravelActivity.class));
 			}
 		});
 	}
@@ -124,8 +122,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		btnGoSettings.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-				startActivity(intent);
+				startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
 			}
 		});
 	}

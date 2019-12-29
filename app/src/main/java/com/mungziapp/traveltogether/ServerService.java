@@ -22,10 +22,19 @@ public class ServerService extends Service {
 	private static final String TAG = "ServerService ::";
 	private Gson gson = new Gson();
 
+	private Timer refreshTimer;
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		Log.d(TAG, "oncreate()");
+
+		refreshTimer = new Timer();
+	}
+
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		Log.d(TAG, "onStartCommand()");
 
 		TimerTask refreshTask = new TimerTask() {
 			@Override
@@ -69,9 +78,18 @@ public class ServerService extends Service {
 			}
 		};
 
-		Timer refreshTimer = new Timer();
 		long duration = TokenManager.getInstance().getDuration() * 1000;
 		refreshTimer.schedule(refreshTask, duration, duration);
+
+		return super.onStartCommand(intent, flags, startId);
+	}
+
+	@Override
+	public void onDestroy() {
+		Log.d(TAG, "onDestroy()");
+		refreshTimer.cancel();
+
+		super.onDestroy();
 	}
 
 	@Override

@@ -31,8 +31,7 @@ public class SplashActivity extends AppCompatActivity {
 		final SharedPreferences prefs = getSharedPreferences(TokenManager.prefFileName, MODE_PRIVATE);
 		final String refreshToken = prefs.getString(TokenManager.refreshToken, "");
 		if (refreshToken.equals("")) {
-			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-			startActivity(intent);
+			startActivity(new Intent(getApplicationContext(), LoginActivity.class));
 			finish();
 		}
 		else {
@@ -56,8 +55,7 @@ public class SplashActivity extends AppCompatActivity {
 									.setAccessToken(accessToken)
 									.setDuration(DateObject.getLocalDateTime(exp));
 
-							Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-							startActivity(intent);
+							startActivity(new Intent(getApplicationContext(), MainActivity.class));
 							finish();
 						}
 

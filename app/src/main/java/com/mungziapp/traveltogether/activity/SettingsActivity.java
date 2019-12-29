@@ -24,6 +24,7 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.mungziapp.traveltogether.R;
+import com.mungziapp.traveltogether.ServerService;
 import com.mungziapp.traveltogether.app.GalleryImageSetter;
 import com.mungziapp.traveltogether.app.TokenManager;
 
@@ -160,8 +161,7 @@ public class SettingsActivity extends BaseActivity {
 								}).show();
 						break;
 					case NORMAL_MODE:
-						Intent intent = new Intent(SettingsActivity.this, PhotoViewActivity.class);
-						startActivity(intent);
+						startActivity(new Intent(SettingsActivity.this, PhotoViewActivity.class));
 						break;
 				}
 			}
@@ -240,6 +240,7 @@ public class SettingsActivity extends BaseActivity {
 							@Override
 							public void onCompleteLogout() {
 								removeRefreshToken();
+								stopServerService();
 								Log.d(TAG, "onCompleteLogout");
 								redirectLoginActivity();
 							}
@@ -283,6 +284,7 @@ public class SettingsActivity extends BaseActivity {
 									@Override
 									public void onSuccess(Long userId) {
 										removeRefreshToken();
+										stopServerService();
 										Log.d(TAG, "onSuccess Unlink");
 										redirectLoginActivity();
 									}
@@ -305,5 +307,9 @@ public class SettingsActivity extends BaseActivity {
 		editor.remove(TokenManager.refreshToken).apply();
 
 		Log.d(TAG, "refresh token remove.");
+	}
+
+	private void stopServerService() {
+		stopService(new Intent(SettingsActivity.this, ServerService.class));
 	}
 }
