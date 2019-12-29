@@ -30,7 +30,7 @@ public class DateObject {
 	}
 
 	public static LocalDateTime getLocalDateTime(long seconds) {
-		return LocalDateTime.ofEpochSecond(seconds * 1000, 0, ZoneOffset.UTC);
+		return LocalDateTime.ofEpochSecond(seconds, 0, ZoneOffset.UTC);
 	}
 
 	public int getYear() { return dateTime.getYear(); }

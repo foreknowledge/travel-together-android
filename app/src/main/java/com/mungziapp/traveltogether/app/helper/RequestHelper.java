@@ -83,7 +83,6 @@ public class RequestHelper {
 			@Override
 			protected Map<String, String> getParams() {
 				Map<String, String> params = new HashMap<>();
-
 				listener.setParams(params);
 
 				return params;

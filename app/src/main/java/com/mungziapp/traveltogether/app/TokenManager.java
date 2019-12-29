@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 public class TokenManager {
 	private static final String TAG = "TokenManager ::";
@@ -20,7 +21,9 @@ public class TokenManager {
 
 	public long getDuration() { return duration; }
 	public TokenManager setDuration(LocalDateTime expireTime) {
-		duration = Duration.between(LocalDateTime.now(), expireTime).getSeconds();
+		LocalDateTime now = LocalDateTime.now(ZoneOffset.UTC);
+		duration = Duration.between(now, expireTime).getSeconds();
+		duration -= 100;
 		Log.d(TAG, "duration = " + duration);
 		return this;
 	}

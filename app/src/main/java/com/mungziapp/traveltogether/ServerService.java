@@ -25,6 +25,8 @@ public class ServerService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		Log.d(TAG, "oncreate()");
+
 		TimerTask refreshTask = new TimerTask() {
 			@Override
 			public void run() {
@@ -68,7 +70,8 @@ public class ServerService extends Service {
 		};
 
 		Timer refreshTimer = new Timer();
-		refreshTimer.schedule(refreshTask, TokenManager.getInstance().getDuration());
+		long duration = TokenManager.getInstance().getDuration() * 1000;
+		refreshTimer.schedule(refreshTask, duration, duration);
 	}
 
 	@Override
