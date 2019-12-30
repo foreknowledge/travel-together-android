@@ -1,5 +1,6 @@
 package com.mungziapp.traveltogether.app;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.time.Duration;
@@ -9,7 +10,7 @@ import java.time.ZoneOffset;
 public class TokenManager {
 	private static final String TAG = "TokenManager ::";
 
-	private static long duration;
+	private static long period;
 	private String accessToken;
 	public static String prefFileName = "token-storage";
 	public static String refreshToken = "refresh-token";
@@ -19,12 +20,12 @@ public class TokenManager {
 
 	public static TokenManager getInstance() { return instance; }
 
-	public long getDuration() { return duration; }
-	public TokenManager setDuration(LocalDateTime expireTime) {
+	public long getPeriod() { return period; }
+	public TokenManager setPeriod(LocalDateTime expireTime) {
 		LocalDateTime now = LocalDateTime.now(ZoneOffset.UTC);
-		duration = Duration.between(now, expireTime).getSeconds();
-		duration -= 100;
-		Log.d(TAG, "duration = " + duration);
+		period = Duration.between(now, expireTime).getSeconds();
+		period -= 100;
+		Log.d(TAG, "period = " + period);
 		return this;
 	}
 
@@ -32,5 +33,14 @@ public class TokenManager {
 	public TokenManager setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
 		Log.d(TAG, "access token = " + accessToken);
-		return this; }
+		return this;
+	}
+
+	public static boolean isRefreshTokenUpdated(SharedPreferences prefs, String newRefreshToken) {
+		return !prefs.getString(refreshToken, "").equals(newRefreshToken);
+	}
+
+	public static boolean hasRefreshToken(SharedPreferences prefs) {
+		return !prefs.getString(refreshToken, "").equals("");
+	}
 }

@@ -32,7 +32,7 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
 import com.mungziapp.traveltogether.app.GalleryImageSetter;
-import com.mungziapp.traveltogether.model.DateObject;
+import com.mungziapp.traveltogether.app.DateObject;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.adapter.SearchCountryAdapter;

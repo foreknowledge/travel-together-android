@@ -20,7 +20,7 @@ import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.activity.AddScheduleActivity;
 import com.mungziapp.traveltogether.adapter.ScheduleAdapter;
 import com.mungziapp.traveltogether.app.helper.DatabaseHelper;
-import com.mungziapp.traveltogether.model.DateObject;
+import com.mungziapp.traveltogether.app.DateObject;
 import com.mungziapp.traveltogether.interfaces.ActivityCallback;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.model.table.TravelTable;

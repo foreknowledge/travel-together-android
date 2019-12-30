@@ -19,7 +19,7 @@ import com.mungziapp.traveltogether.adapter.TravelCountryAdapter;
 import com.mungziapp.traveltogether.adapter.TravelMemberAdapter;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.app.helper.DatabaseHelper;
-import com.mungziapp.traveltogether.model.DateObject;
+import com.mungziapp.traveltogether.app.DateObject;
 import com.mungziapp.traveltogether.model.FragmentType;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.model.table.TravelTable;

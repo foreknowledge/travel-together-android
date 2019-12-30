@@ -27,7 +27,7 @@ import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.app.TokenManager;
 import com.mungziapp.traveltogether.app.helper.RequestHelper;
 import com.mungziapp.traveltogether.interfaces.OnResponseListener;
-import com.mungziapp.traveltogether.model.DateObject;
+import com.mungziapp.traveltogether.app.DateObject;
 import com.mungziapp.traveltogether.model.response.TokenResponse;
 
 import java.util.Map;
@@ -44,7 +44,7 @@ public class LoginActivity extends BaseActivity {
 		btnLogin.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				
+
 			}
 		});
 
@@ -179,7 +179,7 @@ public class LoginActivity extends BaseActivity {
 
 							SharedPreferences prefs = getSharedPreferences(TokenManager.prefFileName, MODE_PRIVATE);
 							SharedPreferences.Editor editor = prefs.edit();
-							if (!prefs.getString(TokenManager.refreshToken, "").equals("")) {
+							if (TokenManager.hasRefreshToken(prefs)) {
 								editor.remove(TokenManager.refreshToken);
 								Log.d(TAG, "refresh token delete.");
 							}
@@ -189,7 +189,7 @@ public class LoginActivity extends BaseActivity {
 
 							TokenManager.getInstance()
 									.setAccessToken(accessToken)
-									.setDuration(DateObject.getLocalDateTime(exp));
+									.setPeriod(DateObject.getLocalDateTime(exp));
 
 							redirectMainActivity();
 							Toast.makeText(mContext, "로그인 성공~!", Toast.LENGTH_SHORT).show();

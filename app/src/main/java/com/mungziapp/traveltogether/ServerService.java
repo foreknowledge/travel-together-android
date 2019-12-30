@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 import com.mungziapp.traveltogether.app.TokenManager;
 import com.mungziapp.traveltogether.app.helper.RequestHelper;
 import com.mungziapp.traveltogether.interfaces.OnResponseListener;
-import com.mungziapp.traveltogether.model.DateObject;
+import com.mungziapp.traveltogether.app.DateObject;
 import com.mungziapp.traveltogether.model.response.TokenResponse;
 
 import java.util.HashMap;
@@ -49,18 +49,19 @@ public class ServerService extends Service {
 							public void onResponse(String response) {
 								TokenResponse tokenResponse = gson.fromJson(response, TokenResponse.class);
 								String accessToken = tokenResponse.getToken();
-								String refreshToken = tokenResponse.getRefreshToken();
+								String newRefreshToken = tokenResponse.getRefreshToken();
 								long exp = tokenResponse.getPayload().getExp();
 
-								SharedPreferences.Editor editor = prefs.edit();
-
-								editor.remove(TokenManager.refreshToken);
-								editor.putString(TokenManager.refreshToken, refreshToken).apply();
-								Log.d(TAG, "refresh token update");
+								if (TokenManager.isRefreshTokenUpdated(prefs, newRefreshToken)) {
+									SharedPreferences.Editor editor = prefs.edit();
+									editor.remove(TokenManager.refreshToken);
+									editor.putString(TokenManager.refreshToken, refreshToken).apply();
+									Log.d(TAG, "refresh token update");
+								}
 
 								TokenManager.getInstance()
 										.setAccessToken(accessToken)
-										.setDuration(DateObject.getLocalDateTime(exp));
+										.setPeriod(DateObject.getLocalDateTime(exp));
 							}
 
 							@Override
@@ -78,7 +79,7 @@ public class ServerService extends Service {
 			}
 		};
 
-		long duration = TokenManager.getInstance().getDuration() * 1000;
+		long duration = TokenManager.getInstance().getPeriod() * 1000;
 		refreshTimer.schedule(refreshTask, duration, duration);
 
 		return super.onStartCommand(intent, flags, startId);

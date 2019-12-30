@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.model.DateObject;
+import com.mungziapp.traveltogether.app.DateObject;
 
 public class AddScheduleActivity extends AppCompatActivity {
 	private boolean btnNormalChecked = true;
