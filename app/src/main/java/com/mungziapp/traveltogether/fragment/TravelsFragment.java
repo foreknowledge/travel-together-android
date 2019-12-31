@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +34,10 @@ public class TravelsFragment extends Fragment {
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		recyclerView.setAdapter(travelsRecyclerAdapter);
+		if (travelsRecyclerAdapter.getItemCount() != 0) {
+			TextView travelNotice = rootView.findViewById(R.id.travel_notice);
+			travelNotice.setVisibility(View.INVISIBLE);
+		}
 
 		return rootView;
 	}
