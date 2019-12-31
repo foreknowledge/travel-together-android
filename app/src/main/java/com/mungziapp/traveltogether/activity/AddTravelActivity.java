@@ -9,6 +9,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -19,18 +20,28 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.snackbar.Snackbar;
+import com.mungziapp.traveltogether.app.ConnectionStatus;
 import com.mungziapp.traveltogether.app.DateObject;
+import com.mungziapp.traveltogether.app.TokenManager;
+import com.mungziapp.traveltogether.app.helper.JsonHelper;
+import com.mungziapp.traveltogether.app.helper.RequestHelper;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.adapter.SearchCountryAdapter;
 import com.mungziapp.traveltogether.R;
+import com.mungziapp.traveltogether.interfaces.OnResponseListener;
 import com.mungziapp.traveltogether.model.item.CountryItem;
+import com.mungziapp.traveltogether.model.response.NewTravelRoom;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddTravelActivity extends AppCompatActivity {
+	private static final String TAG = "AddTravelActivity ::";
 	private Button btnStartDate;
 	private Button btnEndDate;
 
@@ -40,6 +51,8 @@ public class AddTravelActivity extends AppCompatActivity {
 	private RecyclerView countrySearchRecycler;
 	private SearchCountryAdapter countryAdapter;
 	private InputMethodManager in;
+
+	private boolean isFilledDates = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +72,13 @@ public class AddTravelActivity extends AppCompatActivity {
 		btnSave.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				finish();
+				if (ConnectionStatus.getConnected()) {
+					if (editTitle.getText().toString().equals(""))
+						Snackbar.make(view, "제목은 필수 입력 사항입니다.", Snackbar.LENGTH_SHORT).show();
+					else
+						requestToServer();
+				} else
+					Snackbar.make(view, "네트워크가 연결되어 있지 않습니다.", Snackbar.LENGTH_SHORT).show();
 			}
 		});
 
@@ -70,6 +89,39 @@ public class AddTravelActivity extends AppCompatActivity {
 				finish();
 			}
 		});
+	}
+
+	private void requestToServer() {
+		RequestHelper.getInstance().onSendPostRequest(RequestHelper.HOST + "/travel-rooms",
+				new OnResponseListener() {
+					@Override
+					public void onResponse(String response) {
+						JsonHelper.gson.fromJson(response, NewTravelRoom.class);
+
+						finish();
+					}
+
+					@Override
+					public void setParams(Map<String, String> params) {
+						params.put("name", editTitle.getText().toString());
+
+						if (isFilledDates) {
+							params.put("startDate", btnStartDate.getText().toString());
+							params.put("endDate", btnEndDate.getText().toString());
+						}
+
+						params.put("countries", "");
+					}
+
+					@Override
+					public Map<String, String> getHeaders() {
+						Map<String, String> header = new HashMap<>();
+						header.put("Authorization", TokenManager.getInstance().getAuthorization());
+						Log.d(TAG, "authorization = " + TokenManager.getInstance().getAuthorization());
+
+						return header;
+					}
+				});
 	}
 
 	private void setTitleText() {
@@ -128,7 +180,7 @@ public class AddTravelActivity extends AppCompatActivity {
 			@Override
 			public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
 				if (i == EditorInfo.IME_ACTION_SEARCH) {
-					performSearch();
+					performSearch(textView);
 					return true;
 				}
 				return false;
@@ -149,9 +201,9 @@ public class AddTravelActivity extends AppCompatActivity {
 		});
 	}
 
-	private void performSearch() {
+	private void performSearch(View view) {
 		if (editSearch.getText().toString().equals("")) {
-			Toast.makeText(this, "검색어를 입력 해 주세요.", Toast.LENGTH_SHORT).show();
+			Snackbar.make(view, "검색어를 입력 해 주세요.", Snackbar.LENGTH_SHORT).show();
 			return;
 		}
 
@@ -244,6 +296,7 @@ public class AddTravelActivity extends AppCompatActivity {
 					public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
 						String text = i + "." + (i1 + 1) + "." + i2;
 						btnStartDate.setText(text);
+						isFilledDates = true;
 					}
 				}, year, month, date).show();
 
@@ -273,6 +326,7 @@ public class AddTravelActivity extends AppCompatActivity {
 					public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
 						String text = i + "." + (i1 + 1) + "." + i2;
 						btnEndDate.setText(text);
+						isFilledDates = true;
 					}
 				}, year, month, date).show();
 			}
@@ -283,5 +337,4 @@ public class AddTravelActivity extends AppCompatActivity {
 		editSearch.clearFocus();
 		editTitle.clearFocus();
 	}
-
 }

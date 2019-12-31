@@ -17,8 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.adapter.SearchTravelAdapter;
 import com.mungziapp.traveltogether.R;
@@ -84,7 +84,7 @@ public class SearchActivity extends AppCompatActivity {
 			@Override
 			public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
 				if (i == EditorInfo.IME_ACTION_SEARCH) {
-					performSearch();
+					performSearch(textView);
 					return true;
 				}
 				return false;
@@ -107,14 +107,14 @@ public class SearchActivity extends AppCompatActivity {
 		btnSearch.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				performSearch();
+				performSearch(view);
 			}
 		});
 	}
 
-	private void performSearch() {
+	private void performSearch(View view) {
 		if (editSearch.getText().toString().equals("")) {
-			Toast.makeText(this, "검색어를 입력 해 주세요.", Toast.LENGTH_SHORT).show();
+			Snackbar.make(view, "검색어를 입력 해 주세요.", Snackbar.LENGTH_SHORT).show();
 			return;
 		}
 

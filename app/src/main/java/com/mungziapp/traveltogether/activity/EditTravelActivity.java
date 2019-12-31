@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.snackbar.Snackbar;
 import com.mungziapp.traveltogether.app.GalleryImageSetter;
 import com.mungziapp.traveltogether.app.DateObject;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
@@ -189,7 +190,7 @@ public class EditTravelActivity extends AppCompatActivity {
 			@Override
 			public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
 				if (i == EditorInfo.IME_ACTION_SEARCH) {
-					performSearch();
+					performSearch(textView);
 					return true;
 				}
 				return false;
@@ -210,9 +211,9 @@ public class EditTravelActivity extends AppCompatActivity {
 		});
 	}
 
-	private void performSearch() {
+	private void performSearch(View view) {
 		if (editSearch.getText().toString().equals("")) {
-			Toast.makeText(this, "검색어를 입력 해 주세요.", Toast.LENGTH_SHORT).show();
+			Snackbar.make(view, "검색어를 입력 해 주세요.", Snackbar.LENGTH_SHORT).show();
 			return;
 		}
 

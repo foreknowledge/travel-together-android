@@ -77,7 +77,7 @@ public class DatabaseHelper {
 		cursor.close();
 	}
 
-	static void insertTravelsData(TravelData travelData) {
+	public static void insertTravelsData(TravelData travelData) {
 		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + travelData.getId(), null);
 		cursor.moveToNext();
 		if (cursor.getCount() == 0) {

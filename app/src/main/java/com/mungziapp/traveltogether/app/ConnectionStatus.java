@@ -29,7 +29,7 @@ public class ConnectionStatus extends BroadcastReceiver {
 			}
 			else {
 				Log.d(TAG, "네트워크 연결 끊어짐.");
-				Toast.makeText(context, "네트워크를 연결해주세요.", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "네트워크에 연결해주세요.", Toast.LENGTH_SHORT).show();
 				ConnectionStatus.connected = false;
 			}
 		}

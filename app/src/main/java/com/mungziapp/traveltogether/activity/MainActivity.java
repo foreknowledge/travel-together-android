@@ -212,9 +212,8 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 					@Override
 					public Map<String, String> getHeaders() {
 						Map<String, String> header = new HashMap<>();
-						String authorization = TokenManager.TOKEN_TYPE + " " + TokenManager.getInstance().getAccessToken();
-						header.put("Authorization", authorization);
-						Log.d(TAG, "authorization = " + authorization);
+						header.put("Authorization", TokenManager.getInstance().getAuthorization());
+						Log.d(TAG, "authorization = " + TokenManager.getInstance().getAuthorization());
 
 						return header;
 					}

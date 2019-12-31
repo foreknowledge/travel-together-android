@@ -14,7 +14,7 @@ public class TokenManager {
 	private String accessToken;
 	public static String prefFileName = "token-storage";
 	public static String refreshToken = "refresh-token";
-	public static final String TOKEN_TYPE = "Bearer";
+	private static final String TOKEN_TYPE = "Bearer";
 
 	private static TokenManager instance = new TokenManager();
 	private TokenManager() {}
@@ -30,7 +30,7 @@ public class TokenManager {
 		return this;
 	}
 
-	public String getAccessToken() { return accessToken; }
+	public String getAuthorization() { return TOKEN_TYPE + " " + accessToken; }
 	public TokenManager setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
 		Log.d(TAG, "access token = " + accessToken);
