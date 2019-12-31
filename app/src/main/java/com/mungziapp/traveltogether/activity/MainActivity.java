@@ -74,6 +74,12 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		AutoPermissions.Companion.loadAllPermissions(this, 101);
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		setAdapterItems();
+	}
+
 	private void setAdapters() {
 		oncommingAdapter = new TravelsRecyclerAdapter(getApplicationContext());
 		oncommingAdapter.setClickListener(makeItemClickListener(oncommingAdapter));
@@ -150,6 +156,9 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 	}
 
 	private void setAdapterItems() {
+		oncommingAdapter.clearItems();
+		lastTravelAdapter.clearItems();
+
 		if (ConnectionStatus.getConnected())
 			addItemsInNetwork();
 		else

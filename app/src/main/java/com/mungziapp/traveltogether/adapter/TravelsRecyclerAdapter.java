@@ -36,6 +36,7 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 	public TravelData getItem(int position) {
 		return travelData.get(position);
 	}
+	public void clearItems() { travelData.clear(); }
 	public void setClickListener(OnItemClickListener listener) {
 		this.listener = listener;
 	}
