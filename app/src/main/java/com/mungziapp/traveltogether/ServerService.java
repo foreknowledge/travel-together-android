@@ -6,8 +6,8 @@ import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.mungziapp.traveltogether.app.TokenManager;
+import com.mungziapp.traveltogether.app.helper.JsonHelper;
 import com.mungziapp.traveltogether.app.helper.RequestHelper;
 import com.mungziapp.traveltogether.interfaces.OnResponseListener;
 import com.mungziapp.traveltogether.app.DateObject;
@@ -20,7 +20,6 @@ import java.util.TimerTask;
 
 public class ServerService extends Service {
 	private static final String TAG = "ServerService ::";
-	private Gson gson = new Gson();
 
 	private Timer refreshTimer;
 
@@ -47,7 +46,7 @@ public class ServerService extends Service {
 						new OnResponseListener() {
 							@Override
 							public void onResponse(String response) {
-								TokenResponse tokenResponse = gson.fromJson(response, TokenResponse.class);
+								TokenResponse tokenResponse = JsonHelper.gson.fromJson(response, TokenResponse.class);
 								String accessToken = tokenResponse.getToken();
 								String newRefreshToken = tokenResponse.getRefreshToken();
 								long exp = tokenResponse.getPayload().getExp();

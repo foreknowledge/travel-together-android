@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mungziapp.traveltogether.app.DateObject;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.model.data.TravelData;
@@ -107,14 +106,14 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 		void setItem(TravelData item) {
 			this.travelName.setText(item.getName());
 
-			this.travelCover.setImageResource(item.getCover());
+			// set cover image
 
 			String numOfTravelMembers = Integer.toString(item.getMembers());
 			this.numOfTravelMembers.setText(numOfTravelMembers);
 
 			if (item.getStartDate() != null && item.getEndDate() != null) {
-				LocalDate startLocalDate = DateObject.stringToLocalDate(item.getStartDate());
-				LocalDate endLocalDate = DateObject.stringToLocalDate(item.getEndDate());
+				LocalDate startLocalDate = item.getStartDate();
+				LocalDate endLocalDate = item.getEndDate();
 
 				long daysBetween = DAYS.between(startLocalDate, endLocalDate) + 1;
 				String strDuration = item.getStartDate() + " ~ " + item.getEndDate() + " (" + daysBetween + "일간)";

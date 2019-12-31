@@ -26,7 +26,6 @@ public class ConnectionStatus extends BroadcastReceiver {
 			if (ConnectionStatus.checkNetwork(context)) {
 				ConnectionStatus.connected = true;
 				Log.d(TAG, "네트워크 연결됨.");
-				Toast.makeText(context, "네트워크 연결됨", Toast.LENGTH_SHORT).show();
 			}
 			else {
 				Log.d(TAG, "네트워크 연결 끊어짐.");

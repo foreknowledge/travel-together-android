@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.kakao.auth.ApiResponseCallback;
 import com.kakao.auth.AuthService;
 import com.kakao.auth.AuthType;
@@ -25,6 +24,7 @@ import com.kakao.util.OptionalBoolean;
 import com.kakao.util.exception.KakaoException;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.app.TokenManager;
+import com.mungziapp.traveltogether.app.helper.JsonHelper;
 import com.mungziapp.traveltogether.app.helper.RequestHelper;
 import com.mungziapp.traveltogether.interfaces.OnResponseListener;
 import com.mungziapp.traveltogether.app.DateObject;
@@ -33,7 +33,6 @@ import com.mungziapp.traveltogether.model.response.TokenResponse;
 import java.util.Map;
 
 public class LoginActivity extends BaseActivity {
-	private Gson gson = new Gson();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +171,7 @@ public class LoginActivity extends BaseActivity {
 					RequestHelper.getInstance().onSendPostRequest(url, new OnResponseListener() {
 						@Override
 						public void onResponse(String response) {
-							TokenResponse tokenResponse = gson.fromJson(response, TokenResponse.class);
+							TokenResponse tokenResponse = JsonHelper.gson.fromJson(response, TokenResponse.class);
 							String accessToken = tokenResponse.getToken();
 							String refreshToken = tokenResponse.getRefreshToken();
 							long exp = tokenResponse.getPayload().getExp();

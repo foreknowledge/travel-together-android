@@ -14,6 +14,7 @@ public class TokenManager {
 	private String accessToken;
 	public static String prefFileName = "token-storage";
 	public static String refreshToken = "refresh-token";
+	public static final String TOKEN_TYPE = "Bearer";
 
 	private static TokenManager instance = new TokenManager();
 	private TokenManager() {}

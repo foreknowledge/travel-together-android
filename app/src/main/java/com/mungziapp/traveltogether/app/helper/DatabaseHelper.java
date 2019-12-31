@@ -52,7 +52,7 @@ public class DatabaseHelper {
 
 		for (TravelData data : travelData) {
 			String sql = "INSERT INTO " + TravelTable.TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)";
-			Object[] params = {data.getId(), data.getName(), data.getStartDate(), data.getEndDate(), data.getCountryCodes(), data.getCover(), data.getMembers()};
+			Object[] params = {data.getId(), data.getName(), data.getStartDate(), data.getEndDate(), data.getCountryCodes(), data.getCoverImgPath(), data.getMembers()};
 
 			DatabaseHelper.database.execSQL(sql, params);
 		}
@@ -83,7 +83,7 @@ public class DatabaseHelper {
 		if (cursor.getCount() == 0) {
 			// 테이블에 데이터가 없다면 데이터 넣기
 			String sql = "INSERT INTO movieDetail VALUES (?, ?, ?, ?, ?, ?, ?)";
-			Object[] params = {travelData.getId(), travelData.getName(), travelData.getStartDate(), travelData.getEndDate(), travelData.getCountryCodes(), travelData.getCover(), travelData.getMembers()};
+			Object[] params = {travelData.getId(), travelData.getName(), travelData.getStartDate(), travelData.getEndDate(), travelData.getCountryCodes(), travelData.getCoverImgPath(), travelData.getMembers()};
 
 			DatabaseHelper.database.execSQL(sql, params);
 			Log.d(TAG, "movieDetail [" + travelData.getId() + "] 데이터 추가됨.");

@@ -8,7 +8,12 @@ public class DateObject {
 	private LocalDateTime dateTime;
 
 	public static LocalDate stringToLocalDate(String strDate) {
-		String[] strDates = strDate.split("\\.");
+		// ISO 시간 형식 기준이라면 'T' 문자 전까지 substring
+		int index = strDate.indexOf("T");
+		if (index != -1)
+			strDate = strDate.substring(0, index);
+
+		String[] strDates = strDate.split("-");
 
 		if (strDates.length == 3) {
 			int year = Integer.valueOf(strDates[0]);
@@ -42,7 +47,7 @@ public class DateObject {
 	public LocalDateTime getDateTime() {
 		return dateTime;
 	}
-	public void setDate(LocalDateTime dateTime) {
+	public void setDateTime(LocalDateTime dateTime) {
 		this.dateTime = dateTime;
 	}
 }

@@ -7,8 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.mungziapp.traveltogether.app.TokenManager;
+import com.mungziapp.traveltogether.app.helper.JsonHelper;
 import com.mungziapp.traveltogether.app.helper.RequestHelper;
 import com.mungziapp.traveltogether.app.helper.TravelHelper;
 import com.mungziapp.traveltogether.interfaces.OnResponseListener;
@@ -20,7 +20,6 @@ import java.util.Map;
 
 public class SplashActivity extends AppCompatActivity {
 	private static final String TAG = "SplashActivity ::";
-	private Gson gson = new Gson();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +44,7 @@ public class SplashActivity extends AppCompatActivity {
 				new OnResponseListener() {
 					@Override
 					public void onResponse(String response) {
-						TokenResponse tokenResponse = gson.fromJson(response, TokenResponse.class);
+						TokenResponse tokenResponse = JsonHelper.gson.fromJson(response, TokenResponse.class);
 						String accessToken = tokenResponse.getToken();
 						String newRefreshToken = tokenResponse.getRefreshToken();
 						long exp = tokenResponse.getPayload().getExp();

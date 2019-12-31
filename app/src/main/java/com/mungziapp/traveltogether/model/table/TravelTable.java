@@ -8,7 +8,7 @@ public class TravelTable implements BaseColumns {
 	private static String START_DATE = "start_date";
 	private static String END_DATE = "end_date";
 	private static String COUNTRY_CODES = "country_codes";
-	private static String COVER = "cover";
+	private static String COVER_IMG_PATH = "cover_img_path";
 	private static String MEMBERS = "members";
 
 	public static String TABLE_NAME = "travel";
@@ -16,12 +16,12 @@ public class TravelTable implements BaseColumns {
 	private TravelTable() { }
 
 	public static final String CREATE_QUERY = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
-			ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+			ID + " TEXT PRIMARY KEY, " +
 			NAME + " TEXT NOT NULL, " +
 			START_DATE + " TEXT, " +
 			END_DATE + " TEXT, " +
 			COUNTRY_CODES + " TEXT, " +
-			COVER + " INTEGER, " +
+			COVER_IMG_PATH + " TEXT, " +
 			MEMBERS + " INTEGER);";
 
 	public static final String DROP_QUERY = "DROP TABLE " + TABLE_NAME;

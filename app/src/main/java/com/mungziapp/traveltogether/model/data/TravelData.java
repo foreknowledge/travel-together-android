@@ -1,25 +1,27 @@
 package com.mungziapp.traveltogether.model.data;
 
+import java.time.LocalDate;
+
 public class TravelData {
-	private int id;
+	private String id;
 	private String name;
-	private String startDate;
-	private String endDate;
+	private LocalDate startDate;
+	private LocalDate endDate;
 	private String countryCodes;
-	private int cover;
+	private String coverImgPath;
 	private int members;
 
-	public TravelData(int id, String name, String startDate, String endDate, String countryCodes, int cover, int members) {
+	public TravelData(String id, String name, LocalDate startDate, LocalDate endDate, String countryCodes, String coverImgPath, int members) {
 		this.id = id;
 		this.name = name;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.countryCodes = countryCodes;
-		this.cover = cover;
+		this.coverImgPath = coverImgPath;
 		this.members = members;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -27,11 +29,11 @@ public class TravelData {
 		return name;
 	}
 
-	public String getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public String getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
@@ -39,8 +41,8 @@ public class TravelData {
 		return countryCodes;
 	}
 
-	public int getCover() {
-		return cover;
+	public String getCoverImgPath() {
+		return coverImgPath;
 	}
 
 	public int getMembers() {
