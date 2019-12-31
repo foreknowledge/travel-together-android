@@ -3,6 +3,7 @@ package com.mungziapp.traveltogether.app.helper;
 import android.content.Context;
 
 import com.mungziapp.traveltogether.R;
+import com.mungziapp.traveltogether.app.ConnectionStatus;
 import com.mungziapp.traveltogether.model.Countries;
 import com.mungziapp.traveltogether.model.data.ScheduleData;
 import com.mungziapp.traveltogether.model.data.TravelData;
@@ -17,6 +18,7 @@ public class TravelHelper {
 	private TravelHelper() { Countries.setCountryListAndHash(); }
 
 	public static void init(Context context) {
+		ConnectionStatus.registerNetworkReceiver(context);
 		DatabaseHelper.openDatabase(context);
 		DatabaseHelper.dropTables();
 		DatabaseHelper.createTables();
