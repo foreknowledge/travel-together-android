@@ -58,6 +58,7 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
 
 	public void searchItem(String word) {
 		searchItems.clear();
+		word = word.toUpperCase();
 
 		if (word.equals("")) {
 			notifyDataSetChanged();
@@ -66,8 +67,10 @@ public class SearchCountryAdapter extends RecyclerView.Adapter<SearchCountryAdap
 
 		for (int i = 0; i < items.size(); ++i) {
 			CountryItem item = items.get(i);
-			if (!item.getSelected() && item.getCountryKrName().replace(" ", "").contains(word)) {
-				searchItems.add(item);
+			if (!item.getSelected()) {
+				if (item.getCountryKrName().replace(" ", "").contains(word) ||
+						item.getCountryEnName().replace(" ", "").contains(word))
+					searchItems.add(item);
 			}
 		}
 

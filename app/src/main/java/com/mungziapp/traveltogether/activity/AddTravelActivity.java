@@ -96,7 +96,10 @@ public class AddTravelActivity extends AppCompatActivity {
 				new OnResponseListener() {
 					@Override
 					public void onResponse(String response) {
-						JsonHelper.gson.fromJson(response, NewTravelRoom.class);
+						Log.d(TAG, response);
+
+						NewTravelRoom newTravelRoom = JsonHelper.gson.fromJson(response, NewTravelRoom.class);
+						saveToDatabase(newTravelRoom);
 
 						finish();
 					}
@@ -122,6 +125,10 @@ public class AddTravelActivity extends AppCompatActivity {
 						return header;
 					}
 				});
+	}
+
+	private void saveToDatabase(NewTravelRoom newTravelRoom) {
+
 	}
 
 	private void setTitleText() {

@@ -49,11 +49,11 @@ public class Countries {
 		countryList.add(new CountryItem(Arrays.asList("벨리즈", "BELIZE", "BZ", "\uD83C\uDDE7\uD83C\uDDFF")));
 		countryList.add(new CountryItem(Arrays.asList("캐나다", "CANADA", "CA", "\uD83C\uDDE8\uD83C\uDDE6")));
 		countryList.add(new CountryItem(Arrays.asList("코코스 제도", "COCOS (KEELING) ISLANDS", "CC", "\uD83C\uDDE8\uD83C\uDDE8")));
-		countryList.add(new CountryItem(Arrays.asList("콩고민주공화국", "Democratic Republic of the Congo", "CD", "\uD83C\uDDE8\uD83C\uDDE9")));
+		countryList.add(new CountryItem(Arrays.asList("콩고민주공화국", "DEMOCRATIC REPUBLIC OF THE CONGO", "CD", "\uD83C\uDDE8\uD83C\uDDE9")));
 		countryList.add(new CountryItem(Arrays.asList("중앙아프리카공화국", "CENTRAL AFRICAN REPUBLIC", "CF", "\uD83C\uDDE8\uD83C\uDDEB")));
 		countryList.add(new CountryItem(Arrays.asList("콩고", "CONGO", "CG", "\uD83C\uDDE8\uD83C\uDDEC")));
 		countryList.add(new CountryItem(Arrays.asList("스위스", "SWITZERLAND", "CH", "\uD83C\uDDE8\uD83C\uDDED")));
-		countryList.add(new CountryItem(Arrays.asList("코트디부아르", "COTE D`IVOIRE", "CI", "\uD83C\uDDE8\uD83C\uDDEE")));
+		countryList.add(new CountryItem(Arrays.asList("코트디부아르", "COTE DIVOIRE", "CI", "\uD83C\uDDE8\uD83C\uDDEE")));
 		countryList.add(new CountryItem(Arrays.asList("쿡 제도", "COOK ISLANDS", "CK", "\uD83C\uDDE8\uD83C\uDDF0")));
 		countryList.add(new CountryItem(Arrays.asList("칠레", "CHILE", "CL", "\uD83C\uDDE8\uD83C\uDDF1")));
 		countryList.add(new CountryItem(Arrays.asList("카메룬", "CAMEROON", "CM", "\uD83C\uDDE8\uD83C\uDDF2")));
