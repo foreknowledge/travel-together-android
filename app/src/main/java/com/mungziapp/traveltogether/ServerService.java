@@ -9,8 +9,8 @@ import android.util.Log;
 import com.mungziapp.traveltogether.app.TokenManager;
 import com.mungziapp.traveltogether.app.helper.JsonHelper;
 import com.mungziapp.traveltogether.app.helper.RequestHelper;
-import com.mungziapp.traveltogether.interfaces.OnResponseListener;
-import com.mungziapp.traveltogether.app.DateObject;
+import com.mungziapp.traveltogether.interfaces.OnGETResponseListener;
+import com.mungziapp.traveltogether.app.DateHelper;
 import com.mungziapp.traveltogether.model.response.TokenResponse;
 
 import java.util.HashMap;
@@ -43,7 +43,7 @@ public class ServerService extends Service {
 
 				RequestHelper.getInstance().onSendGetRequest(
 						RequestHelper.HOST + "/auth/refresh",
-						new OnResponseListener() {
+						new OnGETResponseListener() {
 							@Override
 							public void onResponse(String response) {
 								TokenResponse tokenResponse = JsonHelper.gson.fromJson(response, TokenResponse.class);
@@ -60,11 +60,8 @@ public class ServerService extends Service {
 
 								TokenManager.getInstance()
 										.setAccessToken(accessToken)
-										.setPeriod(DateObject.getLocalDateTime(exp));
+										.setPeriod(DateHelper.getLocalDateTime(exp));
 							}
-
-							@Override
-							public void setParams(Map<String, String> params) { }
 
 							@Override
 							public Map<String, String> getHeaders() {

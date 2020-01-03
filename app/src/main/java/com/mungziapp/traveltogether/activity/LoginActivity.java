@@ -26,9 +26,12 @@ import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.app.TokenManager;
 import com.mungziapp.traveltogether.app.helper.JsonHelper;
 import com.mungziapp.traveltogether.app.helper.RequestHelper;
-import com.mungziapp.traveltogether.interfaces.OnResponseListener;
-import com.mungziapp.traveltogether.app.DateObject;
+import com.mungziapp.traveltogether.app.DateHelper;
+import com.mungziapp.traveltogether.interfaces.OnPOSTResponseListener;
 import com.mungziapp.traveltogether.model.response.TokenResponse;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Map;
 
@@ -166,12 +169,19 @@ public class LoginActivity extends BaseActivity {
 					final String userId = String.valueOf(accessTokenInfoResponse.getUserId());
 					Log.d(TAG, "this oauth access token is for userId = " + userId);
 
+					JSONObject jsonObject = new JSONObject();
+					try {
+						jsonObject.put("oauthToken", oauthToken);
+						jsonObject.put("oauthId", userId);
+						jsonObject.put("oauthServer", "kakao");
+					} catch (JSONException e) { Log.d(TAG, "error message = " + e.getMessage()); }
+
 					// 서버로 access token & user id 전송
 					String url = RequestHelper.HOST + "/auth/oauth/login";
-					RequestHelper.getInstance().onSendPostRequest(url, new OnResponseListener() {
+					RequestHelper.getInstance().onSendPostRequest(url, jsonObject, new OnPOSTResponseListener() {
 						@Override
-						public void onResponse(String response) {
-							TokenResponse tokenResponse = JsonHelper.gson.fromJson(response, TokenResponse.class);
+						public void onResponse(JSONObject response) {
+							TokenResponse tokenResponse = JsonHelper.gson.fromJson(response.toString(), TokenResponse.class);
 							String accessToken = tokenResponse.getToken();
 							String refreshToken = tokenResponse.getRefreshToken();
 							long exp = tokenResponse.getPayload().getExp();
@@ -188,7 +198,7 @@ public class LoginActivity extends BaseActivity {
 
 							TokenManager.getInstance()
 									.setAccessToken(accessToken)
-									.setPeriod(DateObject.getLocalDateTime(exp));
+									.setPeriod(DateHelper.getLocalDateTime(exp));
 
 							redirectMainActivity();
 							Toast.makeText(mContext, "로그인 성공~!", Toast.LENGTH_SHORT).show();
@@ -197,13 +207,6 @@ public class LoginActivity extends BaseActivity {
 						@Override
 						public Map<String, String> getHeaders() {
 							return null;
-						}
-
-						@Override
-						public void setParams(Map<String, String> params) {
-							params.put("oauthToken", oauthToken);
-							params.put("oauthId", userId);
-							params.put("oauthServer", "kakao");
 						}
 					});
 				}

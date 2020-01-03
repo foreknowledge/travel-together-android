@@ -20,24 +20,34 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
 import com.mungziapp.traveltogether.app.ConnectionStatus;
-import com.mungziapp.traveltogether.app.DateObject;
+import com.mungziapp.traveltogether.app.DateHelper;
 import com.mungziapp.traveltogether.app.TokenManager;
+import com.mungziapp.traveltogether.app.helper.DatabaseHelper;
 import com.mungziapp.traveltogether.app.helper.JsonHelper;
 import com.mungziapp.traveltogether.app.helper.RequestHelper;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.adapter.SearchCountryAdapter;
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.interfaces.OnResponseListener;
+import com.mungziapp.traveltogether.interfaces.OnPOSTResponseListener;
+import com.mungziapp.traveltogether.model.data.TravelData;
 import com.mungziapp.traveltogether.model.item.CountryItem;
 import com.mungziapp.traveltogether.model.response.NewTravelRoom;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AddTravelActivity extends AppCompatActivity {
@@ -53,6 +63,7 @@ public class AddTravelActivity extends AppCompatActivity {
 	private InputMethodManager in;
 
 	private boolean isFilledDates = false;
+	private List<String> countryCodes = new ArrayList<>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +86,10 @@ public class AddTravelActivity extends AppCompatActivity {
 				if (ConnectionStatus.getConnected()) {
 					if (editTitle.getText().toString().equals(""))
 						Snackbar.make(view, "제목은 필수 입력 사항입니다.", Snackbar.LENGTH_SHORT).show();
-					else
+					else {
 						requestToServer();
+						finish();
+					}
 				} else
 					Snackbar.make(view, "네트워크가 연결되어 있지 않습니다.", Snackbar.LENGTH_SHORT).show();
 			}
@@ -92,28 +105,35 @@ public class AddTravelActivity extends AppCompatActivity {
 	}
 
 	private void requestToServer() {
-		RequestHelper.getInstance().onSendPostRequest(RequestHelper.HOST + "/travel-rooms",
-				new OnResponseListener() {
-					@Override
-					public void onResponse(String response) {
-						Log.d(TAG, response);
+		JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject.put("name", editTitle.getText().toString());
 
-						NewTravelRoom newTravelRoom = JsonHelper.gson.fromJson(response, NewTravelRoom.class);
-						saveToDatabase(newTravelRoom);
+			if (isFilledDates) {
+				LocalDate startDate = DateHelper.stringToLocalDate(btnStartDate.getText(), "\\.");
+				LocalDate endDate = DateHelper.stringToLocalDate(btnEndDate.getText(), "\\.");
+
+				jsonObject.put("startDate", DateHelper.toISOFormat(startDate));
+				jsonObject.put("endDate", DateHelper.toISOFormat(endDate));
+			}
+
+			JSONArray countryJson = new JSONArray();
+			for (String countryCode : countryCodes)
+				countryJson.put(countryCode);
+			jsonObject.put("countries", countryJson);
+		} catch (JSONException e) { Log.d(TAG, "error message = " + e.getMessage()); }
+
+		RequestHelper.getInstance().onSendPostRequest(RequestHelper.HOST + "/travel-rooms", jsonObject,
+				new OnPOSTResponseListener() {
+					@Override
+					public void onResponse(JSONObject response) {
+						Log.d(TAG, response.toString());
+
+						NewTravelRoom newTravelRoom = JsonHelper.gson.fromJson(response.toString(), NewTravelRoom.class);
+						//saveToDatabase(newTravelRoom);
+						Toast.makeText(AddTravelActivity.this, "여행방 생성!", Toast.LENGTH_SHORT).show();
 
 						finish();
-					}
-
-					@Override
-					public void setParams(Map<String, String> params) {
-						params.put("name", editTitle.getText().toString());
-
-						if (isFilledDates) {
-							params.put("startDate", btnStartDate.getText().toString());
-							params.put("endDate", btnEndDate.getText().toString());
-						}
-
-						params.put("countries", "");
 					}
 
 					@Override
@@ -128,7 +148,28 @@ public class AddTravelActivity extends AppCompatActivity {
 	}
 
 	private void saveToDatabase(NewTravelRoom newTravelRoom) {
+		LocalDate startDate = null, endDate = null;
 
+		if (isFilledDates) {
+			startDate = DateHelper.stringToLocalDate(btnStartDate.getText(), "\\.");
+			endDate = DateHelper.stringToLocalDate(btnEndDate.getText(), "\\.");
+		}
+
+		StringBuilder selected = new StringBuilder();
+		for (int i = 0; i < countryCodes.size(); ++i) {
+			selected.append(countryCodes.get(i));
+			if (i < countryCodes.size() - 1)
+				selected.append(",");
+		}
+
+		DatabaseHelper.insertTravelsData(new TravelData(newTravelRoom.getId()
+				, editTitle.getText().toString()
+				, startDate
+				, endDate
+				, countryCodes.toString()
+				, newTravelRoom.getCoverImagePath()
+				, 1));
+		Log.d(TAG, "새로운 여행방 DB에 저장");
 	}
 
 	private void setTitleText() {
@@ -234,6 +275,7 @@ public class AddTravelActivity extends AppCompatActivity {
 				CountryItem item = countryAdapter.getSearchItem(position);
 
 				chipGroup.addView(makeChip(item));
+				countryCodes.add(item.getCountryCode());
 				scrollView.post(new Runnable() {
 					@Override
 					public void run() {
@@ -269,6 +311,7 @@ public class AddTravelActivity extends AppCompatActivity {
 			public void onClick(View view) {
 				chipGroup.removeView(view);
 				countryAdapter.deselectItem(item);
+				countryCodes.remove(item.getCountryCode());
 				countryAdapter.searchItem(editSearch.getText().toString());
 			}
 		});
@@ -293,15 +336,21 @@ public class AddTravelActivity extends AppCompatActivity {
 					month = Integer.valueOf(startDate[1]) - 1;
 					date = Integer.valueOf(startDate[2]);
 				} else {
-					DateObject now = new DateObject();
+					DateHelper now = new DateHelper();
 					year = now.getYear();
-					month = now.getMonth();
+					month = now.getMonth() - 1;
 					date = now.getDayOfMonth();
 				}
 				new DatePickerDialog(AddTravelActivity.this, new DatePickerDialog.OnDateSetListener() {
 					@Override
 					public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-						String text = i + "." + (i1 + 1) + "." + i2;
+						String month = String.valueOf(i1 + 1);
+						String day = String.valueOf(i2);
+
+						if (i1 < 10) month = "0" + (i1 + 1);
+						if (i2 < 10) day = "0" + i2;
+
+						String text = i + "." + month + "." + day;
 						btnStartDate.setText(text);
 						isFilledDates = true;
 					}
@@ -323,15 +372,21 @@ public class AddTravelActivity extends AppCompatActivity {
 					month = Integer.valueOf(endDate[1]) - 1;
 					date = Integer.valueOf(endDate[2]);
 				} else {
-					DateObject now = new DateObject();
+					DateHelper now = new DateHelper();
 					year = now.getYear();
-					month = now.getMonth();
+					month = now.getMonth() - 1;
 					date = now.getDayOfMonth();
 				}
 				new DatePickerDialog(AddTravelActivity.this, new DatePickerDialog.OnDateSetListener() {
 					@Override
 					public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-						String text = i + "." + (i1 + 1) + "." + i2;
+						String month = String.valueOf(i1 + 1);
+						String day = String.valueOf(i2);
+
+						if (i1 < 10) month = "0" + (i1 + 1);
+						if (i2 < 10) day = "0" + i2;
+
+						String text = i + "." + month + "." + day;
 						btnEndDate.setText(text);
 						isFilledDates = true;
 					}

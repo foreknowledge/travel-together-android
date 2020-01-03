@@ -33,7 +33,7 @@ import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
 import com.mungziapp.traveltogether.app.GalleryImageSetter;
-import com.mungziapp.traveltogether.app.DateObject;
+import com.mungziapp.traveltogether.app.DateHelper;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.adapter.SearchCountryAdapter;
@@ -296,15 +296,21 @@ public class EditTravelActivity extends AppCompatActivity {
 					month = Integer.valueOf(startDate[1]) - 1;
 					date = Integer.valueOf(startDate[2]);
 				} else {
-					DateObject now = new DateObject();
+					DateHelper now = new DateHelper();
 					year = now.getYear();
-					month = now.getMonth();
+					month = now.getMonth() - 1;
 					date = now.getDayOfMonth();
 				}
 				new DatePickerDialog(EditTravelActivity.this, new DatePickerDialog.OnDateSetListener() {
 					@Override
 					public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-						String text = i + "." + (i1 + 1) + "." + i2;
+						String month = String.valueOf(i1 + 1);
+						String day = String.valueOf(i2);
+
+						if (i1 < 10) month = "0" + (i1 + 1);
+						if (i2 < 10) day = "0" + i2;
+
+						String text = i + "." + month + "." + day;
 						btnStartDate.setText(text);
 					}
 				}, year, month, date).show();
@@ -325,15 +331,21 @@ public class EditTravelActivity extends AppCompatActivity {
 					month = Integer.valueOf(endDate[1]) - 1;
 					date = Integer.valueOf(endDate[2]);
 				} else {
-					DateObject now = new DateObject();
+					DateHelper now = new DateHelper();
 					year = now.getYear();
-					month = now.getMonth();
+					month = now.getMonth() - 1;
 					date = now.getDayOfMonth();
 				}
 				new DatePickerDialog(EditTravelActivity.this, new DatePickerDialog.OnDateSetListener() {
 					@Override
 					public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-						String text = i + "." + (i1 + 1) + "." + i2;
+						String month = String.valueOf(i1 + 1);
+						String day = String.valueOf(i2);
+
+						if (i1 < 10) month = "0" + (i1 + 1);
+						if (i2 < 10) day = "0" + i2;
+
+						String text = i + "." + month + "." + day;
 						btnEndDate.setText(text);
 					}
 				}, year, month, date).show();

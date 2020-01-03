@@ -16,10 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.gson.reflect.TypeToken;
 import com.mungziapp.traveltogether.ServerService;
 import com.mungziapp.traveltogether.app.ConnectionStatus;
-import com.mungziapp.traveltogether.app.DateObject;
+import com.mungziapp.traveltogether.app.DateHelper;
 import com.mungziapp.traveltogether.app.TokenManager;
 import com.mungziapp.traveltogether.app.helper.JsonHelper;
 import com.mungziapp.traveltogether.app.helper.RequestHelper;
@@ -27,7 +26,7 @@ import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.adapter.TravelsRecyclerAdapter;
 import com.mungziapp.traveltogether.adapter.MainPagerAdapter;
 import com.mungziapp.traveltogether.app.helper.DatabaseHelper;
-import com.mungziapp.traveltogether.interfaces.OnResponseListener;
+import com.mungziapp.traveltogether.interfaces.OnJsonArrayListener;
 import com.mungziapp.traveltogether.model.data.TravelData;
 import com.mungziapp.traveltogether.fragment.TravelsFragment;
 import com.mungziapp.traveltogether.R;
@@ -38,10 +37,10 @@ import com.mungziapp.traveltogether.model.table.TravelTable;
 import com.pedro.library.AutoPermissions;
 import com.pedro.library.AutoPermissionsListener;
 
-import org.json.JSONObject;
+import org.json.JSONArray;
 
-import java.lang.reflect.Type;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -169,44 +168,22 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 	}
 
 	private void addItemsInNetwork() {
-		RequestHelper.getInstance().onSendGetRequest(RequestHelper.HOST + "/me/travel-rooms",
-				new OnResponseListener() {
+		RequestHelper.getInstance().onSendJsonArrayRequest(RequestHelper.HOST + "/travel-rooms",
+				new OnJsonArrayListener() {
 					@Override
-					public void onResponse(String response) {
-						try {
-							Type listType = new TypeToken<List<TravelRoom>>() {}.getType();
-							List<TravelRoom> travelRooms = JsonHelper.gson.fromJson(new JSONObject(response).getJSONArray("result").toString(), listType);
+					public void onResponse(JSONArray response) {
+						Log.d(TAG, "response = " + response.toString());
 
-							for (TravelRoom travelRoom : travelRooms) {
-								String id = travelRoom.getId();
-								String title = travelRoom.getName();
-								LocalDate startDate = null, endDate = null;
-								if (travelRoom.getStartDate() != null && travelRoom.getEndDate() != null) {
-									startDate = DateObject.stringToLocalDate(travelRoom.getStartDate());
-									endDate = DateObject.stringToLocalDate(travelRoom.getEndDate());
-								}
-								List<Country> countries = travelRoom.getCountries();
-								List<Member> members = travelRoom.getMembers();
-								String coverImgPath = travelRoom.getCoverImagePath();
+						List<TravelRoom> travelRooms = new ArrayList<>();
 
-								StringBuilder countryCodes = new StringBuilder();
-								for (Country country: countries) {
-									countryCodes.append(country.getCode());
-									countryCodes.append(",");
-								}
+						for(int i = 0; i < response.length(); i++) {
+							try {
+								TravelRoom travelRoom = JsonHelper.gson.fromJson(response.getJSONObject(i).toString(), TravelRoom.class);
+								travelRooms.add(travelRoom);
 
-								if (DAYS.between(LocalDate.now(), endDate) < 0)
-									lastTravelAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes.toString(), coverImgPath, members.size()));
-								else
-									oncommingAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes.toString(), coverImgPath, members.size()));
-							}
-
-						} catch (Exception e) { Log.e(TAG, "error message = " + e.getMessage()); }
-					}
-
-					@Override
-					public void setParams(Map<String, String> params) {
-
+								addTravelItems(travelRooms);
+							} catch (Exception e) { Log.e(TAG, "error message = " + e.getMessage()); }
+						}
 					}
 
 					@Override
@@ -214,10 +191,37 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 						Map<String, String> header = new HashMap<>();
 						header.put("Authorization", TokenManager.getInstance().getAuthorization());
 						Log.d(TAG, "authorization = " + TokenManager.getInstance().getAuthorization());
+						Log.d(TAG, "request headers = " + header.toString());
 
 						return header;
 					}
 				});
+	}
+
+	private void addTravelItems(List<TravelRoom> travelRooms) {
+		for (TravelRoom travelRoom : travelRooms) {
+			String id = travelRoom.getId();
+			String title = travelRoom.getName();
+			LocalDate startDate = null, endDate = null;
+			if (travelRoom.getStartDate() != null && travelRoom.getEndDate() != null) {
+				startDate = DateHelper.stringISOToLocalDate(travelRoom.getStartDate());
+				endDate = DateHelper.stringISOToLocalDate(travelRoom.getEndDate());
+			}
+			List<Country> countries = travelRoom.getCountries();
+			List<Member> members = travelRoom.getMembers();
+			String coverImgPath = travelRoom.getCoverImagePath();
+
+			StringBuilder countryCodes = new StringBuilder();
+			for (Country country: countries) {
+				countryCodes.append(country.getCode());
+				countryCodes.append(",");
+			}
+
+			if (DAYS.between(LocalDate.now(), endDate) < 0)
+				lastTravelAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes.toString(), coverImgPath, members.size()));
+			else
+				oncommingAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes.toString(), coverImgPath, members.size()));
+		}
 	}
 
 	private void addItemsInDatabase() {
@@ -230,8 +234,8 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 
 			String id = cursor.getString(cursor.getColumnIndex("id"));
 			String title = cursor.getString(cursor.getColumnIndex("name"));
-			LocalDate startDate = DateObject.stringToLocalDate(cursor.getString(cursor.getColumnIndex("start_date")));
-			LocalDate endDate = DateObject.stringToLocalDate(cursor.getString(cursor.getColumnIndex("end_date")));
+			LocalDate startDate = DateHelper.stringISOToLocalDate(cursor.getString(cursor.getColumnIndex("start_date")));
+			LocalDate endDate = DateHelper.stringISOToLocalDate(cursor.getString(cursor.getColumnIndex("end_date")));
 			String countryCodes = cursor.getString(cursor.getColumnIndex("country_codes"));
 			String coverImgPath = cursor.getString(cursor.getColumnIndex("cover_img_path"));
 			int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mungziapp.traveltogether.app.DateHelper;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.model.data.TravelData;
@@ -117,7 +118,10 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 				LocalDate endLocalDate = item.getEndDate();
 
 				long daysBetween = DAYS.between(startLocalDate, endLocalDate) + 1;
-				String strDuration = item.getStartDate() + " ~ " + item.getEndDate() + " (" + daysBetween + "일간)";
+				String startDate = item.getStartDate().toString().replace("-", ".");
+				String endDate = item.getEndDate().toString().replace("-", ".");
+
+				String strDuration = startDate + " ~ " + endDate + " (" + daysBetween + "일간)";
 				this.travelDuration.setText(strDuration);
 
 				travelDday.setText("D - N");

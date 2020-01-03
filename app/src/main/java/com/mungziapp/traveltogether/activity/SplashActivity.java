@@ -11,8 +11,8 @@ import com.mungziapp.traveltogether.app.TokenManager;
 import com.mungziapp.traveltogether.app.helper.JsonHelper;
 import com.mungziapp.traveltogether.app.helper.RequestHelper;
 import com.mungziapp.traveltogether.app.helper.TravelHelper;
-import com.mungziapp.traveltogether.interfaces.OnResponseListener;
-import com.mungziapp.traveltogether.app.DateObject;
+import com.mungziapp.traveltogether.interfaces.OnGETResponseListener;
+import com.mungziapp.traveltogether.app.DateHelper;
 import com.mungziapp.traveltogether.model.response.TokenResponse;
 
 import java.util.HashMap;
@@ -41,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
 	private void updateRefreshToken(final SharedPreferences prefs, final String refreshToken) {
 		RequestHelper.getInstance().onSendGetRequest(
 				RequestHelper.HOST + "/auth/refresh",
-				new OnResponseListener() {
+				new OnGETResponseListener() {
 					@Override
 					public void onResponse(String response) {
 						TokenResponse tokenResponse = JsonHelper.gson.fromJson(response, TokenResponse.class);
@@ -51,7 +51,7 @@ public class SplashActivity extends AppCompatActivity {
 
 						TokenManager.getInstance()
 								.setAccessToken(accessToken)
-								.setPeriod(DateObject.getLocalDateTime(exp));
+								.setPeriod(DateHelper.getLocalDateTime(exp));
 
 						if (TokenManager.isRefreshTokenUpdated(prefs, newRefreshToken)) {
 							SharedPreferences.Editor editor = prefs.edit();
@@ -63,9 +63,6 @@ public class SplashActivity extends AppCompatActivity {
 						startActivity(new Intent(getApplicationContext(), MainActivity.class));
 						finish();
 					}
-
-					@Override
-					public void setParams(Map<String, String> params) { }
 
 					@Override
 					public Map<String, String> getHeaders() {

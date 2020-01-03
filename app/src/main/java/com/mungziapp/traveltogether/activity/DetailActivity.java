@@ -19,7 +19,7 @@ import com.mungziapp.traveltogether.adapter.TravelCountryAdapter;
 import com.mungziapp.traveltogether.adapter.TravelMemberAdapter;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.app.helper.DatabaseHelper;
-import com.mungziapp.traveltogether.app.DateObject;
+import com.mungziapp.traveltogether.app.DateHelper;
 import com.mungziapp.traveltogether.model.FragmentType;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.model.table.TravelTable;
@@ -81,8 +81,8 @@ public class DetailActivity extends AppCompatActivity {
 		travelName.setText(this.travelName);
 
 		if (travelStartDate != null && travelEndDate != null) {
-			LocalDate startLocalDate = DateObject.stringToLocalDate(travelStartDate);
-			LocalDate endLocalDate = DateObject.stringToLocalDate(travelEndDate);
+			LocalDate startLocalDate = DateHelper.stringToLocalDate(travelStartDate, "-");
+			LocalDate endLocalDate = DateHelper.stringToLocalDate(travelEndDate, "-");
 
 			long daysBetween = DAYS.between(startLocalDate, endLocalDate) + 1;
 			String strDuration = travelStartDate + " ~ " + travelEndDate + " (" + daysBetween + "일간)";

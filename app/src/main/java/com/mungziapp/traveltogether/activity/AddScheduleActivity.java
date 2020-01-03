@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.app.DateObject;
+import com.mungziapp.traveltogether.app.DateHelper;
 
 public class AddScheduleActivity extends AppCompatActivity {
 	private boolean btnNormalChecked = true;
@@ -105,7 +105,7 @@ public class AddScheduleActivity extends AppCompatActivity {
 					hour = Integer.valueOf(time[0]);
 					minute = Integer.valueOf(time[1]);
 				} else {
-					DateObject now = new DateObject();
+					DateHelper now = new DateHelper();
 					hour = now.getHour();
 					minute = now.getMinute();
 				}

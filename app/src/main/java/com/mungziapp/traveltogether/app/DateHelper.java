@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-public class DateObject {
+public class DateHelper {
 	private LocalDateTime dateTime;
 
-	public static LocalDate stringToLocalDate(String strDate) {
+	public static LocalDate stringISOToLocalDate(String strDate) {
 		// ISO 시간 형식 기준이라면 'T' 문자 전까지 substring
 		int index = strDate.indexOf("T");
 		if (index != -1)
@@ -26,7 +26,29 @@ public class DateObject {
 		return null;
 	}
 
-	public DateObject() {
+	public static LocalDate stringToLocalDate(CharSequence charDate, String regex) {
+		return stringToLocalDate(charDate.toString(), regex);
+	}
+
+	public static LocalDate stringToLocalDate(String strDate, String regex) {
+		String[] tokens = strDate.split(regex);
+		if (tokens.length == 3)
+			return LocalDate.of(Integer.valueOf(tokens[0]), Integer.valueOf(tokens[1]), Integer.valueOf(tokens[2]));
+
+		return null;
+	}
+
+	public static String toISOFormat(LocalDate localDate) {
+		String year = String.valueOf(localDate.getYear());
+		String month = String.valueOf(localDate.getMonthValue());
+		if (localDate.getMonthValue() < 10) month = "0" + localDate.getMonthValue();
+		String day = String.valueOf(localDate.getDayOfMonth());
+		if (localDate.getDayOfMonth() < 10) day = "0" + localDate.getDayOfMonth();
+
+		return year + "-" + month + "-" + day + "T00:00:00.000Z";
+	}
+
+	public DateHelper() {
 		dateTime = LocalDateTime.now();
 	}
 
