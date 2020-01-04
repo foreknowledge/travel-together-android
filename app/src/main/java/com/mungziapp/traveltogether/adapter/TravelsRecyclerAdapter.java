@@ -113,6 +113,8 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 			String numOfTravelMembers = Integer.toString(item.getMembers());
 			this.numOfTravelMembers.setText(numOfTravelMembers);
 
+			String strDDay;
+
 			if (item.getStartDate() != null && item.getEndDate() != null) {
 				LocalDate startLocalDate = item.getStartDate();
 				LocalDate endLocalDate = item.getEndDate();
@@ -127,13 +129,13 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 				LocalDate now = LocalDate.now();
 				long dDay = DAYS.between(startLocalDate, now);
 
-				String strDDay;
 				if (dDay > 0) strDDay = "D + " + dDay;
 				else if (dDay < 0) strDDay = "D - " + -dDay;
 				else strDDay = "D-Day!!";
-
-				travelDday.setText(strDDay);
 			}
+			else strDDay = "D - ?";
+
+			travelDday.setText(strDDay);
 
 			if (item.getCountryCodes() != null) {
 				ArrayList<String> countryCodes = new ArrayList<>(Arrays.asList(item.getCountryCodes().split(",")));

@@ -77,6 +77,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 	protected void onResume() {
 		super.onResume();
 		setAdapterItems();
+		Toast.makeText(this, "dkdkdkdkdkdkdkdkdkdk", Toast.LENGTH_SHORT).show();
 	}
 
 	private void setAdapters() {
@@ -86,20 +87,9 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		lastTravelAdapter = new TravelsRecyclerAdapter(getApplicationContext());
 		lastTravelAdapter.setClickListener(makeItemClickListener(lastTravelAdapter));
 
-		setAdapterItems();
-
-		TravelsFragment oncommingTravels = new TravelsFragment(oncommingAdapter);
-		TravelsFragment lastTravels = new TravelsFragment(lastTravelAdapter);
-
-		MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(fm);
-		mainPagerAdapter.addItem(oncommingTravels);
-		mainPagerAdapter.addItem(lastTravels);
-
-		mainPagerAdapter.notifyDataSetChanged();
-
 		outerViewPager = findViewById(R.id.outer_view_pager);
-		outerViewPager.setOffscreenPageLimit(mainPagerAdapter.getCount());
-		outerViewPager.setAdapter(mainPagerAdapter);
+
+		setAdapterItems();
 	}
 
 	private void setTabBar() {
@@ -158,10 +148,26 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		oncommingAdapter.clearItems();
 		lastTravelAdapter.clearItems();
 
-		if (ConnectionStatus.getConnected())
+		if (ConnectionStatus.getConnected()) {
 			addItemsInNetwork();
-		else
-			addItemsInDatabase();
+			return;
+		}
+		addItemsInDatabase();
+		setPagerAdapter();
+	}
+
+	private void setPagerAdapter() {
+		TravelsFragment oncommingTravels = new TravelsFragment(oncommingAdapter);
+		TravelsFragment lastTravels = new TravelsFragment(lastTravelAdapter);
+
+		MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(fm);
+		mainPagerAdapter.addItem(oncommingTravels);
+		mainPagerAdapter.addItem(lastTravels);
+
+		mainPagerAdapter.notifyDataSetChanged();
+
+		outerViewPager.setOffscreenPageLimit(mainPagerAdapter.getCount());
+		outerViewPager.setAdapter(mainPagerAdapter);
 	}
 
 	private void addItemsInNetwork() {
@@ -180,6 +186,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 							}
 
 							addTravelItems(travelRooms);
+							setPagerAdapter();
 						} catch (Exception e) { Log.e(TAG, "error message = " + e.getMessage()); }
 					}
 

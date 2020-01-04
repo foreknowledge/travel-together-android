@@ -131,8 +131,7 @@ public class AddTravelActivity extends AppCompatActivity {
 
 						NewTravelRoom newTravelRoom = JsonHelper.gson.fromJson(response.toString(), NewTravelRoom.class);
 						//saveToDatabase(newTravelRoom);
-						Toast.makeText(AddTravelActivity.this, "여행방 생성!", Toast.LENGTH_SHORT).show();
-
+						
 						finish();
 					}
 

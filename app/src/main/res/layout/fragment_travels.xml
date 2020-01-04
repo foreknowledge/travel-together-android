@@ -15,6 +15,6 @@
 		android:layout_gravity="center"
 		android:layout_marginBottom="50dp"
 		android:text="@string/text_travel_notice"
-		android:textSize="20sp"/>
+		android:textSize="20sp" />
 
 </FrameLayout>
