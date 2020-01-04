@@ -38,6 +38,7 @@ import com.pedro.library.AutoPermissions;
 import com.pedro.library.AutoPermissionsListener;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 
 		fm = getSupportFragmentManager();
 
-		setAdapters();
+		initAdapters();
 		setTabBar();
 		setAddTravelButton();
 		setSettingsButton();
@@ -80,7 +81,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		Toast.makeText(this, "dkdkdkdkdkdkdkdkdkdk", Toast.LENGTH_SHORT).show();
 	}
 
-	private void setAdapters() {
+	private void initAdapters() {
 		oncommingAdapter = new TravelsRecyclerAdapter(getApplicationContext());
 		oncommingAdapter.setClickListener(makeItemClickListener(oncommingAdapter));
 
@@ -88,8 +89,6 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		lastTravelAdapter.setClickListener(makeItemClickListener(lastTravelAdapter));
 
 		outerViewPager = findViewById(R.id.outer_view_pager);
-
-		setAdapterItems();
 	}
 
 	private void setTabBar() {
@@ -187,7 +186,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 
 							addTravelItems(travelRooms);
 							setPagerAdapter();
-						} catch (Exception e) { Log.e(TAG, "error message = " + e.getMessage()); }
+						} catch (JSONException e) { Log.e(TAG, "json exception = " + e.getMessage()); }
 					}
 
 					@Override
@@ -221,10 +220,10 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 				countryCodes.append(",");
 			}
 
-			if (DAYS.between(LocalDate.now(), endDate) < 0)
-				lastTravelAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes.toString(), coverImgPath, members.size()));
-			else
+			if (endDate == null || DAYS.between(LocalDate.now(), endDate) > 0)
 				oncommingAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes.toString(), coverImgPath, members.size()));
+			else
+				lastTravelAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes.toString(), coverImgPath, members.size()));
 		}
 
 		oncommingAdapter.notifyDataSetChanged();
@@ -247,10 +246,10 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 			String coverImgPath = cursor.getString(cursor.getColumnIndex("cover_img_path"));
 			int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
 
-			if (DAYS.between(LocalDate.now(), endDate) < 0)
-				lastTravelAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes, coverImgPath, numOfMembers));
-			else
+			if (endDate == null || DAYS.between(LocalDate.now(), endDate) > 0)
 				oncommingAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes, coverImgPath, numOfMembers));
+			else
+				lastTravelAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes, coverImgPath, numOfMembers));
 		}
 
 		cursor.close();
