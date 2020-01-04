@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class RequestHelper {
 	private static final String TAG = "RequestHelper :: ";
-	public static final String HOST = "http://192.168.0.23:3000";
+	public static final String HOST = "http://192.168.1.81:3000";
 
 	private static RequestHelper instance = new RequestHelper();
 	private static RequestQueue requestQueue;
@@ -130,7 +130,6 @@ public class RequestHelper {
 			try {
 				body = new String(error.networkResponse.data, StandardCharsets.UTF_8);
 
-				Log.d(TAG, "network error all headers = " + error.networkResponse.allHeaders);
 				Log.d(TAG, "network error message = " + body);
 			} catch (Exception e) {
 				Log.d(TAG, "exception error message = " + e.getMessage());

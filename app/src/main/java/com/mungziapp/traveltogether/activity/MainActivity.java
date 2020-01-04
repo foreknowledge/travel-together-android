@@ -176,14 +176,14 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 
 						List<TravelRoom> travelRooms = new ArrayList<>();
 
-						for(int i = 0; i < response.length(); i++) {
-							try {
+						try {
+							for (int i = 0; i < response.length(); i++) {
 								TravelRoom travelRoom = JsonHelper.gson.fromJson(response.getJSONObject(i).toString(), TravelRoom.class);
 								travelRooms.add(travelRoom);
+							}
 
-								addTravelItems(travelRooms);
-							} catch (Exception e) { Log.e(TAG, "error message = " + e.getMessage()); }
-						}
+							addTravelItems(travelRooms);
+						} catch (Exception e) { Log.e(TAG, "error message = " + e.getMessage()); }
 					}
 
 					@Override
@@ -222,6 +222,9 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 			else
 				oncommingAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes.toString(), coverImgPath, members.size()));
 		}
+
+		lastTravelAdapter.notifyDataSetChanged();
+		oncommingAdapter.notifyDataSetChanged();
 	}
 
 	private void addItemsInDatabase() {
