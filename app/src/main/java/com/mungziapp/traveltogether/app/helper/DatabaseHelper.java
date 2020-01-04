@@ -84,7 +84,7 @@ public class DatabaseHelper {
 			Object[] params = {travelData.getId(), travelData.getName(), travelData.getStartDate(), travelData.getEndDate(), travelData.getCountryCodes(), travelData.getCoverImgPath(), travelData.getMembers()};
 
 			DatabaseHelper.database.execSQL(sql, params);
-			Log.d(TAG, "movieDetail [" + travelData.getId() + "] 데이터 추가됨.");
+			Log.d(TAG, "travel [" + travelData.getId() + "] 데이터 추가됨.");
 		}
 
 		cursor.close();

@@ -129,7 +129,7 @@ public class AddTravelActivity extends AppCompatActivity {
 						Log.d(TAG, response.toString());
 
 						NewTravelRoom newTravelRoom = JsonHelper.gson.fromJson(response.toString(), NewTravelRoom.class);
-						//saveToDatabase(newTravelRoom);
+						saveToDatabase(newTravelRoom);
 
 						finish();
 					}
@@ -167,7 +167,6 @@ public class AddTravelActivity extends AppCompatActivity {
 				, countryCodes.toString()
 				, newTravelRoom.getCoverImagePath()
 				, 1));
-		Log.d(TAG, "새로운 여행방 DB에 저장");
 	}
 
 	private void setTitleText() {
