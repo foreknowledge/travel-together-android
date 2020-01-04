@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.android.volley.VolleyError;
 import com.mungziapp.traveltogether.app.TokenManager;
 import com.mungziapp.traveltogether.app.helper.JsonHelper;
 import com.mungziapp.traveltogether.app.helper.RequestHelper;
@@ -71,6 +72,11 @@ public class SplashActivity extends AppCompatActivity {
 						Log.d(TAG, "refreshToken = " + refreshToken);
 
 						return headers;
+					}
+
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						RequestHelper.processError(error, TAG);
 					}
 				}
 		);

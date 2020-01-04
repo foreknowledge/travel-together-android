@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.kakao.auth.ApiResponseCallback;
 import com.kakao.auth.AuthService;
 import com.kakao.auth.AuthType;
@@ -207,6 +208,11 @@ public class LoginActivity extends BaseActivity {
 						@Override
 						public Map<String, String> getHeaders() {
 							return null;
+						}
+
+						@Override
+						public void onErrorResponse(VolleyError error) {
+							RequestHelper.processError(error, TAG);
 						}
 					});
 				}

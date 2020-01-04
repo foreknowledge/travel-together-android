@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.android.volley.VolleyError;
 import com.google.android.material.tabs.TabLayout;
 import com.mungziapp.traveltogether.ServerService;
 import com.mungziapp.traveltogether.app.ConnectionStatus;
@@ -170,8 +171,6 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 				new OnResponseListener.OnJsonArrayListener() {
 					@Override
 					public void onResponse(JSONArray response) {
-						Log.d(TAG, "response = " + response.toString());
-
 						List<TravelRoom> travelRooms = new ArrayList<>();
 
 						try {
@@ -197,6 +196,11 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 						Log.d(TAG, "request headers = " + headers.toString());
 
 						return headers;
+					}
+
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						RequestHelper.processError(error, TAG);
 					}
 				});
 	}
@@ -270,6 +274,11 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 													headers.put("Authorization", TokenManager.getInstance().getAuthorization());
 
 													return headers;
+												}
+
+												@Override
+												public void onErrorResponse(VolleyError error) {
+													RequestHelper.processError(error, TAG);
 												}
 											});
 								}

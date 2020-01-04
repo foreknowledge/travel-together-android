@@ -21,6 +21,7 @@ import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
@@ -141,6 +142,11 @@ public class AddTravelActivity extends AppCompatActivity {
 						Log.d(TAG, "authorization = " + TokenManager.getInstance().getAuthorization());
 
 						return headers;
+					}
+
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						RequestHelper.processError(error, TAG);
 					}
 				});
 	}

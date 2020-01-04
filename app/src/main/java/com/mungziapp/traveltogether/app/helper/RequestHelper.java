@@ -49,7 +49,7 @@ public class RequestHelper {
 				new Response.ErrorListener() {
 					@Override
 					public void onErrorResponse(VolleyError error) {
-						processError(error);
+						listener.onErrorResponse(error);
 					}
 				}
 		) {
@@ -76,7 +76,7 @@ public class RequestHelper {
 				new Response.ErrorListener() {
 					@Override
 					public void onErrorResponse(VolleyError error) {
-						processError(error);
+						listener.onErrorResponse(error);
 					}
 				}
 		) {
@@ -104,7 +104,7 @@ public class RequestHelper {
 				new Response.ErrorListener() {
 					@Override
 					public void onErrorResponse(VolleyError error) {
-						processError(error);
+						listener.onErrorResponse(error);
 					}
 				}
 		) {
@@ -126,14 +126,14 @@ public class RequestHelper {
 				new Response.Listener<JSONObject>() {
 					@Override
 					public void onResponse(JSONObject response) {
-						Log.d(TAG, "post method response = " + response);
+						Log.d(TAG, "post jsonObject method response = " + response);
 						listener.onResponse(response);
 					}
 				},
 				new Response.ErrorListener() {
 					@Override
 					public void onErrorResponse(VolleyError error) {
-						processError(error);
+						listener.onErrorResponse(error);
 					}
 				}
 		){
@@ -150,7 +150,7 @@ public class RequestHelper {
 		requestQueue.add(request);
 	}
 
-	private void processError(VolleyError error) {
+	public static void processError(VolleyError error, String TAG) {
 		String body;
 		if (error.networkResponse.data != null) {
 			try {
