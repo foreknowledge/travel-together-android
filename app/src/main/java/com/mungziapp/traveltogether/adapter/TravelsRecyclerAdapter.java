@@ -124,7 +124,15 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 				String strDuration = startDate + " ~ " + endDate + " (" + daysBetween + "일간)";
 				this.travelDuration.setText(strDuration);
 
-				travelDday.setText("D - N");
+				LocalDate now = LocalDate.now();
+				long dDay = DAYS.between(startLocalDate, now);
+
+				String strDDay;
+				if (dDay > 0) strDDay = "D + " + dDay;
+				else if (dDay < 0) strDDay = "D - " + -dDay;
+				else strDDay = "D-Day!!";
+
+				travelDday.setText(strDDay);
 			}
 
 			if (item.getCountryCodes() != null) {
