@@ -64,7 +64,7 @@ public class ScheduleFragment extends Fragment {
 	}
 
 	private void setDataFromDB(int id) {
-		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + id, null);
+		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = '" + id + "'", null);
 		cursor.moveToNext();
 
 		this.travelStartDate = cursor.getString(cursor.getColumnIndex("start_date"));

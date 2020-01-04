@@ -75,7 +75,7 @@ public class EditTravelActivity extends AppCompatActivity {
 	private void init() {
 		int travelId = getIntent().getIntExtra("travel_id", 0);
 
-		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = " + travelId, null);
+		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = '" + travelId + "'", null);
 		cursor.moveToNext();
 
 		editTitle.setText(cursor.getString(cursor.getColumnIndex("name")));

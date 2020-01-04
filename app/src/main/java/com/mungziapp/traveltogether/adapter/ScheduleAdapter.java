@@ -89,7 +89,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 		}
 
 		private void setScheduleData(int travelId, int dayN, DetailScheduleAdapter detailScheduleAdapter) {
-			Cursor cursor = DatabaseHelper.database.rawQuery(ScheduleTable.SELECT_QUERY + " WHERE travel_id = " + travelId + " AND day_n = " + dayN, null);
+			Cursor cursor = DatabaseHelper.database.rawQuery(ScheduleTable.SELECT_QUERY + " WHERE travel_id = '" + travelId + "' AND day_n = " + dayN, null);
 			int numOfRecords = cursor.getCount();
 
 			if (numOfRecords != 0) scheduleNotice.setVisibility(View.INVISIBLE);

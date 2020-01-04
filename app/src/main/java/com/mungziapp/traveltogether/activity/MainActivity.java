@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
@@ -30,8 +29,6 @@ import com.mungziapp.traveltogether.interfaces.OnResponseListener;
 import com.mungziapp.traveltogether.model.data.TravelData;
 import com.mungziapp.traveltogether.fragment.TravelsFragment;
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.model.response.Country;
-import com.mungziapp.traveltogether.model.response.Member;
 import com.mungziapp.traveltogether.model.response.TravelRoom;
 import com.mungziapp.traveltogether.model.table.TravelTable;
 import com.pedro.library.AutoPermissions;
@@ -78,7 +75,6 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 	protected void onResume() {
 		super.onResume();
 		setAdapterItems();
-		Toast.makeText(this, "dkdkdkdkdkdkdkdkdkdk", Toast.LENGTH_SHORT).show();
 	}
 
 	private void initAdapters() {
@@ -186,6 +182,10 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 
 							addTravelItems(travelRooms);
 							setPagerAdapter();
+
+							for (TravelRoom travelRoom : travelRooms)
+								DatabaseHelper.insertTravelsData(travelRoom);
+
 						} catch (JSONException e) { Log.e(TAG, "json exception = " + e.getMessage()); }
 					}
 
@@ -203,27 +203,15 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 
 	private void addTravelItems(List<TravelRoom> travelRooms) {
 		for (TravelRoom travelRoom : travelRooms) {
-			String id = travelRoom.getId();
-			String title = travelRoom.getName();
-			LocalDate startDate = null, endDate = null;
-			if (travelRoom.getStartDate() != null && travelRoom.getEndDate() != null) {
-				startDate = DateHelper.stringISOToLocalDate(travelRoom.getStartDate());
+			LocalDate endDate = null;
+			if (travelRoom.getEndDate() != null) {
 				endDate = DateHelper.stringISOToLocalDate(travelRoom.getEndDate());
-			}
-			List<Country> countries = travelRoom.getCountries();
-			List<Member> members = travelRoom.getMembers();
-			String coverImgPath = travelRoom.getCoverImagePath();
-
-			StringBuilder countryCodes = new StringBuilder();
-			for (Country country: countries) {
-				countryCodes.append(country.getCode());
-				countryCodes.append(",");
 			}
 
 			if (endDate == null || DAYS.between(LocalDate.now(), endDate) > 0)
-				oncommingAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes.toString(), coverImgPath, members.size()));
+				oncommingAdapter.addItem(TravelData.toTravelData(travelRoom));
 			else
-				lastTravelAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes.toString(), coverImgPath, members.size()));
+				lastTravelAdapter.addItem(TravelData.toTravelData(travelRoom));
 		}
 
 		oncommingAdapter.notifyDataSetChanged();
