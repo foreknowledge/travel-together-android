@@ -20,7 +20,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
@@ -35,7 +34,7 @@ import com.mungziapp.traveltogether.app.helper.RequestHelper;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.adapter.SearchCountryAdapter;
 import com.mungziapp.traveltogether.R;
-import com.mungziapp.traveltogether.interfaces.OnPOSTResponseListener;
+import com.mungziapp.traveltogether.interfaces.OnResponseListener;
 import com.mungziapp.traveltogether.model.data.TravelData;
 import com.mungziapp.traveltogether.model.item.CountryItem;
 import com.mungziapp.traveltogether.model.response.NewTravelRoom;
@@ -124,24 +123,24 @@ public class AddTravelActivity extends AppCompatActivity {
 		} catch (JSONException e) { Log.d(TAG, "error message = " + e.getMessage()); }
 
 		RequestHelper.getInstance().onSendPostRequest(RequestHelper.HOST + "/travel-rooms", jsonObject,
-				new OnPOSTResponseListener() {
+				new OnResponseListener.OnPOSTListener.OnJsonObjectListener() {
 					@Override
 					public void onResponse(JSONObject response) {
 						Log.d(TAG, response.toString());
 
 						NewTravelRoom newTravelRoom = JsonHelper.gson.fromJson(response.toString(), NewTravelRoom.class);
 						//saveToDatabase(newTravelRoom);
-						
+
 						finish();
 					}
 
 					@Override
 					public Map<String, String> getHeaders() {
-						Map<String, String> header = new HashMap<>();
-						header.put("Authorization", TokenManager.getInstance().getAuthorization());
+						Map<String, String> headers = new HashMap<>();
+						headers.put("Authorization", TokenManager.getInstance().getAuthorization());
 						Log.d(TAG, "authorization = " + TokenManager.getInstance().getAuthorization());
 
-						return header;
+						return headers;
 					}
 				});
 	}

@@ -11,8 +11,8 @@ import com.mungziapp.traveltogether.app.TokenManager;
 import com.mungziapp.traveltogether.app.helper.JsonHelper;
 import com.mungziapp.traveltogether.app.helper.RequestHelper;
 import com.mungziapp.traveltogether.app.helper.TravelHelper;
-import com.mungziapp.traveltogether.interfaces.OnGETResponseListener;
 import com.mungziapp.traveltogether.app.DateHelper;
+import com.mungziapp.traveltogether.interfaces.OnResponseListener;
 import com.mungziapp.traveltogether.model.response.TokenResponse;
 
 import java.util.HashMap;
@@ -41,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
 	private void updateRefreshToken(final SharedPreferences prefs, final String refreshToken) {
 		RequestHelper.getInstance().onSendGetRequest(
 				RequestHelper.HOST + "/auth/refresh",
-				new OnGETResponseListener() {
+				new OnResponseListener.OnGETListener() {
 					@Override
 					public void onResponse(String response) {
 						TokenResponse tokenResponse = JsonHelper.gson.fromJson(response, TokenResponse.class);
@@ -66,11 +66,11 @@ public class SplashActivity extends AppCompatActivity {
 
 					@Override
 					public Map<String, String> getHeaders() {
-						Map<String, String> header = new HashMap<>();
-						header.put("x-rt", refreshToken);
+						Map<String, String> headers = new HashMap<>();
+						headers.put("x-rt", refreshToken);
 						Log.d(TAG, "refreshToken = " + refreshToken);
 
-						return header;
+						return headers;
 					}
 				}
 		);

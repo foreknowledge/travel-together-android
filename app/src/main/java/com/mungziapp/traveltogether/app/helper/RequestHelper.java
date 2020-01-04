@@ -9,9 +9,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.mungziapp.traveltogether.interfaces.OnGETResponseListener;
-import com.mungziapp.traveltogether.interfaces.OnJsonArrayListener;
-import com.mungziapp.traveltogether.interfaces.OnPOSTResponseListener;
+import com.mungziapp.traveltogether.interfaces.OnResponseListener;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -37,7 +35,7 @@ public class RequestHelper {
 		return instance;
 	}
 
-	public void onSendGetRequest(String url, final OnGETResponseListener listener) {
+	public void onSendGetRequest(String url, final OnResponseListener.OnGETListener listener) {
 		StringRequest request = new StringRequest(
 				Request.Method.GET,
 				url,
@@ -65,7 +63,7 @@ public class RequestHelper {
 		requestQueue.add(request);
 	}
 
-	public void onSendJsonArrayRequest(String url, final OnJsonArrayListener listener) {
+	public void onSendJsonArrayRequest(String url, final OnResponseListener.OnJsonArrayListener listener) {
 		JsonArrayRequest request = new JsonArrayRequest(
 				url,
 				new Response.Listener<JSONArray>() {
@@ -92,7 +90,35 @@ public class RequestHelper {
 		requestQueue.add(request);
 	}
 
-	public void onSendPostRequest(String url, JSONObject jsonObject, final OnPOSTResponseListener listener) {
+	public void onSendPostRequest(String url, final OnResponseListener.OnPOSTListener.OnStringListener listener) {
+		StringRequest request = new StringRequest(
+				Request.Method.POST,
+				url,
+				new Response.Listener<String>() {
+					@Override
+					public void onResponse(String response) {
+						Log.d(TAG, "get method response = " + response);
+						listener.onResponse(response);
+					}
+				},
+				new Response.ErrorListener() {
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						processError(error);
+					}
+				}
+		) {
+			@Override
+			public Map<String, String> getHeaders() {
+				return listener.getHeaders();
+			}
+		};
+
+		request.setShouldCache(false);
+		requestQueue.add(request);
+	}
+
+	public void onSendPostRequest(String url, JSONObject jsonObject, final OnResponseListener.OnPOSTListener.OnJsonObjectListener listener) {
 		JsonObjectRequest request = new JsonObjectRequest(
 				Request.Method.POST,
 				url,

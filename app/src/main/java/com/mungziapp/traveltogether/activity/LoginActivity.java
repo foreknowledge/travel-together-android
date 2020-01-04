@@ -27,7 +27,7 @@ import com.mungziapp.traveltogether.app.TokenManager;
 import com.mungziapp.traveltogether.app.helper.JsonHelper;
 import com.mungziapp.traveltogether.app.helper.RequestHelper;
 import com.mungziapp.traveltogether.app.DateHelper;
-import com.mungziapp.traveltogether.interfaces.OnPOSTResponseListener;
+import com.mungziapp.traveltogether.interfaces.OnResponseListener;
 import com.mungziapp.traveltogether.model.response.TokenResponse;
 
 import org.json.JSONException;
@@ -178,7 +178,7 @@ public class LoginActivity extends BaseActivity {
 
 					// 서버로 access token & user id 전송
 					String url = RequestHelper.HOST + "/auth/oauth/login";
-					RequestHelper.getInstance().onSendPostRequest(url, jsonObject, new OnPOSTResponseListener() {
+					RequestHelper.getInstance().onSendPostRequest(url, jsonObject, new OnResponseListener.OnPOSTListener.OnJsonObjectListener() {
 						@Override
 						public void onResponse(JSONObject response) {
 							TokenResponse tokenResponse = JsonHelper.gson.fromJson(response.toString(), TokenResponse.class);

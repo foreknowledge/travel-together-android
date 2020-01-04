@@ -26,7 +26,7 @@ import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.adapter.TravelsRecyclerAdapter;
 import com.mungziapp.traveltogether.adapter.MainPagerAdapter;
 import com.mungziapp.traveltogether.app.helper.DatabaseHelper;
-import com.mungziapp.traveltogether.interfaces.OnJsonArrayListener;
+import com.mungziapp.traveltogether.interfaces.OnResponseListener;
 import com.mungziapp.traveltogether.model.data.TravelData;
 import com.mungziapp.traveltogether.fragment.TravelsFragment;
 import com.mungziapp.traveltogether.R;
@@ -172,7 +172,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 
 	private void addItemsInNetwork() {
 		RequestHelper.getInstance().onSendJsonArrayRequest(RequestHelper.HOST + "/travel-rooms",
-				new OnJsonArrayListener() {
+				new OnResponseListener.OnJsonArrayListener() {
 					@Override
 					public void onResponse(JSONArray response) {
 						Log.d(TAG, "response = " + response.toString());
@@ -192,12 +192,12 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 
 					@Override
 					public Map<String, String> getHeaders() {
-						Map<String, String> header = new HashMap<>();
-						header.put("Authorization", TokenManager.getInstance().getAuthorization());
+						Map<String, String> headers = new HashMap<>();
+						headers.put("Authorization", TokenManager.getInstance().getAuthorization());
 						Log.d(TAG, "authorization = " + TokenManager.getInstance().getAuthorization());
-						Log.d(TAG, "request headers = " + header.toString());
+						Log.d(TAG, "request headers = " + headers.toString());
 
-						return header;
+						return headers;
 					}
 				});
 	}
@@ -262,6 +262,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 	private OnItemClickListener makeItemClickListener(final TravelsRecyclerAdapter adapter) {
 		return new OnItemClickListener() {
 			private String[] options = getResources().getStringArray(R.array.option_travel);
+			private String travelId;
 
 			final AlertDialog deleteDialog = new AlertDialog.Builder(MainActivity.this)
 					.setMessage(getString(R.string.delete_message))
@@ -269,7 +270,21 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 							, new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									Toast.makeText(MainActivity.this, "여행방 사라짐.", Toast.LENGTH_SHORT).show();
+									RequestHelper.getInstance().onSendPostRequest(RequestHelper.HOST + "/travel-rooms/" + travelId + "/leave",
+											new OnResponseListener.OnPOSTListener.OnStringListener() {
+												@Override
+												public void onResponse(String response) {
+													setAdapterItems();
+												}
+
+												@Override
+												public Map<String, String> getHeaders() {
+													Map<String, String> headers = new HashMap<>();
+													headers.put("Authorization", TokenManager.getInstance().getAuthorization());
+
+													return headers;
+												}
+											});
 								}
 							})
 					.setNegativeButton(getString(R.string.btn_cancel_text)
@@ -293,6 +308,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 			@Override
 			public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
 				final TravelData item = adapter.getItem(position);
+				travelId = item.getId();
 
 				new AlertDialog.Builder(MainActivity.this)
 						.setTitle(item.getName())
@@ -302,7 +318,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 								switch (i) {
 									case 0:
 										Intent intent = new Intent(MainActivity.this, EditTravelActivity.class);
-										intent.putExtra("travel_id", item.getId());
+										intent.putExtra("travel_id", travelId);
 										startActivity(intent);
 										break;
 									case 1:
