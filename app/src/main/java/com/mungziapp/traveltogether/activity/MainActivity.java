@@ -162,9 +162,6 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 			addItemsInNetwork();
 		else
 			addItemsInDatabase();
-
-		oncommingAdapter.notifyDataSetChanged();
-		lastTravelAdapter.notifyDataSetChanged();
 	}
 
 	private void addItemsInNetwork() {
@@ -223,8 +220,8 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 				oncommingAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes.toString(), coverImgPath, members.size()));
 		}
 
-		lastTravelAdapter.notifyDataSetChanged();
 		oncommingAdapter.notifyDataSetChanged();
+		lastTravelAdapter.notifyDataSetChanged();
 	}
 
 	private void addItemsInDatabase() {
@@ -250,6 +247,9 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		}
 
 		cursor.close();
+
+		oncommingAdapter.notifyDataSetChanged();
+		lastTravelAdapter.notifyDataSetChanged();
 	}
 
 	private OnItemClickListener makeItemClickListener(final TravelsRecyclerAdapter adapter) {
