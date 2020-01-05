@@ -82,17 +82,8 @@ public class TravelData implements Comparable<TravelData> {
 	@Override
 	public int compareTo(@NonNull TravelData travelData) {
 		long dateDiff = DAYS.between(this.startDate, travelData.getStartDate());
-		if (DAYS.between(this.endDate, LocalDate.now()) < 0) {
-			// 다가오는 여행일 경우
-			if (dateDiff > 0) return -1;
-			else if (dateDiff < 0) return 1;
-		}
-		else {
-			// 지난 여일 경우
-			if (dateDiff > 0) return 1;
-			else if (dateDiff < 0) return -1;
-		}
-
+		if (dateDiff > 0) return -1;
+		else if (dateDiff < 0) return 1;
 		return 0;
 	}
 }

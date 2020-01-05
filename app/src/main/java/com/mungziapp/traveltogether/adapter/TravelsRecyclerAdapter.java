@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,12 +17,14 @@ import com.mungziapp.traveltogether.model.data.TravelData;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecyclerAdapter.ViewHolder> {
 	private Context context;
+	private boolean reverseOrder = false;
 	private List<TravelData> travelData = new ArrayList<>();
 
 	private OnItemClickListener listener;
@@ -32,9 +33,15 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 		this.context = context;
 	}
 
+	public TravelsRecyclerAdapter(Context context, boolean reverseOrder) {
+		this.context = context;
+		this.reverseOrder = reverseOrder;
+	}
+
 	public void addItem(TravelData item) {
 		travelData.add(item);
-
+		if (reverseOrder) Collections.reverse(travelData);
+		else Collections.sort(travelData);
 	}
 
 	public TravelData getItem(int position) {
@@ -65,7 +72,7 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 	}
 
 	static class ViewHolder extends RecyclerView.ViewHolder {
-		private ImageView travelCover;
+		//private ImageView travelCover;
 		private TextView travelName;
 		private TextView travelDuration;
 		private TextView numOfTravelMembers;
@@ -79,7 +86,7 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 
 			this.context = context;
 
-			this.travelCover = itemView.findViewById(R.id.travel_cover);
+			//this.travelCover = itemView.findViewById(R.id.travel_cover);
 			this.travelName = itemView.findViewById(R.id.travel_name);
 			this.travelDuration = itemView.findViewById(R.id.travel_duration);
 			this.numOfTravelMembers = itemView.findViewById(R.id.travel_members);
