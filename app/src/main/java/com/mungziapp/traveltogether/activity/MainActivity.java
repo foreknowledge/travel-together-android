@@ -207,12 +207,9 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 
 	private void addTravelItems(List<TravelRoom> travelRooms) {
 		for (TravelRoom travelRoom : travelRooms) {
-			LocalDate endDate = null;
-			if (travelRoom.getEndDate() != null) {
-				endDate = DateHelper.stringISOToLocalDate(travelRoom.getEndDate());
-			}
+			LocalDate endDate = DateHelper.stringISOToLocalDate(travelRoom.getEndDate());
 
-			if (endDate == null || DAYS.between(LocalDate.now(), endDate) > 0)
+			if (DAYS.between(LocalDate.now(), endDate) > 0)
 				oncommingAdapter.addItem(TravelData.toTravelData(travelRoom));
 			else
 				lastTravelAdapter.addItem(TravelData.toTravelData(travelRoom));
@@ -238,7 +235,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 			String coverImgPath = cursor.getString(cursor.getColumnIndex("cover_img_path"));
 			int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
 
-			if (endDate == null || DAYS.between(LocalDate.now(), endDate) > 0)
+			if (DAYS.between(LocalDate.now(), endDate) > 0)
 				oncommingAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes, coverImgPath, numOfMembers));
 			else
 				lastTravelAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes, coverImgPath, numOfMembers));

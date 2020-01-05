@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class RequestHelper {
 	private static final String TAG = "RequestHelper :: ";
-	public static final String HOST = "http://192.168.1.81:3000";
+	public static final String HOST = "http://192.168.0.8:3000";
 
 	private static RequestHelper instance = new RequestHelper();
 	private static RequestQueue requestQueue;

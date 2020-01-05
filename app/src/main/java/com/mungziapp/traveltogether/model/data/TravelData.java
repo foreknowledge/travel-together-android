@@ -1,5 +1,7 @@
 package com.mungziapp.traveltogether.model.data;
 
+import androidx.annotation.NonNull;
+
 import com.mungziapp.traveltogether.app.DateHelper;
 import com.mungziapp.traveltogether.model.response.Country;
 import com.mungziapp.traveltogether.model.response.Member;
@@ -8,7 +10,9 @@ import com.mungziapp.traveltogether.model.response.TravelRoom;
 import java.time.LocalDate;
 import java.util.List;
 
-public class TravelData {
+import static java.time.temporal.ChronoUnit.DAYS;
+
+public class TravelData implements Comparable<TravelData> {
 	private String id;
 	private String name;
 	private LocalDate startDate;
@@ -30,11 +34,10 @@ public class TravelData {
 	public static TravelData toTravelData(TravelRoom travelRoom) {
 		String id = travelRoom.getId();
 		String title = travelRoom.getName();
-		LocalDate startDate = null, endDate = null;
-		if (travelRoom.getStartDate() != null && travelRoom.getEndDate() != null) {
-			startDate = DateHelper.stringISOToLocalDate(travelRoom.getStartDate());
-			endDate = DateHelper.stringISOToLocalDate(travelRoom.getEndDate());
-		}
+
+		LocalDate startDate = DateHelper.stringISOToLocalDate(travelRoom.getStartDate());
+		LocalDate endDate = DateHelper.stringISOToLocalDate(travelRoom.getEndDate());
+
 		List<Country> countries = travelRoom.getCountries();
 		List<Member> members = travelRoom.getMembers();
 		String coverImgPath = travelRoom.getCoverImagePath();
@@ -74,5 +77,22 @@ public class TravelData {
 
 	public int getMembers() {
 		return members;
+	}
+
+	@Override
+	public int compareTo(@NonNull TravelData travelData) {
+		long dateDiff = DAYS.between(this.startDate, travelData.getStartDate());
+		if (DAYS.between(this.endDate, LocalDate.now()) < 0) {
+			// 다가오는 여행일 경우
+			if (dateDiff > 0) return -1;
+			else if (dateDiff < 0) return 1;
+		}
+		else {
+			// 지난 여일 경우
+			if (dateDiff > 0) return 1;
+			else if (dateDiff < 0) return -1;
+		}
+
+		return 0;
 	}
 }

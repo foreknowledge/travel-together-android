@@ -80,21 +80,19 @@ public class DetailActivity extends AppCompatActivity {
 		TextView travelName = findViewById(R.id.travel_name);
 		travelName.setText(this.travelName);
 
-		if (travelStartDate != null && travelEndDate != null) {
-			LocalDate startLocalDate = DateHelper.stringToLocalDate(travelStartDate, "-");
-			LocalDate endLocalDate = DateHelper.stringToLocalDate(travelEndDate, "-");
+		LocalDate startLocalDate = DateHelper.stringToLocalDate(travelStartDate, "-");
+		LocalDate endLocalDate = DateHelper.stringToLocalDate(travelEndDate, "-");
 
-			long daysBetween = DAYS.between(startLocalDate, endLocalDate) + 1;
-			String strDuration = travelStartDate + " ~ " + travelEndDate + " (" + daysBetween + "일간)";
+		long daysBetween = DAYS.between(startLocalDate, endLocalDate) + 1;
+		String strDuration = travelStartDate + " ~ " + travelEndDate + " (" + daysBetween + "일간)";
 
-			// 여행 기간 설정
-			TextView travelDuration = findViewById(R.id.travel_duration);
-			travelDuration.setText(strDuration);
+		// 여행 기간 설정
+		TextView travelDuration = findViewById(R.id.travel_duration);
+		travelDuration.setText(strDuration);
 
-			// 여행 D-Day 설정
-			TextView travelDDay = findViewById(R.id.travel_d_day);
-			travelDDay.setText("D - N");
-		}
+		// 여행 D-Day 설정
+		TextView travelDDay = findViewById(R.id.travel_d_day);
+		travelDDay.setText("D - N");
 
 		// 여행지 설정
 		RecyclerView countryRecyclerView = findViewById(R.id.country_recycler_view);

@@ -86,6 +86,8 @@ public class AddTravelActivity extends AppCompatActivity {
 				if (ConnectionStatus.getConnected()) {
 					if (editTitle.getText().toString().equals(""))
 						Snackbar.make(view, "제목은 필수 입력 사항입니다.", Snackbar.LENGTH_SHORT).show();
+					else if (!isFilledDates)
+						Snackbar.make(view, "여행 기간은 필수 입력 사항입니다.", Snackbar.LENGTH_SHORT).show();
 					else {
 						requestToServer();
 						finish();
@@ -109,13 +111,11 @@ public class AddTravelActivity extends AppCompatActivity {
 		try {
 			jsonObject.put("name", editTitle.getText().toString());
 
-			if (isFilledDates) {
-				LocalDate startDate = DateHelper.stringToLocalDate(btnStartDate.getText(), "\\.");
-				LocalDate endDate = DateHelper.stringToLocalDate(btnEndDate.getText(), "\\.");
+			LocalDate startDate = DateHelper.stringToLocalDate(btnStartDate.getText(), "\\.");
+			LocalDate endDate = DateHelper.stringToLocalDate(btnEndDate.getText(), "\\.");
 
-				jsonObject.put("startDate", DateHelper.toISOFormat(startDate));
-				jsonObject.put("endDate", DateHelper.toISOFormat(endDate));
-			}
+			jsonObject.put("startDate", DateHelper.toISOFormat(startDate));
+			jsonObject.put("endDate", DateHelper.toISOFormat(endDate));
 
 			JSONArray countryJson = new JSONArray();
 			for (String countryCode : countryCodes)
@@ -152,12 +152,8 @@ public class AddTravelActivity extends AppCompatActivity {
 	}
 
 	private void saveToDatabase(NewTravelRoom newTravelRoom) {
-		LocalDate startDate = null, endDate = null;
-
-		if (isFilledDates) {
-			startDate = DateHelper.stringToLocalDate(btnStartDate.getText(), "\\.");
-			endDate = DateHelper.stringToLocalDate(btnEndDate.getText(), "\\.");
-		}
+		LocalDate startDate = DateHelper.stringToLocalDate(btnStartDate.getText(), "\\.");
+		LocalDate endDate = DateHelper.stringToLocalDate(btnEndDate.getText(), "\\.");
 
 		StringBuilder selected = new StringBuilder();
 		for (int i = 0; i < countryCodes.size(); ++i) {

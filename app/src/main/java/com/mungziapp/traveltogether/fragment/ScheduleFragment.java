@@ -84,13 +84,6 @@ public class ScheduleFragment extends Fragment {
 	}
 
 	private void setRecyclerView() {
-		if (travelStartDate == null || travelEndDate == null) {
-			TextView textScheduleNotice = rootView.findViewById(R.id.text_schedule_notice);
-			textScheduleNotice.setVisibility(View.VISIBLE);
-
-			return;
-		}
-
 		RecyclerView scheduleRecycler = rootView.findViewById(R.id.schedule_recycler);
 		scheduleRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
 

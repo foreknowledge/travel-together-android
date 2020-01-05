@@ -18,8 +18,8 @@ public class TravelTable implements BaseColumns {
 	public static final String CREATE_QUERY = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
 			ID + " TEXT PRIMARY KEY, " +
 			NAME + " TEXT NOT NULL, " +
-			START_DATE + " TEXT, " +
-			END_DATE + " TEXT, " +
+			START_DATE + " TEXT NOT NULL, " +
+			END_DATE + " TEXT NOT NULL, " +
 			COUNTRY_CODES + " TEXT, " +
 			COVER_IMG_PATH + " TEXT, " +
 			MEMBERS + " INTEGER);";

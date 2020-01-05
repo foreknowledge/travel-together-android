@@ -79,10 +79,8 @@ public class EditTravelActivity extends AppCompatActivity {
 		cursor.moveToNext();
 
 		editTitle.setText(cursor.getString(cursor.getColumnIndex("name")));
-		if (!cursor.isNull(cursor.getColumnIndex("start_date")))
-			btnStartDate.setText(cursor.getString(cursor.getColumnIndex("start_date")));
-		if (!cursor.isNull(cursor.getColumnIndex("end_date")))
-			btnEndDate.setText(cursor.getString(cursor.getColumnIndex("end_date")));
+		btnStartDate.setText(cursor.getString(cursor.getColumnIndex("start_date")));
+		btnEndDate.setText(cursor.getString(cursor.getColumnIndex("end_date")));
 		String countryCodes = cursor.getString(cursor.getColumnIndex("country_codes"));
 		int cover = cursor.getInt(cursor.getColumnIndex("cover"));
 		if (cover != 0)

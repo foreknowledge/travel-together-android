@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mungziapp.traveltogether.app.DateHelper;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.model.data.TravelData;
@@ -33,7 +32,11 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 		this.context = context;
 	}
 
-	public void addItem(TravelData item) { travelData.add(item); }
+	public void addItem(TravelData item) {
+		travelData.add(item);
+
+	}
+
 	public TravelData getItem(int position) {
 		return travelData.get(position);
 	}
@@ -114,26 +117,22 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 			this.numOfTravelMembers.setText(numOfTravelMembers);
 
 			String strDDay;
+			LocalDate startLocalDate = item.getStartDate();
+			LocalDate endLocalDate = item.getEndDate();
 
-			if (item.getStartDate() != null && item.getEndDate() != null) {
-				LocalDate startLocalDate = item.getStartDate();
-				LocalDate endLocalDate = item.getEndDate();
+			long daysBetween = DAYS.between(startLocalDate, endLocalDate) + 1;
+			String startDate = item.getStartDate().toString().replace("-", ".");
+			String endDate = item.getEndDate().toString().replace("-", ".");
 
-				long daysBetween = DAYS.between(startLocalDate, endLocalDate) + 1;
-				String startDate = item.getStartDate().toString().replace("-", ".");
-				String endDate = item.getEndDate().toString().replace("-", ".");
+			String strDuration = startDate + " ~ " + endDate + " (" + daysBetween + "일간)";
+			this.travelDuration.setText(strDuration);
 
-				String strDuration = startDate + " ~ " + endDate + " (" + daysBetween + "일간)";
-				this.travelDuration.setText(strDuration);
+			LocalDate now = LocalDate.now();
+			long dDay = DAYS.between(startLocalDate, now);
 
-				LocalDate now = LocalDate.now();
-				long dDay = DAYS.between(startLocalDate, now);
-
-				if (dDay > 0) strDDay = "D + " + dDay;
-				else if (dDay < 0) strDDay = "D - " + -dDay;
-				else strDDay = "D-Day!!";
-			}
-			else strDDay = "D - ?";
+			if (dDay > 0) strDDay = "D + " + dDay;
+			else if (dDay < 0) strDDay = "D - " + -dDay;
+			else strDDay = "D-Day!!";
 
 			travelDday.setText(strDDay);
 
