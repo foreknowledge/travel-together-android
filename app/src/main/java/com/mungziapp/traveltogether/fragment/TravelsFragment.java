@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import com.mungziapp.traveltogether.R;
 
 public class TravelsFragment extends Fragment {
 	private TravelsRecyclerAdapter travelsRecyclerAdapter;
+	private boolean reverseOrder = false;
 
 	public TravelsFragment() {
 	}
@@ -25,13 +27,24 @@ public class TravelsFragment extends Fragment {
 		this.travelsRecyclerAdapter = travelsRecyclerAdapter;
 	}
 
+	public TravelsFragment(TravelsRecyclerAdapter travelsRecyclerAdapter, boolean reverseOrder) {
+		this.travelsRecyclerAdapter = travelsRecyclerAdapter;
+		this.reverseOrder = reverseOrder;
+	}
+
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_travels, container, false);
 
+		LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+		if (reverseOrder) {
+			linearLayoutManager.setReverseLayout(true);
+			linearLayoutManager.setStackFromEnd(true);
+		}
+
 		RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
-		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+		recyclerView.setLayoutManager(linearLayoutManager);
 
 		recyclerView.setAdapter(travelsRecyclerAdapter);
 		if (travelsRecyclerAdapter.getItemCount() != 0) {

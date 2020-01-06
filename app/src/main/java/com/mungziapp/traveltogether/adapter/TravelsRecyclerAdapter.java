@@ -24,7 +24,6 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecyclerAdapter.ViewHolder> {
 	private Context context;
-	private boolean reverseOrder = false;
 	private List<TravelData> travelData = new ArrayList<>();
 
 	private OnItemClickListener listener;
@@ -33,15 +32,9 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 		this.context = context;
 	}
 
-	public TravelsRecyclerAdapter(Context context, boolean reverseOrder) {
-		this.context = context;
-		this.reverseOrder = reverseOrder;
-	}
-
 	public void addItem(TravelData item) {
 		travelData.add(item);
-		if (reverseOrder) Collections.reverse(travelData);
-		else Collections.sort(travelData);
+		Collections.sort(travelData);
 	}
 
 	public TravelData getItem(int position) {

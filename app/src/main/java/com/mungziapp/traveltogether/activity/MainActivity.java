@@ -65,9 +65,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 
 		initAdapters();
 		setTabBar();
-		setAddTravelButton();
-		setSettingsButton();
-		setSearchButton();
+		setButtons();
 
 		AutoPermissions.Companion.loadAllPermissions(this, 101);
 	}
@@ -82,7 +80,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		oncommingAdapter = new TravelsRecyclerAdapter(getApplicationContext());
 		oncommingAdapter.setClickListener(makeItemClickListener(oncommingAdapter));
 
-		lastTravelAdapter = new TravelsRecyclerAdapter(getApplicationContext(), true);
+		lastTravelAdapter = new TravelsRecyclerAdapter(getApplicationContext());
 		lastTravelAdapter.setClickListener(makeItemClickListener(lastTravelAdapter));
 
 		outerViewPager = findViewById(R.id.outer_view_pager);
@@ -108,38 +106,6 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		});
 	}
 
-	private void setSearchButton() {
-		Button btnSearch = findViewById(R.id.btn_search);
-		btnSearch.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-				startActivity(intent);
-			}
-		});
-	}
-
-	private void setAddTravelButton() {
-		Button btnAddTravel = findViewById(R.id.btn_add_travel);
-		btnAddTravel.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				startActivity(new Intent(getApplicationContext(), AddTravelActivity.class));
-			}
-		});
-	}
-
-	private void setSettingsButton() {
-		Button btnGoSettings = findViewById(R.id.btn_go_settings);
-		btnGoSettings.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-			}
-		});
-	}
-
 	private void setAdapterItems() {
 		oncommingAdapter.clearItems();
 		lastTravelAdapter.clearItems();
@@ -154,7 +120,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 
 	private void setPagerAdapter() {
 		TravelsFragment oncommingTravels = new TravelsFragment(oncommingAdapter);
-		TravelsFragment lastTravels = new TravelsFragment(lastTravelAdapter);
+		TravelsFragment lastTravels = new TravelsFragment(lastTravelAdapter, true);
 
 		MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(fm);
 		mainPagerAdapter.addItem(oncommingTravels);
@@ -324,6 +290,34 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 				return true;
 			}
 		};
+	}
+
+	private void setButtons() {
+		Button btnSearch = findViewById(R.id.btn_search);
+		btnSearch.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+				startActivity(intent);
+			}
+		});
+
+		Button btnAddTravel = findViewById(R.id.btn_add_travel);
+		btnAddTravel.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				startActivity(new Intent(getApplicationContext(), AddTravelActivity.class));
+			}
+		});
+
+		Button btnGoSettings = findViewById(R.id.btn_go_settings);
+		btnGoSettings.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+			}
+		});
 	}
 
 	@Override
