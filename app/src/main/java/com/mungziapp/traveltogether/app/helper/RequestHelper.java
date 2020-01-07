@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class RequestHelper {
 	private static final String TAG = "RequestHelper :: ";
-	public static final String HOST = "http://192.168.200.164:3000";
+	public static final String HOST = "http://192.168.35.179:3000";
 
 	private static RequestHelper instance = new RequestHelper();
 	private static RequestQueue requestQueue;
@@ -152,6 +152,11 @@ public class RequestHelper {
 
 	public static void processError(VolleyError error, String TAG) {
 		String body;
+		if (error == null || error.networkResponse == null) {
+			Log.d(TAG, "network is not connected");
+			return;
+		}
+
 		if (error.networkResponse.data != null) {
 			try {
 				body = new String(error.networkResponse.data, StandardCharsets.UTF_8);
