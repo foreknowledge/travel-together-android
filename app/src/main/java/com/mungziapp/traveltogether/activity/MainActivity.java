@@ -24,12 +24,12 @@ import com.mungziapp.traveltogether.app.TokenManager;
 import com.mungziapp.traveltogether.app.helper.JsonHelper;
 import com.mungziapp.traveltogether.app.helper.RequestHelper;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
-import com.mungziapp.traveltogether.adapter.TravelsRecyclerAdapter;
+import com.mungziapp.traveltogether.adapter.TravelRecyclerAdapter;
 import com.mungziapp.traveltogether.adapter.MainPagerAdapter;
 import com.mungziapp.traveltogether.app.helper.DatabaseHelper;
 import com.mungziapp.traveltogether.interfaces.OnResponseListener;
 import com.mungziapp.traveltogether.model.data.TravelData;
-import com.mungziapp.traveltogether.fragment.TravelsFragment;
+import com.mungziapp.traveltogether.fragment.TravelFragment;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.model.response.TravelRoom;
 import com.mungziapp.traveltogether.model.table.TravelTable;
@@ -54,11 +54,11 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 
 	private FragmentManager fm;
 	private ViewPager outerViewPager;
-	private TravelsRecyclerAdapter oncommingAdapter;
-	private TravelsRecyclerAdapter lastTravelAdapter;
+	private TravelRecyclerAdapter oncommingAdapter;
+	private TravelRecyclerAdapter lastTravelAdapter;
 
-	private TravelsFragment oncommingTravels;
-	private TravelsFragment lastTravels;
+	private TravelFragment oncommingTravels;
+	private TravelFragment lastTravels;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,16 +78,16 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 	}
 
 	private void initAdapters() {
-		oncommingAdapter = new TravelsRecyclerAdapter(getApplicationContext());
+		oncommingAdapter = new TravelRecyclerAdapter(getApplicationContext());
 		oncommingAdapter.setClickListener(makeItemClickListener(oncommingAdapter));
 
-		lastTravelAdapter = new TravelsRecyclerAdapter(getApplicationContext());
+		lastTravelAdapter = new TravelRecyclerAdapter(getApplicationContext());
 		lastTravelAdapter.setClickListener(makeItemClickListener(lastTravelAdapter));
 
 		outerViewPager = findViewById(R.id.outer_view_pager);
 
-		oncommingTravels = new TravelsFragment(oncommingAdapter);
-		lastTravels = new TravelsFragment(lastTravelAdapter, true);
+		oncommingTravels = new TravelFragment(oncommingAdapter);
+		lastTravels = new TravelFragment(lastTravelAdapter, true);
 
 		MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(fm);
 		mainPagerAdapter.addItem(oncommingTravels);
@@ -213,7 +213,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		lastTravelAdapter.notifyDataSetChanged();
 	}
 
-	private OnItemClickListener makeItemClickListener(final TravelsRecyclerAdapter adapter) {
+	private OnItemClickListener makeItemClickListener(final TravelRecyclerAdapter adapter) {
 		return new OnItemClickListener() {
 			private String[] options = getResources().getStringArray(R.array.option_travel);
 			private String travelId;

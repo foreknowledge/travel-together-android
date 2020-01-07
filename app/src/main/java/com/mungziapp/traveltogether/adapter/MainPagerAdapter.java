@@ -5,13 +5,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.mungziapp.traveltogether.fragment.TravelsFragment;
+import com.mungziapp.traveltogether.fragment.TravelFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainPagerAdapter extends FragmentStatePagerAdapter {
-	private List<TravelsFragment> travelsFragments = new ArrayList<>();
+	private List<TravelFragment> travelFragments = new ArrayList<>();
 
 	public MainPagerAdapter(FragmentManager fm) {
 		super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
@@ -19,13 +19,13 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
 
 	@NonNull
 	@Override
-	public TravelsFragment getItem(int position) {
-		return travelsFragments.get(position);
+	public TravelFragment getItem(int position) {
+		return travelFragments.get(position);
 	}
 
 	@Override
 	public int getCount() {
-		return travelsFragments.size();
+		return travelFragments.size();
 	}
 
 	@Override
@@ -40,8 +40,8 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
 		else return "지난 여행";
 	}
 
-	public void addItem(TravelsFragment travelsFragment) {
-		travelsFragments.add(travelsFragment);
+	public void addItem(TravelFragment travelFragment) {
+		travelFragments.add(travelFragment);
 	}
 }
 

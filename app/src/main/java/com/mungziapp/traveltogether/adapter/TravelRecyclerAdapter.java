@@ -22,13 +22,13 @@ import java.util.List;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
-public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecyclerAdapter.ViewHolder> {
+public class TravelRecyclerAdapter extends RecyclerView.Adapter<TravelRecyclerAdapter.ViewHolder> {
 	private Context context;
 	private List<TravelData> travelData = new ArrayList<>();
 
 	private OnItemClickListener listener;
 
-	public TravelsRecyclerAdapter(Context context) {
+	public TravelRecyclerAdapter(Context context) {
 		this.context = context;
 	}
 
@@ -92,7 +92,7 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 				@Override
 				public void onClick(View view) {
 					if (listener != null)
-						listener.onItemClick(TravelsRecyclerAdapter.ViewHolder.this, view, getAdapterPosition());
+						listener.onItemClick(TravelRecyclerAdapter.ViewHolder.this, view, getAdapterPosition());
 				}
 			});
 
@@ -100,7 +100,7 @@ public class TravelsRecyclerAdapter extends RecyclerView.Adapter<TravelsRecycler
 				@Override
 				public boolean onLongClick(View view) {
 					if (listener != null)
-						return listener.onItemLongClick(TravelsRecyclerAdapter.ViewHolder.this, view, getAdapterPosition());
+						return listener.onItemLongClick(TravelRecyclerAdapter.ViewHolder.this, view, getAdapterPosition());
 
 					return false;
 				}

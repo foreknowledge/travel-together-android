@@ -12,24 +12,24 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mungziapp.traveltogether.adapter.TravelsRecyclerAdapter;
+import com.mungziapp.traveltogether.adapter.TravelRecyclerAdapter;
 import com.mungziapp.traveltogether.R;
 
-public class TravelsFragment extends Fragment {
-	private TravelsRecyclerAdapter travelsRecyclerAdapter;
+public class TravelFragment extends Fragment {
+	private TravelRecyclerAdapter travelRecyclerAdapter;
 	private boolean reverseOrder = false;
 
 	private View rootView;
 
-	public TravelsFragment() {
+	public TravelFragment() {
 	}
 
-	public TravelsFragment(TravelsRecyclerAdapter travelsRecyclerAdapter) {
-		this.travelsRecyclerAdapter = travelsRecyclerAdapter;
+	public TravelFragment(TravelRecyclerAdapter travelRecyclerAdapter) {
+		this.travelRecyclerAdapter = travelRecyclerAdapter;
 	}
 
-	public TravelsFragment(TravelsRecyclerAdapter travelsRecyclerAdapter, boolean reverseOrder) {
-		this.travelsRecyclerAdapter = travelsRecyclerAdapter;
+	public TravelFragment(TravelRecyclerAdapter travelRecyclerAdapter, boolean reverseOrder) {
+		this.travelRecyclerAdapter = travelRecyclerAdapter;
 		this.reverseOrder = reverseOrder;
 	}
 
@@ -46,13 +46,13 @@ public class TravelsFragment extends Fragment {
 
 		RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(linearLayoutManager);
-		recyclerView.setAdapter(travelsRecyclerAdapter);
+		recyclerView.setAdapter(travelRecyclerAdapter);
 
 		return rootView;
 	}
 
 	public void setNoticeTextVisibility() {
-		if (travelsRecyclerAdapter.getItemCount() != 0) {
+		if (travelRecyclerAdapter.getItemCount() != 0) {
 			TextView travelNotice = rootView.findViewById(R.id.travel_notice);
 			travelNotice.setVisibility(View.INVISIBLE);
 		}
