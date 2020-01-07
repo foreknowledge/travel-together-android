@@ -20,7 +20,7 @@ import com.mungziapp.traveltogether.interfaces.ActivityCallback;
 
 public class SuppliesFragment extends Fragment {
 	private View rootView;
-	private ActivityCallback callback;
+	private ActivityCallback.TravelCallback callback;
 
 	private ViewPager suppliesViewPager;
 	private FragmentManager fm;
@@ -29,8 +29,8 @@ public class SuppliesFragment extends Fragment {
 	public void onAttach(@NonNull Context context) {
 		super.onAttach(context);
 
-		if (context instanceof ActivityCallback)
-			callback = (ActivityCallback) context;
+		if (context instanceof ActivityCallback.TravelCallback)
+			callback = (ActivityCallback.TravelCallback) context;
 	}
 
 	@Nullable

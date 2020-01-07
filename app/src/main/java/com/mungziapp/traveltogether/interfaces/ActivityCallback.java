@@ -1,5 +1,11 @@
 package com.mungziapp.traveltogether.interfaces;
 
 public interface ActivityCallback {
-	void finishActivity();
+	interface MainCallback {
+		void refreshAdapterItems();
+	}
+
+	interface TravelCallback {
+		void finishActivity();
+	}
 }

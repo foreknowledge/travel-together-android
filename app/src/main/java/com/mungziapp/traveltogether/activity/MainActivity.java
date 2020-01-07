@@ -1,7 +1,5 @@
 package com.mungziapp.traveltogether.activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -12,7 +10,6 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.android.volley.VolleyError;
@@ -23,8 +20,7 @@ import com.mungziapp.traveltogether.app.DateHelper;
 import com.mungziapp.traveltogether.app.TokenManager;
 import com.mungziapp.traveltogether.app.helper.JsonHelper;
 import com.mungziapp.traveltogether.app.helper.RequestHelper;
-import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
-import com.mungziapp.traveltogether.adapter.TravelRecyclerAdapter;
+import com.mungziapp.traveltogether.interfaces.ActivityCallback;
 import com.mungziapp.traveltogether.adapter.MainPagerAdapter;
 import com.mungziapp.traveltogether.app.helper.DatabaseHelper;
 import com.mungziapp.traveltogether.interfaces.OnResponseListener;
@@ -47,15 +43,13 @@ import java.util.Map;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
-public class MainActivity extends BaseActivity implements AutoPermissionsListener {
+public class MainActivity extends BaseActivity implements AutoPermissionsListener, ActivityCallback.MainCallback {
 	private static final String TAG = "MainActivity :: ";
 	private static final int PERMISSION_CODE = 101;
 	private static final int REFRESH_CODE = 102;
 
 	private FragmentManager fm;
 	private ViewPager outerViewPager;
-	private TravelRecyclerAdapter oncommingAdapter;
-	private TravelRecyclerAdapter lastTravelAdapter;
 
 	private TravelFragment oncommingTravels;
 	private TravelFragment lastTravels;
@@ -69,25 +63,18 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 
 		fm = getSupportFragmentManager();
 
-		initAdapters();
-		setTabBar();
-		setButtons();
-		setAdapterItems();
+		init();
+		refreshAdapterItems();
 
 		AutoPermissions.Companion.loadAllPermissions(this, PERMISSION_CODE);
 	}
 
-	private void initAdapters() {
-		oncommingAdapter = new TravelRecyclerAdapter(getApplicationContext());
-		oncommingAdapter.setClickListener(makeItemClickListener(oncommingAdapter));
-
-		lastTravelAdapter = new TravelRecyclerAdapter(getApplicationContext());
-		lastTravelAdapter.setClickListener(makeItemClickListener(lastTravelAdapter));
-
+	private void init() {
+		// init View Pager and Adapter
 		outerViewPager = findViewById(R.id.outer_view_pager);
 
-		oncommingTravels = new TravelFragment(oncommingAdapter);
-		lastTravels = new TravelFragment(lastTravelAdapter, true);
+		oncommingTravels = new TravelFragment();
+		lastTravels = new TravelFragment(true);
 
 		MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(fm);
 		mainPagerAdapter.addItem(oncommingTravels);
@@ -97,9 +84,8 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 
 		outerViewPager.setOffscreenPageLimit(mainPagerAdapter.getCount());
 		outerViewPager.setAdapter(mainPagerAdapter);
-	}
 
-	private void setTabBar() {
+		// init tab bar
 		TabLayout tabLayout = findViewById(R.id.tabLayout);
 		tabLayout.setupWithViewPager(outerViewPager);
 
@@ -117,17 +103,49 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 			public void onTabReselected(TabLayout.Tab tab) {
 			}
 		});
+
+		// init buttons
+		Button btnSearch = findViewById(R.id.btn_search);
+		btnSearch.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+				startActivity(intent);
+			}
+		});
+
+		Button btnAddTravel = findViewById(R.id.btn_add_travel);
+		btnAddTravel.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				startActivityForResult(new Intent(getApplicationContext(), AddTravelActivity.class), REFRESH_CODE);
+			}
+		});
+
+		Button btnGoSettings = findViewById(R.id.btn_go_settings);
+		btnGoSettings.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+			}
+		});
 	}
 
-	private void setAdapterItems() {
-		oncommingAdapter.clearItems();
-		lastTravelAdapter.clearItems();
-
+	@Override
+	public void refreshAdapterItems() {
 		if (ConnectionStatus.getConnected()) {
 			addItemsInNetwork();
 			return;
 		}
 		addItemsInDatabase();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if (requestCode == REFRESH_CODE) refreshAdapterItems();
 	}
 
 	private void addItemsInNetwork() {
@@ -168,23 +186,6 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 				});
 	}
 
-	private void addTravelItems(List<TravelData> travelData) {
-		for (TravelData data : travelData) {
-			LocalDate endDate = data.getEndDate();
-
-			if (DAYS.between(LocalDate.now(), endDate) >= 0)
-				oncommingAdapter.addItem(data);
-			else
-				lastTravelAdapter.addItem(data);
-		}
-
-		oncommingAdapter.notifyDataSetChanged();
-		lastTravelAdapter.notifyDataSetChanged();
-
-		oncommingTravels.setNoticeTextVisibility();
-		lastTravels.setNoticeTextVisibility();
-	}
-
 	private void addItemsInDatabase() {
 		List<TravelData> travelData = new ArrayList<>();
 
@@ -210,119 +211,15 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		addTravelItems(travelData);
 	}
 
-	private OnItemClickListener makeItemClickListener(final TravelRecyclerAdapter adapter) {
-		return new OnItemClickListener() {
-			private String[] options = getResources().getStringArray(R.array.option_travel);
-			private String travelId;
+	private void addTravelItems(List<TravelData> travelData) {
+		for (TravelData data : travelData) {
+			LocalDate endDate = data.getEndDate();
 
-			final AlertDialog deleteDialog = new AlertDialog.Builder(MainActivity.this)
-					.setMessage(getString(R.string.delete_message))
-					.setPositiveButton(getString(R.string.btn_ok_text)
-							, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									RequestHelper.getInstance().onSendPostRequest(RequestHelper.HOST + "/travel-rooms/" + travelId + "/leave",
-											new OnResponseListener.OnPOSTListener.OnStringListener() {
-												@Override
-												public void onResponse(String response) {
-													DatabaseHelper.deleteTravelData(travelId);
-													setAdapterItems();
-												}
-
-												@Override
-												public Map<String, String> getHeaders() {
-													Map<String, String> headers = new HashMap<>();
-													headers.put("Authorization", TokenManager.getInstance().getAuthorization());
-
-													return headers;
-												}
-
-												@Override
-												public void onErrorResponse(VolleyError error) {
-													RequestHelper.processError(error, TAG);
-												}
-											});
-								}
-							})
-					.setNegativeButton(getString(R.string.btn_cancel_text)
-							, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									dialog.dismiss();
-								}
-							}).create();
-
-			@Override
-			public void onItemClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
-				TravelData item = adapter.getItem(position);
-
-				Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-				intent.putExtra("id", item.getId());
-
-				startActivity(intent);
-			}
-
-			@Override
-			public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
-				final TravelData item = adapter.getItem(position);
-				travelId = item.getId();
-
-				new AlertDialog.Builder(MainActivity.this)
-						.setTitle(item.getName())
-						.setItems(options, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialogInterface, int i) {
-								switch (i) {
-									case 0:
-										Intent intent = new Intent(MainActivity.this, EditTravelActivity.class);
-										intent.putExtra("travel_id", travelId);
-										startActivity(intent);
-										break;
-									case 1:
-										deleteDialog.show();
-										break;
-								}
-							}
-						}).show();
-
-				return true;
-			}
-		};
-	}
-
-	private void setButtons() {
-		Button btnSearch = findViewById(R.id.btn_search);
-		btnSearch.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-				startActivity(intent);
-			}
-		});
-
-		Button btnAddTravel = findViewById(R.id.btn_add_travel);
-		btnAddTravel.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				startActivityForResult(new Intent(getApplicationContext(), AddTravelActivity.class), REFRESH_CODE);
-			}
-		});
-
-		Button btnGoSettings = findViewById(R.id.btn_go_settings);
-		btnGoSettings.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-			}
-		});
-	}
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-
-		if (requestCode == REFRESH_CODE) setAdapterItems();
+			if (DAYS.between(LocalDate.now(), endDate) >= 0)
+				oncommingTravels.addItem(data);
+			else
+				lastTravels.addItem(data);
+		}
 	}
 
 	@Override

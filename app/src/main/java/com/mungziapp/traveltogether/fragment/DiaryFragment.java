@@ -16,14 +16,14 @@ import com.mungziapp.traveltogether.interfaces.ActivityCallback;
 
 public class DiaryFragment extends Fragment {
 	private View rootView;
-	private ActivityCallback callback;
+	private ActivityCallback.TravelCallback callback;
 
 	@Override
 	public void onAttach(@NonNull Context context) {
 		super.onAttach(context);
 
-		if (context instanceof ActivityCallback)
-			callback = (ActivityCallback) context;
+		if (context instanceof ActivityCallback.TravelCallback)
+			callback = (ActivityCallback.TravelCallback) context;
 	}
 
 	@Nullable
