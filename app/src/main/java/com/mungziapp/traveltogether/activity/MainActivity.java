@@ -74,7 +74,10 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		outerViewPager = findViewById(R.id.outer_view_pager);
 
 		oncommingTravels = new TravelFragment();
-		lastTravels = new TravelFragment(true);
+		lastTravels = new TravelFragment();
+		Bundle bundle = new Bundle();
+		bundle.putBoolean("reverseOrder", true);
+		lastTravels.setArguments(bundle);
 
 		MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(fm);
 		mainPagerAdapter.addItem(oncommingTravels);

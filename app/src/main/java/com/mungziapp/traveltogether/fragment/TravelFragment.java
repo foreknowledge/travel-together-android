@@ -42,7 +42,6 @@ public class TravelFragment extends Fragment {
 	private View rootView;
 
 	public TravelFragment() { }
-	public TravelFragment(boolean reverseOrder) { this.reverseOrder = reverseOrder; }
 
 	@Override
 	public void onAttach(@NonNull Context context) {
@@ -57,20 +56,22 @@ public class TravelFragment extends Fragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.fragment_travels, container, false);
 
+		Bundle bundle = getArguments();
+		if (bundle != null)
+			reverseOrder = bundle.getBoolean("reverseOrder");
+
 		init();
 
 		return rootView;
 	}
 
 	private void init() {
+		LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+		linearLayoutManager.setReverseLayout(reverseOrder);
+		linearLayoutManager.setStackFromEnd(reverseOrder);
+
 		recyclerAdapter = new TravelRecyclerAdapter(getContext());
 		recyclerAdapter.setClickListener(makeItemClickListener());
-
-		LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-		if (reverseOrder) {
-			linearLayoutManager.setReverseLayout(true);
-			linearLayoutManager.setStackFromEnd(true);
-		}
 
 		RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(linearLayoutManager);
