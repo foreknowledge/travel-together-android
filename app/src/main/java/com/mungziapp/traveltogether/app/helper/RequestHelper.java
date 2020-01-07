@@ -42,7 +42,7 @@ public class RequestHelper {
 				new Response.Listener<String>() {
 					@Override
 					public void onResponse(String response) {
-						Log.d(TAG, "get method response = " + response);
+						Log.d(TAG, "get method response");
 						listener.onResponse(response);
 					}
 				},
@@ -69,7 +69,7 @@ public class RequestHelper {
 				new Response.Listener<JSONArray>() {
 					@Override
 					public void onResponse(JSONArray response) {
-						Log.d(TAG, "json array response = " + response);
+						Log.d(TAG, "json array response");
 						listener.onResponse(response);
 					}
 				},
@@ -97,7 +97,7 @@ public class RequestHelper {
 				new Response.Listener<String>() {
 					@Override
 					public void onResponse(String response) {
-						Log.d(TAG, "get method response = " + response);
+						Log.d(TAG, "get method response");
 						listener.onResponse(response);
 					}
 				},
@@ -126,7 +126,7 @@ public class RequestHelper {
 				new Response.Listener<JSONObject>() {
 					@Override
 					public void onResponse(JSONObject response) {
-						Log.d(TAG, "post jsonObject method response = " + response);
+						Log.d(TAG, "post jsonObject method response");
 						listener.onResponse(response);
 					}
 				},

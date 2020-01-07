@@ -43,25 +43,36 @@ public class DatabaseHelper {
 		Log.d(TAG, "schedule 테이블 삭제.");
 	}
 
-	public static void insertTravelsData(TravelData travelData) {
+	public static void insertTravelData(TravelData travelData) {
 		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = '" + travelData.getId() + "'", null);
 		cursor.moveToNext();
 		if (cursor.getCount() != 0) {
 			// 테이블에 데이터가 있다면 데이터 지우기
 			String sql = "DELETE FROM " + TravelTable.TABLE_NAME + " WHERE id = '" + travelData.getId() + "'";
 			DatabaseHelper.database.execSQL(sql);
-			Log.d(TAG, "travel [" + travelData.getId() + "] 데이터 삭제됨.");
 		}
 		String sql = "INSERT INTO " + TravelTable.TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 		Object[] params = {travelData.getId(), travelData.getName(), travelData.getStartDate(), travelData.getEndDate(), travelData.getCountryCodes(), travelData.getCoverImgPath(), travelData.getMembers()};
 
 		DatabaseHelper.database.execSQL(sql, params);
-		Log.d(TAG, "travel [" + travelData.getId() + "] 데이터 추가됨.");
 
 		cursor.close();
 	}
 
-	public static void insertTravelsData(TravelRoom travelRoom) {
-		insertTravelsData(TravelData.toTravelData(travelRoom));
+	public static void insertTravelData(TravelRoom travelRoom) {
+		insertTravelData(TravelData.toTravelData(travelRoom));
+	}
+
+	public static void deleteTravelData(String travelId) {
+		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = '" + travelId + "'", null);
+		cursor.moveToNext();
+		if (cursor.getCount() != 0) {
+			// 테이블에 데이터가 있다면 데이터 지우기
+			String sql = "DELETE FROM " + TravelTable.TABLE_NAME + " WHERE id = '" + travelId + "'";
+			DatabaseHelper.database.execSQL(sql);
+			Log.d(TAG, "travel [" + travelId + "] 데이터 삭제됨.");
+		}
+
+		cursor.close();
 	}
 }

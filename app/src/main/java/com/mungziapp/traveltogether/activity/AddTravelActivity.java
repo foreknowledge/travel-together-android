@@ -88,10 +88,8 @@ public class AddTravelActivity extends AppCompatActivity {
 						Snackbar.make(view, "제목은 필수 입력 사항입니다.", Snackbar.LENGTH_SHORT).show();
 					else if (!isFilledDates)
 						Snackbar.make(view, "여행 기간은 필수 입력 사항입니다.", Snackbar.LENGTH_SHORT).show();
-					else {
+					else
 						requestToServer();
-						finish();
-					}
 				} else
 					Snackbar.make(view, "네트워크가 연결되어 있지 않습니다.", Snackbar.LENGTH_SHORT).show();
 			}
@@ -127,7 +125,7 @@ public class AddTravelActivity extends AppCompatActivity {
 				new OnResponseListener.OnPOSTListener.OnJsonObjectListener() {
 					@Override
 					public void onResponse(JSONObject response) {
-						Log.d(TAG, response.toString());
+						Log.d(TAG, "json object response = " + response.toString());
 
 						NewTravelRoom newTravelRoom = JsonHelper.gson.fromJson(response.toString(), NewTravelRoom.class);
 						saveToDatabase(newTravelRoom);
@@ -162,7 +160,7 @@ public class AddTravelActivity extends AppCompatActivity {
 				selected.append(",");
 		}
 
-		DatabaseHelper.insertTravelsData(new TravelData(newTravelRoom.getId()
+		DatabaseHelper.insertTravelData(new TravelData(newTravelRoom.getId()
 				, editTitle.getText().toString()
 				, startDate
 				, endDate
@@ -285,7 +283,6 @@ public class AddTravelActivity extends AppCompatActivity {
 				countryAdapter.selectItem(item);
 				countryAdapter.searchItem(editSearch.getText().toString());
 			}
-
 			@Override
 			public Boolean onItemLongClick(RecyclerView.ViewHolder viewHolder, View view, int position) {
 				return null;

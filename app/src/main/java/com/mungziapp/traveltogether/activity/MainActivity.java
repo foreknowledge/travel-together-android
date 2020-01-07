@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -49,6 +50,8 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class MainActivity extends BaseActivity implements AutoPermissionsListener {
 	private ViewPager outerViewPager;
 	private static final String TAG = "MainActivity :: ";
+	private static final int PERMISSION_CODE = 101;
+	private static final int REFRESH_CODE = 102;
 
 	private FragmentManager fm;
 	private TravelsRecyclerAdapter oncommingAdapter;
@@ -66,14 +69,9 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		initAdapters();
 		setTabBar();
 		setButtons();
-
-		AutoPermissions.Companion.loadAllPermissions(this, 101);
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
 		setAdapterItems();
+
+		AutoPermissions.Companion.loadAllPermissions(this, PERMISSION_CODE);
 	}
 
 	private void initAdapters() {
@@ -115,21 +113,6 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 			return;
 		}
 		addItemsInDatabase();
-		setPagerAdapter();
-	}
-
-	private void setPagerAdapter() {
-		TravelsFragment oncommingTravels = new TravelsFragment(oncommingAdapter);
-		TravelsFragment lastTravels = new TravelsFragment(lastTravelAdapter, true);
-
-		MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(fm);
-		mainPagerAdapter.addItem(oncommingTravels);
-		mainPagerAdapter.addItem(lastTravels);
-
-		mainPagerAdapter.notifyDataSetChanged();
-
-		outerViewPager.setOffscreenPageLimit(mainPagerAdapter.getCount());
-		outerViewPager.setAdapter(mainPagerAdapter);
 	}
 
 	private void addItemsInNetwork() {
@@ -149,7 +132,8 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 							setPagerAdapter();
 
 							for (TravelRoom travelRoom : travelRooms)
-								DatabaseHelper.insertTravelsData(travelRoom);
+								DatabaseHelper.insertTravelData(travelRoom);
+							Log.d(TAG, "travelRoom 데이터 업데이트.");
 
 						} catch (JSONException e) { Log.e(TAG, "json exception = " + e.getMessage()); }
 					}
@@ -158,7 +142,6 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 					public Map<String, String> getHeaders() {
 						Map<String, String> headers = new HashMap<>();
 						headers.put("Authorization", TokenManager.getInstance().getAuthorization());
-						Log.d(TAG, "authorization = " + TokenManager.getInstance().getAuthorization());
 						Log.d(TAG, "request headers = " + headers.toString());
 
 						return headers;
@@ -211,6 +194,22 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 
 		oncommingAdapter.notifyDataSetChanged();
 		lastTravelAdapter.notifyDataSetChanged();
+
+		setPagerAdapter();
+	}
+
+	private void setPagerAdapter() {
+		TravelsFragment oncommingTravels = new TravelsFragment(oncommingAdapter);
+		TravelsFragment lastTravels = new TravelsFragment(lastTravelAdapter, true);
+
+		MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(fm);
+		mainPagerAdapter.addItem(oncommingTravels);
+		mainPagerAdapter.addItem(lastTravels);
+
+		mainPagerAdapter.notifyDataSetChanged();
+
+		outerViewPager.setOffscreenPageLimit(mainPagerAdapter.getCount());
+		outerViewPager.setAdapter(mainPagerAdapter);
 	}
 
 	private OnItemClickListener makeItemClickListener(final TravelsRecyclerAdapter adapter) {
@@ -228,6 +227,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 											new OnResponseListener.OnPOSTListener.OnStringListener() {
 												@Override
 												public void onResponse(String response) {
+													DatabaseHelper.deleteTravelData(travelId);
 													setAdapterItems();
 												}
 
@@ -307,7 +307,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		btnAddTravel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				startActivity(new Intent(getApplicationContext(), AddTravelActivity.class));
+				startActivityForResult(new Intent(getApplicationContext(), AddTravelActivity.class), REFRESH_CODE);
 			}
 		});
 
@@ -318,6 +318,13 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 				startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
 			}
 		});
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if (requestCode == REFRESH_CODE) setAdapterItems();
 	}
 
 	@Override
