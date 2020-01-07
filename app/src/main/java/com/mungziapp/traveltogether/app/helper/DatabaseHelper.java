@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.mungziapp.traveltogether.model.data.TravelData;
-import com.mungziapp.traveltogether.model.response.TravelRoom;
 import com.mungziapp.traveltogether.model.table.ScheduleTable;
 import com.mungziapp.traveltogether.model.table.TravelTable;
 
@@ -57,10 +56,6 @@ public class DatabaseHelper {
 		DatabaseHelper.database.execSQL(sql, params);
 
 		cursor.close();
-	}
-
-	public static void insertTravelData(TravelRoom travelRoom) {
-		insertTravelData(TravelData.toTravelData(travelRoom));
 	}
 
 	public static void deleteTravelData(String travelId) {

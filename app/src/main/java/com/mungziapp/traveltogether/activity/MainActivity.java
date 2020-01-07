@@ -135,18 +135,18 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 				new OnResponseListener.OnJsonArrayListener() {
 					@Override
 					public void onResponse(JSONArray response) {
-						List<TravelRoom> travelRooms = new ArrayList<>();
+						List<TravelData> travelData = new ArrayList<>();
 
 						try {
 							for (int i = 0; i < response.length(); i++) {
 								TravelRoom travelRoom = JsonHelper.gson.fromJson(response.getJSONObject(i).toString(), TravelRoom.class);
-								travelRooms.add(travelRoom);
+								travelData.add(TravelData.toTravelData(travelRoom));
 							}
 
-							addTravelItems(travelRooms);
+							addTravelItems(travelData);
 
-							for (TravelRoom travelRoom : travelRooms)
-								DatabaseHelper.insertTravelData(travelRoom);
+							for (TravelData data : travelData)
+								DatabaseHelper.insertTravelData(data);
 							Log.d(TAG, "travelRoom 데이터 업데이트.");
 
 						} catch (JSONException e) { Log.e(TAG, "json exception = " + e.getMessage()); }
@@ -168,14 +168,14 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 				});
 	}
 
-	private void addTravelItems(List<TravelRoom> travelRooms) {
-		for (TravelRoom travelRoom : travelRooms) {
-			LocalDate endDate = DateHelper.stringISOToLocalDate(travelRoom.getEndDate());
+	private void addTravelItems(List<TravelData> travelData) {
+		for (TravelData data : travelData) {
+			LocalDate endDate = data.getEndDate();
 
 			if (DAYS.between(LocalDate.now(), endDate) >= 0)
-				oncommingAdapter.addItem(TravelData.toTravelData(travelRoom));
+				oncommingAdapter.addItem(data);
 			else
-				lastTravelAdapter.addItem(TravelData.toTravelData(travelRoom));
+				lastTravelAdapter.addItem(data);
 		}
 
 		oncommingAdapter.notifyDataSetChanged();
@@ -186,6 +186,8 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 	}
 
 	private void addItemsInDatabase() {
+		List<TravelData> travelData = new ArrayList<>();
+
 		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY, null);
 		int numOfRecords = cursor.getCount();
 		Log.d(TAG, "레코드 개수: " + numOfRecords);
@@ -201,16 +203,11 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 			String coverImgPath = cursor.getString(cursor.getColumnIndex("cover_img_path"));
 			int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
 
-			if (DAYS.between(LocalDate.now(), endDate) >= 0)
-				oncommingAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes, coverImgPath, numOfMembers));
-			else
-				lastTravelAdapter.addItem(new TravelData(id, title, startDate, endDate, countryCodes, coverImgPath, numOfMembers));
+			travelData.add(new TravelData(id, title, startDate, endDate, countryCodes, coverImgPath, numOfMembers));
 		}
 
 		cursor.close();
-
-		oncommingAdapter.notifyDataSetChanged();
-		lastTravelAdapter.notifyDataSetChanged();
+		addTravelItems(travelData);
 	}
 
 	private OnItemClickListener makeItemClickListener(final TravelRecyclerAdapter adapter) {
