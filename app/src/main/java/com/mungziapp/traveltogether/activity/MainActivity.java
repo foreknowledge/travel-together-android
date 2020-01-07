@@ -48,14 +48,17 @@ import java.util.Map;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class MainActivity extends BaseActivity implements AutoPermissionsListener {
-	private ViewPager outerViewPager;
 	private static final String TAG = "MainActivity :: ";
 	private static final int PERMISSION_CODE = 101;
 	private static final int REFRESH_CODE = 102;
 
 	private FragmentManager fm;
+	private ViewPager outerViewPager;
 	private TravelsRecyclerAdapter oncommingAdapter;
 	private TravelsRecyclerAdapter lastTravelAdapter;
+
+	private TravelsFragment oncommingTravels;
+	private TravelsFragment lastTravels;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,18 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		lastTravelAdapter.setClickListener(makeItemClickListener(lastTravelAdapter));
 
 		outerViewPager = findViewById(R.id.outer_view_pager);
+
+		oncommingTravels = new TravelsFragment(oncommingAdapter);
+		lastTravels = new TravelsFragment(lastTravelAdapter, true);
+
+		MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(fm);
+		mainPagerAdapter.addItem(oncommingTravels);
+		mainPagerAdapter.addItem(lastTravels);
+
+		mainPagerAdapter.notifyDataSetChanged();
+
+		outerViewPager.setOffscreenPageLimit(mainPagerAdapter.getCount());
+		outerViewPager.setAdapter(mainPagerAdapter);
 	}
 
 	private void setTabBar() {
@@ -129,7 +144,6 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 							}
 
 							addTravelItems(travelRooms);
-							setPagerAdapter();
 
 							for (TravelRoom travelRoom : travelRooms)
 								DatabaseHelper.insertTravelData(travelRoom);
@@ -166,6 +180,9 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 
 		oncommingAdapter.notifyDataSetChanged();
 		lastTravelAdapter.notifyDataSetChanged();
+
+		oncommingTravels.setNoticeTextVisibility();
+		lastTravels.setNoticeTextVisibility();
 	}
 
 	private void addItemsInDatabase() {
@@ -194,22 +211,6 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 
 		oncommingAdapter.notifyDataSetChanged();
 		lastTravelAdapter.notifyDataSetChanged();
-
-		setPagerAdapter();
-	}
-
-	private void setPagerAdapter() {
-		TravelsFragment oncommingTravels = new TravelsFragment(oncommingAdapter);
-		TravelsFragment lastTravels = new TravelsFragment(lastTravelAdapter, true);
-
-		MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(fm);
-		mainPagerAdapter.addItem(oncommingTravels);
-		mainPagerAdapter.addItem(lastTravels);
-
-		mainPagerAdapter.notifyDataSetChanged();
-
-		outerViewPager.setOffscreenPageLimit(mainPagerAdapter.getCount());
-		outerViewPager.setAdapter(mainPagerAdapter);
 	}
 
 	private OnItemClickListener makeItemClickListener(final TravelsRecyclerAdapter adapter) {
