@@ -45,9 +45,9 @@ public class SearchTravelAdapter extends RecyclerView.Adapter<SearchTravelAdapte
 			String title = cursor.getString(cursor.getColumnIndex("name"));
 			String startDate = cursor.getString(cursor.getColumnIndex("start_date"));
 			String endDate = cursor.getString(cursor.getColumnIndex("end_date"));
-			int cover = cursor.getInt(cursor.getColumnIndex("cover"));
+			String coverImgPath = cursor.getString(cursor.getColumnIndex("cover_img_path"));
 
-			items.add(new SearchTravelItem(id, title, startDate, endDate, cover));
+			items.add(new SearchTravelItem(id, title, startDate, endDate, coverImgPath));
 		}
 
 		cursor.close();
@@ -97,14 +97,14 @@ public class SearchTravelAdapter extends RecyclerView.Adapter<SearchTravelAdapte
 	}
 
 	static class ViewHolder extends RecyclerView.ViewHolder {
-		private View travelCover;
+		//private View travelCover;
 		private TextView travelTitle;
 		private TextView travelDuration;
 
 		ViewHolder(@NonNull final View itemView, final OnItemClickListener listener) {
 			super(itemView);
 
-			this.travelCover = itemView.findViewById(R.id.travel_cover);
+			//this.travelCover = itemView.findViewById(R.id.travel_cover);
 			this.travelTitle = itemView.findViewById(R.id.travel_title);
 			this.travelDuration = itemView.findViewById(R.id.travel_duration);
 
@@ -119,7 +119,6 @@ public class SearchTravelAdapter extends RecyclerView.Adapter<SearchTravelAdapte
 		}
 
 		void setItem(SearchTravelItem item) {
-			this.travelCover.setBackgroundResource(item.getImgResId());
 			this.travelTitle.setText(item.getTravelTitle());
 
 			String strDuration = "(" + item.getTravelStartDate() + " ~ " + item.getTravelEndDate() + ")";

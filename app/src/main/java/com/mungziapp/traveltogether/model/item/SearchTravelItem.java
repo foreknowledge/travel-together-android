@@ -5,14 +5,14 @@ public class SearchTravelItem {
 	private String travelTitle;
 	private String travelStartDate;
 	private String travelEndDate;
-	private int imgResId;
+	private String coverImgPath;
 
-	public SearchTravelItem(int id, String travelTitle, String travelStartDate, String travelEndDate, int imgResId) {
+	public SearchTravelItem(int id, String travelTitle, String travelStartDate, String travelEndDate, String coverImgPath) {
 		this.id = id;
 		this.travelTitle = travelTitle;
 		this.travelStartDate = travelStartDate;
 		this.travelEndDate = travelEndDate;
-		this.imgResId = imgResId;
+		this.coverImgPath = coverImgPath;
 	}
 
 	public int getId() {
@@ -31,7 +31,7 @@ public class SearchTravelItem {
 		return travelEndDate;
 	}
 
-	public int getImgResId() {
-		return imgResId;
+	public String getCoverImgPath() {
+		return coverImgPath;
 	}
 }
