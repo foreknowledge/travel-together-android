@@ -73,18 +73,16 @@ public class EditTravelActivity extends AppCompatActivity {
 	}
 
 	private void init() {
-		int travelId = getIntent().getIntExtra("travel_id", 0);
+		String travelId = getIntent().getStringExtra("travel_id");
 
 		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = '" + travelId + "'", null);
 		cursor.moveToNext();
 
 		editTitle.setText(cursor.getString(cursor.getColumnIndex("name")));
-		btnStartDate.setText(cursor.getString(cursor.getColumnIndex("start_date")));
-		btnEndDate.setText(cursor.getString(cursor.getColumnIndex("end_date")));
+		btnStartDate.setText(cursor.getString(cursor.getColumnIndex("start_date")).replace("-", "."));
+		btnEndDate.setText(cursor.getString(cursor.getColumnIndex("end_date")).replace("-", "."));
 		String countryCodes = cursor.getString(cursor.getColumnIndex("country_codes"));
-		int cover = cursor.getInt(cursor.getColumnIndex("cover"));
-		if (cover != 0)
-			btnRePickCoverImg.setImageResource(cover);
+		//String coverImgPath = cursor.getString(cursor.getColumnIndex("cover_img_path"));
 
 		if (countryCodes != null) {
 			for (String countryCode : countryCodes.split(",")) {
