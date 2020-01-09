@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.mungziapp.traveltogether.app.TokenManager;
 import com.mungziapp.traveltogether.app.helper.JsonHelper;
@@ -42,9 +43,9 @@ public class ServerService extends Service {
 				final SharedPreferences prefs = getSharedPreferences(TokenManager.prefFileName, MODE_PRIVATE);
 				final String refreshToken = prefs.getString(TokenManager.refreshToken, "");
 
-				RequestHelper.getInstance().onSendGetRequest(
-						RequestHelper.HOST + "/auth/refresh",
-						new OnResponseListener.OnGETListener() {
+				RequestHelper.getInstance().onSendStringRequest(
+						Request.Method.GET, RequestHelper.HOST + "/auth/refresh",
+						new OnResponseListener.OnStringListener() {
 							@Override
 							public void onResponse(String response) {
 								TokenResponse tokenResponse = JsonHelper.gson.fromJson(response, TokenResponse.class);

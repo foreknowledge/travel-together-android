@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.mungziapp.traveltogether.app.TokenManager;
 import com.mungziapp.traveltogether.app.helper.JsonHelper;
@@ -40,9 +41,9 @@ public class SplashActivity extends AppCompatActivity {
 	}
 
 	private void updateRefreshToken(final SharedPreferences prefs, final String refreshToken) {
-		RequestHelper.getInstance().onSendGetRequest(
-				RequestHelper.HOST + "/auth/refresh",
-				new OnResponseListener.OnGETListener() {
+		RequestHelper.getInstance().onSendStringRequest(
+				Request.Method.GET, RequestHelper.HOST + "/auth/refresh",
+				new OnResponseListener.OnStringListener() {
 					@Override
 					public void onResponse(String response) {
 						TokenResponse tokenResponse = JsonHelper.gson.fromJson(response, TokenResponse.class);

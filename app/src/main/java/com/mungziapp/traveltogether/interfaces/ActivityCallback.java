@@ -2,10 +2,10 @@ package com.mungziapp.traveltogether.interfaces;
 
 public interface ActivityCallback {
 	interface MainCallback {
-		void refreshAdapterItems();
+		void refreshAdapterItems(String logMessage);
 	}
 
-	interface TravelCallback {
+	interface ActivityFinishCallback {
 		void finishActivity();
 	}
 }

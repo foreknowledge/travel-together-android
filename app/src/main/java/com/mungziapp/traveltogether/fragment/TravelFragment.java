@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.mungziapp.traveltogether.activity.DetailActivity;
 import com.mungziapp.traveltogether.activity.EditTravelActivity;
@@ -28,6 +29,7 @@ import com.mungziapp.traveltogether.interfaces.ActivityCallback;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.interfaces.OnResponseListener;
 import com.mungziapp.traveltogether.model.data.TravelData;
+import com.mungziapp.traveltogether.model.item.RequestCodes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,7 +49,7 @@ public class TravelFragment extends Fragment {
 	public void onAttach(@NonNull Context context) {
 		super.onAttach(context);
 
-		if (context instanceof ActivityCallback)
+		if (context instanceof ActivityCallback.MainCallback)
 			callback = (ActivityCallback.MainCallback)context;
 	}
 
@@ -92,6 +94,10 @@ public class TravelFragment extends Fragment {
 		setNoticeTextVisibility();
 	}
 
+	public void clearItems() {
+		recyclerAdapter.clearItems();
+	}
+
 	private OnItemClickListener makeItemClickListener() {
 		return new OnItemClickListener() {
 			private String[] options = getResources().getStringArray(R.array.option_travel);
@@ -103,14 +109,14 @@ public class TravelFragment extends Fragment {
 							, new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									RequestHelper.getInstance().onSendPostRequest(RequestHelper.HOST + "/travel-rooms/" + travelId + "/leave",
-											new OnResponseListener.OnPOSTListener.OnStringListener() {
+									RequestHelper.getInstance().onSendStringRequest(Request.Method.POST,RequestHelper.HOST + "/travel-rooms/" + travelId + "/leave",
+											new OnResponseListener.OnStringListener() {
 												@Override
 												public void onResponse(String response) {
 													DatabaseHelper.deleteTravelData(travelId);
 
 													recyclerAdapter.clearItems();
-													callback.refreshAdapterItems();
+													callback.refreshAdapterItems("clear items");
 												}
 
 												@Override
@@ -160,7 +166,7 @@ public class TravelFragment extends Fragment {
 									case 0:
 										Intent intent = new Intent(getContext(), EditTravelActivity.class);
 										intent.putExtra("travel_id", travelId);
-										startActivity(intent);
+										startActivityForResult(intent, RequestCodes.REFRESH_CODE);
 										break;
 									case 1:
 										deleteDialog.show();

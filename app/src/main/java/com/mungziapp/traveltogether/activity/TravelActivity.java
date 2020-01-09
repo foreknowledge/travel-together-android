@@ -22,7 +22,7 @@ import com.mungziapp.traveltogether.interfaces.ActivityCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TravelActivity extends AppCompatActivity implements ActivityCallback.TravelCallback {
+public class TravelActivity extends AppCompatActivity implements ActivityCallback.ActivityFinishCallback {
 	private FragmentManager fragmentManager;
 
 	private List<Fragment> fragments = new ArrayList<>();

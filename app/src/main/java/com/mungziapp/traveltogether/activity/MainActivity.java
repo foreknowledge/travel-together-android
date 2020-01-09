@@ -27,6 +27,7 @@ import com.mungziapp.traveltogether.interfaces.OnResponseListener;
 import com.mungziapp.traveltogether.model.data.TravelData;
 import com.mungziapp.traveltogether.fragment.TravelFragment;
 import com.mungziapp.traveltogether.R;
+import com.mungziapp.traveltogether.model.item.RequestCodes;
 import com.mungziapp.traveltogether.model.response.TravelRoom;
 import com.mungziapp.traveltogether.model.table.TravelTable;
 import com.pedro.library.AutoPermissions;
@@ -45,8 +46,6 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 public class MainActivity extends BaseActivity implements AutoPermissionsListener, ActivityCallback.MainCallback {
 	private static final String TAG = "MainActivity :: ";
-	private static final int PERMISSION_CODE = 101;
-	private static final int REFRESH_CODE = 102;
 
 	private FragmentManager fm;
 	private ViewPager outerViewPager;
@@ -64,9 +63,9 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		fm = getSupportFragmentManager();
 
 		init();
-		refreshAdapterItems();
+		refreshAdapterItems("onCreate()");
 
-		AutoPermissions.Companion.loadAllPermissions(this, PERMISSION_CODE);
+		AutoPermissions.Companion.loadAllPermissions(this, RequestCodes.PERMISSION_CODE);
 	}
 
 	private void init() {
@@ -122,7 +121,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 		btnAddTravel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				startActivityForResult(new Intent(getApplicationContext(), AddTravelActivity.class), REFRESH_CODE);
+				startActivityForResult(new Intent(getApplicationContext(), AddTravelActivity.class), RequestCodes.REFRESH_CODE);
 			}
 		});
 
@@ -136,7 +135,9 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 	}
 
 	@Override
-	public void refreshAdapterItems() {
+	public void refreshAdapterItems(String logMessage) {
+		Log.d(TAG, "caller: " + logMessage);
+
 		if (ConnectionStatus.getConnected()) {
 			addItemsInNetwork();
 			return;
@@ -148,7 +149,7 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		if (requestCode == REFRESH_CODE) refreshAdapterItems();
+		if (requestCode == RequestCodes.REFRESH_CODE) refreshAdapterItems("onActivityResult()");
 	}
 
 	private void addItemsInNetwork() {
@@ -215,6 +216,9 @@ public class MainActivity extends BaseActivity implements AutoPermissionsListene
 	}
 
 	private void addTravelItems(List<TravelData> travelData) {
+		oncommingTravels.clearItems();
+		lastTravels.clearItems();
+
 		for (TravelData data : travelData) {
 			LocalDate endDate = data.getEndDate();
 

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.kakao.auth.ApiResponseCallback;
 import com.kakao.auth.AuthService;
@@ -179,7 +180,7 @@ public class LoginActivity extends BaseActivity {
 
 					// 서버로 access token & user id 전송
 					String url = RequestHelper.HOST + "/auth/oauth/login";
-					RequestHelper.getInstance().onSendPostRequest(url, jsonObject, new OnResponseListener.OnPOSTListener.OnJsonObjectListener() {
+					RequestHelper.getInstance().onSendJsonObjectRequest(Request.Method.POST, url, jsonObject, new OnResponseListener.OnJsonObjectListener() {
 						@Override
 						public void onResponse(JSONObject response) {
 							TokenResponse tokenResponse = JsonHelper.gson.fromJson(response.toString(), TokenResponse.class);

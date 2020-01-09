@@ -2,7 +2,6 @@ package com.mungziapp.traveltogether.app.helper;
 
 import android.util.Log;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -35,14 +34,14 @@ public class RequestHelper {
 		return instance;
 	}
 
-	public void onSendGetRequest(String url, final OnResponseListener.OnGETListener listener) {
+	public void onSendStringRequest(int method, String url, final OnResponseListener.OnStringListener listener) {
 		StringRequest request = new StringRequest(
-				Request.Method.GET,
+				method,
 				url,
 				new Response.Listener<String>() {
 					@Override
 					public void onResponse(String response) {
-						Log.d(TAG, "get method response");
+						Log.d(TAG, "string response");
 						listener.onResponse(response);
 					}
 				},
@@ -90,43 +89,15 @@ public class RequestHelper {
 		requestQueue.add(request);
 	}
 
-	public void onSendPostRequest(String url, final OnResponseListener.OnPOSTListener.OnStringListener listener) {
-		StringRequest request = new StringRequest(
-				Request.Method.POST,
-				url,
-				new Response.Listener<String>() {
-					@Override
-					public void onResponse(String response) {
-						Log.d(TAG, "get method response");
-						listener.onResponse(response);
-					}
-				},
-				new Response.ErrorListener() {
-					@Override
-					public void onErrorResponse(VolleyError error) {
-						listener.onErrorResponse(error);
-					}
-				}
-		) {
-			@Override
-			public Map<String, String> getHeaders() {
-				return listener.getHeaders();
-			}
-		};
-
-		request.setShouldCache(false);
-		requestQueue.add(request);
-	}
-
-	public void onSendPostRequest(String url, JSONObject jsonObject, final OnResponseListener.OnPOSTListener.OnJsonObjectListener listener) {
+	public void onSendJsonObjectRequest(int method, String url, JSONObject jsonObject, final OnResponseListener.OnJsonObjectListener listener) {
 		JsonObjectRequest request = new JsonObjectRequest(
-				Request.Method.POST,
+				method,
 				url,
 				jsonObject,
 				new Response.Listener<JSONObject>() {
 					@Override
 					public void onResponse(JSONObject response) {
-						Log.d(TAG, "post jsonObject method response");
+						Log.d(TAG, "json object response");
 						listener.onResponse(response);
 					}
 				},

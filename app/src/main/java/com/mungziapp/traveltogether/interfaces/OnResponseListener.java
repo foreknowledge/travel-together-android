@@ -11,7 +11,7 @@ public interface OnResponseListener {
 	Map<String, String> getHeaders();
 	void onErrorResponse(VolleyError error);
 
-	interface OnGETListener extends OnResponseListener {
+	interface OnStringListener extends OnResponseListener {
 		void onResponse(String response);
 	}
 
@@ -19,14 +19,7 @@ public interface OnResponseListener {
 		void onResponse(JSONArray response);
 	}
 
-	interface OnPOSTListener extends OnResponseListener {
-
-		interface OnJsonObjectListener extends OnPOSTListener {
-			void onResponse(JSONObject jsonObject);
-		}
-
-		interface OnStringListener extends OnPOSTListener {
-			void onResponse(String response);
-		}
+	interface OnJsonObjectListener extends OnResponseListener {
+		void onResponse(JSONObject jsonObject);
 	}
 }

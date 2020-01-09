@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="10dp"
+				android:background="@color/colorBack" />
+
+			<EditText
+				android:id="@+id/edit_travel_title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@android:color/white"
+				android:hint="@string/hint_title"
+				android:importantForAutofill="no"
+				android:inputType="text"
+				android:paddingStart="30dp"
+				android:paddingTop="10dp"
+				android:paddingEnd="30dp"
+				android:paddingBottom="10dp" />
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="20dp"
+				android:background="@color/colorBack" />
+
+			<!--여행 시작일 레이아웃-->
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@android:color/white"
+				android:gravity="center_vertical"
+				android:orientation="horizontal"
+				android:padding="10dp">
+
+				<TextView
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="20dp"
+					android:layout_weight="1"
+					android:text="@string/btn_text_start_date"
+					android:textColor="@android:color/black"
+					android:textSize="17sp" />
+
+				<Button
+					android:id="@+id/btn_pick_start_date"
+					android:layout_width="0dp"
+					android:layout_height="19dp"
+					android:layout_weight="1"
+					android:background="@android:color/transparent"
+					android:text="@string/hint_start_date"
+					android:textColor="@color/colorGrayLight" />
+
+			</LinearLayout>
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="2dp"
+				android:background="@color/colorBack" />
+
+			<!--여행 종료일 레이아웃-->
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@android:color/white"
+				android:gravity="center_vertical"
+				android:orientation="horizontal"
+				android:padding="10dp">
+
+				<TextView
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="20dp"
+					android:layout_weight="1"
+					android:text="@string/btn_text_end_date"
+					android:textColor="@android:color/black"
+					android:textSize="17sp" />
+
+				<Button
+					android:id="@+id/btn_pick_end_date"
+					android:layout_width="0dp"
+					android:layout_height="19dp"
+					android:layout_weight="1"
+					android:background="@android:color/transparent"
+					android:text="@string/hint_end_date"
+					android:textColor="@color/colorGrayLight" />
+
+			</LinearLayout>
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="2dp"
+				android:background="@color/colorBack" />
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/btn_text_country"
+				android:textColor="@android:color/black"
+				android:textSize="17sp"
+				android:paddingStart="30dp"
+				android:paddingEnd="10dp"
+				android:paddingTop="10dp"
+				android:paddingBottom="10dp"
+				android:background="@android:color/white" />
+
+		</LinearLayout>
+
+		<com.mungziapp.traveltogether.customWidget.MaxHeightRecyclerView
+			android:id="@+id/country_search_recycler"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="2dp"
+			android:layout_marginStart="60dp"
+			android:layout_marginEnd="60dp"
+			android:layout_gravity="bottom"
+			android:background="@android:color/white"
+			android:visibility="invisible" />
+
+	</FrameLayout>
+
+	<!--여행지 검 레이아웃-->
+	<LinearLayout
+		android:id="@+id/add_countries"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@android:color/white"
+		android:orientation="vertical"
+		android:paddingStart="10dp"
+		android:paddingEnd="10dp">
+
+		<LinearLayout
+			android:id="@+id/search_layout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="15dp"
+			android:layout_marginEnd="15dp"
+			android:background="@drawable/dr_search_rounded"
+			android:gravity="center_vertical"
+			android:orientation="horizontal">
+
+			<ImageView
+				android:layout_width="30dp"
+				android:layout_height="30dp"
+				android:layout_marginStart="10dp"
+				android:layout_marginTop="5dp"
+				android:layout_marginEnd="5dp"
+				android:layout_marginBottom="5dp"
+				android:layout_weight="0"
+				android:contentDescription="@string/hint_search_travel"
+				android:src="@drawable/ic_search_black_24dp" />
+
+			<EditText
+				android:id="@+id/search_country"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:autofillHints="false"
+				android:background="@android:color/transparent"
+				android:hint="@string/hint_search_country"
+				android:imeOptions="actionSearch"
+				android:inputType="text"
+				android:paddingTop="8dp"
+				android:paddingBottom="8dp"
+				android:textColor="@android:color/black"
+				android:textColorHint="@color/colorGrayLight"
+				android:textSize="16sp" />
+
+			<FrameLayout
+				android:id="@+id/btn_clear_out"
+				android:layout_width="40dp"
+				android:layout_height="30dp"
+				android:layout_gravity="center_vertical"
+				android:layout_weight="0"
+				android:clickable="true">
+
+				<Button
+					android:id="@+id/btn_clear"
+					android:layout_width="18dp"
+					android:layout_height="18dp"
+					android:layout_gravity="center"
+					android:background="@drawable/ic_clear_black_24dp"
+					android:visibility="invisible" />
+
+			</FrameLayout>
+
+		</LinearLayout>
+
+		<com.mungziapp.traveltogether.customWidget.MaxHeightScrollView
+			android:id="@+id/scroll_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="10dp"
+			app:maxHeight="130dp"
+			android:descendantFocusability="blocksDescendants">
+
+			<com.google.android.material.chip.ChipGroup
+				android:id="@+id/chip_group"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:chipSpacing="5dp" />
+
+		</com.mungziapp.traveltogether.customWidget.MaxHeightScrollView>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="2dp"
+			android:background="@color/colorBack" />
+
+	</LinearLayout>
+
+</LinearLayout>

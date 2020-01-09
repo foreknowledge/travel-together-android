@@ -32,7 +32,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 public class ScheduleFragment extends Fragment {
 	private View rootView;
-	private ActivityCallback.TravelCallback callback;
+	private ActivityCallback.ActivityFinishCallback callback;
 
 	private int travelId;
 	private String travelStartDate;
@@ -42,8 +42,8 @@ public class ScheduleFragment extends Fragment {
 	public void onAttach(@NonNull Context context) {
 		super.onAttach(context);
 
-		if (context instanceof ActivityCallback.TravelCallback)
-			callback = (ActivityCallback.TravelCallback) context;
+		if (context instanceof ActivityCallback.ActivityFinishCallback)
+			callback = (ActivityCallback.ActivityFinishCallback) context;
 	}
 
 	@Nullable
