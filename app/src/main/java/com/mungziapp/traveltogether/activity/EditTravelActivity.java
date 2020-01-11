@@ -128,8 +128,8 @@ public class EditTravelActivity extends AppCompatActivity {
 				new OnResponseListener.OnJsonObjectListener() {
 					@Override
 					public void onResponse(JSONObject jsonObject) {
-						//Toast.makeText(EditTravelActivity.this, "여행 정보가 변경되었습니다.", Toast.LENGTH_SHORT).show();
-						//finish();
+						Toast.makeText(EditTravelActivity.this, "여행 정보가 변경되었습니다.", Toast.LENGTH_SHORT).show();
+						finish();
 					}
 
 					@Override

@@ -2,24 +2,29 @@ package com.mungziapp.traveltogether.app.helper;
 
 import android.util.Log;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.mungziapp.traveltogether.interfaces.OnResponseListener;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
 public class RequestHelper {
 	private static final String TAG = "RequestHelper :: ";
-	public static final String HOST = "http://192.168.200.164:3000";
+	public static final String HOST = "http://10.10.30.14:3000";
 
 	private static RequestHelper instance = new RequestHelper();
 	private static RequestQueue requestQueue;
@@ -115,6 +120,24 @@ public class RequestHelper {
 				headers.put("Content-Type", "application/json");
 				return headers;
 			}
+
+			@Override
+			protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+				try {
+					String jsonString = new String(response.data,
+							HttpHeaderParser.parseCharset(response.headers, PROTOCOL_CHARSET));
+
+					JSONObject result = null;
+
+					if (jsonString.length() > 0)
+						result = new JSONObject(jsonString);
+
+					return Response.success(result, HttpHeaderParser.parseCacheHeaders(response));
+				}
+				catch(UnsupportedEncodingException | JSONException e){
+					return Response.error(new ParseError(e));
+				}
+			}
 		};
 
 		request.setShouldCache(false);
@@ -122,15 +145,14 @@ public class RequestHelper {
 	}
 
 	public static void processError(VolleyError error, String TAG) {
-		String body;
-		if (error == null || error.networkResponse == null) {
-			Log.d(TAG, "network is not connected");
+		if (error.networkResponse == null) {
+			Log.d(TAG, "error response = " + error);
 			return;
 		}
 
 		if (error.networkResponse.data != null) {
 			try {
-				body = new String(error.networkResponse.data, StandardCharsets.UTF_8);
+				String body = new String(error.networkResponse.data, StandardCharsets.UTF_8);
 
 				Log.d(TAG, "network error message = " + body);
 			} catch (Exception e) {

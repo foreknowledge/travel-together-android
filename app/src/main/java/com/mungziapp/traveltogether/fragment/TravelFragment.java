@@ -166,7 +166,8 @@ public class TravelFragment extends Fragment {
 									case 0:
 										Intent intent = new Intent(getContext(), EditTravelActivity.class);
 										intent.putExtra("travel_id", travelId);
-										startActivityForResult(intent, RequestCodes.REFRESH_CODE);
+										if (getActivity() != null)
+											getActivity().startActivityForResult(intent, RequestCodes.REFRESH_CODE);
 										break;
 									case 1:
 										deleteDialog.show();
