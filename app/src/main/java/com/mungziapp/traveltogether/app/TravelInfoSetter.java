@@ -81,15 +81,16 @@ public class TravelInfoSetter {
 		editTitle.setText(cursor.getString(cursor.getColumnIndex("name")));
 		btnStartDate.setText(cursor.getString(cursor.getColumnIndex("start_date")).replace("-", "."));
 		btnEndDate.setText(cursor.getString(cursor.getColumnIndex("end_date")).replace("-", "."));
-		String countryCodes = cursor.getString(cursor.getColumnIndex("country_codes"));
+		String codes = cursor.getString(cursor.getColumnIndex("country_codes"));
 		//String coverImgPath = cursor.getString(cursor.getColumnIndex("cover_img_path"));
 
-		if (countryCodes != null) {
-			for (String countryCode : countryCodes.split(",")) {
+		if (codes != null) {
+			for (String countryCode : codes.split(",")) {
 				CountryItem item = countryAdapter.getItem(countryCode);
 
 				if (item != null) {
 					chipGroup.addView(makeChip(item));
+					countryCodes.add(item.getCountryCode());
 
 					countryAdapter.selectItem(item);
 					countryAdapter.searchItem(editSearch.getText().toString());
@@ -103,7 +104,7 @@ public class TravelInfoSetter {
 	public void requestToServer(int method, String url, OnResponseListener.OnJsonObjectListener listener) {
 		JSONObject jsonObject = new JSONObject();
 		try {
-			jsonObject.put("name", editTitle.getText().toString());
+			jsonObject.put("name", editTitle.getText().toString().trim());
 
 			LocalDate startDate = DateHelper.stringToLocalDate(btnStartDate.getText(), "\\.");
 			LocalDate endDate = DateHelper.stringToLocalDate(btnEndDate.getText(), "\\.");
