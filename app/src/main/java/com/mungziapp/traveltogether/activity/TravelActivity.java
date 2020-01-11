@@ -37,10 +37,10 @@ public class TravelActivity extends AppCompatActivity implements ActivityCallbac
 
 		Intent intent = getIntent();
 		FragmentType type = (FragmentType) intent.getSerializableExtra("caller");
-		if (type != null) setPagerAdapter(type, intent.getIntExtra("travel_id", 0));
+		if (type != null) setPagerAdapter(type, intent.getStringExtra("travel_id"));
 	}
 
-	private void setPagerAdapter(final FragmentType type, int travelId) {
+	private void setPagerAdapter(final FragmentType type, String travelId) {
 		fragments.add(new NoticeFragment());
 		fragments.add(new SuppliesFragment());
 		fragments.add(new ScheduleFragment());
@@ -48,7 +48,7 @@ public class TravelActivity extends AppCompatActivity implements ActivityCallbac
 		fragments.add(new DiaryFragment());
 
 		Bundle bundle = new Bundle();
-		bundle.putInt("travel_id", travelId);
+		bundle.putString("travel_id", travelId);
 
 		for (Fragment fragment: fragments) {
 			fragment.setArguments(bundle);

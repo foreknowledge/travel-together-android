@@ -23,12 +23,12 @@ import java.util.List;
 
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHolder> {
 	private Context context;
-	private int travelId;
+	private String travelId;
 	private List<List<String>> dates = new ArrayList<>();
 
 	private OnItemClickListener listener;
 
-	public ScheduleAdapter(Context context, int travelId) {
+	public ScheduleAdapter(Context context, String travelId) {
 		this.context = context;
 		this.travelId = travelId;
 	}
@@ -88,7 +88,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 			detailRecycler.setLayoutManager(new LinearLayoutManager(context));
 		}
 
-		private void setScheduleData(int travelId, int dayN, DetailScheduleAdapter detailScheduleAdapter) {
+		private void setScheduleData(String travelId, int dayN, DetailScheduleAdapter detailScheduleAdapter) {
 			Cursor cursor = DatabaseHelper.database.rawQuery(ScheduleTable.SELECT_QUERY + " WHERE travel_id = '" + travelId + "' AND day_n = " + dayN, null);
 			int numOfRecords = cursor.getCount();
 
@@ -97,7 +97,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 			for (int i = 0; i < numOfRecords; ++i) {
 				cursor.moveToNext();
 
-				int id = cursor.getInt(cursor.getColumnIndex("id"));
+				String id = cursor.getString(cursor.getColumnIndex("id"));
 				int type = cursor.getInt(cursor.getColumnIndex("type"));
 				String title = cursor.getString(cursor.getColumnIndex("title"));
 				String time = cursor.getString(cursor.getColumnIndex("time"));
@@ -113,7 +113,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 			detailScheduleAdapter.notifyDataSetChanged();
 		}
 
-		void setItem(List<String> date, int travelId) {
+		void setItem(List<String> date, String travelId) {
 			DetailScheduleAdapter detailScheduleAdapter =  new DetailScheduleAdapter(context);
 
 			String strDayN = "DAY " + date.get(0);

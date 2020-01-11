@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -147,9 +148,8 @@ public class TravelFragment extends Fragment {
 				TravelData item = recyclerAdapter.getItem(position);
 
 				Intent intent = new Intent(getContext(), DetailActivity.class);
-				intent.putExtra("id", item.getId());
-
-				startActivity(intent);
+				intent.putExtra("travel_id", item.getId());
+				startActivityForRefresh(intent);
 			}
 
 			@Override
@@ -166,8 +166,7 @@ public class TravelFragment extends Fragment {
 									case 0:
 										Intent intent = new Intent(getContext(), EditTravelActivity.class);
 										intent.putExtra("travel_id", travelId);
-										if (getActivity() != null)
-											getActivity().startActivityForResult(intent, RequestCodes.REFRESH_CODE);
+										startActivityForRefresh(intent);
 										break;
 									case 1:
 										deleteDialog.show();
@@ -179,5 +178,11 @@ public class TravelFragment extends Fragment {
 				return true;
 			}
 		};
+	}
+
+	private void startActivityForRefresh(Intent intent) {
+		FragmentActivity activity = getActivity();
+		if (activity != null)
+			activity.startActivityForResult(intent, RequestCodes.REFRESH_CODE);
 	}
 }

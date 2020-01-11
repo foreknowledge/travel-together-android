@@ -11,7 +11,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -32,13 +31,13 @@ import static com.mungziapp.traveltogether.model.FragmentType.*;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class DetailActivity extends AppCompatActivity {
-	private int travelId;
+	private String travelId;
 	private String travelName;
 	private String travelStartDate;
 	private String travelEndDate;
 	private ArrayList<String> travelCountryCodes = new ArrayList<>();
 	private ArrayList<Integer> travelMemberProfiles = new ArrayList<>();
-	private int travelCover;
+	private String coverImgPath;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,22 +47,22 @@ public class DetailActivity extends AppCompatActivity {
 		// Detail Fragment 초기화
 		Intent intent = getIntent();
 		if (intent != null) {
-			setDataFromDB(intent.getIntExtra("id", 0));
+			setDataFromDB(intent.getStringExtra("travel_id"));
 			setTravelInfo();
 			setButtons();
 		}
 	}
 
-	private void setDataFromDB(int id) {
-		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = '" + id + "'", null);
+	private void setDataFromDB(String travelId) {
+		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = '" + travelId + "'", null);
 		cursor.moveToNext();
 
-		this.travelId = id;
+		this.travelId = travelId;
 		this.travelName = cursor.getString(cursor.getColumnIndex("name"));
 		this.travelStartDate = cursor.getString(cursor.getColumnIndex("start_date"));
 		this.travelEndDate = cursor.getString(cursor.getColumnIndex("end_date"));
 		String countryCodes = cursor.getString(cursor.getColumnIndex("country_codes"));
-		this.travelCover = cursor.getInt(cursor.getColumnIndex("cover"));
+		this.coverImgPath = cursor.getString(cursor.getColumnIndex("cover_img_path"));
 		int numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));
 
 		if (countryCodes != null)
@@ -92,7 +91,15 @@ public class DetailActivity extends AppCompatActivity {
 
 		// 여행 D-Day 설정
 		TextView travelDDay = findViewById(R.id.travel_d_day);
-		travelDDay.setText("D - N");
+		LocalDate now = LocalDate.now();
+		long dDay = DAYS.between(startLocalDate, now);
+		
+		String strDDay;
+		if (dDay > 0) strDDay = "D + " + dDay;
+		else if (dDay < 0) strDDay = "D - " + -dDay;
+		else strDDay = "D-Day!!";
+
+		travelDDay.setText(strDDay);
 
 		// 여행지 설정
 		RecyclerView countryRecyclerView = findViewById(R.id.country_recycler_view);
@@ -121,12 +128,6 @@ public class DetailActivity extends AppCompatActivity {
 		});
 
 		memberRecyclerView.setAdapter(travelMemberAdapter);
-
-		// 여행 커버 이미지 설정
-		if (travelCover != 0) {
-			ImageView travelCover = findViewById(R.id.travel_cover);
-			travelCover.setImageResource(this.travelCover);
-		}
 	}
 
 	private void setButtons() {

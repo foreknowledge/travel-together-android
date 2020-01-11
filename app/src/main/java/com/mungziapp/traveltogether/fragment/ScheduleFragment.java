@@ -34,7 +34,7 @@ public class ScheduleFragment extends Fragment {
 	private View rootView;
 	private ActivityCallback.ActivityFinishCallback callback;
 
-	private int travelId;
+	private String travelId;
 	private String travelStartDate;
 	private String travelEndDate;
 
@@ -53,7 +53,7 @@ public class ScheduleFragment extends Fragment {
 
 		Bundle bundle = getArguments();
 		if (bundle != null)
-			travelId = bundle.getInt("travel_id");
+			travelId = bundle.getString("travel_id");
 
 		setDataFromDB(travelId);
 		setButtons();
@@ -62,8 +62,8 @@ public class ScheduleFragment extends Fragment {
 		return rootView;
 	}
 
-	private void setDataFromDB(int id) {
-		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = '" + id + "'", null);
+	private void setDataFromDB(String travelId) {
+		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = '" + travelId + "'", null);
 		cursor.moveToNext();
 
 		this.travelStartDate = cursor.getString(cursor.getColumnIndex("start_date"));

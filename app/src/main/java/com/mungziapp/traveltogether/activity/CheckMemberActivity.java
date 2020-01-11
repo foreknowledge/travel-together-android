@@ -27,14 +27,14 @@ public class CheckMemberActivity extends AppCompatActivity {
 
 		Intent intent = getIntent();
 		if (intent != null) {
-			setDataFromDB(intent.getIntExtra("travel_id", 0));
+			setDataFromDB(intent.getStringExtra("travel_id"));
 			setButtons();
 			setRecyclerView();
 		}
 	}
 
-	private void setDataFromDB(int id) {
-		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = '" + id + "'", null);
+	private void setDataFromDB(String travelId) {
+		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = '" + travelId + "'", null);
 		cursor.moveToNext();
 
 		this.numOfMembers = cursor.getInt(cursor.getColumnIndex("members"));

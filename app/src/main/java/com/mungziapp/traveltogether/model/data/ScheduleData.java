@@ -1,8 +1,8 @@
 package com.mungziapp.traveltogether.model.data;
 
 public class ScheduleData {
-	private int id;
-	private int travelId;
+	private String id;
+	private String travelId;
 	private int dayN;
 	private int type = 0;
 	private String title;
@@ -11,7 +11,7 @@ public class ScheduleData {
 	private String memo;
 	private String photos;
 
-	public ScheduleData(int id, int travelId, int dayN, int type, String title, String time, String place, String memo, String photos) {
+	public ScheduleData(String id, String travelId, int dayN, int type, String title, String time, String place, String memo, String photos) {
 		this.id = id;
 		this.travelId = travelId;
 		this.dayN = dayN;
@@ -23,7 +23,7 @@ public class ScheduleData {
 		this.photos = photos;
 	}
 
-	public ScheduleData(int id, int travelId, int dayN, String title, String time, String place, String memo, String photos) {
+	public ScheduleData(String id, String travelId, int dayN, String title, String time, String place, String memo, String photos) {
 		this.id = id;
 		this.travelId = travelId;
 		this.dayN = dayN;
@@ -34,11 +34,11 @@ public class ScheduleData {
 		this.photos = photos;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public int getTravelId() {
+	public String getTravelId() {
 		return travelId;
 	}
 

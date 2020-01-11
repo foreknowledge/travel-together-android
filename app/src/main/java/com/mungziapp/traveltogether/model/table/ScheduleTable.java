@@ -18,8 +18,8 @@ public class ScheduleTable implements BaseColumns {
 	private ScheduleTable() { }
 
 	public static final String CREATE_QUERY = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
-			ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-			TRAVEL_ID + " INTEGER NOT NULL, " +
+			ID + " TEXT NOT NULL, " +
+			TRAVEL_ID + " TEXT NOT NULL, " +
 			DAY_N + " INTEGER NOT NULL, " +
 			TYPE + " INTEGER NOT NULL, " +
 			TITLE + " TEXT NOT NULL, " +
