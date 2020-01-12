@@ -190,7 +190,7 @@ public class EditTravelActivity extends AppCompatActivity {
 
 	private void sendImageToS3(String signedUrl) {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		imgBitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream);
+		imgBitmap.compress(Bitmap.CompressFormat.JPEG, 70, outputStream);
 
 		final byte[] imageBytes = outputStream.toByteArray();
 
@@ -240,6 +240,7 @@ public class EditTravelActivity extends AppCompatActivity {
 								switch (i) {
 									case 0:
 										Toast.makeText(EditTravelActivity.this, "기본 이미지로 변경", Toast.LENGTH_SHORT).show();
+										changedCoverImg = false;
 										break;
 									case 1:
 										Intent intent = new Intent(Intent.ACTION_PICK);

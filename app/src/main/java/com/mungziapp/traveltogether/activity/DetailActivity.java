@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import com.mungziapp.traveltogether.adapter.TravelMemberAdapter;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.app.helper.DatabaseHelper;
 import com.mungziapp.traveltogether.app.helper.DateHelper;
+import com.mungziapp.traveltogether.app.helper.RequestHelper;
 import com.mungziapp.traveltogether.model.FragmentType;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.model.table.TravelTable;
@@ -75,6 +77,10 @@ public class DetailActivity extends AppCompatActivity {
 	}
 
 	private void setTravelInfo() {
+		// 커버 이미지 설정
+		ImageView coverImg = findViewById(R.id.travel_cover);
+		RequestHelper.getInstance().loadImage(coverImgPath, coverImg);
+
 		// 여행 제목 설정
 		TextView travelName = findViewById(R.id.travel_name);
 		travelName.setText(this.travelName);
