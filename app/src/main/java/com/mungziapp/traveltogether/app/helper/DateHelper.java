@@ -1,4 +1,4 @@
-package com.mungziapp.traveltogether.app;
+package com.mungziapp.traveltogether.app.helper;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

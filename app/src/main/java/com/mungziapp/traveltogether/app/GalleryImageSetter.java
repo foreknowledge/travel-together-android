@@ -3,10 +3,10 @@ package com.mungziapp.traveltogether.app;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.widget.ImageView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -14,7 +14,7 @@ import java.io.File;
 
 public class GalleryImageSetter {
 
-	public void setImageInImgView(@NotNull Intent data, Context context, ImageView imgView) {
+	public Bitmap getBitmapFromIntent(@NotNull Intent data, Context context) {
 		Uri photoUri = data.getData();
 		File tempFile = null;
 		Cursor cursor = null;
@@ -38,6 +38,8 @@ public class GalleryImageSetter {
 		}
 
 		if (tempFile != null)
-			imgView.setImageBitmap(BitmapFactory.decodeFile(tempFile.getAbsolutePath(), new BitmapFactory.Options()));
+			return BitmapFactory.decodeFile(tempFile.getAbsolutePath(), new BitmapFactory.Options());
+
+		return null;
 	}
 }

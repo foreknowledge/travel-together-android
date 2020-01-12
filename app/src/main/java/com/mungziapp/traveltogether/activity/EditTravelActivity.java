@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,8 +31,10 @@ import com.mungziapp.traveltogether.app.helper.RequestHelper;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.interfaces.OnResponseListener;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,8 +44,10 @@ public class EditTravelActivity extends AppCompatActivity {
 	private TravelInfoSetter infoSetter;
 
 	private String travelId;
+	private Boolean changedCoverImg = false;
 
-	private ImageView btnRePickCoverImg;
+	private ImageView ivCoverImg;
+	private Bitmap imgBitmap;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +87,7 @@ public class EditTravelActivity extends AppCompatActivity {
 		// set save and cancel buttons
 		setSaveAndCancelButtons(editTitle);
 
-		infoSetter.setDefaultValue(travelId);
+		infoSetter.setDefaultValue(travelId, ivCoverImg);
 	}
 
 	private void setSaveAndCancelButtons(final EditText editTitle) {
@@ -92,9 +98,8 @@ public class EditTravelActivity extends AppCompatActivity {
 				if (ConnectionStatus.getConnected()) {
 					if (editTitle.getText().toString().equals(""))
 						Snackbar.make(view, "제목은 필수 입력 사항입니다.", Snackbar.LENGTH_SHORT).show();
-					else {
+					else
 						requestToServer();
-					}
 				} else
 					Snackbar.make(view, "네트워크가 연결되어 있지 않습니다.", Snackbar.LENGTH_SHORT).show();
 			}
@@ -128,8 +133,12 @@ public class EditTravelActivity extends AppCompatActivity {
 				new OnResponseListener.OnJsonObjectListener() {
 					@Override
 					public void onResponse(JSONObject jsonObject) {
-						Toast.makeText(EditTravelActivity.this, "여행 정보가 변경되었습니다.", Toast.LENGTH_SHORT).show();
-						finish();
+						if (changedCoverImg)
+							getUrlFromServer();
+						else {
+							Toast.makeText(EditTravelActivity.this, "여행 정보가 변경되었습니다.", Toast.LENGTH_SHORT).show();
+							finish();
+						}
 					}
 
 					@Override
@@ -147,9 +156,77 @@ public class EditTravelActivity extends AppCompatActivity {
 				});
 	}
 
+	private void getUrlFromServer() {
+		RequestHelper.getInstance().onSendStringRequest(Request.Method.GET
+				, RequestHelper.HOST + "/travel-rooms/cover-image/upload-url?travelRoomId=" + travelId + "&format=jpg"
+				, new OnResponseListener.OnStringListener() {
+					@Override
+					public void onResponse(String response) {
+						try {
+							String signedUrl = new JSONObject(response).getString("signedUrl");
+							sendImageToS3(signedUrl);
+						} catch (JSONException e) { Log.e(TAG, "json exception = " + e.getMessage()); }
+					}
+
+					@Override
+					public byte[] getBody() {
+						return new byte[0];
+					}
+
+					@Override
+					public Map<String, String> getHeaders() {
+						Map<String, String> headers = new HashMap<>();
+						headers.put("Authorization", TokenManager.getInstance().getAuthorization());
+
+						return headers;
+					}
+
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						RequestHelper.processError(error, TAG);
+					}
+				});
+	}
+
+	private void sendImageToS3(String signedUrl) {
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		imgBitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream);
+
+		final byte[] imageBytes = outputStream.toByteArray();
+
+		RequestHelper.getInstance().onSendStringRequest(Request.Method.PUT, signedUrl,
+				new OnResponseListener.OnStringListener() {
+					@Override
+					public void onResponse(String response) {
+						Log.d(TAG, "response = " + response);
+
+						Toast.makeText(EditTravelActivity.this, "여행 정보가 변경되었습니다.", Toast.LENGTH_SHORT).show();
+						finish();
+					}
+
+					@Override
+					public Map<String, String> getHeaders() {
+						Map<String, String> headers = new HashMap<>();
+						headers.put("Content-Type", "image/jpeg");
+
+						return headers;
+					}
+
+					@Override
+					public byte[] getBody() {
+						return imageBytes;
+					}
+
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						RequestHelper.processError(error, TAG);
+					}
+				});
+	}
+
 	private void setCoverImg() {
-		btnRePickCoverImg = findViewById(R.id.btn_re_pick_cover_img);
-		btnRePickCoverImg.setOnClickListener(new View.OnClickListener() {
+		ivCoverImg = findViewById(R.id.btn_re_pick_cover_img);
+		ivCoverImg.setOnClickListener(new View.OnClickListener() {
 			String[] options = getResources().getStringArray(R.array.option_profile_img);
 
 			@Override
@@ -180,7 +257,10 @@ public class EditTravelActivity extends AppCompatActivity {
 	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		if (requestCode == PICK_FROM_ALBUM && data != null)
-			new GalleryImageSetter().setImageInImgView(data, EditTravelActivity.this, btnRePickCoverImg);
+		if (requestCode == PICK_FROM_ALBUM && data != null) {
+			imgBitmap = new GalleryImageSetter().getBitmapFromIntent(data, EditTravelActivity.this);
+			ivCoverImg.setImageBitmap(imgBitmap);
+			changedCoverImg = true;
+		}
 	}
 }

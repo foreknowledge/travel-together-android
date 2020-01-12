@@ -1,6 +1,7 @@
 package com.mungziapp.traveltogether.app.helper;
 
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
@@ -11,6 +12,7 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.mungziapp.traveltogether.ImageLoadTask;
 import com.mungziapp.traveltogether.interfaces.OnResponseListener;
 
 import org.json.JSONArray;
@@ -24,7 +26,9 @@ import java.util.Map;
 
 public class RequestHelper {
 	private static final String TAG = "RequestHelper :: ";
-	public static final String HOST = "http://10.10.30.14:3000";
+	public static final String HOST = "http://10.10.30.19:3000";
+
+	private static final String IMAGE_URL = "https://dibfgrk6qpg5k.cloudfront.net";
 
 	private static RequestHelper instance = new RequestHelper();
 	private static RequestQueue requestQueue;
@@ -60,6 +64,11 @@ public class RequestHelper {
 			@Override
 			public Map<String, String> getHeaders() {
 				return listener.getHeaders();
+			}
+
+			@Override
+			public byte[] getBody() {
+				return listener.getBody();
 			}
 		};
 
@@ -158,6 +167,13 @@ public class RequestHelper {
 			} catch (Exception e) {
 				Log.d(TAG, "exception error message = " + e.getMessage());
 			}
+		}
+	}
+
+	public void loadImage(String url, ImageView imageView) {
+		if (url != null && imageView != null) {
+			ImageLoadTask imageLoadTask = new ImageLoadTask(IMAGE_URL + "/" + url + "?w=300", imageView);
+			imageLoadTask.execute();
 		}
 	}
 }

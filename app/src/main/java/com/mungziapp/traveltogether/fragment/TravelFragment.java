@@ -96,7 +96,8 @@ public class TravelFragment extends Fragment {
 	}
 
 	public void clearItems() {
-		recyclerAdapter.clearItems();
+		if (recyclerAdapter != null)
+			recyclerAdapter.clearItems();
 	}
 
 	private OnItemClickListener makeItemClickListener() {
@@ -118,6 +119,11 @@ public class TravelFragment extends Fragment {
 
 													recyclerAdapter.clearItems();
 													callback.refreshAdapterItems("clear items");
+												}
+
+												@Override
+												public byte[] getBody() {
+													return new byte[0];
 												}
 
 												@Override

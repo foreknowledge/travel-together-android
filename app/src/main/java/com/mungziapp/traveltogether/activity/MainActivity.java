@@ -16,7 +16,7 @@ import com.android.volley.VolleyError;
 import com.google.android.material.tabs.TabLayout;
 import com.mungziapp.traveltogether.ServerService;
 import com.mungziapp.traveltogether.app.ConnectionStatus;
-import com.mungziapp.traveltogether.app.DateHelper;
+import com.mungziapp.traveltogether.app.helper.DateHelper;
 import com.mungziapp.traveltogether.app.TokenManager;
 import com.mungziapp.traveltogether.app.helper.JsonHelper;
 import com.mungziapp.traveltogether.app.helper.RequestHelper;

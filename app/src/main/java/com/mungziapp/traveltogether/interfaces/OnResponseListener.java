@@ -13,6 +13,7 @@ public interface OnResponseListener {
 
 	interface OnStringListener extends OnResponseListener {
 		void onResponse(String response);
+		byte[] getBody();
 	}
 
 	interface OnJsonArrayListener extends OnResponseListener {

@@ -28,7 +28,7 @@ import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.app.TokenManager;
 import com.mungziapp.traveltogether.app.helper.JsonHelper;
 import com.mungziapp.traveltogether.app.helper.RequestHelper;
-import com.mungziapp.traveltogether.app.DateHelper;
+import com.mungziapp.traveltogether.app.helper.DateHelper;
 import com.mungziapp.traveltogether.interfaces.OnResponseListener;
 import com.mungziapp.traveltogether.model.response.TokenResponse;
 

@@ -181,7 +181,7 @@ public class SettingsActivity extends BaseActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 
 		if (requestCode == PICK_FROM_ALBUM && data != null)
-			new GalleryImageSetter().setImageInImgView(data, SettingsActivity.this, profileImg);
+			profileImg.setImageBitmap(new GalleryImageSetter().getBitmapFromIntent(data, SettingsActivity.this));
 	}
 
 	private void setNormalMode() {

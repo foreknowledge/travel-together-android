@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.adapter.SearchCountryAdapter;
 import com.mungziapp.traveltogether.app.helper.DatabaseHelper;
+import com.mungziapp.traveltogether.app.helper.DateHelper;
 import com.mungziapp.traveltogether.app.helper.RequestHelper;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.interfaces.OnResponseListener;
@@ -74,7 +76,7 @@ public class TravelInfoSetter {
 		this.chipGroup = chipGroup;
 	}
 
-	public void setDefaultValue(String travelId) {
+	public void setDefaultValue(String travelId, ImageView imageView) {
 		Cursor cursor = DatabaseHelper.database.rawQuery(TravelTable.SELECT_QUERY + " WHERE id = '" + travelId + "'", null);
 		cursor.moveToNext();
 
@@ -82,7 +84,9 @@ public class TravelInfoSetter {
 		btnStartDate.setText(cursor.getString(cursor.getColumnIndex("start_date")).replace("-", "."));
 		btnEndDate.setText(cursor.getString(cursor.getColumnIndex("end_date")).replace("-", "."));
 		String codes = cursor.getString(cursor.getColumnIndex("country_codes"));
-		//String coverImgPath = cursor.getString(cursor.getColumnIndex("cover_img_path"));
+		String coverImgPath = cursor.getString(cursor.getColumnIndex("cover_img_path"));
+
+		cursor.close();
 
 		if (codes != null) {
 			for (String countryCode : codes.split(",")) {
@@ -98,7 +102,8 @@ public class TravelInfoSetter {
 			}
 		}
 
-		cursor.close();
+		if (coverImgPath != null)
+			RequestHelper.getInstance().loadImage(coverImgPath, imageView);
 	}
 
 	public void requestToServer(int method, String url, OnResponseListener.OnJsonObjectListener listener) {

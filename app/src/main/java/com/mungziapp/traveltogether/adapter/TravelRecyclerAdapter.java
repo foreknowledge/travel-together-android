@@ -4,12 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mungziapp.traveltogether.app.helper.RequestHelper;
 import com.mungziapp.traveltogether.interfaces.OnItemClickListener;
 import com.mungziapp.traveltogether.R;
 import com.mungziapp.traveltogether.model.data.TravelData;
@@ -65,7 +67,7 @@ public class TravelRecyclerAdapter extends RecyclerView.Adapter<TravelRecyclerAd
 	}
 
 	static class ViewHolder extends RecyclerView.ViewHolder {
-		//private ImageView travelCover;
+		private ImageView travelCover;
 		private TextView travelName;
 		private TextView travelDuration;
 		private TextView numOfTravelMembers;
@@ -79,7 +81,7 @@ public class TravelRecyclerAdapter extends RecyclerView.Adapter<TravelRecyclerAd
 
 			this.context = context;
 
-			//this.travelCover = itemView.findViewById(R.id.travel_cover);
+			this.travelCover = itemView.findViewById(R.id.travel_cover);
 			this.travelName = itemView.findViewById(R.id.travel_name);
 			this.travelDuration = itemView.findViewById(R.id.travel_duration);
 			this.numOfTravelMembers = itemView.findViewById(R.id.travel_members);
@@ -112,6 +114,7 @@ public class TravelRecyclerAdapter extends RecyclerView.Adapter<TravelRecyclerAd
 			this.travelName.setText(item.getName());
 
 			// set cover image
+			RequestHelper.getInstance().loadImage(item.getCoverImgPath(), travelCover);
 
 			String numOfTravelMembers = Integer.toString(item.getMembers());
 			this.numOfTravelMembers.setText(numOfTravelMembers);

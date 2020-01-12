@@ -2,7 +2,7 @@ package com.mungziapp.traveltogether.model.data;
 
 import androidx.annotation.NonNull;
 
-import com.mungziapp.traveltogether.app.DateHelper;
+import com.mungziapp.traveltogether.app.helper.DateHelper;
 import com.mungziapp.traveltogether.model.response.Country;
 import com.mungziapp.traveltogether.model.response.Member;
 import com.mungziapp.traveltogether.model.response.TravelRoom;
